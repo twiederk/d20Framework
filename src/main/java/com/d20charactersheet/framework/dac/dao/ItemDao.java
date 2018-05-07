@@ -76,6 +76,7 @@ public interface ItemDao {
    * Deletes the weapon from the persistent layer.
    *
    * @param weapon
+   *     The weapon to delete.
    */
   public void deleteWeapon(Weapon weapon);
 

@@ -7,6 +7,7 @@ import java.util.List;
 import com.d20charactersheet.framework.boc.model.Ability;
 import com.d20charactersheet.framework.boc.model.Alignment;
 import com.d20charactersheet.framework.boc.model.Armor;
+import com.d20charactersheet.framework.boc.model.Body;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.CharacterAbility;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
@@ -17,6 +18,7 @@ import com.d20charactersheet.framework.boc.model.ClassLevel;
 import com.d20charactersheet.framework.boc.model.Equipment;
 import com.d20charactersheet.framework.boc.model.Feat;
 import com.d20charactersheet.framework.boc.model.Good;
+import com.d20charactersheet.framework.boc.model.HumanoidBody;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
 import com.d20charactersheet.framework.boc.model.KnownSpell;
 import com.d20charactersheet.framework.boc.model.Note;
@@ -51,7 +53,7 @@ public class CharacterServiceImpl implements CharacterService {
   }
 
   /**
-   * @see com.d20charactersheet.framework.boc.service.CharacterService#getAllCharacters(java.util.List, java.util.List, * java.util.List, java.util.List, java.util.List, java.util.List, java.util.List, java.util.List, * java.util.List, java.util.List)
+   * @see com.d20charactersheet.framework.boc.service.CharacterService#getAllCharacters(java.util.List, java.util.List, java.util.List, java.util.List, java.util.List, java.util.List, java.util.List, java.util.List, java.util.List, java.util.List)
    */
   @Override
   public List<Character> getAllCharacters(final List<CharacterClass> allCharacterClasses, final List<Race> allRaces,
@@ -65,7 +67,7 @@ public class CharacterServiceImpl implements CharacterService {
   }
 
   /**
-   * @see com.d20charactersheet.framework.boc.service.CharacterService#getCharacter(int, java.util.List, java.util.List, * java.util.List, java.util.List, java.util.List, java.util.List, java.util.List, java.util.List, * java.util.List, java.util.List)
+   * @see com.d20charactersheet.framework.boc.service.CharacterService#getCharacter(int, java.util.List, java.util.List, java.util.List, java.util.List, java.util.List, java.util.List, java.util.List, java.util.List, java.util.List, java.util.List)
    */
   @Override
   public Character getCharacter(final int id, final List<CharacterClass> allCharacterClasses, final List<Race> allRaces,
@@ -89,6 +91,7 @@ public class CharacterServiceImpl implements CharacterService {
     fillWeaponAttacks(character, allWeapons);
     fillKnownSpells(character, allSpells);
     fillSpellSlots(character, allSpells, allAbilities, allFeats);
+    fillBodyParts(character, allWeapons, allArmor, allGoods);
   }
 
   private void fillClassLevel(final Character character) {
@@ -200,6 +203,11 @@ public class CharacterServiceImpl implements CharacterService {
     character.setSpellSlots(characterDao.getSpellSlots(character, allSpells, allAbilities, allFeats));
   }
 
+  private void fillBodyParts(Character character, final List<Weapon> allWeapons, final List<Armor> allArmor,
+      final List<Good> allGoods) {
+    character.setBody(characterDao.getBody(character, allWeapons, allArmor, allGoods));
+  }
+
   /**
    * @see com.d20charactersheet.framework.boc.service.CharacterService#updateCharacter(com.d20charactersheet.framework.boc.model.Character)
    */
@@ -209,7 +217,7 @@ public class CharacterServiceImpl implements CharacterService {
   }
 
   /**
-   * @see com.d20charactersheet.framework.boc.service.CharacterService#createCharacter(com.d20charactersheet.framework.boc.model.Character, * java.util.List)
+   * @see com.d20charactersheet.framework.boc.service.CharacterService#createCharacter(com.d20charactersheet.framework.boc.model.Character, java.util.List)
    */
   @Override
   public Character createCharacter(final Character character, final List<Skill> allSkills) {
@@ -269,6 +277,7 @@ public class CharacterServiceImpl implements CharacterService {
     characterDao.deleteCharacterAbilities(character);
     characterDao.deleteKnownSpells(character);
     characterDao.deleteSpellSlots(character);
+    characterDao.deleteBody(character);
     characterDao.deleteCharacter(character);
   }
 
@@ -524,6 +533,25 @@ public class CharacterServiceImpl implements CharacterService {
       throw new RuleException(RuleError.NEGATIVE_SKILL_RANK);
     }
     characterDao.updateCharacterSkill(character, characterSkill);
+  }
+
+  @Override
+  public Body createBody(Character character, Body body) {
+    Body newBody = characterDao.createBody(character, body);
+    character.setBody(newBody);
+    return newBody;
+  }
+
+  @Override
+  public void deleteBody(Character character) {
+    characterDao.deleteBody(character);
+    character.setBody(new HumanoidBody());
+  }
+
+  @Override
+  public Body updateBody(Character character) {
+    characterDao.updateBody(character);
+    return character.getBody();
   }
 
 }

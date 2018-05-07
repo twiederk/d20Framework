@@ -29,7 +29,7 @@ public class Attributes implements Serializable {
   /**
    * Sets the strength.
    *
-   * @param strength
+   * @param strength The strength to set.
    */
   public void setStrength(final int strength) {
     this.strength = strength;

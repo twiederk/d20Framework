@@ -1,5 +1,6 @@
 package com.d20charactersheet.framework.boc.service;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -12,12 +13,15 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.assertj.core.api.Assertions;
 import org.junit.After;
 import org.junit.Test;
 
 import com.d20charactersheet.framework.boc.model.Ability;
 import com.d20charactersheet.framework.boc.model.Alignment;
 import com.d20charactersheet.framework.boc.model.AttackWield;
+import com.d20charactersheet.framework.boc.model.Body;
+import com.d20charactersheet.framework.boc.model.BodyPart;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.CharacterAbility;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
@@ -25,6 +29,8 @@ import com.d20charactersheet.framework.boc.model.CharacterSkill;
 import com.d20charactersheet.framework.boc.model.ClassAbility;
 import com.d20charactersheet.framework.boc.model.ClassLevel;
 import com.d20charactersheet.framework.boc.model.Feat;
+import com.d20charactersheet.framework.boc.model.HumanoidBody;
+import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
 import com.d20charactersheet.framework.boc.model.KnownSpell;
 import com.d20charactersheet.framework.boc.model.Note;
@@ -729,6 +735,51 @@ public abstract class BaseCharacterServiceTest {
     // tear down
     concentration.setModifier(modifierBackup);
     characterService.updateCharacterSkill(belvador, concentration);
+  }
+
+  @Test
+  public void testCreateBody() {
+    // Arrange
+    final CharacterService characterService = gameSystem.getCharacterService();
+    Character belvador = characterService.findCharacterByName("Belvador the Summoner", gameSystem.getAllCharacters());
+
+    // Act
+    Body body = characterService.createBody(belvador, new HumanoidBody());
+
+    // Assert
+    assertNotNull(body);
+
+  }
+
+  @Test
+  public void testDeleteBody() {
+    // Arrange
+    final CharacterService characterService = gameSystem.getCharacterService();
+    Character belvador = characterService.findCharacterByName("Belvador the Summoner", gameSystem.getAllCharacters());
+
+    // Act
+    characterService.deleteBody(belvador);
+
+    // Assert
+    Body body = belvador.getBody();
+    body.getBodyParts().stream()
+        .forEach(bodyPart -> assertThat(body.getItemOfBodyPart(bodyPart)).isEqualTo(Item.EMPTY_ITEM));
+  }
+
+  @Test
+  public void testUpdateBody() {
+    // Arrange
+    final CharacterService characterService = gameSystem.getCharacterService();
+    Character belvador = characterService.findCharacterByName("Belvador the Summoner", gameSystem.getAllCharacters());
+    belvador.getBody().equip(BodyPart.BOTH_HANDS, Item.EMPTY_ITEM);
+
+    // Act
+    Body body = characterService.updateBody(belvador);
+
+    // Assert
+    assertThat(body).isNotNull();
+    body.getBodyParts().stream()
+        .forEach(bodyPart -> assertThat(body.getItemOfBodyPart(bodyPart)).isEqualTo(Item.EMPTY_ITEM));
   }
 
   private CharacterSkill findSkillByName(final Character character, final String name) {

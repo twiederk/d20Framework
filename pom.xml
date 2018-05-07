@@ -20,6 +20,18 @@
   <dependencies>
 
     <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.9.1</version>
+    </dependency>
+
+    <dependency>
       <groupId>com.d20charactersheet</groupId>
       <artifactId>memorydb</artifactId>
       <version>1.0.0</version>

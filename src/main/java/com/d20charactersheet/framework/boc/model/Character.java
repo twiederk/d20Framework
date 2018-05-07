@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+
 /**
  * Stores the data of character, which is normally stored on a paper called character sheet.
  */
@@ -26,6 +27,7 @@ public class Character implements Serializable {
   private List<WeaponAttack> weaponAttacks = new ArrayList<WeaponAttack>();
   private List<KnownSpell> knownSpells = new ArrayList<KnownSpell>();
   private List<SpellSlot> spellSlots = new ArrayList<SpellSlot>();
+  private Body body = new HumanoidBody();
 
   /**
    * Sets the spell slots.
@@ -76,7 +78,7 @@ public class Character implements Serializable {
   }
 
   /**
-   * @see java.lang.Object#toString()
+   * @see Object#toString()
    */
   @Override
   public String toString() {
@@ -579,7 +581,7 @@ public class Character implements Serializable {
   /**
    * Only id of character is important.
    *
-   * @see java.lang.Object#hashCode()
+   * @see Object#hashCode()
    */
   @Override
   public int hashCode() {
@@ -592,7 +594,7 @@ public class Character implements Serializable {
   /**
    * Only id of character is important.
    *
-   * @see java.lang.Object#equals(java.lang.Object)
+   * @see Object#equals(Object)
    */
   @Override
   public boolean equals(final Object obj) {
@@ -907,4 +909,28 @@ public class Character implements Serializable {
     return metamagicFeats;
   }
 
+  /**
+   * Returns the body of the character.
+   *
+   * @return The body of the character.
+   */
+  public Body getBody() {
+    return body;
+  }
+
+  /**
+   * Sets the body of the character.
+   * @param body The body of the character to set.
+   */
+  public void setBody(Body body) {
+    this.body = body;
+  }
+
+  /**
+   * Returns the equipped items of the character.
+   * @return The equipped items of the character.
+   */
+  public List<Item> getEquippedItems() {
+    return body.getEquippedItems();
+  }
 }

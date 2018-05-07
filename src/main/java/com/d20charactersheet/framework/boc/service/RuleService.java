@@ -5,12 +5,15 @@ import java.util.List;
 
 import com.d20charactersheet.framework.boc.model.AttackWield;
 import com.d20charactersheet.framework.boc.model.Attribute;
+import com.d20charactersheet.framework.boc.model.Body;
+import com.d20charactersheet.framework.boc.model.BodyPart;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
 import com.d20charactersheet.framework.boc.model.CharacterSkill;
 import com.d20charactersheet.framework.boc.model.Critical;
 import com.d20charactersheet.framework.boc.model.Damage;
 import com.d20charactersheet.framework.boc.model.DieRoll;
+import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.Save;
 import com.d20charactersheet.framework.boc.model.Size;
 import com.d20charactersheet.framework.boc.model.Skill;
@@ -543,4 +546,18 @@ public interface RuleService {
    * @return The refreshed spell slots.
    */
   public List<SpellSlot> rest(Character character);
+
+  /**
+   * Equip the item to the body part of the body.
+   *
+   * @param body
+   *     The body to equip the item to.
+   * @param bodyPart
+   *     The body part where to equip the item to.
+   * @param item
+   *     The item to equip.
+   *
+   * @return The body with the equipped item.
+   */
+  Body equipItem(Body body, BodyPart bodyPart, Item item);
 }

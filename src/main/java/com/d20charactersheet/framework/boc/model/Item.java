@@ -8,6 +8,11 @@ import java.io.Serializable;
  */
 public abstract class Item implements Serializable {
 
+  /**
+   * An empty item
+   */
+  public static final Item EMPTY_ITEM = new EmptyItem();
+
   private static final long serialVersionUID = -7607921893077838072L;
 
   private int id;
@@ -179,4 +184,20 @@ public abstract class Item implements Serializable {
   public void setQualityType(final QualityType qualityType) {
     this.qualityType = qualityType;
   }
+
+  private static class EmptyItem extends Item {
+
+    private static final long serialVersionUID = 1L;
+
+    private EmptyItem() {
+      super();
+      setId(-1);
+      setName("EMPTY ITEM");
+      setCost(0.0f);
+      setWeight(0.0f);
+      setQualityType(QualityType.NORMAL);
+      setDescription("");
+    }
+  }
+
 }

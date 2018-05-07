@@ -7,6 +7,7 @@ import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35Charac
 import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35CharacterStorage.CHARACTER_ABILITY;
 import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35CharacterStorage.CHARACTER_ARMOR;
 import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35CharacterStorage.CHARACTER_ATTACK;
+import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35CharacterStorage.CHARACTER_BODY_PART;
 import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35CharacterStorage.CHARACTER_CLASS_LEVEL;
 import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35CharacterStorage.CHARACTER_FEAT;
 import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35CharacterStorage.CHARACTER_GOOD;
@@ -39,6 +40,7 @@ import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35XpStor
 
 import com.d20charactersheet.framework.boc.service.AbilityService;
 import com.d20charactersheet.framework.boc.service.AbilityServiceImpl;
+import com.d20charactersheet.framework.boc.service.BodyService;
 import com.d20charactersheet.framework.boc.service.CharacterClassService;
 import com.d20charactersheet.framework.boc.service.CharacterClassServiceImpl;
 import com.d20charactersheet.framework.boc.service.CharacterService;
@@ -84,7 +86,7 @@ public class DnDv35Universe extends AbstractUniverse {
         new DummyCharacterDao(CHARACTER, CHARACTER_CLASS_LEVEL, CHARACTER_ABILITY, CHARACTER_SKILL, CHARACTER_FEAT,
                               CHARACTER_WEAPON, CHARACTER_ARMOR, CHARACTER_GOOD, CHARACTER_NOTE, CHARACTER_ATTACK,
                               CHARACTER_KNOWN_SPELL, CHARACTER_SPELL_SLOT, CHARACTER_SPELL_SLOT_ABILITY,
-                              CHARACTER_SPELL_SLOT_FEAT));
+                              CHARACTER_SPELL_SLOT_FEAT, CHARACTER_BODY_PART));
     final SpelllistService spelllistService = new SpelllistServiceImpl(
         new DummySpelllistDao(SPELL, SPELLLIST, SPELLLIST_SPELL, KNOWN_SPELLS_TABLE, KNOWN_SPELLS_LEVEL, SPELLS_PER_DAY_TABLE,
                               SPELLS_PER_DAY_LEVEL));
@@ -102,6 +104,7 @@ public class DnDv35Universe extends AbstractUniverse {
     gameSystem.setSpelllistService(spelllistService);
     gameSystem.setXpService(xpService);
     gameSystem.setExportImportService(exportImportService);
+    gameSystem.setBodyService(new BodyService());
     gameSystem.setRuleService(new DnDv35RuleServiceImpl());
   }
 

@@ -7,8 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.d20charactersheet.framework.boc.model.Ability;
+import com.d20charactersheet.framework.boc.model.Armor;
 import com.d20charactersheet.framework.boc.model.AttackWield;
 import com.d20charactersheet.framework.boc.model.Attribute;
+import com.d20charactersheet.framework.boc.model.Body;
+import com.d20charactersheet.framework.boc.model.BodyPart;
 import com.d20charactersheet.framework.boc.model.CastingType;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.CharacterAbility;
@@ -146,11 +149,19 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
    */
   @Override
   public int getArmorClass(final Character character) {
-    return 10 + getModifier(character.getDexterity()) + character.getArmorClass();
+    int armorBonus = calculateArmorBonus(character.getEquippedItems());
+    return 10 + getModifier(character.getDexterity()) + armorBonus + character.getArmorClass();
+  }
+
+  private int calculateArmorBonus(List<Item> equippedItems) {
+    return equippedItems.stream().
+        filter(item -> item instanceof Armor).
+        mapToInt(item -> ((Armor) item).getArmorBonus()).
+        sum();
   }
 
   /**
-   * @see com.d20charactersheet.framework.boc.service.RuleService#getOppositeOfCharacterClasses(com.d20charactersheet.framework.boc.model.Character, * java.util.List)
+   * @see com.d20charactersheet.framework.boc.service.RuleService#getOppositeOfCharacterClasses(com.d20charactersheet.framework.boc.model.Character, java.util.List)
    */
   @Override
   public List<CharacterClass> getOppositeOfCharacterClasses(final Character character, final List<CharacterClass> allClasses) {
@@ -195,7 +206,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   }
 
   /**
-   * @see com.d20charactersheet.framework.boc.service.RuleService#getAttributeModifier(com.d20charactersheet.framework.boc.model.Character, * com.d20charactersheet.framework.boc.model.Attribute)
+   * @see com.d20charactersheet.framework.boc.service.RuleService#getAttributeModifier(com.d20charactersheet.framework.boc.model.Character, com.d20charactersheet.framework.boc.model.Attribute)
    */
   @Override
   public int getAttributeModifier(final Character character, final Attribute attribute) {
@@ -218,7 +229,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   }
 
   /**
-   * @see com.d20charactersheet.framework.boc.service.RuleService#rollSkill(com.d20charactersheet.framework.boc.model.Character, * com.d20charactersheet.framework.boc.model.CharacterSkill)
+   * @see com.d20charactersheet.framework.boc.service.RuleService#rollSkill(com.d20charactersheet.framework.boc.model.Character, com.d20charactersheet.framework.boc.model.CharacterSkill)
    */
   @Override
   public DieRoll rollSkill(final Character character, final CharacterSkill characterSkill) {
@@ -230,7 +241,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   }
 
   /**
-   * @see com.d20charactersheet.framework.boc.service.RuleService#getSave(com.d20charactersheet.framework.boc.model.Character, * com.d20charactersheet.framework.boc.model.Save)
+   * @see com.d20charactersheet.framework.boc.service.RuleService#getSave(com.d20charactersheet.framework.boc.model.Character, com.d20charactersheet.framework.boc.model.Save)
    */
   @Override
   public int getSave(final Character character, final Save save) {
@@ -242,7 +253,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   }
 
   /**
-   * @see com.d20charactersheet.framework.boc.service.RuleService#getBaseSave(com.d20charactersheet.framework.boc.model.Character, * com.d20charactersheet.framework.boc.model.Save)
+   * @see com.d20charactersheet.framework.boc.service.RuleService#getBaseSave(com.d20charactersheet.framework.boc.model.Character, com.d20charactersheet.framework.boc.model.Save)
    */
   @Override
   public int getBaseSave(final Character character, final Save save) {
@@ -270,7 +281,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   }
 
   /**
-   * @see com.d20charactersheet.framework.boc.service.RuleService#getSaveAttributeModifier(com.d20charactersheet.framework.boc.model.Character, * com.d20charactersheet.framework.boc.model.Save)
+   * @see com.d20charactersheet.framework.boc.service.RuleService#getSaveAttributeModifier(com.d20charactersheet.framework.boc.model.Character, com.d20charactersheet.framework.boc.model.Save)
    */
   @Override
   public int getSaveAttributeModifier(final Character character, final Save save) {
@@ -290,7 +301,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   }
 
   /**
-   * @see com.d20charactersheet.framework.boc.service.RuleService#getSaveModifier(com.d20charactersheet.framework.boc.model.Character, * com.d20charactersheet.framework.boc.model.Save)
+   * @see com.d20charactersheet.framework.boc.service.RuleService#getSaveModifier(com.d20charactersheet.framework.boc.model.Character, com.d20charactersheet.framework.boc.model.Save)
    */
   @Override
   public int getSaveModifier(final Character character, final Save save) {
@@ -310,7 +321,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   }
 
   /**
-   * @see com.d20charactersheet.framework.boc.service.RuleService#isClassSkill(com.d20charactersheet.framework.boc.model.Character, * com.d20charactersheet.framework.boc.model.Skill)
+   * @see com.d20charactersheet.framework.boc.service.RuleService#isClassSkill(com.d20charactersheet.framework.boc.model.Character, com.d20charactersheet.framework.boc.model.Skill)
    */
   @Override
   public boolean isClassSkill(final Character character, final Skill skill) {
@@ -1214,5 +1225,21 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
       }
     }
     return spellSlots;
+  }
+
+  @Override
+  public Body equipItem(Body body, BodyPart bodyPart, Item item) {
+    switch (bodyPart) {
+      case BOTH_HANDS:
+        body.clear(BodyPart.OFF_HAND);
+        body.clear(BodyPart.PRIMARY_HAND);
+        break;
+      case OFF_HAND:
+      case PRIMARY_HAND:
+        body.clear(BodyPart.BOTH_HANDS);
+        break;
+    }
+    body.equip(bodyPart, item);
+    return body;
   }
 }

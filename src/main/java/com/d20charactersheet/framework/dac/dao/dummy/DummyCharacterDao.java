@@ -15,6 +15,8 @@ import com.d20charactersheet.framework.boc.model.Ability;
 import com.d20charactersheet.framework.boc.model.Alignment;
 import com.d20charactersheet.framework.boc.model.Armor;
 import com.d20charactersheet.framework.boc.model.AttackWield;
+import com.d20charactersheet.framework.boc.model.Body;
+import com.d20charactersheet.framework.boc.model.BodyPart;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.CharacterAbility;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
@@ -25,6 +27,7 @@ import com.d20charactersheet.framework.boc.model.ClassLevel;
 import com.d20charactersheet.framework.boc.model.Feat;
 import com.d20charactersheet.framework.boc.model.FeatType;
 import com.d20charactersheet.framework.boc.model.Good;
+import com.d20charactersheet.framework.boc.model.HumanoidBody;
 import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
 import com.d20charactersheet.framework.boc.model.KnownSpell;
@@ -61,6 +64,7 @@ public class DummyCharacterDao implements CharacterDao {
   private final DataTable characterSpellSlotTable;
   private final DataTable characterSpellSlotAbilityTable;
   private final DataTable characterSpellSlotFeatTable;
+  private final DataTable characterBodyPartTable;
 
   private final DummyItemDaoHelper helper;
 
@@ -98,12 +102,14 @@ public class DummyCharacterDao implements CharacterDao {
    *     Character spell slot ability raw data.
    * @param characterSpellSlotFeat
    *     Character spell slot feat raw data.
+   * @param characterBodyPart
+   *     Character body part raw data.
    */
   public DummyCharacterDao(final Object[][] character, final Object[][] classLevel, final Object[][] characterAbility,
       final Object[][] characterSkill, final Object[][] characterFeat, final Object[][] characterWeapon,
       final Object[][] characterArmor, final Object[][] characterGood, final Object[][] characterNote,
       final Object[][] characterAttack, final Object[][] characterKnownSpell, final Object[][] characterSpellSlot,
-      final Object[][] characterSpellSlotAbility, final Object[][] characterSpellSlotFeat) {
+      final Object[][] characterSpellSlotAbility, final Object[][] characterSpellSlotFeat, final Object[][] characterBodyPart) {
     characterTable = new DataTable(character);
     characterClassLevelTable = new DataTable(classLevel);
     characterAbilityTable = new DataTable(characterAbility);
@@ -118,6 +124,7 @@ public class DummyCharacterDao implements CharacterDao {
     characterSpellSlotTable = new DataTable(characterSpellSlot);
     characterSpellSlotAbilityTable = new DataTable(characterSpellSlotAbility);
     characterSpellSlotFeatTable = new DataTable(characterSpellSlotFeat);
+    characterBodyPartTable = new DataTable(characterBodyPart);
 
     helper = new DummyItemDaoHelper(characterWeaponTable, characterArmorTable, characterGoodTable);
 
@@ -1006,4 +1013,66 @@ public class DummyCharacterDao implements CharacterDao {
             0
         });
   }
+
+  @Override
+  public Body getBody(Character character, List<Weapon> allWeapons, List<Armor> allArmor, List<Good> allGoods) {
+    Body body = new HumanoidBody();
+    final List<DataRow> result = characterBodyPartTable.select(1, character.getId());
+    for (final DataRow dataRow : result) {
+      BodyPart bodyPart = (BodyPart) daoUtil.getEnum(dataRow.getInt(2), BodyPart.values());
+      Item item = getItem(dataRow.getInt(3), dataRow.getString(4), allWeapons, allArmor, allGoods);
+      body.equip(bodyPart, item);
+    }
+
+    return body;
+  }
+
+  private Item getItem(int itemId, String itemclass, List<Weapon> allWeapons, List<Armor> allArmor, List<Good> allGoods) {
+    Item item;
+    if (Weapon.class.getSimpleName().equals(itemclass)) {
+      item = findItem(itemId, allWeapons);
+    } else if (Armor.class.getSimpleName().equals(itemclass)) {
+      item = findItem(itemId, allArmor);
+    } else if (Armor.class.getSimpleName().equals(itemclass)) {
+      item = findItem(itemId, allGoods);
+    } else {
+      throw new IllegalArgumentException("Can't find item with id: " + itemId + " and itemclass: " + itemclass);
+    }
+    return item;
+  }
+
+  private Item findItem(final int itemId, final List<? extends Item> allItems) {
+    return allItems.stream().filter(item -> item.getId() == itemId).findFirst().get();
+  }
+
+  @Override
+  public Body createBody(Character character, Body body) {
+    // id, character_id, body_part_id, item_id, itemclass
+    for (BodyPart bodyPart : body.getBodyParts()) {
+      Item item = body.getItemOfBodyPart(bodyPart);
+      insertcharacterBodyPartTable(character, bodyPart, item);
+    }
+    return body;
+  }
+
+  @Override
+  public void deleteBody(Character character) {
+    characterBodyPartTable.delete(1, character.getId());
+  }
+
+  @Override
+  public void updateBody(Character character) {
+    deleteBody(character);
+    createBody(character, character.getBody());
+  }
+
+  private void insertcharacterBodyPartTable(Character character, BodyPart bodyPart, Item item) {
+    if (!item.equals(Item.EMPTY_ITEM)) {
+      characterWeaponAttackTable.insert(
+          new Object[] {characterBodyPartTable.getNewId(), character.getId(), bodyPart.ordinal(), item.getId(),
+              item.getClass().getSimpleName()
+          });
+    }
+  }
+
 }

@@ -75,7 +75,9 @@ public class SpellsPerDayTable {
    * Returns the number of spells per day according to caster and spell level.
    *
    * @param spellcasterLevel
+   *     The level of the spell caster.
    * @param spellLevel
+   *     The level of the spell.
    *
    * @return The number of spells per day according to caster and spell level.
    */

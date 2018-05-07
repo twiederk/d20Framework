@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.d20charactersheet.framework.boc.model.Ability;
 import com.d20charactersheet.framework.boc.model.Armor;
+import com.d20charactersheet.framework.boc.model.Body;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.CharacterAbility;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
@@ -487,6 +488,7 @@ public interface CharacterDao {
    * Delete all KnownSpells of a character.
    *
    * @param character
+   *     The character to delete the known spells of.
    */
   public void deleteKnownSpells(Character character);
 
@@ -573,4 +575,47 @@ public interface CharacterDao {
    */
   public void updateCharacterSkill(Character character, CharacterSkill characterSkill);
 
+  /**
+   * Returns the body of a character with equipped items.
+   *
+   * @param character
+   *     The character to get the body of.
+   * @param allWeapons
+   *     All weapons.
+   * @param allArmor
+   *     All armor.
+   * @param allGoods
+   *     All goods.
+   *
+   * @return The body of the character with equipped items.
+   */
+  public Body getBody(Character character, List<Weapon> allWeapons, List<Armor> allArmor, List<Good> allGoods);
+
+  /**
+   * Stores the body of a charater to the persistent layer.
+   *
+   * @param character
+   *     The character to persist the body of.
+   * @param body
+   *     The body to persist.
+   *
+   * @return The persisted body.
+   */
+  public Body createBody(Character character, Body body);
+
+  /**
+   * Delete the body of a character from the persistent layer.
+   *
+   * @param character
+   *     The character to delete the body of.
+   */
+  public void deleteBody(Character character);
+
+  /**
+   * Update the body of a character.
+   *
+   * @param character
+   *     The character to update the body of.
+   */
+  public void updateBody(Character character);
 }

@@ -21,9 +21,9 @@ public class DummyItemDaoHelper extends ItemDaoHelper {
   /**
    * Creates helper using the given tables to store weapons, armor and goods of the characters.
    *
-   * @param charakterWeaponDataTable
-   * @param characterArmorDataTable
-   * @param characterGoodDataTable
+   * @param charakterWeaponDataTable The data table of the characters weapons.
+   * @param characterArmorDataTable The data table of the characters armor.
+   * @param characterGoodDataTable The data table of the characters goods.
    */
   public DummyItemDaoHelper(final DataTable charakterWeaponDataTable, final DataTable characterArmorDataTable,
       final DataTable characterGoodDataTable) {

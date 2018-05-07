@@ -33,7 +33,7 @@ public class PathfinderRuleServiceImpl extends AbstractRuleServiceImpl {
   }
 
   /**
-   * @see com.d20charactersheet.framework.boc.service.RuleService#getSkillModifier(com.d20charactersheet.framework.boc.model.Character, * com.d20charactersheet.framework.boc.model.CharacterSkill)
+   * @see com.d20charactersheet.framework.boc.service.RuleService#getSkillModifier(com.d20charactersheet.framework.boc.model.Character, com.d20charactersheet.framework.boc.model.CharacterSkill)
    */
   @Override
   public int getSkillModifier(final Character character, final CharacterSkill characterSkill) {
@@ -67,7 +67,7 @@ public class PathfinderRuleServiceImpl extends AbstractRuleServiceImpl {
   }
 
   /**
-   * @see com.d20charactersheet.framework.boc.service.RuleService#getSkillPoints(com.d20charactersheet.framework.boc.model.Character, * com.d20charactersheet.framework.boc.model.CharacterClass)
+   * @see com.d20charactersheet.framework.boc.service.RuleService#getSkillPoints(com.d20charactersheet.framework.boc.model.Character, com.d20charactersheet.framework.boc.model.CharacterClass)
    */
   @Override
   public int getSkillPoints(final Character character, final CharacterClass startClass) {

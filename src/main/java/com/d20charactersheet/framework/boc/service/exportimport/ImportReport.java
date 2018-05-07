@@ -38,7 +38,7 @@ public class ImportReport<T> {
   /**
    * Adds an import message to the report.
    *
-   * @param importMessage
+   * @param importMessage The import message.
    */
   public void addMessage(final ImportMessage importMessage) {
     importMessages.add(importMessage);

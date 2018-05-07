@@ -298,7 +298,7 @@ public class ImportContext {
   /**
    * Set all abilities of the game system.
    *
-   * @param allAbilities
+   * @param allAbilities All abilities of the game system.
    */
   public void setAllAbilities(final List<Ability> allAbilities) {
     this.allAbilities = allAbilities;

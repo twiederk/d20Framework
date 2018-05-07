@@ -1,18 +1,24 @@
 package com.d20charactersheet.framework.boc.model;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.d20charactersheet.framework.DnDv35Universe;
 import com.d20charactersheet.framework.Universe;
+import com.d20charactersheet.framework.boc.service.BodyService;
 import com.d20charactersheet.framework.boc.service.CharacterClassService;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 
@@ -221,13 +227,196 @@ public class CharacterTest {
     assertTrue(containsSpell("Lightning Bolt", knownSpells));
   }
 
-  private boolean containsSpell(final String name, final List<KnownSpell> knownSpells) {
-    for (final KnownSpell knownSpell : knownSpells) {
-      final Spell spell = knownSpell.getSpell();
-      if (spell.getName().equals(name)) {
-        return true;
-      }
+  @Test
+  public void testBodyPartsBelvador() {
+    // Arrange
+    final Character belvador = gameSystem.getCharacter(0);
+
+    // Act
+    Body body = belvador.getBody();
+
+    // Assert
+    assertThat(body.getBodyParts()).hasSize(15);
+    assertThat(body.getItemOfBodyPart(BodyPart.BOTH_HANDS).getName()).isEqualTo("Quarterstaff");
+  }
+
+  @Test
+  public void testBodyPartsNascan() {
+    // Arrange
+    final Character nascan = gameSystem.getCharacter(1);
+    Armor studdedLeather = gameSystem.getAllArmor().get(2);
+    Weapon battleaxe = gameSystem.getAllWeapons().get(25);
+    Weapon shortSword = gameSystem.getAllWeapons().get(24);
+
+    // Act
+    Body body = nascan.getBody();
+
+    // Assert
+    assertThat(body.getBodyParts()).hasSize(15);
+    BodyAssert.assertThat(body).equippedItem(BodyPart.BODY, studdedLeather).equippedItem(BodyPart.OFF_HAND, shortSword)
+        .equippedItem(BodyPart.PRIMARY_HAND, battleaxe);
+  }
+
+  @Test
+  public void testBodyPartsTocDerJuengere() {
+    // Arrange
+    final Character tocDerJuengere = gameSystem.getCharacter(13);
+    Armor studdedLeather = gameSystem.getAllArmor().get(2);
+    Weapon rapier = gameSystem.getAllWeapons().get(29);
+
+    // Act
+    Body body = tocDerJuengere.getBody();
+
+    // Assert
+    assertThat(body.getBodyParts()).hasSize(15);
+    BodyAssert.assertThat(body).equippedItem(BodyPart.BODY, studdedLeather).equippedItem(BodyPart.PRIMARY_HAND, rapier);
+  }
+
+  @Test
+  public void testWholeEquipmentOfBelvador() {
+    // Arrange
+    final Character belvador = gameSystem.getCharacter(0);
+    final Equipment equipment = belvador.getEquipment();
+    Map<BodyPart, List<Item>> bodyParts = new HashMap<>();
+    Arrays.stream(BodyPart.values()).forEach(bodyPart -> bodyParts.put(bodyPart, new LinkedList<>()));
+    BodyService bodyService = gameSystem.getBodyService();
+
+    for (ItemGroup itemGroup : equipment.getItems()) {
+      // Act
+      Item item = itemGroup.getItem();
+      EnumSet<BodyPart> itemBodyParts = bodyService.calculateBodyParts(item);
+      itemBodyParts.stream().forEach(bodyPart -> bodyParts.get(bodyPart).add(item));
     }
-    return false;
+
+    // Assert
+    assertThat(bodyParts.get(BodyPart.HEAD)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.EYES)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.NECK)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.TORSO)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.BODY)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.WAIST)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.SHOULDERS)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.ARMS)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.HANDS)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.FINGERS_LEFT)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.FINGERS_RIGHT)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.FEET)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.OFF_HAND)).extracting("name").containsOnly("Crossbow, light");
+    assertThat(bodyParts.get(BodyPart.PRIMARY_HAND)).extracting("name").containsOnly("Crossbow, light");
+    assertThat(bodyParts.get(BodyPart.HEAD)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.BOTH_HANDS)).extracting("name").containsOnly("Quarterstaff", "Crossbow, light");
+    assertThat(bodyParts.get(BodyPart.NONE)).hasSize(20);
+  }
+
+  @Test
+  public void testWholeEquipmentOfNascan() {
+    // Arrange
+    final Character nascan = gameSystem.getCharacter(1);
+    final Equipment equipment = nascan.getEquipment();
+    Map<BodyPart, List<Item>> bodyParts = new HashMap<>();
+    Arrays.stream(BodyPart.values()).forEach(bodyPart -> bodyParts.put(bodyPart, new LinkedList<>()));
+    BodyService bodyService = gameSystem.getBodyService();
+
+    for (ItemGroup itemGroup : equipment.getItems()) {
+      // Act
+      Item item = itemGroup.getItem();
+      EnumSet<BodyPart> itemBodyParts = bodyService.calculateBodyParts(item);
+      itemBodyParts.stream().forEach(bodyPart -> bodyParts.get(bodyPart).add(item));
+    }
+
+    // Assert
+    assertThat(bodyParts.get(BodyPart.HEAD)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.EYES)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.NECK)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.TORSO)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.BODY)).extracting("name").containsOnly("Studded Leather");
+    assertThat(bodyParts.get(BodyPart.WAIST)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.SHOULDERS)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.ARMS)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.HANDS)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.FINGERS_LEFT)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.FINGERS_RIGHT)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.FEET)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.OFF_HAND)).extracting("name").containsOnly("Sword, short", "Battleaxe");
+    assertThat(bodyParts.get(BodyPart.PRIMARY_HAND)).extracting("name").containsOnly("Sword, short", "Battleaxe");
+    assertThat(bodyParts.get(BodyPart.HEAD)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.BOTH_HANDS)).extracting("name").containsOnly("Sword, short", "Battleaxe");
+    assertThat(bodyParts.get(BodyPart.NONE)).hasSize(6);
+  }
+
+  @Test
+  public void testWholeEquipmentOfTocDerJuengere() {
+    // Arrange
+    final Character tocDerJuengere = gameSystem.getCharacter(13);
+    final Equipment equipment = tocDerJuengere.getEquipment();
+    Map<BodyPart, List<Item>> bodyParts = new HashMap<>();
+    Arrays.stream(BodyPart.values()).forEach(bodyPart -> bodyParts.put(bodyPart, new LinkedList<>()));
+    BodyService bodyService = gameSystem.getBodyService();
+
+    for (ItemGroup itemGroup : equipment.getItems()) {
+      // Act
+      Item item = itemGroup.getItem();
+      EnumSet<BodyPart> itemBodyParts = bodyService.calculateBodyParts(item);
+      itemBodyParts.stream().forEach(bodyPart -> bodyParts.get(bodyPart).add(item));
+    }
+
+    // Assert
+    assertThat(bodyParts.get(BodyPart.HEAD)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.EYES)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.NECK)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.TORSO)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.BODY)).extracting("name").containsOnly("Studded Leather");
+    assertThat(bodyParts.get(BodyPart.WAIST)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.SHOULDERS)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.ARMS)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.HANDS)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.FINGERS_LEFT)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.FINGERS_RIGHT)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.FEET)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.OFF_HAND)).extracting("name").containsOnly("Rapier", "Crossbow, light");
+    assertThat(bodyParts.get(BodyPart.PRIMARY_HAND)).extracting("name").containsOnly("Rapier", "Crossbow, light");
+    assertThat(bodyParts.get(BodyPart.HEAD)).hasSize(0);
+    assertThat(bodyParts.get(BodyPart.BOTH_HANDS)).extracting("name").containsOnly("Rapier", "Crossbow, light");
+    assertThat(bodyParts.get(BodyPart.NONE)).hasSize(14);
+  }
+
+  @Test
+  public void testEquippedItemsOfBelvador() {
+    // Arrange
+    final Character belvador = gameSystem.getCharacter(0);
+
+    // Act
+    List<Item> equippedItems = belvador.getEquippedItems();
+
+    // Assert
+    assertThat(equippedItems).extracting("Name").containsOnly("Quarterstaff");
+  }
+
+  @Test
+  public void testEquippedItemsOfNascan() {
+    // Arrange
+    final Character nascan = gameSystem.getCharacter(1);
+
+    // Act
+    List<Item> equippedItems = nascan.getEquippedItems();
+
+    // Assert
+    assertThat(equippedItems).extracting("Name").containsExactlyInAnyOrder("Studded Leather", "Sword, short", "Battleaxe");
+  }
+
+  @Test
+  public void testEquippedItemsOfTocDerJuengere() {
+    // Arrange
+    final Character tocDerJuengere = gameSystem.getCharacter(13);
+
+    // Act
+    List<Item> equippedItems = tocDerJuengere.getEquippedItems();
+
+    // Assert
+    assertThat(equippedItems).extracting("Name").containsExactlyInAnyOrder("Studded Leather", "Rapier");
+  }
+
+  private boolean containsSpell(final String name, final List<KnownSpell> knownSpells) {
+    return knownSpells.stream().anyMatch(knownSpell -> knownSpell.getSpell().getName().equals(name));
   }
 }

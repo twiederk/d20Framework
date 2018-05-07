@@ -25,7 +25,7 @@ public class CharacterClassServiceImpl implements CharacterClassService {
   }
 
   /**
-   * @see com.d20charactersheet.framework.boc.service.CharacterClassService#getAllCharacterClasses(java.util.List, * java.util.List)
+   * @see com.d20charactersheet.framework.boc.service.CharacterClassService#getAllCharacterClasses(java.util.List, java.util.List)
    */
   @Override
   public List<CharacterClass> getAllCharacterClasses(final List<Skill> allSkills, final List<Ability> allAbilities) {
@@ -58,7 +58,7 @@ public class CharacterClassServiceImpl implements CharacterClassService {
   }
 
   /**
-   * @see com.d20charactersheet.framework.boc.service.CharacterClassService#addSkill(com.d20charactersheet.framework.boc.model.Skill, * java.util.List)
+   * @see com.d20charactersheet.framework.boc.service.CharacterClassService#addSkill(com.d20charactersheet.framework.boc.model.Skill, java.util.List)
    */
   @Override
   public void addSkill(final Skill skill, final List<CharacterClass> characterClasses) {
@@ -66,7 +66,7 @@ public class CharacterClassServiceImpl implements CharacterClassService {
   }
 
   /**
-   * @see com.d20charactersheet.framework.boc.service.CharacterClassService#findClassByName(java.lang.String, * java.util.List)
+   * @see com.d20charactersheet.framework.boc.service.CharacterClassService#findClassByName(java.lang.String, java.util.List)
    */
   @Override
   public CharacterClass findClassByName(final String name, final List<CharacterClass> allClasses) {

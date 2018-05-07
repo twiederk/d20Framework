@@ -143,6 +143,13 @@ public interface GameSystem {
   public void setExportImportService(ExportImportService exportImportService);
 
   /**
+   * Sets the BodyService.
+   *
+   * @param bodyService
+   *     The BodyService.
+   */
+  public void setBodyService(BodyService bodyService);
+  /**
    * Returns the skill service.
    *
    * @return The skill service.
@@ -232,6 +239,12 @@ public interface GameSystem {
    * @return The XpService.
    */
   public XpService getXpService();
+
+  /**
+   * Returns the BodyService.
+   * @return The BodyService.
+   */
+  public BodyService getBodyService();
 
   /**
    * Returns all skills of the game system.

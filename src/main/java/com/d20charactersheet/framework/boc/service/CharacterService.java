@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.d20charactersheet.framework.boc.model.Ability;
 import com.d20charactersheet.framework.boc.model.Armor;
+import com.d20charactersheet.framework.boc.model.Body;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.CharacterAbility;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
@@ -481,4 +482,34 @@ public interface CharacterService {
    *     The skill to update.
    */
   public void updateCharacterSkill(Character character, CharacterSkill characterSkill);
+
+  /**
+   * Create the body of a character.
+   *
+   * @param character
+   *     The character to create the body of.
+   * @param body
+   *     The body to create.
+   *
+   * @return The created body.
+   */
+  public Body createBody(Character character, Body body);
+
+  /**
+   * Deletes the body of a character
+   *
+   * @param character
+   *     The character to delete the body of.
+   */
+  public void deleteBody(Character character);
+
+  /**
+   * Updates the body of a character.
+   *
+   * @param character
+   *     The character to update the body of.
+   *
+   * @return The updated body.
+   */
+  public Body updateBody(Character character);
 }

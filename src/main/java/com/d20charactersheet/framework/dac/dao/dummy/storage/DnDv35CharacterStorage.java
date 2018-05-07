@@ -12,7 +12,7 @@ public class DnDv35CharacterStorage {
       {0, "Torsten", "Belvador the Summoner", 2, 0, 2, 1, 13129, 11, 18, 17, 18, 11, 15, 26, 26, 0, 0, 0, 0, 0, 0, 0, 2, 3, 1, 2, 3,
           4
       }, //
-      {1, "Torsten", "Nascan Schwarzhaut", 0, 0, 4, 1, 24500, 12, 16, 13, 10, 12, 10, 39, 39, 5, 0, 0, 0, 0, 0, 0, 4, 5, 10, 20, 30,
+      {1, "Torsten", "Nascan Schwarzhaut", 0, 0, 4, 1, 24500, 12, 16, 13, 10, 12, 10, 39, 39, 2, 0, 0, 0, 0, 0, 0, 4, 5, 10, 20, 30,
           40
       }, //
       {2, "Diana", "Nyatar", 14, 1, 5, 1, 14056, 13, 18, 13, 14, 13, 12, 27, 27, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 732, 69, 14}, //
@@ -30,7 +30,7 @@ public class DnDv35CharacterStorage {
       {12, "Fabian", "Hakim Al Dschech Ibn Sauri Harfed Ben Uluman", 0, 0, 1, 1, 8000, 9, 14, 16, 17, 12, 13, 28, 28, 0, 0, 0, 0, 0,
           0, 0, 0, 1, 0, 0, 0, 0
       }, //
-      {13, "Frank", "Toc der Juengere", 0, 1, 4, 1, 9401, 10, 16, 12, 16, 13, 17, 25, 25, 3, 0, 0, 0, 0, 2, 0, 0, 1, 0, 400, 4, 4},
+      {13, "Frank", "Toc der Juengere", 0, 1, 4, 1, 9401, 10, 16, 12, 16, 13, 17, 25, 25, 0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 400, 4, 4},
       //
   };
 
@@ -274,11 +274,11 @@ public class DnDv35CharacterStorage {
    */
   public static final Object[][] CHARACTER_WEAPON = {//
       // id, character id, weapon id, number
-      {0, 0, 11, 1}, //
-      {1, 0, 14, 1}, //
-      {2, 0, 66, 2}, //
-      {3, 1, 24, 1}, //
-      {4, 1, 25, 1}, //
+      {0, 0, 11, 1}, // Quarterstaff
+      {1, 0, 14, 1}, // Crossbow, light
+      {2, 0, 66, 2}, // Bolts, crossbow (10)
+      {3, 1, 24, 1}, // Sword, short
+      {4, 1, 25, 1}, // Battleaxe
       {5, 11, 1, 1}, //
       {6, 12, 11, 1}, //
       {7, 13, 29, 1}, //
@@ -292,7 +292,7 @@ public class DnDv35CharacterStorage {
   public static final Object[][] CHARACTER_ARMOR = {//
       // id, character id, armor id, number
       {0, 1, 2, 1}, // Studded Leather
-      {1, 13, 2, 1}, //
+      {1, 13, 2, 1}, // Studded Leather
 
   };
 
@@ -579,6 +579,19 @@ public class DnDv35CharacterStorage {
   public static final Object[][] CHARACTER_SPELL_SLOT_FEAT = { //
       // id, spell_slot_id, feat_id
       {1, 13, 32}, //
+  };
+
+  /**
+   * Body
+   */
+  public static final Object[][] CHARACTER_BODY_PART = { //
+    // id, character_id, body_part_id, item_id, itemclass
+      {1, 0, 14, 11, "Weapon"}, // BOTH_HANDS, Quarterstaff
+      {2, 1, 13, 24, "Weapon"}, // OFF_HAND, Short sword
+      {3, 1, 12, 25, "Weapon"}, // PRIMARY_HAND, Battleaxe
+      {4, 1, 4, 2, "Armor"}, // BODY, Studded Leather
+      {5, 13, 4, 2, "Armor"}, // BODY, Studded Leather
+      {5, 13, 12, 29, "Weapon"}, // PRIMARY_HAND, Rapier
   };
 
 }

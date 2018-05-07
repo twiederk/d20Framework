@@ -145,6 +145,7 @@ public interface SpelllistService {
    * @param spelllist
    *     The spell list to delete.
    * @param spell
+   *     The spell to delete
    */
   public void deleteSpelllevel(Spelllist spelllist, Spell spell);
 

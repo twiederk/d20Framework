@@ -218,7 +218,7 @@ public class DummyClassDao implements ClassDao {
   }
 
   /**
-   * @see com.d20charactersheet.framework.dac.dao.ClassDao#addSkill(com.d20charactersheet.framework.boc.model.Skill, * java.util.List)
+   * @see com.d20charactersheet.framework.dac.dao.ClassDao#addSkill(com.d20charactersheet.framework.boc.model.Skill, java.util.List)
    */
   @Override
   public void addSkill(final Skill skill, final List<CharacterClass> characterClasses) {

@@ -128,7 +128,7 @@ public interface DisplayService {
   /**
    * Returns the formula to calculate the initiative and cmb. Example: +2 +
    *
-   * @param modifier
+   * @param modifier The modifier to display.
    *
    * @return The formula to calculate the initiative and cmb.
    */
