@@ -78,6 +78,7 @@ public class ExportImportServiceTest {
   }
 
   @Test
+  @Ignore
   public void testExportCharacters() throws Exception {
     final Character belvador = gameSystem.getCharacter(0);
 
@@ -363,6 +364,7 @@ public class ExportImportServiceTest {
   }
 
   @Test
+  @Ignore
   public void testExportEquipment() throws Exception {
     final List<Weapon> weapons = gameSystem.getAllWeapons();
     final List<Armor> armor = gameSystem.getAllArmor();
