@@ -13,10 +13,7 @@ public interface ImportCharacter {
    * Imports characters and returns an import report for each character.
    *
    * @return The import reports for each character.
-   *
-   * @throws Exception
-   *     Thrown if the import failed.
    */
-  List<ImportReport<Character>> importCharacters() throws Exception;
+  List<ImportReport<Character>> importCharacters();
 
 }

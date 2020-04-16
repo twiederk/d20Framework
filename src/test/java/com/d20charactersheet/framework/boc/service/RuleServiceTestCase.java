@@ -36,7 +36,7 @@ public abstract class RuleServiceTestCase {
   Race halfOrc;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     universe = createUniverse();
     gameSystem = universe.getGameSystem();
     ruleService = gameSystem.getRuleService();
@@ -55,7 +55,7 @@ public abstract class RuleServiceTestCase {
 
   Character createCharacter(final CharacterClass characterClass, final int level) {
     final Character character = new Character();
-    final List<ClassLevel> classLevels = new ArrayList<ClassLevel>();
+    final List<ClassLevel> classLevels = new ArrayList<>();
     classLevels.add(new ClassLevel(characterClass, level));
     character.setClassLevels(classLevels);
     return character;
@@ -75,7 +75,7 @@ public abstract class RuleServiceTestCase {
 
   Character createCharacter(final ClassLevel classLevel1, final ClassLevel classLevel2, final Race race, final int intelligence) {
     final Character character = new Character();
-    final List<ClassLevel> classLevels = new ArrayList<ClassLevel>();
+    final List<ClassLevel> classLevels = new ArrayList<>();
     classLevels.add(classLevel1);
     classLevels.add(classLevel2);
     character.setClassLevels(classLevels);

@@ -68,7 +68,7 @@ public class DummyCharacterDaoTest extends BaseCharacterDaoTest {
   }
 
   @Test
-  public void testDummyCharacters() throws Exception {
+  public void testDummyCharacters() {
     final List<Character> allCharacters = characterDao.getAllCharacters(allCharacterClasses, allRaces, allXpTables);
     final Character belvador = allCharacters.get(0);
     assertStats(belvador, 0, "Belvador the Summoner", "Torsten", 2, Sex.MALE, Alignment.CHAOTIC_GOOD, 13129);
@@ -106,10 +106,11 @@ public class DummyCharacterDaoTest extends BaseCharacterDaoTest {
   }
 
   @Test
-  public void testClassLevels() throws Exception {
+  public void testClassLevels() {
     final Character belvador = characterDao.getCharacter(0, allCharacterClasses, allRaces, allXpTables);
 
-    assertEquals(1, belvador.getClassLevels().size());
+    assertEquals(1, belvador.getClassLevels()
+        .size());
   }
 
 }

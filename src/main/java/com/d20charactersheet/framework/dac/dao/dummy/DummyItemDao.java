@@ -57,7 +57,7 @@ public class DummyItemDao implements ItemDao {
 
   @Override
   public List<WeaponFamily> getAllWeaponFamilies() {
-    final List<WeaponFamily> allWeaponFamilies = new ArrayList<WeaponFamily>(DnDv35WeaponStorage.WEAPON_FAMILY.length);
+    final List<WeaponFamily> allWeaponFamilies = new ArrayList<>(DnDv35WeaponStorage.WEAPON_FAMILY.length);
     for (final DataRow dataRow : weaponFamilyDataTable) {
       final WeaponFamily weaponFamily = selectWeaponType(dataRow);
       allWeaponFamilies.add(weaponFamily);
@@ -74,7 +74,7 @@ public class DummyItemDao implements ItemDao {
 
   @Override
   public List<Weapon> getAllWeapons(final List<WeaponFamily> allWeaponFamilies) {
-    final List<Weapon> allWeapons = new ArrayList<Weapon>();
+    final List<Weapon> allWeapons = new ArrayList<>();
     for (final DataRow weaponDataRow : weaponDataTable) {
       final Weapon weapon = selectWeapon(weaponDataRow, allWeaponFamilies);
       allWeapons.add(weapon);
@@ -129,7 +129,7 @@ public class DummyItemDao implements ItemDao {
 
   @Override
   public List<Armor> getAllArmor() {
-    final List<Armor> allArmors = new ArrayList<Armor>();
+    final List<Armor> allArmors = new ArrayList<>();
     for (final DataRow armorDataRow : armorDataTable) {
       final Armor armor = selectArmor(armorDataRow);
       allArmors.add(armor);
@@ -153,7 +153,7 @@ public class DummyItemDao implements ItemDao {
 
   @Override
   public List<Good> getAllGoods() {
-    final List<Good> allGoods = new ArrayList<Good>();
+    final List<Good> allGoods = new ArrayList<>();
     for (final DataRow goodDataRow : goodDataTable) {
       final Good adventuringGear = selectGood(goodDataRow);
       allGoods.add(adventuringGear);

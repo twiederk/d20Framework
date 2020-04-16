@@ -23,6 +23,6 @@ public enum ArmorType {
   /**
    * Shield
    */
-  SHIELD;
+  SHIELD
 
 }

@@ -14,7 +14,7 @@ import com.d20charactersheet.framework.boc.model.Save;
 public class DnDv35RuleServiceSavingThrowTest extends DnDv35RuleServiceTestCase {
 
   @Test
-  public void testGetGoodSavingThrow() throws Exception {
+  public void testGetGoodSavingThrow() {
     final AbstractRuleServiceImpl abstractRuleServiceImpl = (AbstractRuleServiceImpl) ruleService;
 
     // level 1 => +2
@@ -43,7 +43,7 @@ public class DnDv35RuleServiceSavingThrowTest extends DnDv35RuleServiceTestCase 
   }
 
   @Test
-  public void testGetPoorSavingThrow() throws Exception {
+  public void testGetPoorSavingThrow() {
     final AbstractRuleServiceImpl abstractRuleServiceImpl = (AbstractRuleServiceImpl) ruleService;
 
     // level 1 => 0
@@ -72,7 +72,7 @@ public class DnDv35RuleServiceSavingThrowTest extends DnDv35RuleServiceTestCase 
   }
 
   @Test
-  public void testGetSavingThrowClass() throws Exception {
+  public void testGetSavingThrowClass() {
     final AbstractRuleServiceImpl abstractRuleServiceImpl = (AbstractRuleServiceImpl) ruleService;
 
     // Fighter (1), Fortitude => 2
@@ -98,7 +98,7 @@ public class DnDv35RuleServiceSavingThrowTest extends DnDv35RuleServiceTestCase 
   }
 
   @Test
-  public void testGetSavingThrowCharacter() throws Exception {
+  public void testGetSavingThrowCharacter() {
     final Character character = createCharacter(wizard, 5);
     character.setConstitution(12);
     character.setDexterity(14);
@@ -118,9 +118,9 @@ public class DnDv35RuleServiceSavingThrowTest extends DnDv35RuleServiceTestCase 
   }
 
   @Test
-  public void testGetSavingThrowMultiClassCharacter() throws Exception {
+  public void testGetSavingThrowMultiClassCharacter() {
     final Character character = new Character();
-    final List<ClassLevel> classLevels = new ArrayList<ClassLevel>();
+    final List<ClassLevel> classLevels = new ArrayList<>();
     classLevels.add(new ClassLevel(ranger, 4));
     classLevels.add(new ClassLevel(rogue, 3));
     character.setClassLevels(classLevels);
@@ -146,9 +146,9 @@ public class DnDv35RuleServiceSavingThrowTest extends DnDv35RuleServiceTestCase 
   }
 
   @Test
-  public void testGetBaseSaveMultiCharacter() throws Exception {
+  public void testGetBaseSaveMultiCharacter() {
     final Character character = new Character();
-    final List<ClassLevel> classLevels = new ArrayList<ClassLevel>();
+    final List<ClassLevel> classLevels = new ArrayList<>();
     classLevels.add(new ClassLevel(ranger, 4));
     classLevels.add(new ClassLevel(rogue, 3));
     character.setClassLevels(classLevels);

@@ -24,7 +24,7 @@ public interface AbilityService {
    *
    * @return All abilities of the game system.
    */
-  public List<Ability> getAllAbilities(List<Spelllist> allSpelllists, List<KnownSpellsTable> allKnownSpellsTables,
+  List<Ability> getAllAbilities(List<Spelllist> allSpelllists, List<KnownSpellsTable> allKnownSpellsTables,
       List<SpellsPerDayTable> allSpellsPerDayTables);
 
   /**
@@ -35,7 +35,7 @@ public interface AbilityService {
    *
    * @return The create ability.
    */
-  public Ability createAbility(Ability ability);
+  Ability createAbility(Ability ability);
 
   /**
    * Updates the given ability.
@@ -43,7 +43,7 @@ public interface AbilityService {
    * @param ability
    *     The ability to update.
    */
-  public void updateAbility(Ability ability);
+  void updateAbility(Ability ability);
 
   /**
    * Returns the ability with the given id out of the given list.
@@ -55,6 +55,6 @@ public interface AbilityService {
    *
    * @return The ability with the given id out of the given list.
    */
-  public Ability getAbilityById(int abilityId, List<Ability> allAbilities);
+  Ability getAbilityById(int abilityId, List<Ability> allAbilities);
 
 }

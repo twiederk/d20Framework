@@ -27,7 +27,7 @@ import com.d20charactersheet.framework.dac.dao.BaseItemDaoTest;
 public class DummyItemDaoTest extends BaseItemDaoTest {
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     itemDao = new DummyItemDao(WEAPON_FAMILY, WEAPON, ARMOR, GOOD);
     characterDao = new DummyCharacterDao(CHARACTER, CHARACTER_CLASS_LEVEL, CHARACTER_ABILITY, CHARACTER_SKILL, CHARACTER_FEAT,
                                          CHARACTER_WEAPON, CHARACTER_ARMOR, CHARACTER_GOOD, CHARACTER_NOTE, CHARACTER_ATTACK,

@@ -48,6 +48,6 @@ public enum RuleError {
   /**
    * Spell level must always be 0 or higher
    */
-  NEGATIVE_SPELL_LEVEL;
+  NEGATIVE_SPELL_LEVEL
 
 }

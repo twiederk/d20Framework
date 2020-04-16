@@ -275,7 +275,7 @@ public class ImportContext {
    */
   public List<SpelllistAbility> getAllSpelllistAbilities() {
     if (allSpelllistAbilities == null) {
-      allSpelllistAbilities = new LinkedList<SpelllistAbility>();
+      allSpelllistAbilities = new LinkedList<>();
       for (final Ability ability : allAbilities) {
         if (ability instanceof SpelllistAbility) {
           final SpelllistAbility spelllistAbilitiy = (SpelllistAbility) ability;
@@ -311,7 +311,7 @@ public class ImportContext {
    */
   public List<Feat> getAllMetamagicFeats() {
     if (allMetamagicFeats == null) {
-      allMetamagicFeats = new LinkedList<Feat>();
+      allMetamagicFeats = new LinkedList<>();
       for (final Feat feat : allFeats) {
         if (FeatType.METAMAGIC.equals(feat.getFeatType())) {
           allMetamagicFeats.add(feat);

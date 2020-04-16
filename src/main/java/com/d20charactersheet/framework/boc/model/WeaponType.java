@@ -23,6 +23,6 @@ public enum WeaponType {
   /**
    * Ammo of a weapon like a arrow or bolt
    */
-  AMMO;
+  AMMO
 
 }

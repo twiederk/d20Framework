@@ -8,12 +8,12 @@ public interface ImageService {
   /**
    * The id of the default image of the character
    */
-  public static final int DEFAULT_CHARACTER_IMAGE_ID = 0;
+  int DEFAULT_CHARACTER_IMAGE_ID = 0;
 
   /**
    * The id of the default thumbnail of the character
    */
-  public static final int DEFAULT_THUMB_IMAGE_ID = 1;
+  int DEFAULT_THUMB_IMAGE_ID = 1;
 
   /**
    * Returns the data of the image.
@@ -23,7 +23,7 @@ public interface ImageService {
    *
    * @return The data of the image.
    */
-  public byte[] getImage(int imageId);
+  byte[] getImage(int imageId);
 
   /**
    * Stores the image file in the persistent layer.
@@ -33,7 +33,7 @@ public interface ImageService {
    *
    * @return The id of the new created image.
    */
-  public int createImage(String filename);
+  int createImage(String filename);
 
   /**
    * Deletes the image from the persistent layer.
@@ -41,6 +41,6 @@ public interface ImageService {
    * @param imageId
    *     The id of the image to delete.
    */
-  public void deleteImage(int imageId);
+  void deleteImage(int imageId);
 
 }

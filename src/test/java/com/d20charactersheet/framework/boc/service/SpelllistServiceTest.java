@@ -66,7 +66,8 @@ public class SpelllistServiceTest {
     spell = spelllistService.getSpellDescription(spell);
     assertNotNull(spell);
     assertNotNull(spell.getDescription());
-    assertTrue(spell.getDescription().startsWith("A magical arrow of acid springs from your hand"));
+    assertTrue(spell.getDescription()
+                   .startsWith("A magical arrow of acid springs from your hand"));
   }
 
   @Test
@@ -139,8 +140,8 @@ public class SpelllistServiceTest {
     assertNotNull(spelllist);
     assertTrue(spelllist.getId() > 0);
 
-    final Spelllist newSpelllist = spelllistService
-        .findSpelllistById(spelllist.getId(), spelllistService.getAllSpelllists(spelllistService.getAllSpells()));
+    final Spelllist newSpelllist = spelllistService.findSpelllistById(spelllist.getId(), spelllistService.getAllSpelllists(
+        spelllistService.getAllSpells()));
 
     assertEquals("testName", newSpelllist.getName());
     assertEquals("testShortname", newSpelllist.getShortname());
@@ -207,6 +208,32 @@ public class SpelllistServiceTest {
 
     // Act
     boolean result = spelllistService.createSpelllevel(spelllist, spell, 1);
+
+    // Assert
+    assertFalse(result);
+  }
+
+  @Test
+  public void createSpelllevel_addObscuringMistToAirSpelllist_obscuringMistNotAdded() {
+    // Arrange
+    Spell obscuringMist = spelllistService.findSpellByName("Obscuring Mist", spelllistService.getAllSpells());
+    Spelllist air = spelllistService.findSpelllistByName("Air", spelllistService.getAllSpelllists(spelllistService.getAllSpells()));
+
+    // Act
+    boolean result = spelllistService.createSpelllevel(air, obscuringMist, 1);
+
+    // Assert
+    assertFalse(result);
+  }
+
+  @Test
+  public void createSpelllevel_addAirWalkToAirSpelllist_airWalkNotAdded() {
+    // Arrange
+    Spell airWalk = spelllistService.findSpellByName("Air Walk", spelllistService.getAllSpells());
+    Spelllist air = spelllistService.findSpelllistByName("Air", spelllistService.getAllSpelllists(spelllistService.getAllSpells()));
+
+    // Act
+    boolean result = spelllistService.createSpelllevel(air, airWalk, 1);
 
     // Assert
     assertFalse(result);

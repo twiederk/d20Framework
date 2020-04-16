@@ -31,7 +31,7 @@ public class DummyXpDao implements XpDao {
 
   @Override
   public List<XpTable> getAllXpTables() {
-    final List<XpTable> allXpTables = new ArrayList<XpTable>(xpTablesTable.getNumberOfRows());
+    final List<XpTable> allXpTables = new ArrayList<>(xpTablesTable.getNumberOfRows());
     for (final DataRow dataRow : xpTablesTable) {
       final XpTable xpTable = new XpTable();
       xpTable.setId(dataRow.getId());

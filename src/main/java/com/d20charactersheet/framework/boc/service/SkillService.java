@@ -14,7 +14,7 @@ public interface SkillService {
    *
    * @return All skills.
    */
-  public List<Skill> getAllSkills();
+  List<Skill> getAllSkills();
 
   /**
    * Creates a skill from the given parameters.
@@ -24,7 +24,7 @@ public interface SkillService {
    *
    * @return The created skill with a valid id.
    */
-  public Skill createSkill(Skill skill);
+  Skill createSkill(Skill skill);
 
   /**
    * Updates the given skill.
@@ -32,7 +32,7 @@ public interface SkillService {
    * @param skill
    *     The skill to update.
    */
-  public void updateSkill(Skill skill);
+  void updateSkill(Skill skill);
 
   /**
    * Delete the skill.
@@ -40,7 +40,7 @@ public interface SkillService {
    * @param skill
    *     The skill to delete.
    */
-  public void deleteSkill(Skill skill);
+  void deleteSkill(Skill skill);
 
   /**
    * Returns the skill with the given id out of the given list of skills.
@@ -52,7 +52,7 @@ public interface SkillService {
    *
    * @return The skill with the given id out of the given list of skills.
    */
-  public Skill getSkillById(int skillId, List<Skill> allSkills);
+  Skill getSkillById(int skillId, List<Skill> allSkills);
 
   /**
    * Adds the description to the skill if it is empty.
@@ -62,6 +62,6 @@ public interface SkillService {
    *
    * @return The skill with description.
    */
-  public Skill getSkillDescription(Skill skill);
+  Skill getSkillDescription(Skill skill);
 
 }

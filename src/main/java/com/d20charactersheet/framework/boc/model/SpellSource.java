@@ -13,5 +13,5 @@ public enum SpellSource {
   /**
    * Spells are get by study of arcane books.
    */
-  ARCANE;
+  ARCANE
 }

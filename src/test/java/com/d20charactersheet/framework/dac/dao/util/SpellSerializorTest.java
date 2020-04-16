@@ -19,7 +19,7 @@ public class SpellSerializorTest {
   private SpellSerializor spellSerializor;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     spellSerializor = new SpellSerializor();
   }
 
@@ -51,7 +51,7 @@ public class SpellSerializorTest {
   }
 
   @Test
-  public void testSerializeSchool() throws Exception {
+  public void testSerializeSchool() {
     final Spell spell = new Spell();
 
     spell.setSchool(School.CONJURATION);
@@ -121,7 +121,7 @@ public class SpellSerializorTest {
   }
 
   @Test
-  public void testDeserializeCastingTime() throws Exception {
+  public void testDeserializeCastingTime() {
     CastingTime castingTime = spellSerializor.deserializeCastingTime("1 standard action");
     assertNotNull(castingTime);
     assertEquals(CastingTime.ONE_STANDARD_ACTION, castingTime);
@@ -176,7 +176,7 @@ public class SpellSerializorTest {
   }
 
   @Test
-  public void testDeserializeRange() throws Exception {
+  public void testDeserializeRange() {
     Range range = spellSerializor.deserializeRange("Personal");
     assertNotNull(range);
     assertEquals(Range.PERSONAL, range);
@@ -211,7 +211,7 @@ public class SpellSerializorTest {
   }
 
   @Test
-  public void testDeserializeSpellResistance() throws Exception {
+  public void testDeserializeSpellResistance() {
     SpellResistance spellResistance = spellSerializor.deserializeSpellResistance("Yes");
     assertNotNull(spellResistance);
     assertEquals(SpellResistance.YES, spellResistance);
@@ -250,7 +250,7 @@ public class SpellSerializorTest {
   }
 
   @Test
-  public void testSerializeComponents() throws Exception {
+  public void testSerializeComponents() {
     final Spell spell = new Spell();
 
     int components = spellSerializor.serializeComponents(spell);
@@ -288,7 +288,7 @@ public class SpellSerializorTest {
   }
 
   @Test
-  public void testSerializeCastingTime() throws Exception {
+  public void testSerializeCastingTime() {
     String castingTime = spellSerializor.serializeCastingTime(CastingTime.ONE_STANDARD_ACTION);
     assertNotNull(castingTime);
     assertEquals("1 standard action", castingTime);
@@ -323,7 +323,7 @@ public class SpellSerializorTest {
   }
 
   @Test
-  public void testSerializeSpellResistance() throws Exception {
+  public void testSerializeSpellResistance() {
     String spellResistance = spellSerializor.serializeSpellResistance(SpellResistance.NO);
     assertNotNull(spellResistance);
     assertEquals("No", spellResistance);

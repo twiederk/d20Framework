@@ -139,7 +139,7 @@ public class DummyCharacterDao implements CharacterDao {
 
   private List<Character> selectAllCharacters(final List<CharacterClass> allCharacterClasses, final List<Race> allRaces,
       final List<XpTable> allXpTables) {
-    final List<Character> allCharacters = new ArrayList<Character>(characterTable.getNumberOfRows());
+    final List<Character> allCharacters = new ArrayList<>(characterTable.getNumberOfRows());
     for (final DataRow characterTableRow : characterTable) {
       final Character character = selectCharacter(characterTableRow, allCharacterClasses, allRaces, allXpTables);
       allCharacters.add(character);
@@ -182,7 +182,7 @@ public class DummyCharacterDao implements CharacterDao {
   }
 
   private void setClassLevels(final Character character, final List<CharacterClass> allClasses) {
-    final List<ClassLevel> characterClasses = new ArrayList<ClassLevel>();
+    final List<ClassLevel> characterClasses = new ArrayList<>();
     final List<DataRow> dataRows = characterClassLevelTable.select(1, character.getId());
     for (final DataRow classLevelRow : dataRows) {
       final ClassLevel classLevel = selectClassLevel(classLevelRow, allClasses);
@@ -349,7 +349,7 @@ public class DummyCharacterDao implements CharacterDao {
 
   @Override
   public List<CharacterSkill> getCharacterSkills(final Character character, final List<Skill> allSkills) {
-    final List<CharacterSkill> characterSkills = new ArrayList<CharacterSkill>();
+    final List<CharacterSkill> characterSkills = new ArrayList<>();
     final int characterId = character.getId();
 
     for (final DataRow dataRow : characterSkillTable.select(1, characterId)) {
@@ -384,7 +384,7 @@ public class DummyCharacterDao implements CharacterDao {
 
   @Override
   public List<CharacterFeat> getCharacterFeats(final Character character, final List<Feat> allFeats) {
-    final List<CharacterFeat> characterFeats = new ArrayList<CharacterFeat>();
+    final List<CharacterFeat> characterFeats = new ArrayList<>();
     for (final DataRow characterFeatRow : characterFeatTable.select(2, character.getId())) {
       final CharacterFeat characterFeat = createCharacterFeat(characterFeatRow, allFeats);
       characterFeats.add(characterFeat);
@@ -434,7 +434,7 @@ public class DummyCharacterDao implements CharacterDao {
 
   @Override
   public List<ItemGroup> getWeapons(final Character character, final List<Weapon> allWeapons) {
-    final List<ItemGroup> weaponGroups = new ArrayList<ItemGroup>();
+    final List<ItemGroup> weaponGroups = new ArrayList<>();
     for (final DataRow dataRow : characterWeaponTable) {
       final int characterId = (Integer) dataRow.get(1);
       if (characterId == character.getId()) {
@@ -447,7 +447,7 @@ public class DummyCharacterDao implements CharacterDao {
 
   @Override
   public List<ItemGroup> getArmor(final Character character, final List<Armor> allArmor) {
-    final List<ItemGroup> armorGroups = new ArrayList<ItemGroup>();
+    final List<ItemGroup> armorGroups = new ArrayList<>();
     for (final DataRow dataRow : characterArmorTable) {
       final int characterId = (Integer) dataRow.get(1);
       if (characterId == character.getId()) {
@@ -460,7 +460,7 @@ public class DummyCharacterDao implements CharacterDao {
 
   @Override
   public List<ItemGroup> getGoods(final Character character, final List<Good> allGoods) {
-    final List<ItemGroup> itemGroups = new ArrayList<ItemGroup>();
+    final List<ItemGroup> itemGroups = new ArrayList<>();
     for (final DataRow dataRow : characterGoodTable) {
       final int characterId = (Integer) dataRow.get(1);
       if (characterId == character.getId()) {
@@ -513,7 +513,7 @@ public class DummyCharacterDao implements CharacterDao {
 
   @Override
   public List<Note> getNotes(final Character character) {
-    final List<Note> notes = new ArrayList<Note>();
+    final List<Note> notes = new ArrayList<>();
     for (final DataRow dataRow : characterNoteTable) {
       if (dataRow.get(1).equals(character.getId())) {
         final Note note = selectNote(dataRow);
@@ -594,7 +594,7 @@ public class DummyCharacterDao implements CharacterDao {
 
   @Override
   public List<CharacterAbility> getCharacterAbilities(final Character character, final CharacterClass characterClass) {
-    final List<CharacterAbility> characterAbilities = new ArrayList<CharacterAbility>();
+    final List<CharacterAbility> characterAbilities = new ArrayList<>();
     final List<DataRow> dataRows = selectCharacterAbilities(character.getId(), characterClass.getId());
     for (final DataRow dataRow : dataRows) {
       final CharacterAbility characterAbility = new CharacterAbility();
@@ -607,7 +607,7 @@ public class DummyCharacterDao implements CharacterDao {
   }
 
   private List<DataRow> selectCharacterAbilities(final int characterId, final int classId) {
-    final List<DataRow> dataRows = new LinkedList<DataRow>();
+    final List<DataRow> dataRows = new LinkedList<>();
     for (final DataRow dataRow : characterAbilityTable) {
       // id, character_id, class_id, ability_id, owned
       if (dataRow.getInt(1) == characterId && dataRow.getInt(2) == classId) {
@@ -688,7 +688,7 @@ public class DummyCharacterDao implements CharacterDao {
   @Override
   public void deleteCharacterAbilities(final CharacterClass characterClass, final List<ClassAbility> classAbilities) {
     final int classId = characterClass.getId();
-    final List<DataRow> dataRows = new LinkedList<DataRow>();
+    final List<DataRow> dataRows = new LinkedList<>();
     for (final DataRow dataRow : characterAbilityTable) {
       // id, character_id, class_id, ability_id, owned
       if (dataRow.getInt(2) == classId && isAbility(dataRow.getInt(3), classAbilities)) {
@@ -712,7 +712,7 @@ public class DummyCharacterDao implements CharacterDao {
 
   @Override
   public List<WeaponAttack> getWeaponAttacks(final Character character, final List<Weapon> allWeapons) {
-    final List<WeaponAttack> weaponAttacks = new ArrayList<WeaponAttack>();
+    final List<WeaponAttack> weaponAttacks = new ArrayList<>();
     final List<DataRow> dataRows = characterWeaponAttackTable.select(1, character.getId());
     for (final DataRow dataRow : dataRows) {
       final WeaponAttack weaponAttack = new WeaponAttack();
@@ -775,7 +775,7 @@ public class DummyCharacterDao implements CharacterDao {
       final List<Spell> allSpells) {
     final List<DataRow> result = characterKnownSpellTable.select(1, character.getId());
 
-    final List<KnownSpell> knownSpells = new LinkedList<KnownSpell>();
+    final List<KnownSpell> knownSpells = new LinkedList<>();
     for (final DataRow dataRow : result) {
       final KnownSpell knownSpell = new KnownSpell();
       knownSpell.setId(dataRow.getId());
@@ -830,7 +830,7 @@ public class DummyCharacterDao implements CharacterDao {
 
     final List<DataRow> result = characterSpellSlotTable.select(1, character.getId());
 
-    final List<SpellSlot> spellSlots = new ArrayList<SpellSlot>();
+    final List<SpellSlot> spellSlots = new ArrayList<>();
     for (final DataRow dataRow : result) {
       final SpellSlot spellSlot = new SpellSlot();
       spellSlot.setId(dataRow.getId());
@@ -852,7 +852,7 @@ public class DummyCharacterDao implements CharacterDao {
   }
 
   private List<SpelllistAbility> getSpelllistAbilities(final List<Ability> allAbilities) {
-    final List<SpelllistAbility> spelllistAbilities = new LinkedList<SpelllistAbility>();
+    final List<SpelllistAbility> spelllistAbilities = new LinkedList<>();
     for (final Ability ability : allAbilities) {
       if (ability instanceof SpelllistAbility) {
         final SpelllistAbility spelllistAbility = (SpelllistAbility) ability;
@@ -863,7 +863,7 @@ public class DummyCharacterDao implements CharacterDao {
   }
 
   private List<SpelllistAbility> getSpelllistAbilities(final int spellSlotId, final List<SpelllistAbility> allAbilities) {
-    final List<SpelllistAbility> spelllistAbilities = new LinkedList<SpelllistAbility>();
+    final List<SpelllistAbility> spelllistAbilities = new LinkedList<>();
     final List<DataRow> result = characterSpellSlotAbilityTable.select(1, spellSlotId);
     for (final DataRow dataRow : result) {
       final SpelllistAbility spelllistAbility = getAbilityById(dataRow.getInt(2), allAbilities);
@@ -882,7 +882,7 @@ public class DummyCharacterDao implements CharacterDao {
   }
 
   private List<Feat> getMetaMagicFeats(final List<Feat> allFeats) {
-    final List<Feat> metaMagicFeats = new LinkedList<Feat>();
+    final List<Feat> metaMagicFeats = new LinkedList<>();
     for (final Feat feat : allFeats) {
       if (FeatType.METAMAGIC.equals(feat.getFeatType())) {
         metaMagicFeats.add(feat);
@@ -892,7 +892,7 @@ public class DummyCharacterDao implements CharacterDao {
   }
 
   private List<Feat> getMetaMagicFeats(final int spellSlotId, final List<Feat> allFeats) {
-    final List<Feat> metaMagicFeats = new LinkedList<Feat>();
+    final List<Feat> metaMagicFeats = new LinkedList<>();
     final List<DataRow> result = characterSpellSlotFeatTable.select(1, spellSlotId);
     for (final DataRow dataRow : result) {
       final Feat feat = getFeatById(dataRow.getInt(2), allFeats);

@@ -51,7 +51,7 @@ public class DummyClassDao implements ClassDao {
   }
 
   private List<CharacterClass> selectAllCharacterClasses(final List<Skill> allSkills, final List<Ability> allAbilities) {
-    final List<CharacterClass> allCharacterClasses = new ArrayList<CharacterClass>();
+    final List<CharacterClass> allCharacterClasses = new ArrayList<>();
     for (final DataRow characterClassRow : characterClassTable) {
       final CharacterClass characterClass = selectCharacterClass(characterClassRow, allSkills, allAbilities);
       allCharacterClasses.add(characterClass);
@@ -98,7 +98,7 @@ public class DummyClassDao implements ClassDao {
   }
 
   private List<Skill> getSkills(final int characterClassId, final List<Skill> allSkills) {
-    final List<Skill> skills = new ArrayList<Skill>();
+    final List<Skill> skills = new ArrayList<>();
     for (final DataRow characterClassSkillRow : characterClassSkillTable) {
       if (characterClassId == characterClassSkillRow.getId()) {
         final int skillId = (Integer) characterClassSkillRow.get(1);
@@ -128,7 +128,7 @@ public class DummyClassDao implements ClassDao {
   }
 
   private List<ClassAbility> getAbilities(final int characterClassId, final List<Ability> allAbilities) {
-    final List<ClassAbility> classAbilities = new ArrayList<ClassAbility>();
+    final List<ClassAbility> classAbilities = new ArrayList<>();
     for (final DataRow dataRow : characterClassAbilityTable) {
       if (dataRow.getId() == characterClassId) {
         final ClassAbility classAbility = selectClassAbility(dataRow, allAbilities);

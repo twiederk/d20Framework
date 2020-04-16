@@ -20,7 +20,7 @@ public class XpServiceTest {
   private XpService xpService;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     final GameSystem gameSystem = new DnDv35Universe().getGameSystem();
     xpService = gameSystem.getXpService();
   }
@@ -40,7 +40,7 @@ public class XpServiceTest {
   }
 
   @Test
-  public void testGetNextLevelAt() throws Exception {
+  public void testGetNextLevelAt() {
     final List<XpTable> allXpTables = xpService.getAllXpTables();
     final XpTable xpTable = allXpTables.get(0);
 
@@ -52,7 +52,7 @@ public class XpServiceTest {
   }
 
   @Test
-  public void testGetNextLevelAtZeroLevel() throws Exception {
+  public void testGetNextLevelAtZeroLevel() {
     final List<XpTable> allXpTables = xpService.getAllXpTables();
     final XpTable xpTable = allXpTables.get(0);
 
@@ -60,7 +60,7 @@ public class XpServiceTest {
   }
 
   @Test
-  public void testGetNextLevelAtNegativeLevel() throws Exception {
+  public void testGetNextLevelAtNegativeLevel() {
     final List<XpTable> allXpTables = xpService.getAllXpTables();
     final XpTable xpTable = allXpTables.get(0);
 
@@ -75,7 +75,7 @@ public class XpServiceTest {
   }
 
   @Test
-  public void testIsValidExperiencePointsToCharacterLevel() throws Exception {
+  public void testIsValidExperiencePointsToCharacterLevel() {
 
     final Character character = new Character() {
 

@@ -15,7 +15,7 @@ public interface XpService {
    *
    * @return All xp tables.
    */
-  public List<XpTable> getAllXpTables();
+  List<XpTable> getAllXpTables();
 
   /**
    * Returns the number of experience points the next level starts at.
@@ -27,7 +27,7 @@ public interface XpService {
    *
    * @return The number of experience points the next level starts at.
    */
-  public int getNextLevelAt(XpTable xpTable, int level);
+  int getNextLevelAt(XpTable xpTable, int level);
 
   /**
    * Validates if the given experience points match the character level of the character.
@@ -39,6 +39,6 @@ public interface XpService {
    *
    * @return True, if the experience points match the character level.
    */
-  public boolean isValidExperiencePointsToCharacterLevel(int experiencePoints, Character character);
+  boolean isValidExperiencePointsToCharacterLevel(int experiencePoints, Character character);
 
 }

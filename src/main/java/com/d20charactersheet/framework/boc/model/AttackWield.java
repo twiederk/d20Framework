@@ -20,5 +20,5 @@ public enum AttackWield {
   ONE_HAND, /**
    * Wield the weapon with tww hands.
    */
-  TWO_HANDED;
+  TWO_HANDED
 }

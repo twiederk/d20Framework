@@ -31,7 +31,7 @@ public class DummySkillDao implements SkillDao {
    */
   @Override
   public List<Skill> getAllSkills() {
-    final List<Skill> allSkills = new LinkedList<Skill>();
+    final List<Skill> allSkills = new LinkedList<>();
     for (final DataRow dataRow : skillTable) {
       final Skill skill = selectSkill(dataRow);
       allSkills.add(skill);

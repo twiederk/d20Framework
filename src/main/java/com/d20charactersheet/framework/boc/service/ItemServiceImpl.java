@@ -93,7 +93,7 @@ public class ItemServiceImpl implements ItemService {
 
   @Override
   public List<Weapon> getEquipableWeapons(final List<Weapon> allWeapons) {
-    final List<Weapon> equipWeapons = new ArrayList<Weapon>(allWeapons.size());
+    final List<Weapon> equipWeapons = new ArrayList<>(allWeapons.size());
     for (final Weapon weapon : allWeapons) {
       if (weapon.getCost() == 0 && weapon.getWeight() == 0) {
         continue;

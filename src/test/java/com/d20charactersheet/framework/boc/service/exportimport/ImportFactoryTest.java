@@ -18,9 +18,6 @@ import org.w3c.dom.Element;
 
 import com.d20charactersheet.framework.DnDv35Universe;
 import com.d20charactersheet.framework.Universe;
-import com.d20charactersheet.framework.boc.model.Armor;
-import com.d20charactersheet.framework.boc.model.Good;
-import com.d20charactersheet.framework.boc.model.Weapon;
 import com.d20charactersheet.framework.boc.service.GameSystem;
 
 public class ImportFactoryTest {
@@ -33,7 +30,7 @@ public class ImportFactoryTest {
   private GameSystem gameSystem;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     final Universe universe = new DnDv35Universe();
     gameSystem = universe.getGameSystem();
     importFactory = new ImportFactoryImpl();
@@ -54,9 +51,9 @@ public class ImportFactoryTest {
   public void testGetImportEquipment() throws Exception {
     final ImportContext importContext = new ImportContext();
     importContext.setGameSystemName(gameSystem.getName());
-    importContext.setAllWeapons(new ArrayList<Weapon>());
-    importContext.setAllArmor(new ArrayList<Armor>());
-    importContext.setAllGoods(new ArrayList<Good>());
+    importContext.setAllWeapons(new ArrayList<>());
+    importContext.setAllArmor(new ArrayList<>());
+    importContext.setAllGoods(new ArrayList<>());
     final ImportEquipment importEquipment = importFactory.getImportEquipment(importContext, IMPORT_CHARACTER_V1_FILE);
     assertNotNull(importEquipment);
     assertTrue(importEquipment instanceof ImportEquipmentV1Xml);

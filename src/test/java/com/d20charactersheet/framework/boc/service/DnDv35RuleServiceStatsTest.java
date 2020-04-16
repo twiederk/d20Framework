@@ -30,7 +30,7 @@ public class DnDv35RuleServiceStatsTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetModifier() throws Exception {
+  public void testGetModifier() {
     // value: 1 => modifier -5
     int modifier = ruleService.getModifier(1);
     assertEquals(-5, modifier);
@@ -74,7 +74,7 @@ public class DnDv35RuleServiceStatsTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetBaseAttackBonusOfSingleClass() throws Exception {
+  public void testGetBaseAttackBonusOfSingleClass() {
 
     // Fighter (good), level 1 => 1
     Character character = createCharacter(fighter, 1);
@@ -93,8 +93,8 @@ public class DnDv35RuleServiceStatsTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetBaseAttackBonusMultiClass() throws Exception {
-    final List<ClassLevel> classLevels = new LinkedList<ClassLevel>();
+  public void testGetBaseAttackBonusMultiClass() {
+    final List<ClassLevel> classLevels = new LinkedList<>();
     classLevels.add(new ClassLevel(ranger, 4));
     classLevels.add(new ClassLevel(druid, 6));
 
@@ -116,7 +116,7 @@ public class DnDv35RuleServiceStatsTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetGoodBaseAttackBonus() throws Exception {
+  public void testGetGoodBaseAttackBonus() {
     final AbstractRuleServiceImpl abstractRuleServiceImpl = (AbstractRuleServiceImpl) ruleService;
 
     assertEquals(1, abstractRuleServiceImpl.getGoodBaseAttackBonus(1));
@@ -125,7 +125,7 @@ public class DnDv35RuleServiceStatsTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetAverageAttackBonus() throws Exception {
+  public void testGetAverageAttackBonus() {
     final AbstractRuleServiceImpl abstractRuleServiceImpl = (AbstractRuleServiceImpl) ruleService;
 
     assertEquals(0, abstractRuleServiceImpl.getAverageBaseAttackBonus(1));
@@ -142,7 +142,7 @@ public class DnDv35RuleServiceStatsTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetPoorAttackBonus() throws Exception {
+  public void testGetPoorAttackBonus() {
     final AbstractRuleServiceImpl abstractRuleServiceImpl = (AbstractRuleServiceImpl) ruleService;
 
     assertEquals(0, abstractRuleServiceImpl.getPoorBaseAttackBonus(1));
@@ -159,7 +159,7 @@ public class DnDv35RuleServiceStatsTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetInitative() throws Exception {
+  public void testGetInitative() {
     final Character character = new Character();
 
     character.setDexterity(5);
@@ -181,7 +181,7 @@ public class DnDv35RuleServiceStatsTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetSpeed() throws Exception {
+  public void testGetSpeed() {
 
     // Human, Fighter (1) => 30 feet
     Character character = createCharacter(new ClassLevel(fighter, 1), human);
@@ -198,7 +198,7 @@ public class DnDv35RuleServiceStatsTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetClassesWithSingleClassLevel() throws Exception {
+  public void testGetClassesWithSingleClassLevel() {
     final Character character = createCharacter(wizard, 5);
 
     final List<CharacterClass> oppositeClasses = ruleService.getOppositeOfCharacterClasses(character, allClasses);
@@ -207,9 +207,9 @@ public class DnDv35RuleServiceStatsTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetClassesWithThreeClassLevels() throws Exception {
+  public void testGetClassesWithThreeClassLevels() {
     final Character character = new Character();
-    final List<ClassLevel> classLevels = new ArrayList<ClassLevel>();
+    final List<ClassLevel> classLevels = new ArrayList<>();
     classLevels.add(new ClassLevel(wizard, 5));
     classLevels.add(new ClassLevel(bard, 5));
     classLevels.add(new ClassLevel(barbarian, 5));
@@ -221,7 +221,7 @@ public class DnDv35RuleServiceStatsTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testACLevel11() throws Exception {
+  public void testACLevel11() {
     final Character character = createCharacter(new ClassLevel(fighter, 11), human);
     character.setDexterity(12);
     final int armorClass = ruleService.getArmorClass(character);
@@ -229,7 +229,7 @@ public class DnDv35RuleServiceStatsTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetCombatManeuverBonus() throws Exception {
+  public void testGetCombatManeuverBonus() {
     // expectedCmb, class, level, race, strength, cmbModifier
     assertCmbScore(3, fighter, 1, human, 14, 0);
     assertCmbScore(6, fighter, 5, human, 10, 1);
@@ -237,7 +237,7 @@ public class DnDv35RuleServiceStatsTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetCombatManeuverBonusMultiClass() throws Exception {
+  public void testGetCombatManeuverBonusMultiClass() {
     final Character character = createCharacter(new ClassLevel(ranger, 4), new ClassLevel(rogue, 4), human, 1);
     character.setStrength(12);
 
@@ -256,7 +256,7 @@ public class DnDv35RuleServiceStatsTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetSpecialSizeModifier() throws Exception {
+  public void testGetSpecialSizeModifier() {
     try {
       for (final Size size : Size.values()) {
         ruleService.getSpecialSizeModifier(size);
@@ -267,7 +267,7 @@ public class DnDv35RuleServiceStatsTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetCombatDefenceModifier() throws Exception {
+  public void testGetCombatDefenceModifier() {
     // expectedCmd, class, level, race, strength, dexterity, cmdModifier
     assertCmdScore(13, fighter, 1, human, 14, 10, 0);
     assertCmdScore(18, fighter, 5, human, 10, 14, 1);

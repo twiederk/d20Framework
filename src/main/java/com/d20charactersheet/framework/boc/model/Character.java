@@ -19,14 +19,14 @@ public class Character implements Serializable {
   private final Attributes attributes = new Attributes();
   private final Combat combat = new Combat();
   private final Saves saves = new Saves();
-  private List<CharacterSkill> characterSkills = new ArrayList<CharacterSkill>();
-  private List<CharacterFeat> characterFeats = new ArrayList<CharacterFeat>();
+  private List<CharacterSkill> characterSkills = new ArrayList<>();
+  private List<CharacterFeat> characterFeats = new ArrayList<>();
   private Money money = new Money();
   private Equipment equipment = new Equipment();
-  private List<Note> notes = new ArrayList<Note>();
-  private List<WeaponAttack> weaponAttacks = new ArrayList<WeaponAttack>();
-  private List<KnownSpell> knownSpells = new ArrayList<KnownSpell>();
-  private List<SpellSlot> spellSlots = new ArrayList<SpellSlot>();
+  private List<Note> notes = new ArrayList<>();
+  private List<WeaponAttack> weaponAttacks = new ArrayList<>();
+  private List<KnownSpell> knownSpells = new ArrayList<>();
+  private List<SpellSlot> spellSlots = new ArrayList<>();
   private Body body = new HumanoidBody();
 
   /**
@@ -697,7 +697,7 @@ public class Character implements Serializable {
    */
   public List<CharacterClass> getCharacterClasses() {
     final List<ClassLevel> classLevels = stats.getClassLevels();
-    final List<CharacterClass> characterClasses = new ArrayList<CharacterClass>(classLevels.size());
+    final List<CharacterClass> characterClasses = new ArrayList<>(classLevels.size());
     for (final ClassLevel classLevel : classLevels) {
       characterClasses.add(classLevel.getCharacterClass());
     }
@@ -711,7 +711,7 @@ public class Character implements Serializable {
    * @return The activie abilities of the character.
    */
   public List<Ability> getActiveAbilities() {
-    final List<Ability> abilities = new ArrayList<Ability>();
+    final List<Ability> abilities = new ArrayList<>();
     final List<Ability> classAbilities = getClassAbilities();
     abilities.addAll(classAbilities);
     abilities.addAll(stats.getRace().getAbilities());
@@ -725,7 +725,7 @@ public class Character implements Serializable {
    * @return Active class abilities.
    */
   public List<Ability> getClassAbilities() {
-    final List<Ability> classAbilities = new ArrayList<Ability>();
+    final List<Ability> classAbilities = new ArrayList<>();
     for (final ClassLevel classLevel : stats.getClassLevels()) {
       final int level = classLevel.getLevel();
       for (final CharacterAbility characterAbility : classLevel.getCharacterAbilities()) {
@@ -753,7 +753,7 @@ public class Character implements Serializable {
    * @return All abilities of the character.
    */
   public List<Ability> getAllAbilities() {
-    final List<Ability> allAbilities = new ArrayList<Ability>();
+    final List<Ability> allAbilities = new ArrayList<>();
     allAbilities.addAll(stats.getRace().getAbilities());
     for (final CharacterClass characterClass : getCharacterClasses()) {
       for (final ClassAbility classAbility : characterClass.getClassAbilities()) {
@@ -770,7 +770,7 @@ public class Character implements Serializable {
    * @return The active spell lists of the character.
    */
   public List<Spelllist> getSpelllists() {
-    final List<Spelllist> spelllists = new LinkedList<Spelllist>();
+    final List<Spelllist> spelllists = new LinkedList<>();
     for (final SpelllistAbility spelllistAbility : getSpelllistAbilities()) {
       final Spelllist spelllist = spelllistAbility.getSpelllist();
       if (!spelllists.contains(spelllist)) {
@@ -835,7 +835,7 @@ public class Character implements Serializable {
    * @return The active spell list abilities of the character.
    */
   public List<SpelllistAbility> getSpelllistAbilities() {
-    final List<SpelllistAbility> spellAbilities = new LinkedList<SpelllistAbility>();
+    final List<SpelllistAbility> spellAbilities = new LinkedList<>();
     for (final Ability ability : getActiveAbilities()) {
       if (ability instanceof SpelllistAbility) {
         final SpelllistAbility spelllistAbility = (SpelllistAbility) ability;
@@ -875,7 +875,7 @@ public class Character implements Serializable {
    * @return The known spells of the given spell list.
    */
   public List<KnownSpell> getKnownSpells(final Spelllist spelllist) {
-    final List<KnownSpell> spells = new LinkedList<KnownSpell>();
+    final List<KnownSpell> spells = new LinkedList<>();
     for (final KnownSpell knownSpell : knownSpells) {
       if (knownSpell.getSpelllist().equals(spelllist)) {
         spells.add(knownSpell);
@@ -899,7 +899,7 @@ public class Character implements Serializable {
    * @return The metamagic feats of the character.
    */
   public List<Feat> getMetamagicFeats() {
-    final List<Feat> metamagicFeats = new LinkedList<Feat>();
+    final List<Feat> metamagicFeats = new LinkedList<>();
     for (final CharacterFeat characterFeat : characterFeats) {
       final Feat feat = characterFeat.getFeat();
       if (FeatType.METAMAGIC.equals(feat.getFeatType())) {

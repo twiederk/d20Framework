@@ -57,7 +57,7 @@ public interface CharacterService {
    *
    * @return List of all available characters.
    */
-  public List<Character> getAllCharacters(List<CharacterClass> allCharacterClasses, List<Race> allRaces, List<Ability> allAbilities,
+  List<Character> getAllCharacters(List<CharacterClass> allCharacterClasses, List<Race> allRaces, List<Ability> allAbilities,
       List<Skill> allSkills, List<Feat> allFeats, List<Weapon> allWeapons, List<Armor> allArmor, List<Good> allGoods,
       List<Spell> allSpells, List<XpTable> allXpTables);
 
@@ -89,7 +89,7 @@ public interface CharacterService {
    *
    * @return The character of the given id.
    */
-  public Character getCharacter(int id, List<CharacterClass> allCharacterClasses, List<Race> allRaces, List<Ability> allAbilities,
+  Character getCharacter(int id, List<CharacterClass> allCharacterClasses, List<Race> allRaces, List<Ability> allAbilities,
       List<Skill> allSkills, List<Feat> allFeats, List<Weapon> allWeapons, List<Armor> allArmor, List<Good> allGoods,
       List<Spell> allSpells, List<XpTable> allXpTables);
 
@@ -101,7 +101,7 @@ public interface CharacterService {
    *
    * @return The updated character.
    */
-  public Character updateCharacter(Character character);
+  Character updateCharacter(Character character);
 
   /**
    * Creates a new character with the given arguments and stores it in the persistent layer.
@@ -113,7 +113,7 @@ public interface CharacterService {
    *
    * @return The new created character with valid id.
    */
-  public Character createCharacter(Character character, List<Skill> allSkills);
+  Character createCharacter(Character character, List<Skill> allSkills);
 
   /**
    * Delete the character. Images are <b>not</b> deleted!
@@ -121,7 +121,7 @@ public interface CharacterService {
    * @param character
    *     The character to delete.
    */
-  public void deleteCharacter(Character character);
+  void deleteCharacter(Character character);
 
   /**
    * Save feats of character to persistent layer.
@@ -129,7 +129,7 @@ public interface CharacterService {
    * @param character
    *     The character with the feats to save.
    */
-  public void updateFeats(Character character);
+  void updateFeats(Character character);
 
   /**
    * Returns the feats of the character.
@@ -141,7 +141,7 @@ public interface CharacterService {
    *
    * @return The feats of the character.
    */
-  public List<CharacterFeat> getCharacterFeats(Character character, List<Feat> allFeats);
+  List<CharacterFeat> getCharacterFeats(Character character, List<Feat> allFeats);
 
   /**
    * Delete the feats of the character.
@@ -149,7 +149,7 @@ public interface CharacterService {
    * @param character
    *     The character to delete its feats.
    */
-  public void deleteCharacterFeats(Character character);
+  void deleteCharacterFeats(Character character);
 
   /**
    * Update the feats of the character.
@@ -157,7 +157,7 @@ public interface CharacterService {
    * @param character
    *     The character to update its feats.
    */
-  public void updateCharacterFeats(Character character);
+  void updateCharacterFeats(Character character);
 
   /**
    * Returns the skills of the character.
@@ -169,7 +169,7 @@ public interface CharacterService {
    *
    * @return The skills of the character.
    */
-  public List<CharacterSkill> getCharacterSkills(Character character, List<Skill> allSkills);
+  List<CharacterSkill> getCharacterSkills(Character character, List<Skill> allSkills);
 
   /**
    * Delete the skills of the character.
@@ -177,7 +177,7 @@ public interface CharacterService {
    * @param character
    *     The character to delete its skills.
    */
-  public void deleteCharacterSkills(Character character);
+  void deleteCharacterSkills(Character character);
 
   /**
    * Updates the goods of the character.
@@ -187,7 +187,7 @@ public interface CharacterService {
    * @param goods
    *     The goods to update.
    */
-  public void updateGoods(Character character, List<ItemGroup> goods);
+  void updateGoods(Character character, List<ItemGroup> goods);
 
   /**
    * Updates the weapons of the character.
@@ -197,7 +197,7 @@ public interface CharacterService {
    * @param weapons
    *     The weapons to update.
    */
-  public void updateWeapons(Character character, List<ItemGroup> weapons);
+  void updateWeapons(Character character, List<ItemGroup> weapons);
 
   /**
    * Updates the armor of the character.
@@ -207,7 +207,7 @@ public interface CharacterService {
    * @param armor
    *     The armor to update.
    */
-  public void updateArmor(Character character, List<ItemGroup> armor);
+  void updateArmor(Character character, List<ItemGroup> armor);
 
   /**
    * Returns the weapons of the character.
@@ -219,7 +219,7 @@ public interface CharacterService {
    *
    * @return The weapons of the character.
    */
-  public List<ItemGroup> getWeapons(Character character, List<Weapon> allWeapons);
+  List<ItemGroup> getWeapons(Character character, List<Weapon> allWeapons);
 
   /**
    * Returns the armor of the character.
@@ -231,7 +231,7 @@ public interface CharacterService {
    *
    * @return The armor of the character.
    */
-  public List<ItemGroup> getArmor(Character character, List<Armor> allArmor);
+  List<ItemGroup> getArmor(Character character, List<Armor> allArmor);
 
   /**
    * Returns the goods of the character.
@@ -243,7 +243,7 @@ public interface CharacterService {
    *
    * @return The goods of the character.
    */
-  public List<ItemGroup> getGoods(Character character, List<Good> allGoods);
+  List<ItemGroup> getGoods(Character character, List<Good> allGoods);
 
   /**
    * Delete the skill from all characters.
@@ -251,7 +251,7 @@ public interface CharacterService {
    * @param skill
    *     The skill to delete.
    */
-  public void deleteSkill(Skill skill);
+  void deleteSkill(Skill skill);
 
   /**
    * Delete the feat from all characters.
@@ -259,7 +259,7 @@ public interface CharacterService {
    * @param feat
    *     The feat to delete.
    */
-  public void deleteFeat(Feat feat);
+  void deleteFeat(Feat feat);
 
   /**
    * Creates a note belonging to the character.
@@ -271,7 +271,7 @@ public interface CharacterService {
    *
    * @return The created note with a valid id.
    */
-  public Note createNote(Note note, Character character);
+  Note createNote(Note note, Character character);
 
   /**
    * Updates a note belonging to the character.
@@ -281,7 +281,7 @@ public interface CharacterService {
    * @param character
    *     The character the note belongs to.
    */
-  public void updateNote(Note note, Character character);
+  void updateNote(Note note, Character character);
 
   /**
    * Deletes a note from a character.
@@ -291,7 +291,7 @@ public interface CharacterService {
    * @param character
    *     The character to delete the note from.
    */
-  public void deleteNote(Note note, Character character);
+  void deleteNote(Note note, Character character);
 
   /**
    * Updates a CharacterAbility
@@ -299,7 +299,7 @@ public interface CharacterService {
    * @param characterAbility
    *     The CharacterAbility to update.
    */
-  public void updateCharacterAbility(CharacterAbility characterAbility);
+  void updateCharacterAbility(CharacterAbility characterAbility);
 
   /**
    * Creates a new class level for the character.
@@ -311,7 +311,7 @@ public interface CharacterService {
    *
    * @return The created class level
    */
-  public ClassLevel createClassLevel(Character character, ClassLevel classLevel);
+  ClassLevel createClassLevel(Character character, ClassLevel classLevel);
 
   /**
    * Updates the given class level.
@@ -319,7 +319,7 @@ public interface CharacterService {
    * @param classLevel
    *     The class level to update.
    */
-  public void updateClassLevel(ClassLevel classLevel);
+  void updateClassLevel(ClassLevel classLevel);
 
   /**
    * Deletes the given class level.
@@ -327,7 +327,7 @@ public interface CharacterService {
    * @param classLevel
    *     The class level to delete.
    */
-  public void deleteClassLevel(ClassLevel classLevel);
+  void deleteClassLevel(ClassLevel classLevel);
 
   /**
    * Deletes ClassAbilities from all characters.
@@ -337,7 +337,7 @@ public interface CharacterService {
    * @param classAbilities
    *     The class abilities to delete.
    */
-  public void deleteCharacterAbilities(CharacterClass characterClass, List<ClassAbility> classAbilities);
+  void deleteCharacterAbilities(CharacterClass characterClass, List<ClassAbility> classAbilities);
 
   /**
    * Assigns WeaponAttack to character and creates it in the persistent layer.
@@ -349,7 +349,7 @@ public interface CharacterService {
    *
    * @return The created WeaponAttack.
    */
-  public WeaponAttack createWeaponAttack(Character character, WeaponAttack weaponAttack);
+  WeaponAttack createWeaponAttack(Character character, WeaponAttack weaponAttack);
 
   /**
    * Updates the given WeaponAttack in the persistent layer.
@@ -357,7 +357,7 @@ public interface CharacterService {
    * @param weaponAttack
    *     The WeaponAttack to update.
    */
-  public void updateWeaponAttack(WeaponAttack weaponAttack);
+  void updateWeaponAttack(WeaponAttack weaponAttack);
 
   /**
    * Deletes a weapon attack from a character.
@@ -367,7 +367,7 @@ public interface CharacterService {
    * @param weaponAttack
    *     The WeaponAttack to delete.
    */
-  public void deleteWeaponAttack(Character character, WeaponAttack weaponAttack);
+  void deleteWeaponAttack(Character character, WeaponAttack weaponAttack);
 
   /**
    * Create known spell for character.
@@ -379,7 +379,7 @@ public interface CharacterService {
    *
    * @return The created known spell.
    */
-  public KnownSpell createKnownSpell(Character character, KnownSpell knownSpell);
+  KnownSpell createKnownSpell(Character character, KnownSpell knownSpell);
 
   /**
    * Delete known spell from character.
@@ -389,7 +389,7 @@ public interface CharacterService {
    * @param knownSpell
    *     The known spell to delete.
    */
-  public void deleteKnownSpell(Character character, KnownSpell knownSpell);
+  void deleteKnownSpell(Character character, KnownSpell knownSpell);
 
   /**
    * Find character by id.
@@ -401,7 +401,7 @@ public interface CharacterService {
    *
    * @return The character with the given id.
    */
-  public Character findCharacterById(int characterId, List<Character> allCharacters);
+  Character findCharacterById(int characterId, List<Character> allCharacters);
 
   /**
    * Find character by name.
@@ -413,7 +413,7 @@ public interface CharacterService {
    *
    * @return The character with the given name.
    */
-  public Character findCharacterByName(String name, List<Character> allCharacters);
+  Character findCharacterByName(String name, List<Character> allCharacters);
 
   /**
    * Update the given spell slot.
@@ -421,7 +421,7 @@ public interface CharacterService {
    * @param spellSlot
    *     The spell slot to update.
    */
-  public void updateSpellSlot(SpellSlot spellSlot);
+  void updateSpellSlot(SpellSlot spellSlot);
 
   /**
    * Create spell slot for character.
@@ -433,7 +433,7 @@ public interface CharacterService {
    *
    * @return The created spell slot.
    */
-  public SpellSlot createSpellSlot(Character character, SpellSlot spellSlot);
+  SpellSlot createSpellSlot(Character character, SpellSlot spellSlot);
 
   /**
    * Delete the given spell slot.
@@ -441,7 +441,7 @@ public interface CharacterService {
    * @param spellSlot
    *     The spell slot to delete.
    */
-  public void deleteSpellSlot(SpellSlot spellSlot);
+  void deleteSpellSlot(SpellSlot spellSlot);
 
   /**
    * Update the spell slots of the character.
@@ -451,7 +451,7 @@ public interface CharacterService {
    * @param spellSlots
    *     The spell slots to update.
    */
-  public void updateSpellSlots(Character character, List<SpellSlot> spellSlots);
+  void updateSpellSlots(Character character, List<SpellSlot> spellSlots);
 
   /**
    * Delete known spells of a spell list. Use if a spell is deleted from a spell list.
@@ -461,7 +461,7 @@ public interface CharacterService {
    * @param spell
    *     The spell to delete from the known spells of.
    */
-  public void deleteKnownSpells(Spelllist spelllist, Spell spell);
+  void deleteKnownSpells(Spelllist spelllist, Spell spell);
 
   /**
    * Delete the spell slots of a spell list and spell. Use if a spell is deleted from aa spell list.
@@ -471,7 +471,7 @@ public interface CharacterService {
    * @param spell
    *     The spll to delete the spell slots of.
    */
-  public void deleteSpellSlots(Spelllist spelllist, Spell spell);
+  void deleteSpellSlots(Spelllist spelllist, Spell spell);
 
   /**
    * Update the skill of a character.
@@ -481,7 +481,7 @@ public interface CharacterService {
    * @param characterSkill
    *     The skill to update.
    */
-  public void updateCharacterSkill(Character character, CharacterSkill characterSkill);
+  void updateCharacterSkill(Character character, CharacterSkill characterSkill);
 
   /**
    * Create the body of a character.
@@ -493,7 +493,7 @@ public interface CharacterService {
    *
    * @return The created body.
    */
-  public Body createBody(Character character, Body body);
+  Body createBody(Character character, Body body);
 
   /**
    * Deletes the body of a character
@@ -501,7 +501,7 @@ public interface CharacterService {
    * @param character
    *     The character to delete the body of.
    */
-  public void deleteBody(Character character);
+  void deleteBody(Character character);
 
   /**
    * Updates the body of a character.
@@ -511,5 +511,5 @@ public interface CharacterService {
    *
    * @return The updated body.
    */
-  public Body updateBody(Character character);
+  Body updateBody(Character character);
 }

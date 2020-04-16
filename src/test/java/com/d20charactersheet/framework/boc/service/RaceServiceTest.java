@@ -23,20 +23,20 @@ public class RaceServiceTest {
   private RaceService raceService;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     gameSystem = new DnDv35Universe().getGameSystem();
     raceService = gameSystem.getRaceService();
   }
 
   @Test
-  public void testGetAllRaces() throws Exception {
+  public void testGetAllRaces() {
     final List<Race> races = raceService.getAllRaces(gameSystem.getAllCharacterClasses(), gameSystem.getAllAbilities());
     assertNotNull(races);
     assertEquals(19, races.size());
   }
 
   @Test
-  public void testCreateRace() throws Exception {
+  public void testCreateRace() {
     final Race race = raceService.createRace(createRace());
     assertNotNull(race);
     assertTrue(race.getId() > 0);
@@ -54,7 +54,7 @@ public class RaceServiceTest {
 
   private List<Ability> createAbilities() {
     final List<Ability> allAbilities = gameSystem.getAllAbilities();
-    final List<Ability> abilities = new ArrayList<Ability>();
+    final List<Ability> abilities = new ArrayList<>();
     for (int i = 0; i < 10; i++) {
       abilities.add(allAbilities.get(i));
     }
@@ -62,7 +62,7 @@ public class RaceServiceTest {
   }
 
   @Test
-  public void testUpdateRace() throws Exception {
+  public void testUpdateRace() {
     final Race originalRace = getRaceById(0);
     final Race updateRace = createRace();
     updateRace.setId(originalRace.getId());

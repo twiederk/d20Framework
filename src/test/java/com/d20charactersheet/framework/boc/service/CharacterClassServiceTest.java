@@ -20,7 +20,7 @@ public class CharacterClassServiceTest {
   private List<Ability> allAbilities;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     final GameSystem gameSystem = new DnDv35Universe().getGameSystem();
     characterClassService = gameSystem.getCharacterClassService();
     allSkills = gameSystem.getAllSkills();

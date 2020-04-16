@@ -58,7 +58,7 @@ public class DummyFeatDao implements FeatDao {
    */
   @Override
   public List<Feat> getAllFeats() {
-    final List<Feat> allFeats = new ArrayList<Feat>();
+    final List<Feat> allFeats = new ArrayList<>();
     for (final DataRow featRow : featTable) {
       final Feat feat = selectFeat(featRow);
       allFeats.add(feat);

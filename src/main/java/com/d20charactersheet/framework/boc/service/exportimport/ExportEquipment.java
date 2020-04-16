@@ -29,7 +29,7 @@ public interface ExportEquipment {
    * @throws Exception
    *     Thrown if the export fails.
    */
-  public void exportEquipment(String gameSystemName, File exportFile, List<Weapon> weapons, List<Armor> armor, List<Good> goods)
+  void exportEquipment(String gameSystemName, File exportFile, List<Weapon> weapons, List<Armor> armor, List<Good> goods)
       throws Exception;
 
 }

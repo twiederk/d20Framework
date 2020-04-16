@@ -19,7 +19,7 @@ public class BodyTest {
 
     // Assert
     assertThat(bodyParts).hasSize(15);
-    bodyParts.stream().forEach(bodyPart -> assertThat(body.getItemOfBodyPart(bodyPart)).isEqualTo(Item.EMPTY_ITEM));
+    bodyParts.forEach(bodyPart -> assertThat(body.getItemOfBodyPart(bodyPart)).isEqualTo(Item.EMPTY_ITEM));
   }
 
   @Test

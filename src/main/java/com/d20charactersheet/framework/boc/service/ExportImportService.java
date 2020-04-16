@@ -18,17 +18,17 @@ public interface ExportImportService {
   /**
    * The file name prefix of a character xml file
    */
-  public static final String EXPORT_CHARACTER_FILE_PREFIX = "d20cs_characters";
+  String EXPORT_CHARACTER_FILE_PREFIX = "d20cs_characters";
 
   /**
    * The file name prefix of a equipment xml file
    */
-  public static final String EXPORT_EQUIPMENT_FILE_PREFIX = "d20cs_equipment";
+  String EXPORT_EQUIPMENT_FILE_PREFIX = "d20cs_equipment";
 
   /**
    * The file name suffix of a xml file
    */
-  public static final String EXPORT_FILE_SUFFIX = ".xml";
+  String EXPORT_FILE_SUFFIX = ".xml";
 
   /**
    * Exports the characters to a xml file.
@@ -45,7 +45,7 @@ public interface ExportImportService {
    * @throws Exception
    *     Thrown if the export failed.
    */
-  public File exportCharacters(GameSystem gameSystem, File exportFile, List<Character> characters) throws Exception;
+  File exportCharacters(GameSystem gameSystem, File exportFile, List<Character> characters) throws Exception;
 
   /**
    * Imports characters from a xml file into the given game system and returning an import report for each character.
@@ -60,7 +60,7 @@ public interface ExportImportService {
    * @throws Exception
    *     Thrown if the import failed.
    */
-  public List<ImportReport<Character>> importCharacters(GameSystem gameSystem, File importFile) throws Exception;
+  List<ImportReport<Character>> importCharacters(GameSystem gameSystem, File importFile) throws Exception;
 
   /**
    * Exports equipment to a xml file.
@@ -81,7 +81,7 @@ public interface ExportImportService {
    * @throws Exception
    *     Thrown if the export failed.
    */
-  public File exportEquipment(GameSystem gameSystem, File exportFile, List<Weapon> weapons, List<Armor> armor, List<Good> goods)
+  File exportEquipment(GameSystem gameSystem, File exportFile, List<Weapon> weapons, List<Armor> armor, List<Good> goods)
       throws Exception;
 
   /**
@@ -97,5 +97,5 @@ public interface ExportImportService {
    * @throws Exception
    *     Thrown if the import failed.
    */
-  public List<ImportReport<? extends Item>> importEquipment(GameSystem gameSystem, File importFile) throws Exception;
+  List<ImportReport<? extends Item>> importEquipment(GameSystem gameSystem, File importFile) throws Exception;
 }

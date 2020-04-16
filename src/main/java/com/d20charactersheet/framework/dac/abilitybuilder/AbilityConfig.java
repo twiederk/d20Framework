@@ -25,7 +25,7 @@ public class AbilityConfig {
    */
   public AbilityConfig() {
     super();
-    properties = new HashMap<String, String>();
+    properties = new HashMap<>();
   }
 
   /**

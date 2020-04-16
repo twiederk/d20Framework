@@ -75,7 +75,7 @@ public abstract class BaseCharacterDaoTest {
   }
 
   @After
-  public void tearDown() throws Exception {
+  public void tearDown() {
     characterDao = null;
     imageDao = null;
     characterClassDao = null;
@@ -110,7 +110,7 @@ public abstract class BaseCharacterDaoTest {
   }
 
   @Test
-  public void testUpdateAttribute() throws Exception {
+  public void testUpdateAttribute() {
     Character character = characterDao.getCharacter(0, allCharacterClasses, allRaces, allXpTables);
     final int oldStrength = character.getStrength();
 
@@ -127,12 +127,12 @@ public abstract class BaseCharacterDaoTest {
   }
 
   @Test
-  public void testUpdateClassLevel() throws Exception {
+  public void testUpdateClassLevel() {
     final Character belvador = characterDao.getCharacter(0, allCharacterClasses, allRaces, allXpTables);
     final List<ClassLevel> oldClassLevels = belvador.getClassLevels();
     assertNotNull(oldClassLevels);
 
-    final List<ClassLevel> classLevels = new ArrayList<ClassLevel>();
+    final List<ClassLevel> classLevels = new ArrayList<>();
     final ClassLevel classLevel = new ClassLevel(wizard, 10);
     classLevels.add(classLevel);
     belvador.setClassLevels(classLevels);
@@ -145,14 +145,15 @@ public abstract class BaseCharacterDaoTest {
   }
 
   @Test
-  public void testCreateCharacter() throws Exception {
+  public void testCreateCharacter() {
     final String name = "name";
     final String player = "player";
     final Race race = human;
     final Sex sex = Sex.MALE;
     final ClassLevel classLevel = new ClassLevel(fighter, 1);
     final Alignment alignment = Alignment.NEUTRAL;
-    final XpTable xpTable = xpDao.getAllXpTables().get(0);
+    final XpTable xpTable = xpDao.getAllXpTables()
+        .get(0);
 
     final Character newCharacter = createCharacter(name, player, race, sex, classLevel, alignment, xpTable);
 
@@ -174,14 +175,15 @@ public abstract class BaseCharacterDaoTest {
   }
 
   @Test
-  public void testDeleteCharacter() throws Exception {
+  public void testDeleteCharacter() {
     final String name = "testDeleteCharacter";
     final String player = "player";
     final Race race = human;
     final Sex sex = Sex.MALE;
     final ClassLevel classLevel = new ClassLevel(fighter, 1);
     final Alignment alignment = Alignment.NEUTRAL;
-    final XpTable xpTable = xpDao.getAllXpTables().get(0);
+    final XpTable xpTable = xpDao.getAllXpTables()
+        .get(0);
     final Character newCharacter = createCharacter(name, player, race, sex, classLevel, alignment, xpTable);
     newCharacter.setStrength(10);
     newCharacter.setDexterity(10);
@@ -191,7 +193,8 @@ public abstract class BaseCharacterDaoTest {
     newCharacter.setCharisma(10);
     final Character character = characterDao.createCharacter(newCharacter);
     final int id = character.getId();
-    final int numberOfCharacters = characterDao.getAllCharacters(allCharacterClasses, allRaces, allXpTables).size();
+    final int numberOfCharacters = characterDao.getAllCharacters(allCharacterClasses, allRaces, allXpTables)
+        .size();
 
     // test
     characterDao.deleteCharacter(character);
@@ -209,7 +212,7 @@ public abstract class BaseCharacterDaoTest {
     character.setPlayer(player);
     character.setRace(race);
     character.setSex(sex);
-    final List<ClassLevel> classLevels = new LinkedList<ClassLevel>();
+    final List<ClassLevel> classLevels = new LinkedList<>();
     classLevels.add(classLevel);
     character.setClassLevels(classLevels);
     character.setAlignment(alignment);
@@ -226,7 +229,7 @@ public abstract class BaseCharacterDaoTest {
   }
 
   @Test
-  public void testGetAllNotes() throws Exception {
+  public void testGetAllNotes() {
     final Character belvador = new Character();
     belvador.setId(0);
     final List<Note> notes = characterDao.getNotes(belvador);
@@ -235,7 +238,7 @@ public abstract class BaseCharacterDaoTest {
   }
 
   @Test
-  public void testCreateAndDeleteNote() throws Exception {
+  public void testCreateAndDeleteNote() {
     final Note note = new Note();
     final Date date = new Date();
     note.setDate(date);
@@ -256,7 +259,7 @@ public abstract class BaseCharacterDaoTest {
   }
 
   @Test
-  public void testGetKnownSpells() throws Exception {
+  public void testGetKnownSpells() {
     final Character belvador = new Character();
     belvador.setId(0);
 
@@ -279,7 +282,7 @@ public abstract class BaseCharacterDaoTest {
   }
 
   @Test
-  public void testGetSpellSlots() throws Exception {
+  public void testGetSpellSlots() {
     final Character belvador = new Character();
     belvador.setId(0);
 
@@ -362,7 +365,7 @@ public abstract class BaseCharacterDaoTest {
   }
 
   @Test
-  public void testUpdateSpellSlot() throws Exception {
+  public void testUpdateSpellSlot() {
     final Character belvador = new Character();
     belvador.setId(0);
 
@@ -374,7 +377,7 @@ public abstract class BaseCharacterDaoTest {
     final Spell detectPoison = findSpellByName("Detect Poison", allSpells);
     spellSlot.setSpell(detectPoison);
     spellSlot.setCast(true);
-    final List<Feat> metamagicFeats = new LinkedList<Feat>();
+    final List<Feat> metamagicFeats = new LinkedList<>();
     metamagicFeats.add(findFeatByName("Empower Spell", allFeats));
     spellSlot.setMetamagicFeats(metamagicFeats);
 
@@ -401,8 +404,8 @@ public abstract class BaseCharacterDaoTest {
     copySpellSlot.setSpell(spellSlot.getSpell());
     copySpellSlot.setLevel(spellSlot.getLevel());
     copySpellSlot.setCast(spellSlot.isCast());
-    copySpellSlot.setSpelllistAbilities(new LinkedList<SpelllistAbility>(spellSlot.getSpelllistAbilities()));
-    copySpellSlot.setMetamagicFeats(new LinkedList<Feat>(spellSlot.getMetamagicFeats()));
+    copySpellSlot.setSpelllistAbilities(new LinkedList<>(spellSlot.getSpelllistAbilities()));
+    copySpellSlot.setMetamagicFeats(new LinkedList<>(spellSlot.getMetamagicFeats()));
     return copySpellSlot;
   }
 
@@ -434,7 +437,7 @@ public abstract class BaseCharacterDaoTest {
   }
 
   @Test
-  public void testCreateSpellSlot() throws Exception {
+  public void testCreateSpellSlot() {
     final List<Spell> allSpells = spelllistDao.getAllSpells();
 
     final Character character = new Character();
@@ -444,11 +447,11 @@ public abstract class BaseCharacterDaoTest {
     spellSlot.setSpell(findSpellByName("Magic Missile", allSpells));
     spellSlot.setLevel(1);
     spellSlot.setCast(true);
-    List<SpelllistAbility> spelllistAbilities = new ArrayList<SpelllistAbility>(1);
+    List<SpelllistAbility> spelllistAbilities = new ArrayList<>(1);
     spelllistAbilities.add((SpelllistAbility) findAbilityByName("Spells - Wizard", allAbilities));
     spellSlot.setSpelllistAbilities(spelllistAbilities);
 
-    List<Feat> metamagicFeats = new ArrayList<Feat>(1);
+    List<Feat> metamagicFeats = new ArrayList<>(1);
     metamagicFeats.add(findFeatByName("Extend Spell", featDao.getAllFeats()));
     spellSlot.setMetamagicFeats(metamagicFeats);
 
@@ -488,7 +491,7 @@ public abstract class BaseCharacterDaoTest {
   }
 
   @Test
-  public void testUpdateCharacterSkill() throws Exception {
+  public void testUpdateCharacterSkill() {
     final Character belvador = new Character();
     belvador.setId(0);
 

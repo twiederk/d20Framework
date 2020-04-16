@@ -19,7 +19,7 @@ import com.d20charactersheet.framework.boc.model.Skill;
 public class DnDv35RuleServiceRollTest extends DnDv35RuleServiceTestCase {
 
   @Test
-  public void testRollAttack() throws Exception {
+  public void testRollAttack() {
     final DieRoll dieRoll = ruleService.rollAttack(5);
     assertDieRoll(dieRoll, 1, Die.D20, 5);
   }
@@ -31,7 +31,7 @@ public class DnDv35RuleServiceRollTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testRollCritical() throws Exception {
+  public void testRollCritical() {
     final Critical critical = new Critical(20, 2);
     DieRoll dieRoll = ruleService.rollCritical(new Damage(1, Die.D4), 2, critical);
     assertDieRoll(dieRoll, 2, Die.D4, 4);
@@ -42,7 +42,7 @@ public class DnDv35RuleServiceRollTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testRollSkill() throws Exception {
+  public void testRollSkill() {
     final Skill skill = new Skill();
     skill.setAttribute(Attribute.STRENGTH);
     final CharacterSkill characterSkill = new CharacterSkill(skill);
@@ -67,7 +67,7 @@ public class DnDv35RuleServiceRollTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testIsCritical() throws Exception {
+  public void testIsCritical() {
     final Critical critical = new Critical(20, 2);
 
     final DieRoll dieRoll = new DieRoll();
@@ -79,7 +79,7 @@ public class DnDv35RuleServiceRollTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testIsFumble() throws Exception {
+  public void testIsFumble() {
     final DieRoll dieRoll = new DieRoll();
     dieRoll.setRolls(new int[] {1});
     assertTrue(ruleService.isFumble(dieRoll));
@@ -89,37 +89,37 @@ public class DnDv35RuleServiceRollTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testRollAttribute() throws Exception {
+  public void testRollAttribute() {
     final DieRoll dieRoll = ruleService.rollAttribute(belvador, Attribute.INTELLIGENCE);
     assertDieRoll(dieRoll, 1, Die.D20, 4);
   }
 
   @Test
-  public void testRollSave() throws Exception {
+  public void testRollSave() {
     final DieRoll dieRoll = ruleService.rollSave(belvador, Save.FORTITUDE);
     assertDieRoll(dieRoll, 1, Die.D20, 4);
   }
 
   @Test
-  public void testRollInitative() throws Exception {
+  public void testRollInitative() {
     final DieRoll dieRoll = ruleService.rollInitative(belvador);
     assertDieRoll(dieRoll, 1, Die.D20, 4);
   }
 
   @Test
-  public void testRollBaseAttackBonus() throws Exception {
+  public void testRollBaseAttackBonus() {
     final DieRoll dieRoll = ruleService.rollBaseAttackBonus(belvador);
     assertDieRoll(dieRoll, 1, Die.D20, 2);
   }
 
   @Test
-  public void testRollCombatManeuverBonus() throws Exception {
+  public void testRollCombatManeuverBonus() {
     final DieRoll dieRoll = ruleService.rollCombatManeuverBonus(belvador);
     assertDieRoll(dieRoll, 1, Die.D20, 2);
   }
 
   @Test
-  public void testRollCombatManeuverDefence() throws Exception {
+  public void testRollCombatManeuverDefence() {
     final DieRoll dieRoll = ruleService.rollCombatManeuverDefence(belvador);
     assertDieRoll(dieRoll, 1, Die.D20, 16);
   }

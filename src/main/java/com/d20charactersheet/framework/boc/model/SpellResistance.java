@@ -25,5 +25,5 @@ public enum SpellResistance {
   YES_HARMLESS_OBJECT, /**
    * Specific
    */
-  SPECIFIC;
+  SPECIFIC
 }

@@ -64,5 +64,5 @@ public enum Descriptor {
   SONIC, /**
    * Water
    */
-  WATER;
+  WATER
 }

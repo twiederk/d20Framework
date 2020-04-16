@@ -109,7 +109,7 @@ public class CharacterServiceImpl implements CharacterService {
 
   List<CharacterAbility> removeCharacterAbilities(final List<CharacterAbility> characterAbilities,
       final CharacterClass characterClass) {
-    final List<CharacterAbility> remainingCharacterAbilities = new ArrayList<CharacterAbility>(characterAbilities.size());
+    final List<CharacterAbility> remainingCharacterAbilities = new ArrayList<>(characterAbilities.size());
     for (final CharacterAbility characterAbility : characterAbilities) {
       if (contains(characterAbility, characterClass.getClassAbilities())) {
         remainingCharacterAbilities.add(characterAbility);
@@ -187,7 +187,7 @@ public class CharacterServiceImpl implements CharacterService {
   private void fillKnownSpells(final Character character, final List<Spell> allSpells) {
     final List<Spelllist> spelllists = character.getSpelllists();
     final List<KnownSpell> daoKnownSpells = characterDao.getKnownSpells(character, spelllists, allSpells);
-    final List<KnownSpell> knownSpells = new ArrayList<KnownSpell>(daoKnownSpells.size());
+    final List<KnownSpell> knownSpells = new ArrayList<>(daoKnownSpells.size());
     for (final KnownSpell knownSpell : daoKnownSpells) {
       if (knownSpell.getSpelllist() == null) {
         deleteKnownSpell(character, knownSpell);
@@ -388,7 +388,7 @@ public class CharacterServiceImpl implements CharacterService {
   @Override
   public void deleteNote(final Note note, final Character character) {
     characterDao.deleteNote(note);
-    final List<Note> notes = new ArrayList<Note>();
+    final List<Note> notes = new ArrayList<>();
     for (final Note currentNote : character.getNotes()) {
       if (currentNote.getId() != note.getId()) {
         notes.add(currentNote);
@@ -437,7 +437,8 @@ public class CharacterServiceImpl implements CharacterService {
 
   @Override
   public void deleteWeaponAttack(final Character character, final WeaponAttack weaponAttack) {
-    final List<WeaponAttack> weaponAttacks = new ArrayList<WeaponAttack>(character.getWeaponAttacks().size() - 1);
+    final List<WeaponAttack> weaponAttacks = new ArrayList<>(character.getWeaponAttacks()
+                                                                 .size() - 1);
     for (final WeaponAttack currentWeaponAttack : character.getWeaponAttacks()) {
       if (currentWeaponAttack.equals(weaponAttack)) {
         continue;
@@ -500,7 +501,7 @@ public class CharacterServiceImpl implements CharacterService {
 
   @Override
   public void updateSpellSlots(final Character character, final List<SpellSlot> newSpellSlots) {
-    final List<SpellSlot> oldSpellSlots = new LinkedList<SpellSlot>(character.getSpellSlots());
+    final List<SpellSlot> oldSpellSlots = new LinkedList<>(character.getSpellSlots());
 
     // create new spell slots
     for (final SpellSlot spellSlot : newSpellSlots) {

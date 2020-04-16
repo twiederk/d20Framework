@@ -17,7 +17,7 @@ public class Spelllist implements Serializable {
   private int id;
   private String name;
   private String shortname;
-  private Map<Integer, List<Spell>> spellsByLevel = new HashMap<Integer, List<Spell>>();
+  private Map<Integer, List<Spell>> spellsByLevel = new HashMap<>();
   private boolean domain;
   private int minLevel;
   private int maxLevel;
@@ -110,7 +110,7 @@ public class Spelllist implements Serializable {
   public List<Spell> getSpellsOfLevel(final int level) {
     List<Spell> spellsOfLevel = spellsByLevel.get(level);
     if (spellsOfLevel == null) {
-      spellsOfLevel = new LinkedList<Spell>();
+      spellsOfLevel = new LinkedList<>();
     }
     return spellsOfLevel;
   }
@@ -135,7 +135,7 @@ public class Spelllist implements Serializable {
    * @return All spells of the spell list.
    */
   public List<Spell> getAllSpells() {
-    final List<Spell> allSpells = new ArrayList<Spell>();
+    final List<Spell> allSpells = new ArrayList<>();
     for (final List<Spell> spells : spellsByLevel.values()) {
       allSpells.addAll(spells);
     }

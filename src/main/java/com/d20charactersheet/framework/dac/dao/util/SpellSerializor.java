@@ -177,7 +177,7 @@ public class SpellSerializor {
    * @return The serializable school as string.
    */
   public String serializeSchool(final Spell spell) {
-    final StringBuffer output = new StringBuffer();
+    final StringBuilder output = new StringBuilder();
     output.append(getSchool(spell.getSchool()));
     output.append(getSubSchool(spell));
     output.append(getDescriptors(spell));

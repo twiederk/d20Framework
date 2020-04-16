@@ -31,6 +31,6 @@ public enum School {
   TRANSMUTATION, /**
    * Universal
    */
-  UNIVERSAL;
+  UNIVERSAL
 
 }

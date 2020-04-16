@@ -37,14 +37,14 @@ public class ItemDaoHelperTest {
   private List<ItemGroup> editedItems;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     helper = new DummyItemDaoHelper(null, null, null);
     currentItems = createCurrentItems();
     editedItems = createEditedItems();
   }
 
   private List<ItemGroup> createCurrentItems() {
-    final List<ItemGroup> currentItems = new LinkedList<ItemGroup>();
+    final List<ItemGroup> currentItems = new LinkedList<>();
     for (int i = 1; i <= 4; i++) {
       currentItems.add(createItemGroup(i, i)); // creates 4 items with id = number
     }
@@ -52,7 +52,7 @@ public class ItemDaoHelperTest {
   }
 
   private List<ItemGroup> createEditedItems() {
-    final List<ItemGroup> editedItems = new LinkedList<ItemGroup>();
+    final List<ItemGroup> editedItems = new LinkedList<>();
     editedItems.add(createItemGroup(-1, 1)); // new added item => insert
     editedItems.add(createItemGroup(1, 1)); // nothing changed => nothing to do
     editedItems.add(createItemGroup(2, 1)); // removed one item => update
@@ -72,7 +72,7 @@ public class ItemDaoHelperTest {
   }
 
   @Test
-  public void testGetItemsToDelete() throws Exception {
+  public void testGetItemsToDelete() {
     final List<ItemGroup> itemsToDelete = helper.getItemsToDelete(currentItems, editedItems);
 
     assertNotNull(itemsToDelete);
@@ -82,7 +82,7 @@ public class ItemDaoHelperTest {
   }
 
   @Test
-  public void testGetItemsToUpate() throws Exception {
+  public void testGetItemsToUpate() {
     final List<ItemGroup> itemsToUpdate = helper.getItemsToUpdate(currentItems, editedItems);
 
     assertNotNull(itemsToUpdate);
@@ -98,7 +98,7 @@ public class ItemDaoHelperTest {
   }
 
   @Test
-  public void testGetItemsToInsert() throws Exception {
+  public void testGetItemsToInsert() {
     final List<ItemGroup> itemsToInsert = helper.getItemsToInsert(editedItems);
 
     assertNotNull(itemsToInsert);
@@ -110,7 +110,7 @@ public class ItemDaoHelperTest {
   }
 
   @Test
-  public void testGetUnmodifiedItems() throws Exception {
+  public void testGetUnmodifiedItems() {
     final List<ItemGroup> itemsUnmodified = helper.getUnmodifiedItems(currentItems, editedItems);
 
     assertNotNull(itemsUnmodified);

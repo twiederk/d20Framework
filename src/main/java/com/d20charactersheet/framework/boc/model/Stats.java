@@ -15,7 +15,7 @@ public class Stats implements Serializable {
   private String player;
   private Race race;
   private Sex sex;
-  private List<ClassLevel> classLevels = new ArrayList<ClassLevel>();
+  private List<ClassLevel> classLevels = new ArrayList<>();
   private Alignment alignment;
   private int imageId;
   private int thumbImageId;

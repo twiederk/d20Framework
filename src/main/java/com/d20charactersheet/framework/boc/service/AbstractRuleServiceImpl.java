@@ -166,7 +166,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   @Override
   public List<CharacterClass> getOppositeOfCharacterClasses(final Character character, final List<CharacterClass> allClasses) {
     final List<CharacterClass> characterClasses = getCharacterClasses(character);
-    final List<CharacterClass> oppositeClasses = new ArrayList<CharacterClass>();
+    final List<CharacterClass> oppositeClasses = new ArrayList<>();
     for (final CharacterClass characterClass : allClasses) {
       if (!characterClasses.contains(characterClass)) {
         oppositeClasses.add(characterClass);
@@ -177,7 +177,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   }
 
   private List<CharacterClass> getCharacterClasses(final Character character) {
-    final List<CharacterClass> characterClasses = new LinkedList<CharacterClass>();
+    final List<CharacterClass> characterClasses = new LinkedList<>();
     for (final ClassLevel classLevel : character.getClassLevels()) {
       characterClasses.add(classLevel.getCharacterClass());
     }
@@ -435,7 +435,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
       baseAttackBonuses = getAttackBonusesOffHand(character.getCharacterFeats(), baseAttackBonus, enhancementBonus, attributeBonus,
                                                   featBonus, attackBonusModifier);
     } else {
-      baseAttackBonuses = new LinkedList<Integer>();
+      baseAttackBonuses = new LinkedList<>();
       int bab = baseAttackBonus;
       do {
         final int attackBonus = bab + enhancementBonus + attributeBonus + featBonus + attackBonusModifier;
@@ -448,7 +448,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
 
   private List<Integer> getAttackBonusesOffHand(final List<CharacterFeat> characterFeats, final int baseAttackBonus,
       final int enhancementBonus, final int attributeBonus, final int featBonus, final int attackBonusModifier) {
-    final List<Integer> baseAttackBonuses = new LinkedList<Integer>();
+    final List<Integer> baseAttackBonuses = new LinkedList<>();
 
     // 1st attack
     final int attackBonus = baseAttackBonus + enhancementBonus + attributeBonus + featBonus + attackBonusModifier;
@@ -964,7 +964,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
 
   @Override
   public List<SpellSlot> calculateSpellSlots(final Character character) {
-    final List<SpellSlot> spellSlots = new ArrayList<SpellSlot>();
+    final List<SpellSlot> spellSlots = new ArrayList<>();
     for (final SpelllistAbility spelllistAbility : character.getSpelllistAbilities()) {
       calculateSpellSlots(character, spelllistAbility, spellSlots);
     }
@@ -1074,7 +1074,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   }
 
   private void fillSpellSlots(final Character character, final List<SpellSlot> spellSlots) {
-    final List<SpellSlot> characterSpellSlots = new ArrayList<SpellSlot>(character.getSpellSlots());
+    final List<SpellSlot> characterSpellSlots = new ArrayList<>(character.getSpellSlots());
     for (final SpellSlot spellSlot : spellSlots) {
       fillSpellSlot(spellSlot, characterSpellSlots);
     }
@@ -1123,7 +1123,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   }
 
   private List<Spell> getSpellSelectionOfLevel(final Character character, final SpellSlot spellSlot) throws RuleException {
-    final List<Spell> spellSelection = new ArrayList<Spell>();
+    final List<Spell> spellSelection = new ArrayList<>();
     final List<Spelllist> spelllists = spellSlot.getSpelllists();
     for (final Spelllist spelllist : spelllists) {
       final List<KnownSpell> knownSpells = character.getKnownSpells(spelllist);
@@ -1150,7 +1150,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
       return spellSelectionOfLevel;
     }
 
-    final List<Spell> spellSelection = new LinkedList<Spell>();
+    final List<Spell> spellSelection = new LinkedList<>();
     for (final Spell spell : spellSelectionOfLevel) {
       if (spellSlot.getSchools().contains(spell.getSchool())) {
         spellSelection.add(spell);
@@ -1160,7 +1160,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   }
 
   private List<Spell> getSpellsOfLevel(final List<Spell> spelllistSpells, final List<KnownSpell> knownSpells) {
-    final List<Spell> spellsOfLevel = new LinkedList<Spell>();
+    final List<Spell> spellsOfLevel = new LinkedList<>();
     for (final KnownSpell knownSpell : knownSpells) {
       final Spell spell = knownSpell.getSpell();
       if (spelllistSpells.contains(spell)) {
@@ -1214,7 +1214,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
 
   @Override
   public List<SpellSlot> rest(final Character character) {
-    final List<SpellSlot> spellSlots = new LinkedList<SpellSlot>();
+    final List<SpellSlot> spellSlots = new LinkedList<>();
     for (final SpellSlot spellSlot : character.getSpellSlots()) {
       if (spellSlot.isCast()) {
         spellSlot.setCast(false);

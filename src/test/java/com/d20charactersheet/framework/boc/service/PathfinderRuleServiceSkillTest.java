@@ -27,12 +27,12 @@ public class PathfinderRuleServiceSkillTest extends PathfinderRuleServiceTestCas
   }
 
   @Test
-  public void testGetSkillModifierWithClassSkillNoRank() throws Exception {
+  public void testGetSkillModifierWithClassSkillNoRank() {
     assertCharacterSkill(0, "Perform");
   }
 
   @Test
-  public void testGetSkillModifierWithCrossClassSkill() throws Exception {
+  public void testGetSkillModifierWithCrossClassSkill() {
     assertCharacterSkill(0, "Perception");
   }
 
@@ -52,7 +52,7 @@ public class PathfinderRuleServiceSkillTest extends PathfinderRuleServiceTestCas
   }
 
   @Test
-  public void testGetSkillPoints() throws Exception {
+  public void testGetSkillPoints() {
     final int skillPoints = ruleService.getSkillPoints(valeros, null);
     assertEquals(4, skillPoints);
   }

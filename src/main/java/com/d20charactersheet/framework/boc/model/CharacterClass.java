@@ -266,7 +266,7 @@ public class CharacterClass implements Serializable {
       setSaves(EnumSet.noneOf(Save.class));
       setAlignments(EnumSet.noneOf(Alignment.class));
       setSkillPointsPerLevel(0);
-      setSkills(new LinkedList<Skill>());
+      setSkills(new LinkedList<>());
     }
   }
 

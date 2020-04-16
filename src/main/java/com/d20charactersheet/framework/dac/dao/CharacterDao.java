@@ -34,7 +34,7 @@ public interface CharacterDao {
   /**
    * The format of the date how it is stored in the persistent layer as string
    */
-  public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss.SSS";
+  String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss.SSS";
 
   /**
    * Returns list of all available characters. All character classes are necessary to instanciate the characters.
@@ -48,7 +48,7 @@ public interface CharacterDao {
    *
    * @return List of all available characters.
    */
-  public List<Character> getAllCharacters(List<CharacterClass> allCharacterClasses, List<Race> allRaces, List<XpTable> allXpTables);
+  List<Character> getAllCharacters(List<CharacterClass> allCharacterClasses, List<Race> allRaces, List<XpTable> allXpTables);
 
   /**
    * Returns the character of the given id. All character classes of the game system are necessary to instanciate the
@@ -65,7 +65,7 @@ public interface CharacterDao {
    *
    * @return The character of the given id.
    */
-  public Character getCharacter(int id, List<CharacterClass> allCharacterClasses, List<Race> allRaces, List<XpTable> allXpTables);
+  Character getCharacter(int id, List<CharacterClass> allCharacterClasses, List<Race> allRaces, List<XpTable> allXpTables);
 
   /**
    * Updates the character to the persistence layer.
@@ -75,7 +75,7 @@ public interface CharacterDao {
    *
    * @return The given character.
    */
-  public Character updateCharacter(Character character);
+  Character updateCharacter(Character character);
 
   /**
    * Inserts the character into the persistence layer. Returning it with a valid id.
@@ -85,7 +85,7 @@ public interface CharacterDao {
    *
    * @return The inserted character with a valid id.
    */
-  public Character createCharacter(Character character);
+  Character createCharacter(Character character);
 
   /**
    * Delets the character from the persistent layer, including its class levels and notes, excluding its images.
@@ -93,7 +93,7 @@ public interface CharacterDao {
    * @param character
    *     The character to delete.
    */
-  public void deleteCharacter(Character character);
+  void deleteCharacter(Character character);
 
   /**
    * Returns skills of the character. Character dependent data ist set.
@@ -105,7 +105,7 @@ public interface CharacterDao {
    *
    * @return Skills of the character.
    */
-  public List<CharacterSkill> getCharacterSkills(Character character, List<Skill> allSkills);
+  List<CharacterSkill> getCharacterSkills(Character character, List<Skill> allSkills);
 
   /**
    * Delete all skills of the character.
@@ -113,7 +113,7 @@ public interface CharacterDao {
    * @param character
    *     The character to delete the skills of.
    */
-  public void deleteCharacterSkills(Character character);
+  void deleteCharacterSkills(Character character);
 
   /**
    * Returns the feats of the character.
@@ -125,7 +125,7 @@ public interface CharacterDao {
    *
    * @return The feats of the character.
    */
-  public List<CharacterFeat> getCharacterFeats(Character character, List<Feat> allFeats);
+  List<CharacterFeat> getCharacterFeats(Character character, List<Feat> allFeats);
 
   /**
    * Updates the feats of the character.
@@ -133,7 +133,7 @@ public interface CharacterDao {
    * @param character
    *     The character with the feats to update.
    */
-  public void updateCharacterFeats(Character character);
+  void updateCharacterFeats(Character character);
 
   /**
    * Delete all feats of the character.
@@ -141,7 +141,7 @@ public interface CharacterDao {
    * @param character
    *     The character to delete the feats of.
    */
-  public void deleteCharacterFeats(Character character);
+  void deleteCharacterFeats(Character character);
 
   /**
    * Returns all weapons of the character.
@@ -153,7 +153,7 @@ public interface CharacterDao {
    *
    * @return The weapons of the character.
    */
-  public List<ItemGroup> getWeapons(Character character, List<Weapon> allWeapons);
+  List<ItemGroup> getWeapons(Character character, List<Weapon> allWeapons);
 
   /**
    * Returns all armor of the character.
@@ -165,7 +165,7 @@ public interface CharacterDao {
    *
    * @return The armor of the character.
    */
-  public List<ItemGroup> getArmor(Character character, List<Armor> allArmor);
+  List<ItemGroup> getArmor(Character character, List<Armor> allArmor);
 
   /**
    * Returns all good of the character
@@ -177,7 +177,7 @@ public interface CharacterDao {
    *
    * @return The goods of the character.
    */
-  public List<ItemGroup> getGoods(Character character, List<Good> allGoods);
+  List<ItemGroup> getGoods(Character character, List<Good> allGoods);
 
   /**
    * Updates the weapons of the character.
@@ -189,7 +189,7 @@ public interface CharacterDao {
    *
    * @return The updated list of weapons.
    */
-  public List<ItemGroup> updateWeapons(Character character, List<ItemGroup> weapons);
+  List<ItemGroup> updateWeapons(Character character, List<ItemGroup> weapons);
 
   /**
    * Updates the armor of the character.
@@ -201,7 +201,7 @@ public interface CharacterDao {
    *
    * @return The updated list of armor.
    */
-  public List<ItemGroup> updateArmor(Character character, List<ItemGroup> armor);
+  List<ItemGroup> updateArmor(Character character, List<ItemGroup> armor);
 
   /**
    * Updates the goods of the character.
@@ -213,7 +213,7 @@ public interface CharacterDao {
    *
    * @return The updated goods.
    */
-  public List<ItemGroup> updateGoods(Character character, List<ItemGroup> goods);
+  List<ItemGroup> updateGoods(Character character, List<ItemGroup> goods);
 
   /**
    * Delete the given Skill from all Characters
@@ -221,7 +221,7 @@ public interface CharacterDao {
    * @param skill
    *     The skill to deleted from the game system.
    */
-  public void deleteSkill(Skill skill);
+  void deleteSkill(Skill skill);
 
   /**
    * Delete the feat from all characters.
@@ -229,7 +229,7 @@ public interface CharacterDao {
    * @param feat
    *     The feat to deleted from the game system.
    */
-  public void deleteFeat(Feat feat);
+  void deleteFeat(Feat feat);
 
   /**
    * Returns the notes of the character.
@@ -239,7 +239,7 @@ public interface CharacterDao {
    *
    * @return The notes of the character.
    */
-  public List<Note> getNotes(Character character);
+  List<Note> getNotes(Character character);
 
   /**
    * Creates the note belonging to the character.
@@ -251,7 +251,7 @@ public interface CharacterDao {
    *
    * @return The created note with a valid id.
    */
-  public Note createNote(Note note, Character character);
+  Note createNote(Note note, Character character);
 
   /**
    * Updates a note of a character.
@@ -261,7 +261,7 @@ public interface CharacterDao {
    * @param character
    *     The character the note belongs to.
    */
-  public void updateNote(Note note, Character character);
+  void updateNote(Note note, Character character);
 
   /**
    * Deletes a note from the persistent layer.
@@ -269,7 +269,7 @@ public interface CharacterDao {
    * @param note
    *     The note to delete.
    */
-  public void deleteNote(Note note);
+  void deleteNote(Note note);
 
   /**
    * Create new CharacterSkill with given skill. Overwrite this methode to usw own subclasses of CharacterSkill.
@@ -279,7 +279,7 @@ public interface CharacterDao {
    *
    * @return The created CharacterSkill
    */
-  public CharacterSkill newCharacterSkill(Skill skill);
+  CharacterSkill newCharacterSkill(Skill skill);
 
   /**
    * Deletes all notes of the given character.
@@ -287,7 +287,7 @@ public interface CharacterDao {
    * @param character
    *     The character to delete the notes of.
    */
-  public void deleteNotes(Character character);
+  void deleteNotes(Character character);
 
   /**
    * Deletes all weapons of the given character.
@@ -295,7 +295,7 @@ public interface CharacterDao {
    * @param character
    *     The character to delete the weapons of.
    */
-  public void deleteWeapons(Character character);
+  void deleteWeapons(Character character);
 
   /**
    * Delete all armor of the character.
@@ -303,7 +303,7 @@ public interface CharacterDao {
    * @param character
    *     The character to delete armor of.
    */
-  public void deleteArmor(Character character);
+  void deleteArmor(Character character);
 
   /**
    * Delete all goods of the character.
@@ -311,7 +311,7 @@ public interface CharacterDao {
    * @param character
    *     The character to delete goods of.
    */
-  public void deleteGoods(Character character);
+  void deleteGoods(Character character);
 
   /**
    * Returns list of character abilities.
@@ -323,7 +323,7 @@ public interface CharacterDao {
    *
    * @return List of character abilities.
    */
-  public List<CharacterAbility> getCharacterAbilities(Character character, CharacterClass characterClass);
+  List<CharacterAbility> getCharacterAbilities(Character character, CharacterClass characterClass);
 
   /**
    * Updates the character ability.
@@ -331,7 +331,7 @@ public interface CharacterDao {
    * @param characterAbility
    *     The character ability to update.
    */
-  public void updateCharacterAbility(CharacterAbility characterAbility);
+  void updateCharacterAbility(CharacterAbility characterAbility);
 
   /**
    * Create CharacterAbility for character and class.
@@ -345,8 +345,7 @@ public interface CharacterDao {
    *
    * @return The created CharacterAbility.
    */
-  public CharacterAbility createCharacterAbility(Character character, CharacterClass characterClass,
-      CharacterAbility characterAbility);
+  CharacterAbility createCharacterAbility(Character character, CharacterClass characterClass, CharacterAbility characterAbility);
 
   /**
    * Delete CharacterAbility.
@@ -354,7 +353,7 @@ public interface CharacterDao {
    * @param characterAbility
    *     The CharacterAbility to delete.
    */
-  public void deleteCharacterAbility(CharacterAbility characterAbility);
+  void deleteCharacterAbility(CharacterAbility characterAbility);
 
   /**
    * Delete all character abilities of a character.
@@ -362,7 +361,7 @@ public interface CharacterDao {
    * @param character
    *     The character to delete the abilities of.
    */
-  public void deleteCharacterAbilities(Character character);
+  void deleteCharacterAbilities(Character character);
 
   /**
    * Create a new class level for a character.
@@ -374,7 +373,7 @@ public interface CharacterDao {
    *
    * @return The created class level.
    */
-  public ClassLevel createClassLevel(Character character, ClassLevel classLevel);
+  ClassLevel createClassLevel(Character character, ClassLevel classLevel);
 
   /**
    * Update the class level.
@@ -382,7 +381,7 @@ public interface CharacterDao {
    * @param classLevel
    *     The class level to update.
    */
-  public void updateClassLevel(ClassLevel classLevel);
+  void updateClassLevel(ClassLevel classLevel);
 
   /**
    * Delete the class level.
@@ -390,7 +389,7 @@ public interface CharacterDao {
    * @param classLevel
    *     The class level to delete.
    */
-  public void deleteClassLevel(ClassLevel classLevel);
+  void deleteClassLevel(ClassLevel classLevel);
 
   /**
    * Delete the given list of character abilities.
@@ -400,7 +399,7 @@ public interface CharacterDao {
    * @param classAbilities
    *     the class abilities to delete.
    */
-  public void deleteCharacterAbilities(CharacterClass characterClass, List<ClassAbility> classAbilities);
+  void deleteCharacterAbilities(CharacterClass characterClass, List<ClassAbility> classAbilities);
 
   /**
    * Returns the weapon attacks of a character.
@@ -412,7 +411,7 @@ public interface CharacterDao {
    *
    * @return The weapon attacks of a character.
    */
-  public List<WeaponAttack> getWeaponAttacks(Character character, List<Weapon> allWeapons);
+  List<WeaponAttack> getWeaponAttacks(Character character, List<Weapon> allWeapons);
 
   /**
    * Create a WeaponAttack for a character.
@@ -424,7 +423,7 @@ public interface CharacterDao {
    *
    * @return The created weapon attack.
    */
-  public WeaponAttack createWeaponAttack(Character character, WeaponAttack weaponAttack);
+  WeaponAttack createWeaponAttack(Character character, WeaponAttack weaponAttack);
 
   /**
    * Update the weapon attack.
@@ -432,7 +431,7 @@ public interface CharacterDao {
    * @param weaponAttack
    *     The weapon attack to update.
    */
-  public void updateWeaponAttack(WeaponAttack weaponAttack);
+  void updateWeaponAttack(WeaponAttack weaponAttack);
 
   /**
    * Delete the weapon attack.
@@ -440,7 +439,7 @@ public interface CharacterDao {
    * @param weaponAttack
    *     The weapon attack to delete.
    */
-  public void deleteWeaponAttack(WeaponAttack weaponAttack);
+  void deleteWeaponAttack(WeaponAttack weaponAttack);
 
   /**
    * Delete all weapon attacks of a character.
@@ -448,7 +447,7 @@ public interface CharacterDao {
    * @param character
    *     The character to delete all weaon attacks of.
    */
-  public void deleteWeaponAttacks(Character character);
+  void deleteWeaponAttacks(Character character);
 
   /**
    * Returns all marked spells of a character.
@@ -462,7 +461,7 @@ public interface CharacterDao {
    *
    * @return All marked spells of a character.
    */
-  public List<KnownSpell> getKnownSpells(Character character, List<Spelllist> allSpelllist, List<Spell> allSpells);
+  List<KnownSpell> getKnownSpells(Character character, List<Spelllist> allSpelllist, List<Spell> allSpells);
 
   /**
    * Create a new known spell for the character.
@@ -474,7 +473,7 @@ public interface CharacterDao {
    *
    * @return The new created known spell.
    */
-  public KnownSpell createKnownSpell(Character character, KnownSpell knownSpell);
+  KnownSpell createKnownSpell(Character character, KnownSpell knownSpell);
 
   /**
    * Delete the known spell from all characters. Use if a spell is deleted from the game system.
@@ -482,7 +481,7 @@ public interface CharacterDao {
    * @param knownSpell
    *     The known spell to delete.
    */
-  public void deleteKnownSpell(KnownSpell knownSpell);
+  void deleteKnownSpell(KnownSpell knownSpell);
 
   /**
    * Delete all KnownSpells of a character.
@@ -490,7 +489,7 @@ public interface CharacterDao {
    * @param character
    *     The character to delete the known spells of.
    */
-  public void deleteKnownSpells(Character character);
+  void deleteKnownSpells(Character character);
 
   /**
    * Returns the spell slots of the character.
@@ -506,8 +505,7 @@ public interface CharacterDao {
    *
    * @return The spell slots of the character.
    */
-  public List<SpellSlot> getSpellSlots(Character character, List<Spell> allSpells, final List<Ability> allAbilities,
-      List<Feat> allFeats);
+  List<SpellSlot> getSpellSlots(Character character, List<Spell> allSpells, final List<Ability> allAbilities, List<Feat> allFeats);
 
   /**
    * Update the given spell slot.
@@ -515,7 +513,7 @@ public interface CharacterDao {
    * @param spellSlot
    *     The spell slot to update.
    */
-  public void updateSpellSlot(SpellSlot spellSlot);
+  void updateSpellSlot(SpellSlot spellSlot);
 
   /**
    * Create spell slot for character.
@@ -527,7 +525,7 @@ public interface CharacterDao {
    *
    * @return The new created spell slot.
    */
-  public SpellSlot createSpellSlot(Character character, SpellSlot spellSlot);
+  SpellSlot createSpellSlot(Character character, SpellSlot spellSlot);
 
   /**
    * Delete the given spell slot.
@@ -535,7 +533,7 @@ public interface CharacterDao {
    * @param spellSlot
    *     The spell slot to delete.
    */
-  public void deleteSpellSlot(SpellSlot spellSlot);
+  void deleteSpellSlot(SpellSlot spellSlot);
 
   /**
    * Delete all spell slots of the character.
@@ -543,7 +541,7 @@ public interface CharacterDao {
    * @param character
    *     The character to delete the spell slots of.
    */
-  public void deleteSpellSlots(Character character);
+  void deleteSpellSlots(Character character);
 
   /**
    * Delete known spells of a spell list. Use if a spell is deleted from a spell list.
@@ -553,7 +551,7 @@ public interface CharacterDao {
    * @param spell
    *     The spell to delete from the known spells of.
    */
-  public void deleteKnownSpells(Spelllist spelllist, Spell spell);
+  void deleteKnownSpells(Spelllist spelllist, Spell spell);
 
   /**
    * Delete the spell slots of a spell list and spell. Use if a spell is deleted from aa spell list.
@@ -563,7 +561,7 @@ public interface CharacterDao {
    * @param spell
    *     The spll to delete the spell slots of.
    */
-  public void deleteSpellSlots(Spelllist spelllist, Spell spell);
+  void deleteSpellSlots(Spelllist spelllist, Spell spell);
 
   /**
    * Update the skill of a character.
@@ -573,7 +571,7 @@ public interface CharacterDao {
    * @param characterSkill
    *     The skill to update.
    */
-  public void updateCharacterSkill(Character character, CharacterSkill characterSkill);
+  void updateCharacterSkill(Character character, CharacterSkill characterSkill);
 
   /**
    * Returns the body of a character with equipped items.
@@ -589,7 +587,7 @@ public interface CharacterDao {
    *
    * @return The body of the character with equipped items.
    */
-  public Body getBody(Character character, List<Weapon> allWeapons, List<Armor> allArmor, List<Good> allGoods);
+  Body getBody(Character character, List<Weapon> allWeapons, List<Armor> allArmor, List<Good> allGoods);
 
   /**
    * Stores the body of a charater to the persistent layer.
@@ -601,7 +599,7 @@ public interface CharacterDao {
    *
    * @return The persisted body.
    */
-  public Body createBody(Character character, Body body);
+  Body createBody(Character character, Body body);
 
   /**
    * Delete the body of a character from the persistent layer.
@@ -609,7 +607,7 @@ public interface CharacterDao {
    * @param character
    *     The character to delete the body of.
    */
-  public void deleteBody(Character character);
+  void deleteBody(Character character);
 
   /**
    * Update the body of a character.
@@ -617,5 +615,5 @@ public interface CharacterDao {
    * @param character
    *     The character to update the body of.
    */
-  public void updateBody(Character character);
+  void updateBody(Character character);
 }

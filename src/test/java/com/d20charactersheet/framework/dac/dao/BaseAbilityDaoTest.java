@@ -42,7 +42,7 @@ public abstract class BaseAbilityDaoTest {
   }
 
   @Test
-  public void testAbilityFastMovementBarbarian() throws Exception {
+  public void testAbilityFastMovementBarbarian() {
     final Ability fastMovementBarbarianAbility = findAbilityById(ABILITY_ID_FAST_MOVEMENT_BARBARIAN);
     assertAbility(fastMovementBarbarianAbility, 0, AbilityType.EXTRAORDINARY, "Fast Movement - Barbarian",
                   "A barbarian's land speed is faster than the norm for his race by +10 feet. This benefit applies only when he is wearing no armor, light armor, or medium armor and not carrying a heavy load. Apply this bonus before modifying the barbarian's speed because of any load carried or armor worn.");
@@ -69,10 +69,11 @@ public abstract class BaseAbilityDaoTest {
   }
 
   @Test
-  public void testCreateAbility() throws Exception {
-    final int numberOfAllAbilities = abilityDao
-        .getAllAbilities(spelllistDao.getAllSpelllists(spelllistDao.getAllSpells()), spelllistDao.getAllKnownSpellsTables(),
-                         spelllistDao.getAllSpellsPerDayTables()).size();
+  public void testCreateAbility() {
+    final int numberOfAllAbilities = abilityDao.getAllAbilities(spelllistDao.getAllSpelllists(spelllistDao.getAllSpells()),
+                                                                spelllistDao.getAllKnownSpellsTables(),
+                                                                spelllistDao.getAllSpellsPerDayTables())
+        .size();
 
     final Ability ability = new Ability();
     ability.setName("newAbilityName");
@@ -90,7 +91,7 @@ public abstract class BaseAbilityDaoTest {
   }
 
   @Test
-  public void testExtraFeatAbility() throws Exception {
+  public void testExtraFeatAbility() {
     final Ability ability = findAbilityById(ABILITY_ID_EXTRA_FEAT);
     assertTrue(ability instanceof ExtraFeatsAbility);
     final ExtraFeatsAbility extraFeatAbility = (ExtraFeatsAbility) ability;
@@ -98,7 +99,7 @@ public abstract class BaseAbilityDaoTest {
   }
 
   @Test
-  public void testExtraSkillPointsAbility() throws Exception {
+  public void testExtraSkillPointsAbility() {
     final Ability ability = findAbilityById(ABILITY_ID_EXTRA_SKILL_POINTS);
     assertTrue(ability instanceof ExtraSkillPointsAbility);
     final ExtraSkillPointsAbility extraSkillPointsAbility = (ExtraSkillPointsAbility) ability;
@@ -106,7 +107,7 @@ public abstract class BaseAbilityDaoTest {
   }
 
   @Test
-  public void testSpelllistAbility() throws Exception {
+  public void testSpelllistAbility() {
     final Ability ability = findAbilityById(ABILITY_ID_SPELLLIST_CLERIC);
     assertTrue(ability instanceof SpelllistAbility);
     final SpelllistAbility spelllistAbility = (SpelllistAbility) ability;
@@ -118,7 +119,7 @@ public abstract class BaseAbilityDaoTest {
   }
 
   @Test
-  public void testCreateSpelllistAbility() throws Exception {
+  public void testCreateSpelllistAbility() {
     final List<Spelllist> allSpelllists = spelllistDao.getAllSpelllists(spelllistDao.getAllSpells());
     final List<KnownSpellsTable> allKnownSpellsTables = spelllistDao.getAllKnownSpellsTables();
     final List<SpellsPerDayTable> allSpellsPerDayTables = spelllistDao.getAllSpellsPerDayTables();
@@ -161,7 +162,7 @@ public abstract class BaseAbilityDaoTest {
   }
 
   @Test
-  public void testUpdateSpelllistAbility() throws Exception {
+  public void testUpdateSpelllistAbility() {
     final List<Spelllist> allSpelllists = spelllistDao.getAllSpelllists(spelllistDao.getAllSpells());
     final List<KnownSpellsTable> allKnownSpellsTables = spelllistDao.getAllKnownSpellsTables();
     final List<SpellsPerDayTable> allSpellsPerDayTables = spelllistDao.getAllSpellsPerDayTables();

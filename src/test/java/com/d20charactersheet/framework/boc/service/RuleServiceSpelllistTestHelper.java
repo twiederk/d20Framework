@@ -14,7 +14,7 @@ import com.d20charactersheet.framework.boc.model.SpelllistAbility;
 public class RuleServiceSpelllistTestHelper {
 
   public static List<SpellSlot> getSchoolSpellSlots(final List<SpellSlot> spellSlots) {
-    final List<SpellSlot> schoolSpellSlots = new LinkedList<SpellSlot>();
+    final List<SpellSlot> schoolSpellSlots = new LinkedList<>();
     for (final SpellSlot spellSlot : spellSlots) {
       if (spellSlot.getSchools().size() == 1) {
         schoolSpellSlots.add(spellSlot);
@@ -137,7 +137,7 @@ public class RuleServiceSpelllistTestHelper {
   }
 
   public static List<SpellSlot> getDomainSpellSlots(final List<SpellSlot> spellSlots) {
-    final List<SpellSlot> domainSpellSlots = new LinkedList<SpellSlot>();
+    final List<SpellSlot> domainSpellSlots = new LinkedList<>();
     for (final SpellSlot spellSlot : spellSlots) {
       if (spellSlot.isDomain()) {
         domainSpellSlots.add(spellSlot);

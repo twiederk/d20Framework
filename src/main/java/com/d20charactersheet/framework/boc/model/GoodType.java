@@ -48,6 +48,6 @@ public enum GoodType {
   /**
    * Entertainment
    */
-  ENTERTAINMENT;
+  ENTERTAINMENT
 
 }

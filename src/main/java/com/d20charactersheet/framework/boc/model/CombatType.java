@@ -13,6 +13,6 @@ public enum CombatType {
   /**
    * Weapon used in ranged combat
    */
-  RANGED_WEAPON;
+  RANGED_WEAPON
 
 }

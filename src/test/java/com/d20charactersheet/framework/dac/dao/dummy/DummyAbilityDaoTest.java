@@ -17,7 +17,7 @@ import com.d20charactersheet.framework.dac.dao.BaseAbilityDaoTest;
 public class DummyAbilityDaoTest extends BaseAbilityDaoTest {
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     abilityDao = new DummyAbilityDao(ABILITY, ABILITY_PROPERTY);
     spelllistDao = new DummySpelllistDao(SPELL, SPELLLIST, SPELLLIST_SPELL, KNOWN_SPELLS_TABLE, KNOWN_SPELLS_LEVEL,
                                          SPELLS_PER_DAY_TABLE, SPELLS_PER_DAY_LEVEL);

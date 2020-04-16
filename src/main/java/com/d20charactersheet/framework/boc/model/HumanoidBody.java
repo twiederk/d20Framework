@@ -21,7 +21,7 @@ public class HumanoidBody implements Body {
     bodySlots = new HashMap<>();
     EnumSet<BodyPart> humanoidBodyParts = EnumSet.allOf(BodyPart.class);
     humanoidBodyParts.remove(BodyPart.NONE);
-    humanoidBodyParts.stream().forEach(bodyPart -> clear(bodyPart));
+    humanoidBodyParts.forEach(this::clear);
   }
 
   @Override

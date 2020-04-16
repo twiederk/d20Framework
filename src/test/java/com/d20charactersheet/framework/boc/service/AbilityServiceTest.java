@@ -28,7 +28,7 @@ public class AbilityServiceTest {
   private SpelllistService spelllistService;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     abilityService = new AbilityServiceImpl(new DummyAbilityDao(ABILITY, ABILITY_PROPERTY));
     spelllistService = new SpelllistServiceImpl(
         new DummySpelllistDao(SPELL, SPELLLIST, SPELLLIST_SPELL, KNOWN_SPELLS_TABLE, KNOWN_SPELLS_LEVEL, SPELLS_PER_DAY_TABLE,
@@ -45,7 +45,7 @@ public class AbilityServiceTest {
   }
 
   @Test
-  public void testUpdateAbility() throws Exception {
+  public void testUpdateAbility() {
     final int ABILITY_ID = 0;
 
     final Ability sourceAbility = getAbilityById(ABILITY_ID);

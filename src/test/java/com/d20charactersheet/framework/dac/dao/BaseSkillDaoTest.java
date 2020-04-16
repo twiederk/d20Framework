@@ -20,20 +20,21 @@ public abstract class BaseSkillDaoTest {
   protected CharacterDao characterDao;
 
   @Test
-  public void testGetAllSkills() throws Exception {
+  public void testGetAllSkills() {
     final List<Skill> allSkills = skillDao.getAllSkills();
     assertEquals(44, allSkills.size());
     final Skill skill = getSkill(allSkills, SKILL_ID_CLIMB);
     assertNotNull(skill);
     assertEquals(skill.getId(), SKILL_ID_CLIMB);
     assertEquals("Climb", skill.getName());
-    assertTrue(skill.getDescription().startsWith("<b>Check: </b> With a successful Climb check"));
+    assertTrue(skill.getDescription()
+                   .startsWith("<b>Check: </b> With a successful Climb check"));
     assertEquals(Attribute.STRENGTH, skill.getAttribute());
     assertTrue(skill.isUntrained());
   }
 
   @Test
-  public void testGetCharacterSkills() throws Exception {
+  public void testGetCharacterSkills() {
     final Character belvador = new Character();
     belvador.setId(0);
 
@@ -52,13 +53,14 @@ public abstract class BaseSkillDaoTest {
   }
 
   @Test
-  public void testUpdateSkill() throws Exception {
+  public void testUpdateSkill() {
     final String nameTest = "testName";
     final String descriptionTest = "descriptionTest";
     final Attribute attributeTest = Attribute.STRENGTH;
     final boolean untrainedTest = false;
 
-    final Skill skill = skillDao.getAllSkills().get(0);
+    final Skill skill = skillDao.getAllSkills()
+        .get(0);
     final String nameOrginal = skill.getName();
     final String descriptionOrginal = skill.getDescription();
     final Attribute attributeOrginal = skill.getAttribute();
@@ -87,7 +89,7 @@ public abstract class BaseSkillDaoTest {
   }
 
   @Test
-  public void testCreateSkill() throws Exception {
+  public void testCreateSkill() {
     final String nameTest = "testName";
     final String descriptionTest = "descriptionTest";
     final Attribute attributeTest = Attribute.STRENGTH;
@@ -113,7 +115,7 @@ public abstract class BaseSkillDaoTest {
   }
 
   @Test
-  public void testDeleteSkill() throws Exception {
+  public void testDeleteSkill() {
     final String nameTest = "testName";
     final String descriptionTest = "descriptionTest";
     final Attribute attributeTest = Attribute.STRENGTH;

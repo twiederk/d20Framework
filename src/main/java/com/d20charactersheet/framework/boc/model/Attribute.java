@@ -33,5 +33,5 @@ public enum Attribute {
   /**
    * Charisma of character
    */
-  CHARISMA;
+  CHARISMA
 }

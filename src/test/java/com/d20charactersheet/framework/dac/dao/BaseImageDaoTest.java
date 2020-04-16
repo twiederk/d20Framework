@@ -19,7 +19,7 @@ public abstract class BaseImageDaoTest {
   }
 
   @Test
-  public void testCreateImage() throws Exception {
+  public void testCreateImage() {
     final byte[] imageData = imageDao.getImage(DEFAULT_CHARACTER_IMAGE_ID);
     final int imageId = imageDao.createImage(imageData);
     assertTrue(imageId != DEFAULT_CHARACTER_IMAGE_ID);
@@ -30,7 +30,7 @@ public abstract class BaseImageDaoTest {
   }
 
   @Test
-  public void testDeleteImage() throws Exception {
+  public void testDeleteImage() {
     byte[] imageData = imageDao.getImage(DEFAULT_CHARACTER_IMAGE_ID);
     final int imageId = imageDao.createImage(imageData);
     imageDao.deleteImage(imageId);

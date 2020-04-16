@@ -23,6 +23,6 @@ public enum FeatType {
   /**
    * Teamwork feat
    */
-  TEAMWORK;
+  TEAMWORK
 
 }

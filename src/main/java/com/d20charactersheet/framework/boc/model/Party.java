@@ -14,7 +14,7 @@ public class Party {
    * Creates a empty party.
    */
   public Party() {
-    members = new ArrayList<Character>();
+    members = new ArrayList<>();
   }
 
   /**

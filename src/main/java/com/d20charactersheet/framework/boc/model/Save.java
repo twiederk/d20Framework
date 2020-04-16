@@ -18,6 +18,6 @@ public enum Save {
   /**
    * Will saving throw
    */
-  WILL;
+  WILL
 
 }

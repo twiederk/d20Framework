@@ -13,9 +13,9 @@ public class Equipment implements Serializable {
 
   private static final long serialVersionUID = -6456350791921140731L;
 
-  private List<ItemGroup> weapons = new ArrayList<ItemGroup>();
-  private List<ItemGroup> armor = new ArrayList<ItemGroup>();
-  private List<ItemGroup> goods = new ArrayList<ItemGroup>();
+  private List<ItemGroup> weapons = new ArrayList<>();
+  private List<ItemGroup> armor = new ArrayList<>();
+  private List<ItemGroup> goods = new ArrayList<>();
 
   /**
    * Returns the weapons of the equipment.
@@ -80,7 +80,7 @@ public class Equipment implements Serializable {
    * @return All items of the equipment.
    */
   public List<ItemGroup> getItems() {
-    final List<ItemGroup> items = new LinkedList<ItemGroup>();
+    final List<ItemGroup> items = new LinkedList<>();
     items.addAll(weapons);
     items.addAll(armor);
     items.addAll(goods);

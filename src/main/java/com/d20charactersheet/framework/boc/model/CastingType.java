@@ -10,5 +10,5 @@ public enum CastingType {
   SPONTANEOUS, /**
    * Spells must be memorized before casting
    */
-  PREPARED;
+  PREPARED
 }

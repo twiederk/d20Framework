@@ -14,7 +14,7 @@ public interface FeatDao {
    *
    * @return All feats.
    */
-  public List<Feat> getAllFeats();
+  List<Feat> getAllFeats();
 
   /**
    * Create the feat.
@@ -24,7 +24,7 @@ public interface FeatDao {
    *
    * @return The created feat.
    */
-  public Feat createFeat(Feat feat);
+  Feat createFeat(Feat feat);
 
   /**
    * Updates the feat.
@@ -34,7 +34,7 @@ public interface FeatDao {
    *
    * @return The updated feat.
    */
-  public Feat updateFeat(Feat feat);
+  Feat updateFeat(Feat feat);
 
   /**
    * Deletes the feat.
@@ -42,6 +42,6 @@ public interface FeatDao {
    * @param feat
    *     The feat to delete.
    */
-  public void deleteFeat(Feat feat);
+  void deleteFeat(Feat feat);
 
 }

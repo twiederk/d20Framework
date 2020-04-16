@@ -73,8 +73,8 @@ public class DieRoll {
    */
   public int getResult() {
     int result = 0;
-    for (int i = 0; i < rolls.length; i++) {
-      result = result + rolls[i];
+    for (int roll : rolls) {
+      result = result + roll;
     }
     result = result + bonus;
     return result;

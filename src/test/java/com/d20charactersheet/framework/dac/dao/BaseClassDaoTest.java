@@ -25,7 +25,7 @@ public abstract class BaseClassDaoTest {
   protected List<CharacterClass> allCharacterClasses;
 
   @Test
-  public void testBaseClasses() throws Exception {
+  public void testBaseClasses() {
     assertNotNull(allCharacterClasses);
     assertEquals(27, allCharacterClasses.size());
 
@@ -63,7 +63,7 @@ public abstract class BaseClassDaoTest {
   }
 
   @Test
-  public void testSkillsOfCharacterClasses() throws Exception {
+  public void testSkillsOfCharacterClasses() {
     final CharacterClass fighter = allCharacterClasses.get(4);
     assertSkills(fighter, new String[] {"Climb", "Craft", "Handle Animal", "Intimidate", "Jump", "Ride", "Swim"});
 
@@ -81,13 +81,14 @@ public abstract class BaseClassDaoTest {
   }
 
   @Test
-  public void testAbilitiesOfCharacterClasses() throws Exception {
+  public void testAbilitiesOfCharacterClasses() {
     final CharacterClass barbarian = allCharacterClasses.get(0);
     final List<ClassAbility> classAbilities = barbarian.getClassAbilities();
     assertNotNull(classAbilities);
     assertEquals(11, classAbilities.size());
     final ClassAbility fastMovementBarbarian = classAbilities.get(0);
-    assertEquals("Fast Movement - Barbarian", fastMovementBarbarian.getAbility().getName());
+    assertEquals("Fast Movement - Barbarian", fastMovementBarbarian.getAbility()
+        .getName());
     assertEquals(1, fastMovementBarbarian.getLevel());
   }
 }

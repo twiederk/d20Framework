@@ -10,7 +10,7 @@ import com.d20charactersheet.framework.boc.model.ClassLevel;
 public class DnDv35RuleServiceFeatTest extends DnDv35RuleServiceTestCase {
 
   @Test
-  public void testGetNumberOfFeats() throws Exception {
+  public void testGetNumberOfFeats() {
     final Character character = createCharacter(new ClassLevel(wizard, 5), elf);
     int numberOfFeats = ruleService.getNumberOfFeats(character);
     assertEquals(2, numberOfFeats);
@@ -21,7 +21,7 @@ public class DnDv35RuleServiceFeatTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetNumberOfFeatsMultiClass() throws Exception {
+  public void testGetNumberOfFeatsMultiClass() {
     final Character character = createCharacter(new ClassLevel(wizard, 5), new ClassLevel(fighter, 2), human, 10);
     final int numberOfFeats = ruleService.getNumberOfFeats(character);
     assertEquals(4, numberOfFeats);

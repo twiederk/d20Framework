@@ -44,7 +44,7 @@ public class ImportCharacterV1XmlTest {
   }
 
   @Test
-  public void testGetRace() throws Exception {
+  public void testGetRace() {
     final Element raceElement = document.createElement(XmlConstants.TAG_RACE);
     raceElement.setTextContent("High Elf");
 

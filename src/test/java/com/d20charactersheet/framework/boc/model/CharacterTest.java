@@ -29,7 +29,7 @@ public class CharacterTest {
   private CharacterClassService characterClassService;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     final Universe universe = new DnDv35Universe();
     gameSystem = universe.getGameSystem();
     characterClassService = gameSystem.getCharacterClassService();
@@ -37,8 +37,8 @@ public class CharacterTest {
   }
 
   @Test
-  public void testGetCharacterLevel() throws Exception {
-    final List<ClassLevel> classLevels = new LinkedList<ClassLevel>();
+  public void testGetCharacterLevel() {
+    final List<ClassLevel> classLevels = new LinkedList<>();
 
     final CharacterClass wizard = characterClassService.findClassByName("Wizard", gameSystem.getAllCharacterClasses());
     final CharacterClass bard = characterClassService.findClassByName("Bard", gameSystem.getAllCharacterClasses());
@@ -53,7 +53,7 @@ public class CharacterTest {
   }
 
   @Test
-  public void testCheckAttributeNegativeValue() throws Exception {
+  public void testCheckAttributeNegativeValue() {
     try {
       character.setStrength(-1);
       fail("Missing exception. Expected RuleException");
@@ -65,7 +65,7 @@ public class CharacterTest {
   }
 
   @Test
-  public void testCheckAttributeZeroValue() throws Exception {
+  public void testCheckAttributeZeroValue() {
     try {
       character.setStrength(0);
       fail("Missing exception. Expected RuleException");
@@ -77,7 +77,7 @@ public class CharacterTest {
   }
 
   @Test
-  public void testCheckAttributeAllowedValue() throws Exception {
+  public void testCheckAttributeAllowedValue() {
     character.setStrength(1);
     character.setStrength(5);
     character.setStrength(10);
@@ -88,7 +88,7 @@ public class CharacterTest {
   }
 
   @Test
-  public void testCheckAttributeToHighValue() throws Exception {
+  public void testCheckAttributeToHighValue() {
     try {
       character.setStrength(100);
       fail("Missing exception. Expected RuleException");
@@ -100,7 +100,7 @@ public class CharacterTest {
   }
 
   @Test
-  public void testSetExperiencePointsNegative() throws Exception {
+  public void testSetExperiencePointsNegative() {
     try {
       character.setExperiencePoints(-1);
       fail("Missing exception. Expected RuleException");
@@ -112,11 +112,11 @@ public class CharacterTest {
   }
 
   @Test
-  public void testSetClassLevels() throws Exception {
+  public void testSetClassLevels() {
     final CharacterClass barbarian = characterClassService.findClassByName("Barbarian", gameSystem.getAllCharacterClasses());
     final ClassLevel classLevel = new ClassLevel(barbarian);
     classLevel.setLevel(0);
-    final List<ClassLevel> classLevels = new LinkedList<ClassLevel>();
+    final List<ClassLevel> classLevels = new LinkedList<>();
     classLevels.add(classLevel);
 
     try {
@@ -130,8 +130,8 @@ public class CharacterTest {
   }
 
   @Test
-  public void testGetCharacterClasses() throws Exception {
-    final List<ClassLevel> classLevels = new LinkedList<ClassLevel>();
+  public void testGetCharacterClasses() {
+    final List<ClassLevel> classLevels = new LinkedList<>();
 
     final CharacterClass wizard = characterClassService.findClassByName("Wizard", gameSystem.getAllCharacterClasses());
     final CharacterClass barbarian = characterClassService.findClassByName("Barbarian", gameSystem.getAllCharacterClasses());
@@ -147,28 +147,34 @@ public class CharacterTest {
   }
 
   @Test
-  public void testGetAllAbilitiesOfBelvador() throws Exception {
-    final Character belvador = gameSystem.getAllCharacters().get(0);
-    final int numberOfAllAbilities = belvador.getAllAbilities().size();
+  public void testGetAllAbilitiesOfBelvador() {
+    final Character belvador = gameSystem.getAllCharacters()
+        .get(0);
+    final int numberOfAllAbilities = belvador.getAllAbilities()
+        .size();
     assertEquals(21, numberOfAllAbilities);
   }
 
   @Test
-  public void testGetRaceAbilitiesOfBelvador() throws Exception {
-    final Character belvador = gameSystem.getAllCharacters().get(0);
-    final int numberOfRaceAbilities = belvador.getRaceAbilities().size();
+  public void testGetRaceAbilitiesOfBelvador() {
+    final Character belvador = gameSystem.getAllCharacters()
+        .get(0);
+    final int numberOfRaceAbilities = belvador.getRaceAbilities()
+        .size();
     assertEquals(5, numberOfRaceAbilities);
   }
 
   @Test
-  public void testGetClassAbilitiesOfBelvador() throws Exception {
-    final Character belvador = gameSystem.getAllCharacters().get(0);
-    final int numberOfClassAbilities = belvador.getClassAbilities().size();
+  public void testGetClassAbilitiesOfBelvador() {
+    final Character belvador = gameSystem.getAllCharacters()
+        .get(0);
+    final int numberOfClassAbilities = belvador.getClassAbilities()
+        .size();
     assertEquals(8, numberOfClassAbilities);
   }
 
   @Test
-  public void testGetSpelllistAbilities() throws Exception {
+  public void testGetSpelllistAbilities() {
     final Character belvador = gameSystem.getCharacter(0);
 
     final List<SpelllistAbility> spelllistAbilities = belvador.getSpelllistAbilities();
@@ -177,13 +183,14 @@ public class CharacterTest {
   }
 
   @Test
-  public void testGetKnownSpellsOfBelvador() throws Exception {
+  public void testGetKnownSpellsOfBelvador() {
     final Character belvador = gameSystem.getCharacter(0);
     final List<SpelllistAbility> spelllistAbilities = belvador.getSpelllistAbilities();
     assertNotNull(spelllistAbilities);
     assertEquals(2, spelllistAbilities.size());
 
-    final List<KnownSpell> knownSpells = belvador.getKnownSpells(spelllistAbilities.get(0).getSpelllist());
+    final List<KnownSpell> knownSpells = belvador.getKnownSpells(spelllistAbilities.get(0)
+                                                                     .getSpelllist());
     assertNotNull(knownSpells);
     assertEquals(31, knownSpells.size());
 
@@ -285,7 +292,8 @@ public class CharacterTest {
       // Act
       Item item = itemGroup.getItem();
       EnumSet<BodyPart> itemBodyParts = bodyService.calculateBodyParts(item);
-      itemBodyParts.stream().forEach(bodyPart -> bodyParts.get(bodyPart).add(item));
+      itemBodyParts.forEach(bodyPart -> bodyParts.get(bodyPart)
+          .add(item));
     }
 
     // Assert
@@ -321,7 +329,8 @@ public class CharacterTest {
       // Act
       Item item = itemGroup.getItem();
       EnumSet<BodyPart> itemBodyParts = bodyService.calculateBodyParts(item);
-      itemBodyParts.stream().forEach(bodyPart -> bodyParts.get(bodyPart).add(item));
+      itemBodyParts.forEach(bodyPart -> bodyParts.get(bodyPart)
+          .add(item));
     }
 
     // Assert
@@ -357,7 +366,8 @@ public class CharacterTest {
       // Act
       Item item = itemGroup.getItem();
       EnumSet<BodyPart> itemBodyParts = bodyService.calculateBodyParts(item);
-      itemBodyParts.stream().forEach(bodyPart -> bodyParts.get(bodyPart).add(item));
+      itemBodyParts.forEach(bodyPart -> bodyParts.get(bodyPart)
+          .add(item));
     }
 
     // Assert

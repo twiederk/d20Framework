@@ -6,7 +6,6 @@ import static org.junit.Assert.fail;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,13 +25,14 @@ public class NoteComparatorTest {
     final Note note10 = createNote("10.12.2010", dateFormat);
     final Note note20 = createNote("20.12.2010", dateFormat);
 
-    final List<Note> notes = new LinkedList<Note>();
+    final List<Note> notes = new LinkedList<>();
     notes.add(note30);
     notes.add(note10);
     notes.add(note20);
 
-    Collections.sort(notes, new NoteComparator());
-    assertEquals(note30.getDate(), notes.get(0).getDate());
+    notes.sort(new NoteComparator());
+    assertEquals(note30.getDate(), notes.get(0)
+        .getDate());
     assertEquals(note20.getDate(), notes.get(1).getDate());
     assertEquals(note10.getDate(), notes.get(2).getDate());
   }

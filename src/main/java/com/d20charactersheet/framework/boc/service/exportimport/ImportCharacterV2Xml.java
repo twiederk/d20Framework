@@ -38,7 +38,7 @@ public class ImportCharacterV2Xml extends ImportCharacterV1Xml {
 
   @Override
   protected ImportReport<Character> importCharacter(final Node characterElement) {
-    final ImportReport<Character> importReport = new ImportReport<Character>(new Character());
+    final ImportReport<Character> importReport = new ImportReport<>(new Character());
     try {
       new ImportAppearance().importAppearance(characterElement, importReport);
       new ImportAttribute().importAttribute(characterElement, importReport);
@@ -84,7 +84,7 @@ public class ImportCharacterV2Xml extends ImportCharacterV1Xml {
       final NodeList knownSpellNodes = knownSpellsElement.getChildNodes();
       final Character character = importReport.getImportObject();
 
-      final List<KnownSpell> knownSpells = new ArrayList<KnownSpell>(knownSpellNodes.getLength());
+      final List<KnownSpell> knownSpells = new ArrayList<>(knownSpellNodes.getLength());
       for (int i = 0; i < knownSpellNodes.getLength(); i++) {
         final Node knownSpellElement = knownSpellNodes.item(i);
         final NodeList knownSpellChildren = knownSpellElement.getChildNodes();
@@ -164,7 +164,7 @@ public class ImportCharacterV2Xml extends ImportCharacterV1Xml {
       final NodeList spellSlotNodes = spellSlotsElement.getChildNodes();
       final Character character = importReport.getImportObject();
 
-      final List<SpellSlot> spellSlots = new ArrayList<SpellSlot>(spellSlotNodes.getLength());
+      final List<SpellSlot> spellSlots = new ArrayList<>(spellSlotNodes.getLength());
       for (int i = 0; i < spellSlotNodes.getLength(); i++) {
         final Node spellSlotNode = spellSlotNodes.item(i);
         try {
@@ -195,7 +195,7 @@ public class ImportCharacterV2Xml extends ImportCharacterV1Xml {
     }
 
     private List<SpelllistAbility> getSpelllistAbilities(final Node spelllistAbilitiesNode) {
-      final List<SpelllistAbility> spelllistAbilities = new ArrayList<SpelllistAbility>();
+      final List<SpelllistAbility> spelllistAbilities = new ArrayList<>();
       final NodeList spelllistAbilityNodes = spelllistAbilitiesNode.getChildNodes();
       for (int i = 0; i < spelllistAbilityNodes.getLength(); i++) {
         final Node spelllistAbilityNode = spelllistAbilityNodes.item(i);
@@ -226,7 +226,7 @@ public class ImportCharacterV2Xml extends ImportCharacterV1Xml {
     }
 
     private List<Feat> getMetamagicFeats(final Node metamagicFeatsNode) {
-      final List<Feat> metamagicFeats = new ArrayList<Feat>();
+      final List<Feat> metamagicFeats = new ArrayList<>();
       final NodeList metamagicFeatNodes = metamagicFeatsNode.getChildNodes();
       for (int i = 0; i < metamagicFeatNodes.getLength(); i++) {
         final Node metamagicFeatNode = metamagicFeatNodes.item(i);

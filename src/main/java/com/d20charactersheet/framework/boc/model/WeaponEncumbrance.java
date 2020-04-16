@@ -18,6 +18,6 @@ public enum WeaponEncumbrance {
   /**
    * Wield two-handed in a melee combat.
    */
-  TWO_HANDED;
+  TWO_HANDED
 
 }

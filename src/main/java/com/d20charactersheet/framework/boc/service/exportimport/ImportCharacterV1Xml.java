@@ -68,10 +68,10 @@ public class ImportCharacterV1Xml extends XmlImport implements ImportCharacter {
   }
 
   @Override
-  public List<ImportReport<Character>> importCharacters() throws Exception {
+  public List<ImportReport<Character>> importCharacters() {
     final NodeList nodeList = document.getElementsByTagName(TAG_CHARACTER);
     final int numberOfCharacters = nodeList.getLength();
-    final List<ImportReport<Character>> importReports = new ArrayList<ImportReport<Character>>(numberOfCharacters);
+    final List<ImportReport<Character>> importReports = new ArrayList<>(numberOfCharacters);
     for (int i = 0; i < numberOfCharacters; i++) {
       final Node characterElement = nodeList.item(i);
       final ImportReport<Character> importReport = importCharacter(characterElement);
@@ -81,7 +81,7 @@ public class ImportCharacterV1Xml extends XmlImport implements ImportCharacter {
   }
 
   protected ImportReport<Character> importCharacter(final Node characterElement) {
-    final ImportReport<Character> importReport = new ImportReport<Character>(new Character());
+    final ImportReport<Character> importReport = new ImportReport<>(new Character());
     try {
       new ImportAppearance().importAppearance(characterElement, importReport);
       new ImportAttribute().importAttribute(characterElement, importReport);
@@ -178,7 +178,7 @@ public class ImportCharacterV1Xml extends XmlImport implements ImportCharacter {
     }
 
     private List<ClassLevel> getClassLevels(final Node classLevelsElement, final ImportReport<Character> importReport) {
-      final List<ClassLevel> classLevels = new ArrayList<ClassLevel>();
+      final List<ClassLevel> classLevels = new ArrayList<>();
       final NodeList nodeList = classLevelsElement.getChildNodes();
       for (int i = 0; i < nodeList.getLength(); i++) {
         final Node classLevelElement = nodeList.item(i);
@@ -216,7 +216,7 @@ public class ImportCharacterV1Xml extends XmlImport implements ImportCharacter {
 
     private List<CharacterAbility> getCharacterAbilities(final Node characterAbilitiesElement, final CharacterClass clazz,
         final ImportReport<Character> importReport) {
-      final List<CharacterAbility> characterAbilities = new ArrayList<CharacterAbility>();
+      final List<CharacterAbility> characterAbilities = new ArrayList<>();
       final NodeList nodeList = characterAbilitiesElement.getChildNodes();
       for (int i = 0; i < nodeList.getLength(); i++) {
         final Element characterAbilityElement = (Element) nodeList.item(i);
@@ -432,7 +432,7 @@ public class ImportCharacterV1Xml extends XmlImport implements ImportCharacter {
       final NodeList childNodes = notesElement.getChildNodes();
       final Character character = importReport.getImportObject();
 
-      final List<Note> notes = new ArrayList<Note>(childNodes.getLength());
+      final List<Note> notes = new ArrayList<>(childNodes.getLength());
       final DateFormat dateFormat = new SimpleDateFormat(PATTERN_DATETIME);
       for (int i = 0; i < childNodes.getLength(); i++) {
         final Node noteElement = childNodes.item(i);
@@ -487,7 +487,7 @@ public class ImportCharacterV1Xml extends XmlImport implements ImportCharacter {
       final NodeList childNodes = attacksElement.getChildNodes();
       final Character character = importReport.getImportObject();
 
-      final List<WeaponAttack> weaponAttacks = new ArrayList<WeaponAttack>(childNodes.getLength());
+      final List<WeaponAttack> weaponAttacks = new ArrayList<>(childNodes.getLength());
       for (int i = 0; i < childNodes.getLength(); i++) {
         final Node attackElement = childNodes.item(i);
         final NodeList attackChildren = attackElement.getChildNodes();
@@ -545,7 +545,7 @@ public class ImportCharacterV1Xml extends XmlImport implements ImportCharacter {
       final NodeList skillNodes = skillsElement.getChildNodes();
       final Character character = importReport.getImportObject();
 
-      final List<CharacterSkill> characterSkills = new ArrayList<CharacterSkill>(skillNodes.getLength());
+      final List<CharacterSkill> characterSkills = new ArrayList<>(skillNodes.getLength());
       for (int i = 0; i < skillNodes.getLength(); i++) {
         try {
           final CharacterSkill characterSkill = getCharacterSkill(skillNodes.item(i));
@@ -599,7 +599,7 @@ public class ImportCharacterV1Xml extends XmlImport implements ImportCharacter {
       final NodeList featNodes = featsElement.getChildNodes();
       final Character character = importReport.getImportObject();
 
-      final List<CharacterFeat> characterFeats = new ArrayList<CharacterFeat>(featNodes.getLength());
+      final List<CharacterFeat> characterFeats = new ArrayList<>(featNodes.getLength());
       for (int i = 0; i < featNodes.getLength(); i++) {
         try {
           final CharacterFeat characterFeat = getCharacterFeat(featNodes.item(i));
@@ -652,7 +652,7 @@ public class ImportCharacterV1Xml extends XmlImport implements ImportCharacter {
       final NodeList spellNodes = spellsElement.getChildNodes();
       final Character character = importReport.getImportObject();
 
-      final List<KnownSpell> knownSpells = new ArrayList<KnownSpell>(spellNodes.getLength());
+      final List<KnownSpell> knownSpells = new ArrayList<>(spellNodes.getLength());
       for (int i = 0; i < spellNodes.getLength(); i++) {
         try {
           final KnownSpell knownSpell = getKnownSpell(character, spellNodes.item(i));
@@ -775,7 +775,7 @@ public class ImportCharacterV1Xml extends XmlImport implements ImportCharacter {
 
     private List<ItemGroup> getItems(final NodeList itemNodes, final List<? extends Item> items,
         final ImportReport<Character> importReport) {
-      final List<ItemGroup> itemGroups = new ArrayList<ItemGroup>(itemNodes.getLength());
+      final List<ItemGroup> itemGroups = new ArrayList<>(itemNodes.getLength());
       for (int i = 0; i < itemNodes.getLength(); i++) {
         try {
           final ItemGroup itemGroup = getItemGroup(itemNodes.item(i), items);

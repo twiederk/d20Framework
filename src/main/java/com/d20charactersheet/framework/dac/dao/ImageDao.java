@@ -13,7 +13,7 @@ public interface ImageDao {
    *
    * @return The data of the image.
    */
-  public byte[] getImage(int imageId);
+  byte[] getImage(int imageId);
 
   /**
    * Inserts the given image data into the persistence layer.
@@ -23,7 +23,7 @@ public interface ImageDao {
    *
    * @return The id of the new created image.
    */
-  public int createImage(byte[] imageData);
+  int createImage(byte[] imageData);
 
   /**
    * Deletes the image of the given id.
@@ -31,6 +31,6 @@ public interface ImageDao {
    * @param imageId
    *     The id of the image to delete.
    */
-  public void deleteImage(int imageId);
+  void deleteImage(int imageId);
 
 }

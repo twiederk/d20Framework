@@ -29,16 +29,18 @@ import com.d20charactersheet.framework.boc.model.SpelllistAbility;
 public class DnDv35RuleServiceSpelllistTest extends DnDv35RuleServiceTestCase {
 
   @Test
-  public void testGetMaxSpelllevel() throws Exception {
-    final SpelllistAbility spelllistAbility = belvador.getSpelllistAbilities().get(0);
+  public void testGetMaxSpelllevel() {
+    final SpelllistAbility spelllistAbility = belvador.getSpelllistAbilities()
+        .get(0);
     final int maxSpelllevel = ruleService.getMaxSpelllevel(belvador, spelllistAbility);
     assertEquals(8, maxSpelllevel);
   }
 
   @Test
-  public void testGetNumberOfKnownSpellsBard() throws Exception {
+  public void testGetNumberOfKnownSpellsBard() {
     // Toc Bard (4)
-    final SpelllistAbility spelllistAbility = toc.getSpelllistAbilities().get(0);
+    final SpelllistAbility spelllistAbility = toc.getSpelllistAbilities()
+        .get(0);
 
     // 0.level
     int numberOfKnownSpells = ruleService.getNumberOfKnownSpells(toc, spelllistAbility, 0);
@@ -58,9 +60,10 @@ public class DnDv35RuleServiceSpelllistTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetNumberOfKnownSpellsCleric() throws Exception {
+  public void testGetNumberOfKnownSpellsCleric() {
     // Kyra Cleric (1)
-    final SpelllistAbility spelllistAbility = kyra.getSpelllistAbilities().get(0);
+    final SpelllistAbility spelllistAbility = kyra.getSpelllistAbilities()
+        .get(0);
 
     // 0.level
     int numberOfKnownSpells = ruleService.getNumberOfKnownSpells(kyra, spelllistAbility, 0);
@@ -76,9 +79,10 @@ public class DnDv35RuleServiceSpelllistTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetNumberOfKnownSpellsSorcerer() throws Exception {
+  public void testGetNumberOfKnownSpellsSorcerer() {
     // Dorn Evenwood Sorcerer (4)
-    final SpelllistAbility spelllistAbility = dorn.getSpelllistAbilities().get(0);
+    final SpelllistAbility spelllistAbility = dorn.getSpelllistAbilities()
+        .get(0);
 
     // 0.level
     int numberOfKnownSpells = ruleService.getNumberOfKnownSpells(dorn, spelllistAbility, 0);
@@ -98,9 +102,10 @@ public class DnDv35RuleServiceSpelllistTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetNumberOfKnownSpellsWizard() throws Exception {
+  public void testGetNumberOfKnownSpellsWizard() {
     // Belvador Wizard (5)
-    final SpelllistAbility wizardSpelllistAbility = belvador.getSpelllistAbilities().get(0);
+    final SpelllistAbility wizardSpelllistAbility = belvador.getSpelllistAbilities()
+        .get(0);
 
     // 0.level
     int numberOfKnownSpells = ruleService.getNumberOfKnownSpells(belvador, wizardSpelllistAbility, 0);
@@ -146,7 +151,7 @@ public class DnDv35RuleServiceSpelllistTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testCalculateSpellSlotsOfWizard() throws Exception {
+  public void testCalculateSpellSlotsOfWizard() {
     // Wizard (5), INT: 18, Spells - Wizard, School Specialisation - Conjuration
     final List<SpellSlot> spellSlots = ruleService.calculateSpellSlots(belvador);
     assertNotNull(spellSlots);
@@ -201,7 +206,7 @@ public class DnDv35RuleServiceSpelllistTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testCalculateSpellSlotsOfBard() throws Exception {
+  public void testCalculateSpellSlotsOfBard() {
     // Bard (4), CHA: 17, Spells - Bard
     final List<SpellSlot> spellSlots = ruleService.calculateSpellSlots(toc);
     assertNotNull(spellSlots);
@@ -230,7 +235,7 @@ public class DnDv35RuleServiceSpelllistTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testCalculateSpellSlotsOfCleric() throws Exception {
+  public void testCalculateSpellSlotsOfCleric() {
     // Cleric (1), WIS: 17, Spells - Cleric
     final List<SpellSlot> spellSlots = ruleService.calculateSpellSlots(kyra);
     assertNotNull(spellSlots);
@@ -267,7 +272,7 @@ public class DnDv35RuleServiceSpelllistTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testCalculateSpellSlotsOfSorcerer() throws Exception {
+  public void testCalculateSpellSlotsOfSorcerer() {
     // Sorcerer (4), CHA: 18, Spells - Sorcerer
     final List<SpellSlot> spellSlots = ruleService.calculateSpellSlots(dorn);
     assertNotNull(spellSlots);
@@ -299,13 +304,15 @@ public class DnDv35RuleServiceSpelllistTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testCalculateSpellSlotsOfWizardAddLevel() throws Exception {
+  public void testCalculateSpellSlotsOfWizardAddLevel() {
     // Wizard (6), INT: 18, Spells - Wizard, School Specialisation - Conjuration
     // Spells-Wizard_: 4, 3, 3, 2
     // Specialisation: 1, 1, 1, 1
     // Intelli. Bonus: 0, 1, 1, 1
     // Total_________: 5, 5, 5, 4
-    belvador.getClassLevels().get(0).setLevel(6);
+    belvador.getClassLevels()
+        .get(0)
+        .setLevel(6);
     final List<SpellSlot> spellSlots = ruleService.calculateSpellSlots(belvador);
     assertNotNull(spellSlots);
     assertEquals(19, spellSlots.size());
@@ -362,13 +369,15 @@ public class DnDv35RuleServiceSpelllistTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testCalculateSpellSlotsOfWizardRemoveLevel() throws Exception {
+  public void testCalculateSpellSlotsOfWizardRemoveLevel() {
     // Wizard (4), INT: 18, Spells - Wizard, School Specialisation - Conjuration
     // Spells-Wizard_: 4, 3, 2, 0
     // Specialisation: 1, 1, 1, 1
     // Intelli. Bonus: 0, 1, 1, 1
     // Total_________: 5, 5, 4, 0
-    belvador.getClassLevels().get(0).setLevel(4);
+    belvador.getClassLevels()
+        .get(0)
+        .setLevel(4);
     final List<SpellSlot> spellSlots = ruleService.calculateSpellSlots(belvador);
     assertNotNull(spellSlots);
     assertEquals(14, spellSlots.size());
@@ -394,11 +403,12 @@ public class DnDv35RuleServiceSpelllistTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testCreateSpellsPerDaySlots() throws Exception {
-    final SpelllistAbility spelllistAbility = belvador.getSpelllistAbilities().get(0);
+  public void testCreateSpellsPerDaySlots() {
+    final SpelllistAbility spelllistAbility = belvador.getSpelllistAbilities()
+        .get(0);
     final int spellCasterLevel = ruleService.getSpellcasterLevel(belvador, spelllistAbility);
     final DnDv35RuleServiceImpl dndv35RuleService = (DnDv35RuleServiceImpl) ruleService;
-    final List<SpellSlot> spellSlots = new ArrayList<SpellSlot>();
+    final List<SpellSlot> spellSlots = new ArrayList<>();
     dndv35RuleService.createSpellsPerDaySlots(spelllistAbility, spellCasterLevel, spellSlots);
     assertNotNull(spellSlots);
     assertEquals(10, spellSlots.size());
@@ -410,10 +420,11 @@ public class DnDv35RuleServiceSpelllistTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testCreateAttributeBonusSlots() throws Exception {
-    final SpelllistAbility spelllistAbility = belvador.getSpelllistAbilities().get(0);
+  public void testCreateAttributeBonusSlots() {
+    final SpelllistAbility spelllistAbility = belvador.getSpelllistAbilities()
+        .get(0);
     final DnDv35RuleServiceImpl dndv35RuleService = (DnDv35RuleServiceImpl) ruleService;
-    final List<SpellSlot> spellSlots = new ArrayList<SpellSlot>();
+    final List<SpellSlot> spellSlots = new ArrayList<>();
     dndv35RuleService.createAttributeBonusSlots(belvador, spelllistAbility, spellSlots);
     assertNotNull(spellSlots);
     assertEquals(3, spellSlots.size());
@@ -425,7 +436,7 @@ public class DnDv35RuleServiceSpelllistTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetAttributeBonusSlots() throws Exception {
+  public void testGetAttributeBonusSlots() {
     assertAttributeBonusSlots(1, new int[] {0, 1, 0, 0, 0, 0, 0, 0, 0, 0});
     assertAttributeBonusSlots(2, new int[] {0, 1, 1, 0, 0, 0, 0, 0, 0, 0});
     assertAttributeBonusSlots(5, new int[] {0, 2, 1, 1, 1, 1, 0, 0, 0, 0});
@@ -442,7 +453,7 @@ public class DnDv35RuleServiceSpelllistTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetSpellSelectionOfWizard() throws Exception {
+  public void testGetSpellSelectionOfWizard() {
     // Wizard (5), INT: 18, Spells - Wizard, School Specialisation - Conjuration
     final List<SpellSlot> spellSlots = ruleService.calculateSpellSlots(belvador);
 
@@ -548,7 +559,7 @@ public class DnDv35RuleServiceSpelllistTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetSpellSelectionOfBard() throws Exception {
+  public void testGetSpellSelectionOfBard() {
     // Bard (4), CHA: 17, Spells - Bard
     final List<SpellSlot> spellSlots = ruleService.calculateSpellSlots(toc);
 
@@ -585,7 +596,7 @@ public class DnDv35RuleServiceSpelllistTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetSpellSelectionOfSorcerer() throws Exception {
+  public void testGetSpellSelectionOfSorcerer() {
     // Sorcerer (4), CHA: 18, Spells - Sorcerer
     final List<SpellSlot> spellSlots = ruleService.calculateSpellSlots(dorn);
 
@@ -620,7 +631,7 @@ public class DnDv35RuleServiceSpelllistTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetSpellSelectionOfCleric() throws Exception {
+  public void testGetSpellSelectionOfCleric() {
     // Cleric (1), WIS: 17, Spells - Cleric, Spells - Good Domain, Spells - Healing Domain
     final List<SpellSlot> spellSlots = ruleService.calculateSpellSlots(kyra);
 
@@ -688,7 +699,7 @@ public class DnDv35RuleServiceSpelllistTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetSpellSaveDifficultyClassWizard() throws Exception {
+  public void testGetSpellSaveDifficultyClassWizard() {
     final List<SpellSlot> spellSlots = belvador.getSpellSlots();
 
     // Spells - Wizard, 0th level
@@ -734,7 +745,7 @@ public class DnDv35RuleServiceSpelllistTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetSpellSaveDifficultyClassCleric() throws Exception {
+  public void testGetSpellSaveDifficultyClassCleric() {
     final List<SpellSlot> spellSlots = kyra.getSpellSlots();
 
     // Spells - Cleric, 0th level
@@ -761,14 +772,14 @@ public class DnDv35RuleServiceSpelllistTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testRestOfWizard() throws Exception {
+  public void testRestOfWizard() {
     final List<SpellSlot> spellSlots = ruleService.rest(belvador);
     assertNotNull(spellSlots);
     assertEquals(0, spellSlots.size());
   }
 
   @Test
-  public void testRestOfBard() throws Exception {
+  public void testRestOfBard() {
     final List<SpellSlot> spellSlots = ruleService.rest(toc);
     assertNotNull(spellSlots);
     assertEquals(3, spellSlots.size());
@@ -776,14 +787,14 @@ public class DnDv35RuleServiceSpelllistTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testRestOfCleric() throws Exception {
+  public void testRestOfCleric() {
     final List<SpellSlot> spellSlots = ruleService.rest(kyra);
     assertNotNull(spellSlots);
     assertEquals(0, spellSlots.size());
   }
 
   @Test
-  public void testRestOfSorcerer() throws Exception {
+  public void testRestOfSorcerer() {
     final List<SpellSlot> spellSlots = ruleService.rest(dorn);
     assertNotNull(spellSlots);
     assertEquals(10, spellSlots.size());

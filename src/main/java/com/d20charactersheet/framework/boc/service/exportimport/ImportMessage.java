@@ -61,7 +61,7 @@ public class ImportMessage {
     WARNING, /**
      * An error occured, which broke the whole import.
      */
-    ERROR;
+    ERROR
   }
 
 }

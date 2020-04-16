@@ -38,7 +38,7 @@ public class ItemServiceTest {
   private ItemService itemService;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     itemService = new ItemServiceImpl(new DummyItemDao(WEAPON_FAMILY, WEAPON, ARMOR, GOOD));
   }
 
@@ -152,9 +152,10 @@ public class ItemServiceTest {
   }
 
   @Test
-  public void testUpdateWeapon() throws Exception {
+  public void testUpdateWeapon() {
     final List<WeaponFamily> allWeaponTypes = itemService.getAllWeaponFamilies();
-    Weapon weapon = itemService.getAllWeapons(allWeaponTypes).get(0);
+    Weapon weapon = itemService.getAllWeapons(allWeaponTypes)
+        .get(0);
     final int weaponId = weapon.getId();
     weapon.setName("testUpdate");
     weapon.setWeaponType(WeaponType.EXOTIC);
@@ -188,7 +189,7 @@ public class ItemServiceTest {
   }
 
   @Test
-  public void testCheckCritical() throws Exception {
+  public void testCheckCritical() {
     final Critical zeroHitCritical = new Critical(0, 0);
     final Critical oneHitCritical = new Critical(1, 0);
     final Critical tweentyHitCritical = new Critical(20, 0);
@@ -253,8 +254,9 @@ public class ItemServiceTest {
   }
 
   @Test
-  public void testUpdateArmor() throws Exception {
-    Armor armor = itemService.getAllArmor().get(0);
+  public void testUpdateArmor() {
+    Armor armor = itemService.getAllArmor()
+        .get(0);
     final int armorId = armor.getId();
     armor.setName("testUpdate");
     armor.setArmorType(ArmorType.LIGHT);
@@ -304,8 +306,9 @@ public class ItemServiceTest {
   }
 
   @Test
-  public void testUpdateGood() throws Exception {
-    Good good = itemService.getAllGoods().get(0);
+  public void testUpdateGood() {
+    Good good = itemService.getAllGoods()
+        .get(0);
     final int goodId = good.getId();
     good.setName("testUpdate");
     good.setGoodType(GoodType.SPECIAL_ITEM);
@@ -321,7 +324,7 @@ public class ItemServiceTest {
   }
 
   @Test
-  public void testGetEquipableWeapons() throws Exception {
+  public void testGetEquipableWeapons() {
     final List<WeaponFamily> allWeaponTypes = itemService.getAllWeaponFamilies();
     final List<Weapon> allWeapons = itemService.getAllWeapons(allWeaponTypes);
 

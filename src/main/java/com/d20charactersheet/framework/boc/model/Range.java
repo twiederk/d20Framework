@@ -22,6 +22,6 @@ public enum Range {
   LONG, /**
    * Specific
    */
-  SPECIFIC;
+  SPECIFIC
 
 }

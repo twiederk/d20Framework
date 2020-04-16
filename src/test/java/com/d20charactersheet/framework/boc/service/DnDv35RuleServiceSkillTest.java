@@ -20,7 +20,7 @@ import com.d20charactersheet.framework.boc.model.Skill;
 public class DnDv35RuleServiceSkillTest extends DnDv35RuleServiceTestCase {
 
   @Test
-  public void testGetMaxClassSkillRankSingleClassCharacter() throws Exception {
+  public void testGetMaxClassSkillRankSingleClassCharacter() {
     final Character character = createCharacter(wizard, 5);
 
     final int maxClassSkillRank = ruleService.getMaxClassSkillRank(character);
@@ -28,9 +28,9 @@ public class DnDv35RuleServiceSkillTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetMaxClassSkillRankMultiClassCharacter() throws Exception {
+  public void testGetMaxClassSkillRankMultiClassCharacter() {
     final Character character = new Character();
-    final List<ClassLevel> classLevels = new ArrayList<ClassLevel>();
+    final List<ClassLevel> classLevels = new ArrayList<>();
     classLevels.add(new ClassLevel(wizard, 5));
     classLevels.add(new ClassLevel(bard, 5));
     classLevels.add(new ClassLevel(barbarian, 5));
@@ -41,9 +41,9 @@ public class DnDv35RuleServiceSkillTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetMaxCrossClassSkillRankSingleClassCharacter() throws Exception {
+  public void testGetMaxCrossClassSkillRankSingleClassCharacter() {
     final Character character = new Character();
-    final List<ClassLevel> classLevels = new ArrayList<ClassLevel>();
+    final List<ClassLevel> classLevels = new ArrayList<>();
     classLevels.add(new ClassLevel(wizard, 4));
     character.setClassLevels(classLevels);
 
@@ -52,9 +52,9 @@ public class DnDv35RuleServiceSkillTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetMaxCrossClassSkillRankMultiClassCharacter() throws Exception {
+  public void testGetMaxCrossClassSkillRankMultiClassCharacter() {
     final Character character = new Character();
-    final List<ClassLevel> classLevels = new ArrayList<ClassLevel>();
+    final List<ClassLevel> classLevels = new ArrayList<>();
     classLevels.add(new ClassLevel(wizard, 5));
     classLevels.add(new ClassLevel(bard, 5));
     classLevels.add(new ClassLevel(barbarian, 5));
@@ -65,7 +65,7 @@ public class DnDv35RuleServiceSkillTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testIsSkillTrained() throws Exception {
+  public void testIsSkillTrained() {
 
     CharacterSkill characterSkill = createCharacterSkill(0.0f, false);
     assertFalse(ruleService.isTrained(characterSkill));
@@ -91,65 +91,79 @@ public class DnDv35RuleServiceSkillTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetSkillPointsWizard5ElfInt10() throws Exception {
+  public void testGetSkillPointsWizard5ElfInt10() {
     // Wizard (5), Elf, INT 10
     final ClassLevel classLevel = new ClassLevel(wizard, 5);
     final Character character = createCharacter(classLevel, elf, 10);
-    final int skillPoints = ruleService.getSkillPoints(character, character.getClassLevels().get(0).getCharacterClass());
+    final int skillPoints = ruleService.getSkillPoints(character, character.getClassLevels()
+        .get(0)
+        .getCharacterClass());
     assertEquals(16, skillPoints);
   }
 
   @Test
-  public void testGetSkillPointsWizard5ElfInt18() throws Exception {
+  public void testGetSkillPointsWizard5ElfInt18() {
     // Wizard (5), Elf, INT 18
     final Character character = createCharacter(new ClassLevel(wizard, 5), elf, 18);
-    final int skillPoints = ruleService.getSkillPoints(character, character.getClassLevels().get(0).getCharacterClass());
+    final int skillPoints = ruleService.getSkillPoints(character, character.getClassLevels()
+        .get(0)
+        .getCharacterClass());
     assertEquals(48, skillPoints);
 
   }
 
   @Test
-  public void testGetSkillPointsWizard5HumanInt18() throws Exception {
+  public void testGetSkillPointsWizard5HumanInt18() {
     // Wizard (5), Human, INT 18
     final Character character = createCharacter(new ClassLevel(wizard, 5), human, 18);
-    final int skillPoints = ruleService.getSkillPoints(character, character.getClassLevels().get(0).getCharacterClass());
+    final int skillPoints = ruleService.getSkillPoints(character, character.getClassLevels()
+        .get(0)
+        .getCharacterClass());
     assertEquals(56, skillPoints);
   }
 
   @Test
-  public void testGetSkillPointsBarbarian4HalfOrcInt9() throws Exception {
+  public void testGetSkillPointsBarbarian4HalfOrcInt9() {
     // Barbarian (4), Half-Orc, INT 9
     final Character character = createCharacter(new ClassLevel(barbarian, 4), halfOrc, 9);
-    final int skillPoints = ruleService.getSkillPoints(character, character.getClassLevels().get(0).getCharacterClass());
+    final int skillPoints = ruleService.getSkillPoints(character, character.getClassLevels()
+        .get(0)
+        .getCharacterClass());
     assertEquals(21, skillPoints);
   }
 
   @Test
-  public void testGetSkillPointsBarbarian4HumanInt9() throws Exception {
+  public void testGetSkillPointsBarbarian4HumanInt9() {
     // Barbarian (4), Half-Orc, INT 9
     final Character character = createCharacter(new ClassLevel(barbarian, 4), human, 9);
-    final int skillPoints = ruleService.getSkillPoints(character, character.getClassLevels().get(0).getCharacterClass());
+    final int skillPoints = ruleService.getSkillPoints(character, character.getClassLevels()
+        .get(0)
+        .getCharacterClass());
     assertEquals(28, skillPoints);
   }
 
   @Test
-  public void testGetSkillPointsBard4HumanInt16() throws Exception {
+  public void testGetSkillPointsBard4HumanInt16() {
     // Bard (4), Human, INT 16
     final Character character = createCharacter(new ClassLevel(bard, 4), human, 16);
-    final int skillPoints = ruleService.getSkillPoints(character, character.getClassLevels().get(0).getCharacterClass());
+    final int skillPoints = ruleService.getSkillPoints(character, character.getClassLevels()
+        .get(0)
+        .getCharacterClass());
     assertEquals(70, skillPoints);
   }
 
   @Test
-  public void testGetSkillPointsBard5HumanInt16() throws Exception {
+  public void testGetSkillPointsBard5HumanInt16() {
     // Bard (5), Human, INT 16
     final Character character = createCharacter(new ClassLevel(bard, 5), human, 16);
-    final int skillPoints = ruleService.getSkillPoints(character, character.getClassLevels().get(0).getCharacterClass());
+    final int skillPoints = ruleService.getSkillPoints(character, character.getClassLevels()
+        .get(0)
+        .getCharacterClass());
     assertEquals(80, skillPoints);
   }
 
   @Test
-  public void testGetSkillPointsRanger4Rogue3HumanInt10() throws Exception {
+  public void testGetSkillPointsRanger4Rogue3HumanInt10() {
     // Ranger (4), Rogue (3), Human, INT 10
     final Character character = createCharacter(new ClassLevel(ranger, 4), new ClassLevel(rogue, 3), human, 10);
     final int skillPoints = ruleService.getSkillPoints(character, ranger);
@@ -157,7 +171,7 @@ public class DnDv35RuleServiceSkillTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetSkillPointsRanger4Druid6HumanInt10() throws Exception {
+  public void testGetSkillPointsRanger4Druid6HumanInt10() {
     // Ranger (4), Druid (6), Human, INT 10
     final Character character = createCharacter(new ClassLevel(ranger, 4), new ClassLevel(druid, 6), human, 10);
     final int skillPoints = ruleService.getSkillPoints(character, ranger);
@@ -165,7 +179,7 @@ public class DnDv35RuleServiceSkillTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetSkillModifier() throws Exception {
+  public void testGetSkillModifier() {
     final Character character = new Character();
     character.setStrength(14);
 
@@ -175,7 +189,7 @@ public class DnDv35RuleServiceSkillTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetSkillModifierWithHalfRank() throws Exception {
+  public void testGetSkillModifierWithHalfRank() {
     final Character character = new Character();
     character.setStrength(14);
 
@@ -185,7 +199,7 @@ public class DnDv35RuleServiceSkillTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testSkillRoll() throws Exception {
+  public void testSkillRoll() {
     final Character character = new Character();
     character.setStrength(14);
 
@@ -206,7 +220,7 @@ public class DnDv35RuleServiceSkillTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testIsClassSkillSingleClassCharacter() throws Exception {
+  public void testIsClassSkillSingleClassCharacter() {
     final Character wizardCharacter = createCharacter(new ClassLevel(wizard, 5), elf, 10);
     final Character fighterCharacter = createCharacter(new ClassLevel(fighter, 5), human, 10);
     final Skill spellcraft = createSkill(39, "Spellcraft");
@@ -219,7 +233,7 @@ public class DnDv35RuleServiceSkillTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testIsClassSkillMultiClassCharacter() throws Exception {
+  public void testIsClassSkillMultiClassCharacter() {
     final Character character = createCharacter(new ClassLevel(fighter, 1), new ClassLevel(wizard, 1), human, 10);
     final Skill spellcraft = createSkill(39, "Spellcraft");
     final Skill appraise = createSkill(1, "Appraise");
@@ -232,11 +246,13 @@ public class DnDv35RuleServiceSkillTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetSpentSkillPointsClassSkills() throws Exception {
+  public void testGetSpentSkillPointsClassSkills() {
     final Character character = createCharacter(new ClassLevel(fighter, 1), human, 10);
-    final List<CharacterSkill> characterSkills = new LinkedList<CharacterSkill>();
-    characterSkills.add(createCharacterSkill(fighter.getSkills().get(0), 4.0f));
-    characterSkills.add(createCharacterSkill(fighter.getSkills().get(1), 4.0f));
+    final List<CharacterSkill> characterSkills = new LinkedList<>();
+    characterSkills.add(createCharacterSkill(fighter.getSkills()
+                                                 .get(0), 4.0f));
+    characterSkills.add(createCharacterSkill(fighter.getSkills()
+                                                 .get(1), 4.0f));
     character.setCharacterSkills(characterSkills);
 
     final int spentSkillPoints = ruleService.getSpentSkillPoints(character);
@@ -245,9 +261,9 @@ public class DnDv35RuleServiceSkillTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetSpentSkillPointsCrossClassSkills() throws Exception {
+  public void testGetSpentSkillPointsCrossClassSkills() {
     final Character character = createCharacter(new ClassLevel(fighter, 1), human, 10);
-    final List<CharacterSkill> characterSkills = new LinkedList<CharacterSkill>();
+    final List<CharacterSkill> characterSkills = new LinkedList<>();
     characterSkills.add(createCharacterSkill(new Skill(), 2.5f));
     characterSkills.add(createCharacterSkill(new Skill(), 4.0f));
     character.setCharacterSkills(characterSkills);
@@ -258,13 +274,17 @@ public class DnDv35RuleServiceSkillTest extends DnDv35RuleServiceTestCase {
   }
 
   @Test
-  public void testGetSpentSkillPointsMultiClassCharacter() throws Exception {
+  public void testGetSpentSkillPointsMultiClassCharacter() {
     final Character character = createCharacter(new ClassLevel(fighter, 1), new ClassLevel(wizard, 1), human, 10);
-    final List<CharacterSkill> characterSkills = new LinkedList<CharacterSkill>();
-    characterSkills.add(createCharacterSkill(fighter.getSkills().get(0), 4.0f));
-    characterSkills.add(createCharacterSkill(fighter.getSkills().get(1), 4.0f));
-    characterSkills.add(createCharacterSkill(wizard.getSkills().get(0), 4.0f));
-    characterSkills.add(createCharacterSkill(wizard.getSkills().get(1), 4.0f));
+    final List<CharacterSkill> characterSkills = new LinkedList<>();
+    characterSkills.add(createCharacterSkill(fighter.getSkills()
+                                                 .get(0), 4.0f));
+    characterSkills.add(createCharacterSkill(fighter.getSkills()
+                                                 .get(1), 4.0f));
+    characterSkills.add(createCharacterSkill(wizard.getSkills()
+                                                 .get(0), 4.0f));
+    characterSkills.add(createCharacterSkill(wizard.getSkills()
+                                                 .get(1), 4.0f));
     characterSkills.add(createCharacterSkill(new Skill(), 2.0f));
     characterSkills.add(createCharacterSkill(new Skill(), 2.0f));
     character.setCharacterSkills(characterSkills);

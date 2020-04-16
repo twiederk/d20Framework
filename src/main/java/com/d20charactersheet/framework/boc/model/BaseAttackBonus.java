@@ -17,6 +17,6 @@ public enum BaseAttackBonus {
   /**
    * The character class is a good fighter
    */
-  GOOD;
+  GOOD
 
 }

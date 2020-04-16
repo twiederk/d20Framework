@@ -14,6 +14,6 @@ public interface XpDao {
    *
    * @return All xp tables from the persistent layer.
    */
-  public List<XpTable> getAllXpTables();
+  List<XpTable> getAllXpTables();
 
 }

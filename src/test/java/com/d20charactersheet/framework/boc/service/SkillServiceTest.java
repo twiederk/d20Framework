@@ -18,7 +18,7 @@ public class SkillServiceTest {
   private SkillService skillService;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     skillService = new SkillServiceImpl(new DummySkillDao(SKILL));
   }
 
@@ -29,13 +29,14 @@ public class SkillServiceTest {
   }
 
   @Test
-  public void testGetSkillDescription() throws Exception {
+  public void testGetSkillDescription() {
     Skill skill = new Skill();
     skill.setId(1);
     skill.setName("Appraise");
     skill = skillService.getSkillDescription(skill);
     assertNotNull(skill.getDescription());
-    assertTrue(skill.getDescription().startsWith("<b>Check:</b> You can appraise common"));
+    assertTrue(skill.getDescription()
+                   .startsWith("<b>Check:</b> You can appraise common"));
   }
 
 }

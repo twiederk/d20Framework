@@ -43,9 +43,9 @@ public class ImportEquipmentV1Xml extends XmlImport implements ImportEquipment {
   }
 
   @Override
-  public List<ImportReport<? extends Item>> importEquipment() throws Exception {
+  public List<ImportReport<? extends Item>> importEquipment() {
 
-    final List<ImportReport<? extends Item>> importReports = new ArrayList<ImportReport<? extends Item>>();
+    final List<ImportReport<? extends Item>> importReports = new ArrayList<>();
 
     final NodeList weaponList = document.getElementsByTagName(TAG_WEAPON);
     importReports.addAll(importItems(weaponList, new ImportWeapon()));
@@ -60,7 +60,7 @@ public class ImportEquipmentV1Xml extends XmlImport implements ImportEquipment {
   }
 
   private List<ImportReport<? extends Item>> importItems(final NodeList itemList, final ImportItem importItem) {
-    final List<ImportReport<? extends Item>> importReports = new ArrayList<ImportReport<? extends Item>>(itemList.getLength());
+    final List<ImportReport<? extends Item>> importReports = new ArrayList<>(itemList.getLength());
     for (int i = 0; i < itemList.getLength(); i++) {
       final Node itemNode = itemList.item(i);
       final ImportReport<? extends Item> importReport = importItem.importItem(itemNode);
@@ -115,7 +115,7 @@ public class ImportEquipmentV1Xml extends XmlImport implements ImportEquipment {
 
     @Override
     public ImportReport<Weapon> importItem(final Node weaponNode) {
-      final ImportReport<Weapon> importReport = new ImportReport<Weapon>(new Weapon());
+      final ImportReport<Weapon> importReport = new ImportReport<>(new Weapon());
       try {
         final Weapon weapon = importReport.getImportObject();
         importItem(weaponNode, weapon);
@@ -190,7 +190,7 @@ public class ImportEquipmentV1Xml extends XmlImport implements ImportEquipment {
 
     @Override
     public ImportReport<Armor> importItem(final Node armorNode) {
-      final ImportReport<Armor> importReport = new ImportReport<Armor>(new Armor());
+      final ImportReport<Armor> importReport = new ImportReport<>(new Armor());
       final Armor armor = importReport.getImportObject();
       try {
         importItem(armorNode, armor);
@@ -220,7 +220,7 @@ public class ImportEquipmentV1Xml extends XmlImport implements ImportEquipment {
 
     @Override
     public ImportReport<Good> importItem(final Node goodNode) {
-      final ImportReport<Good> importReport = new ImportReport<Good>(new Good());
+      final ImportReport<Good> importReport = new ImportReport<>(new Good());
       final Good good = importReport.getImportObject();
       try {
         importItem(goodNode, good);

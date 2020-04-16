@@ -8,7 +8,7 @@ import org.junit.Test;
 public class DefaultAbilityBuilderTest {
 
   @Test
-  public void testGetClassnameAbility() throws Exception {
+  public void testGetClassnameAbility() {
     final DefaultAbilityBuilder abilityBuilder = new DefaultAbilityBuilder();
     final AbilityConfig abilityConfig = new AbilityConfig();
     abilityConfig.setClassname("Ability");
@@ -18,7 +18,7 @@ public class DefaultAbilityBuilderTest {
   }
 
   @Test
-  public void testGetClassnameExtraAbility() throws Exception {
+  public void testGetClassnameExtraAbility() {
     final DefaultAbilityBuilder abilityBuilder = new DefaultAbilityBuilder();
     final AbilityConfig abilityConfig = new AbilityConfig();
     abilityConfig.setClassname("ExtraAbility");

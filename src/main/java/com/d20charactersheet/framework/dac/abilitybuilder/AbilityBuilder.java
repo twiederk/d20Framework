@@ -15,5 +15,5 @@ public interface AbilityBuilder {
    *
    * @return The created Ability instance.
    */
-  public Ability createAbility(AbilityConfig abilityConfig);
+  Ability createAbility(AbilityConfig abilityConfig);
 }

@@ -21,7 +21,7 @@ public interface RaceDao {
    *
    * @return All races of the game system.
    */
-  public List<Race> getAllRaces(List<CharacterClass> allCharacterClasses, List<Ability> allAbilities);
+  List<Race> getAllRaces(List<CharacterClass> allCharacterClasses, List<Ability> allAbilities);
 
   /**
    * Creates a new race in the persistent layer. Fills the id of the race.
@@ -31,7 +31,7 @@ public interface RaceDao {
    *
    * @return The created race with id.
    */
-  public Race createRace(Race race);
+  Race createRace(Race race);
 
   /**
    * Deletes the race from the persistent layer.
@@ -39,7 +39,7 @@ public interface RaceDao {
    * @param race
    *     The race to delete.
    */
-  public void deleteRace(Race race);
+  void deleteRace(Race race);
 
   /**
    * Update the race in the persistent layer.
@@ -47,6 +47,6 @@ public interface RaceDao {
    * @param race
    *     The race to update.
    */
-  public void updateRace(Race race);
+  void updateRace(Race race);
 
 }

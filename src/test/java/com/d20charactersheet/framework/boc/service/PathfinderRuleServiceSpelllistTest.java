@@ -28,16 +28,18 @@ import com.d20charactersheet.framework.boc.model.SpelllistAbility;
 public class PathfinderRuleServiceSpelllistTest extends PathfinderRuleServiceTestCase {
 
   @Test
-  public void testGetMaxSpelllevel() throws Exception {
-    final SpelllistAbility spelllistAbility = belvador.getSpelllistAbilities().get(0);
+  public void testGetMaxSpelllevel() {
+    final SpelllistAbility spelllistAbility = belvador.getSpelllistAbilities()
+        .get(0);
     final int maxSpelllevel = ruleService.getMaxSpelllevel(belvador, spelllistAbility);
     assertEquals(8, maxSpelllevel);
   }
 
   @Test
-  public void testGetNumberOfKnownSpellsBard() throws Exception {
+  public void testGetNumberOfKnownSpellsBard() {
     // Toc Bard (4)
-    final SpelllistAbility spelllistAbility = toc.getSpelllistAbilities().get(0);
+    final SpelllistAbility spelllistAbility = toc.getSpelllistAbilities()
+        .get(0);
 
     // 0.level
     int numberOfKnownSpells = ruleService.getNumberOfKnownSpells(toc, spelllistAbility, 0);
@@ -57,9 +59,10 @@ public class PathfinderRuleServiceSpelllistTest extends PathfinderRuleServiceTes
   }
 
   @Test
-  public void testGetNumberOfKnownSpellsCleric() throws Exception {
+  public void testGetNumberOfKnownSpellsCleric() {
     // Kyra Cleric (1)
-    final SpelllistAbility spelllistAbility = kyra.getSpelllistAbilities().get(0);
+    final SpelllistAbility spelllistAbility = kyra.getSpelllistAbilities()
+        .get(0);
 
     // 0.level
     int numberOfKnownSpells = ruleService.getNumberOfKnownSpells(kyra, spelllistAbility, 0);
@@ -75,9 +78,10 @@ public class PathfinderRuleServiceSpelllistTest extends PathfinderRuleServiceTes
   }
 
   @Test
-  public void testGetNumberOfKnownSpellsSorcerer() throws Exception {
+  public void testGetNumberOfKnownSpellsSorcerer() {
     // Dorn Evenwood Sorcerer (4)
-    final SpelllistAbility spelllistAbility = dorn.getSpelllistAbilities().get(0);
+    final SpelllistAbility spelllistAbility = dorn.getSpelllistAbilities()
+        .get(0);
 
     // 0.level
     int numberOfKnownSpells = ruleService.getNumberOfKnownSpells(dorn, spelllistAbility, 0);
@@ -97,9 +101,10 @@ public class PathfinderRuleServiceSpelllistTest extends PathfinderRuleServiceTes
   }
 
   @Test
-  public void testGetNumberOfKnownSpellsWizard() throws Exception {
+  public void testGetNumberOfKnownSpellsWizard() {
     // Belvador Wizard (5)
-    final SpelllistAbility spelllistAbility = belvador.getSpelllistAbilities().get(0);
+    final SpelllistAbility spelllistAbility = belvador.getSpelllistAbilities()
+        .get(0);
 
     // 0.level
     int numberOfKnownSpells = ruleService.getNumberOfKnownSpells(belvador, spelllistAbility, 0);
@@ -123,7 +128,7 @@ public class PathfinderRuleServiceSpelllistTest extends PathfinderRuleServiceTes
   }
 
   @Test
-  public void testCalculateSpellSlotsOfWizard() throws Exception {
+  public void testCalculateSpellSlotsOfWizard() {
     // Wizard (5), INT: 18, Spells - Wizard, School Specialisation - Conjuration
     final List<SpellSlot> spellSlots = ruleService.calculateSpellSlots(belvador);
     assertNotNull(spellSlots);
@@ -180,7 +185,7 @@ public class PathfinderRuleServiceSpelllistTest extends PathfinderRuleServiceTes
   }
 
   @Test
-  public void testCalculateSpellSlotsOfBard() throws Exception {
+  public void testCalculateSpellSlotsOfBard() {
     // Bard (4), CHA: 17, Spells - Bard
     final List<SpellSlot> spellSlots = ruleService.calculateSpellSlots(toc);
     assertNotNull(spellSlots);
@@ -216,7 +221,7 @@ public class PathfinderRuleServiceSpelllistTest extends PathfinderRuleServiceTes
   }
 
   @Test
-  public void testCalculateSpellSlotsOfCleric() throws Exception {
+  public void testCalculateSpellSlotsOfCleric() {
     // Cleric (1), WIS: 17, Spells - Cleric
     final List<SpellSlot> spellSlots = ruleService.calculateSpellSlots(kyra);
     assertNotNull(spellSlots);
@@ -253,7 +258,7 @@ public class PathfinderRuleServiceSpelllistTest extends PathfinderRuleServiceTes
   }
 
   @Test
-  public void testCalculateSpellSlotsOfSorcerer() throws Exception {
+  public void testCalculateSpellSlotsOfSorcerer() {
     // Sorcerer (4), CHA: 18, Spells - Sorcerer
     final List<SpellSlot> spellSlots = ruleService.calculateSpellSlots(dorn);
     assertNotNull(spellSlots);
@@ -289,11 +294,12 @@ public class PathfinderRuleServiceSpelllistTest extends PathfinderRuleServiceTes
   }
 
   @Test
-  public void testCreateSpellsPerDaySlots() throws Exception {
-    final SpelllistAbility spelllistAbility = belvador.getSpelllistAbilities().get(0);
+  public void testCreateSpellsPerDaySlots() {
+    final SpelllistAbility spelllistAbility = belvador.getSpelllistAbilities()
+        .get(0);
     final int spellCasterLevel = ruleService.getSpellcasterLevel(belvador, spelllistAbility);
     final AbstractRuleServiceImpl abstractRuleService = (AbstractRuleServiceImpl) ruleService;
-    final List<SpellSlot> spellSlots = new ArrayList<SpellSlot>();
+    final List<SpellSlot> spellSlots = new ArrayList<>();
     abstractRuleService.createSpellsPerDaySlots(spelllistAbility, spellCasterLevel, spellSlots);
     assertNotNull(spellSlots);
     assertEquals(10, spellSlots.size());
@@ -305,7 +311,7 @@ public class PathfinderRuleServiceSpelllistTest extends PathfinderRuleServiceTes
   }
 
   @Test
-  public void testGetSpellSelectionOfWizard() throws Exception {
+  public void testGetSpellSelectionOfWizard() {
     // Wizard (5), INT: 18, Spells - Wizard, School Specialisation - Conjuration
     final List<SpellSlot> spellSlots = ruleService.calculateSpellSlots(belvador);
 
@@ -411,7 +417,7 @@ public class PathfinderRuleServiceSpelllistTest extends PathfinderRuleServiceTes
   }
 
   @Test
-  public void testGetSpellSelectionOfBard() throws Exception {
+  public void testGetSpellSelectionOfBard() {
     // Bard (4), CHA: 17, Spells - Bard
     final List<SpellSlot> spellSlots = ruleService.calculateSpellSlots(toc);
 
@@ -449,7 +455,7 @@ public class PathfinderRuleServiceSpelllistTest extends PathfinderRuleServiceTes
   }
 
   @Test
-  public void testGetSpellSelectionOfSorcerer() throws Exception {
+  public void testGetSpellSelectionOfSorcerer() {
     // Sorcerer (4), CHA: 18, Spells - Sorcerer
     final List<SpellSlot> spellSlots = ruleService.calculateSpellSlots(dorn);
 
@@ -484,7 +490,7 @@ public class PathfinderRuleServiceSpelllistTest extends PathfinderRuleServiceTes
   }
 
   @Test
-  public void testGetSpellSelectionOfCleric() throws Exception {
+  public void testGetSpellSelectionOfCleric() {
     // Cleric (1), WIS: 17, Spells - Cleric, Spells - Good Domain, Spells - Healing Domain
     final List<SpellSlot> spellSlots = ruleService.calculateSpellSlots(kyra);
 
@@ -552,14 +558,14 @@ public class PathfinderRuleServiceSpelllistTest extends PathfinderRuleServiceTes
   }
 
   @Test
-  public void testRestOfWizard() throws Exception {
+  public void testRestOfWizard() {
     final List<SpellSlot> spellSlots = ruleService.rest(belvador);
     assertNotNull(spellSlots);
     assertEquals(0, spellSlots.size());
   }
 
   @Test
-  public void testRestOfBard() throws Exception {
+  public void testRestOfBard() {
     final List<SpellSlot> spellSlots = ruleService.rest(toc);
     assertNotNull(spellSlots);
     assertEquals(4, spellSlots.size());
@@ -567,14 +573,14 @@ public class PathfinderRuleServiceSpelllistTest extends PathfinderRuleServiceTes
   }
 
   @Test
-  public void testRestOfCleric() throws Exception {
+  public void testRestOfCleric() {
     final List<SpellSlot> spellSlots = ruleService.rest(kyra);
     assertNotNull(spellSlots);
     assertEquals(0, spellSlots.size());
   }
 
   @Test
-  public void testRestOfSorcerer() throws Exception {
+  public void testRestOfSorcerer() {
     final List<SpellSlot> spellSlots = ruleService.rest(dorn);
     assertNotNull(spellSlots);
     assertEquals(6, spellSlots.size());

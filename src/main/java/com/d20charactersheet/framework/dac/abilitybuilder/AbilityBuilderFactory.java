@@ -15,7 +15,7 @@ public class AbilityBuilderFactory {
    * Instanciates AbilityBuilderFactory with none AbilityBuilder registered.
    */
   public AbilityBuilderFactory() {
-    this.abilityBuilders = new HashMap<String, AbilityBuilder>();
+    this.abilityBuilders = new HashMap<>();
   }
 
   /**

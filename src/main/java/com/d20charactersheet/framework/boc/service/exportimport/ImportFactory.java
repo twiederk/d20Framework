@@ -20,7 +20,7 @@ public interface ImportFactory {
    * @throws Exception
    *     Thrown if the game system and file doesn't match or no import implementation is available.
    */
-  public ImportCharacter getImportCharacter(ImportContext importContext, File importFile) throws Exception;
+  ImportCharacter getImportCharacter(ImportContext importContext, File importFile) throws Exception;
 
   /**
    * Returns proper import implementation for equipment based on the version of the import file.
@@ -35,6 +35,6 @@ public interface ImportFactory {
    * @throws Exception
    *     Thrown if the game system and file doesn't match or no import implementation is available.
    */
-  public ImportEquipment getImportEquipment(ImportContext importContext, File importFile) throws Exception;
+  ImportEquipment getImportEquipment(ImportContext importContext, File importFile) throws Exception;
 
 }

@@ -33,5 +33,5 @@ public enum WeaponCategory {
   /**
    * Ammunition of a weapon
    */
-  AMMUNITION;
+  AMMUNITION
 }

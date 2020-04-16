@@ -10,7 +10,7 @@ import com.d20charactersheet.framework.boc.model.Money;
 public class DnDv35RuleServiceMoneyTest extends DnDv35RuleServiceTestCase {
 
   @Test
-  public void testGetMoney() throws Exception {
+  public void testGetMoney() {
     final Money money = new Money();
     money.setPlatinum(1);
     money.setGold(2);

@@ -48,7 +48,7 @@ public class ClassLevel implements Serializable {
     this.characterClass = characterClass;
     this.level = level;
 
-    characterAbilities = new ArrayList<CharacterAbility>();
+    characterAbilities = new ArrayList<>();
     for (final ClassAbility classAbility : characterClass.getClassAbilities()) {
       final CharacterAbility characterAbility = new CharacterAbility();
       characterAbility.setClassAbility(classAbility);

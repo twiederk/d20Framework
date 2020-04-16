@@ -23,7 +23,7 @@ import com.d20charactersheet.framework.dac.dao.BaseRaceDaoTest;
 public class DummyRaceDaoTest extends BaseRaceDaoTest {
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     characterClassDao = new DummyClassDao(CLASS, CLASS_SKILL, CLASS_ABILITY);
     skillDao = new DummySkillDao(SKILL);
     raceDao = new DummyRaceDao(RACE, RACE_ABILITY);

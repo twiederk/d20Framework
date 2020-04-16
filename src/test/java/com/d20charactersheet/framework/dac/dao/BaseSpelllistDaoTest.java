@@ -175,7 +175,7 @@ public abstract class BaseSpelllistDaoTest {
   }
 
   @Test
-  public void testGetAllKnownSpellsTables() throws Exception {
+  public void testGetAllKnownSpellsTables() {
     final List<KnownSpellsTable> allKnownSpellsTables = spelllistDao.getAllKnownSpellsTables();
     assertNotNull(allKnownSpellsTables);
     assertEquals(4, allKnownSpellsTables.size());
@@ -216,7 +216,7 @@ public abstract class BaseSpelllistDaoTest {
   }
 
   @Test
-  public void testGetAllSpellsPerDayTables() throws Exception {
+  public void testGetAllSpellsPerDayTables() {
     final List<SpellsPerDayTable> allSpellsPerDayTables = spelllistDao.getAllSpellsPerDayTables();
     assertNotNull(allSpellsPerDayTables);
     assertEquals(8, allSpellsPerDayTables.size());

@@ -18,6 +18,6 @@ public enum QualityType {
   /**
    * The item is magical enhanced
    */
-  MAGIC;
+  MAGIC
 
 }

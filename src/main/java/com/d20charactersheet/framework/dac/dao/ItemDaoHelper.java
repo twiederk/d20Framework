@@ -32,7 +32,7 @@ public abstract class ItemDaoHelper {
   public List<ItemGroup> updateItems(final List<ItemGroup> currentItems, final List<ItemGroup> editedItems, final String tableName,
       final int characterId) {
     deleteItemGroups(currentItems, editedItems, tableName);
-    final List<ItemGroup> updatedItems = new ArrayList<ItemGroup>();
+    final List<ItemGroup> updatedItems = new ArrayList<>();
     updatedItems.addAll(updateItemGroups(currentItems, editedItems, tableName, characterId));
     updatedItems.addAll(insertItemGroups(editedItems, tableName, characterId));
     updatedItems.addAll(getUnmodifiedItems(currentItems, editedItems));
@@ -40,7 +40,7 @@ public abstract class ItemDaoHelper {
   }
 
   List<ItemGroup> getUnmodifiedItems(final List<ItemGroup> currentItems, final List<ItemGroup> editedItems) {
-    final List<ItemGroup> itemsUnmodified = new LinkedList<ItemGroup>();
+    final List<ItemGroup> itemsUnmodified = new LinkedList<>();
     for (final ItemGroup currentItem : currentItems) {
       if (isUnmodified(currentItem, editedItems)) {
         itemsUnmodified.add(currentItem);
@@ -60,7 +60,7 @@ public abstract class ItemDaoHelper {
   }
 
   protected List<ItemGroup> getItemsToDelete(final List<ItemGroup> currentItems, final List<ItemGroup> editedItems) {
-    final List<ItemGroup> itemsToDelete = new LinkedList<ItemGroup>();
+    final List<ItemGroup> itemsToDelete = new LinkedList<>();
     for (final ItemGroup currentItem : currentItems) {
       if (isDeleted(currentItem, editedItems)) {
         itemsToDelete.add(currentItem);
@@ -79,7 +79,7 @@ public abstract class ItemDaoHelper {
   }
 
   protected List<ItemGroup> getItemsToUpdate(final List<ItemGroup> currentItems, final List<ItemGroup> editedItems) {
-    final List<ItemGroup> itemsToUpdate = new LinkedList<ItemGroup>();
+    final List<ItemGroup> itemsToUpdate = new LinkedList<>();
     for (final ItemGroup currentItem : currentItems) {
       final ItemGroup editedItem = getEditedItem(currentItem, editedItems);
       if (editedItem != null) {
@@ -101,7 +101,7 @@ public abstract class ItemDaoHelper {
   }
 
   protected List<ItemGroup> getItemsToInsert(final List<ItemGroup> editedItems) {
-    final List<ItemGroup> itemsToInsert = new LinkedList<ItemGroup>();
+    final List<ItemGroup> itemsToInsert = new LinkedList<>();
     for (final ItemGroup editedItem : editedItems) {
       if (editedItem.getNumber() > 0 //
           && editedItem.getId() == -1) {

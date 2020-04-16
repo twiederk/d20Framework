@@ -24,40 +24,44 @@ import com.d20charactersheet.framework.boc.model.WeaponAttack;
 public class DnDv35RuleServiceWeaponAttackTest extends DnDv35RuleServiceTestCase {
 
   @Test
-  public void testBelvadorWithQuarterstaff() throws Exception {
+  public void testBelvadorWithQuarterstaff() {
     WeaponAttack weaponAttack = createWeaponAttack("Quarterstaff", AttackWield.TWO_HANDED);
     weaponAttack = ruleService.calculateWeaponAttack(belvador, weaponAttack);
     assertWeaponAttack(new int[] {2}, new Damage(1, Die.D6), 0, new Critical(20, 2), weaponAttack);
   }
 
   @Test
-  public void testBelvadorWithCrossbowLight() throws Exception {
+  public void testBelvadorWithCrossbowLight() {
     WeaponAttack weaponAttack = createWeaponAttack("Crossbow, light", AttackWield.ONE_HAND);
     weaponAttack = ruleService.calculateWeaponAttack(belvador, weaponAttack);
     assertWeaponAttack(new int[] {6}, new Damage(1, Die.D8), 0, new Critical(19, 2), weaponAttack);
   }
 
   @Test
-  public void testBelvadorWithSilverDagger() throws Exception {
+  public void testBelvadorWithSilverDagger() {
     WeaponAttack weaponAttack = createWeaponAttack("Silver Dagger", AttackWield.ONE_HAND);
     weaponAttack = ruleService.calculateWeaponAttack(belvador, weaponAttack);
     assertWeaponAttack(new int[] {3}, new Damage(1, Die.D4), 0, new Critical(19, 2), weaponAttack);
   }
 
   @Test
-  public void testNascanWithWolfaxe() throws Exception {
+  public void testNascanWithWolfaxe() {
     WeaponAttack weaponAttack = createWeaponAttack("Battleaxe", AttackWield.ONE_HAND);
-    weaponAttack.getWeapon().setEnhancementBonus(2);
-    weaponAttack.getWeapon().setQualityType(QualityType.MAGIC);
+    weaponAttack.getWeapon()
+        .setEnhancementBonus(2);
+    weaponAttack.getWeapon()
+        .setQualityType(QualityType.MAGIC);
     weaponAttack = ruleService.calculateWeaponAttack(nascan, weaponAttack);
     assertWeaponAttack(new int[] {9, 4}, new Damage(1, Die.D8), 3, new Critical(20, 3), weaponAttack);
   }
 
   @Test
-  public void testNascanWithWolfaxeAndModifier() throws Exception {
+  public void testNascanWithWolfaxeAndModifier() {
     WeaponAttack weaponAttack = createWeaponAttack("Battleaxe", AttackWield.ONE_HAND);
-    weaponAttack.getWeapon().setEnhancementBonus(2);
-    weaponAttack.getWeapon().setQualityType(QualityType.MAGIC);
+    weaponAttack.getWeapon()
+        .setEnhancementBonus(2);
+    weaponAttack.getWeapon()
+        .setQualityType(QualityType.MAGIC);
     weaponAttack.setAttackBonusModifier(2);
     weaponAttack.setDamageBonusModifier(-2);
     weaponAttack = ruleService.calculateWeaponAttack(nascan, weaponAttack);
@@ -66,184 +70,193 @@ public class DnDv35RuleServiceWeaponAttackTest extends DnDv35RuleServiceTestCase
   }
 
   @Test
-  public void testNascanWithHandaxePrimaryHand() throws Exception {
+  public void testNascanWithHandaxePrimaryHand() {
     WeaponAttack weaponAttack = createWeaponAttack("Handaxe", AttackWield.PRIMARY_HAND_LIGHT_OFF_HAND);
     weaponAttack = ruleService.calculateWeaponAttack(nascan, weaponAttack);
     assertWeaponAttack(new int[] {7, 2}, new Damage(1, Die.D6), 1, new Critical(20, 3), weaponAttack);
   }
 
   @Test
-  public void testNascanWithHandaxeOneHand() throws Exception {
+  public void testNascanWithHandaxeOneHand() {
     WeaponAttack weaponAttack = createWeaponAttack("Handaxe", AttackWield.ONE_HAND);
     weaponAttack = ruleService.calculateWeaponAttack(nascan, weaponAttack);
     assertWeaponAttack(new int[] {9, 4}, new Damage(1, Die.D6), 1, new Critical(20, 3), weaponAttack);
   }
 
   @Test
-  public void testNascanWithHandaxeOffHand() throws Exception {
+  public void testNascanWithHandaxeOffHand() {
     WeaponAttack weaponAttack = createWeaponAttack("Handaxe", AttackWield.OFF_HAND);
     weaponAttack = ruleService.calculateWeaponAttack(nascan, weaponAttack);
     assertWeaponAttack(new int[] {7}, new Damage(1, Die.D6), 0, new Critical(20, 3), weaponAttack);
   }
 
   @Test
-  public void testNyatarWithShortSword() throws Exception {
+  public void testNyatarWithShortSword() {
     WeaponAttack weaponAttack = createWeaponAttack("Sword, short", AttackWield.ONE_HAND);
     weaponAttack = ruleService.calculateWeaponAttack(nyatar, weaponAttack);
     assertWeaponAttack(new int[] {4}, new Damage(1, Die.D6), 1, new Critical(19, 2), weaponAttack);
   }
 
   @Test
-  public void testNyatarWithCrossbowLight() throws Exception {
+  public void testNyatarWithCrossbowLight() {
     WeaponAttack weaponAttack = createWeaponAttack("Crossbow, light", AttackWield.ONE_HAND);
     weaponAttack = ruleService.calculateWeaponAttack(nyatar, weaponAttack);
     assertWeaponAttack(new int[] {7}, new Damage(1, Die.D8), 0, new Critical(19, 2), weaponAttack);
   }
 
   @Test
-  public void testJadziaWithQuarterstaffPlusOneTwoHanded() throws Exception {
+  public void testJadziaWithQuarterstaffPlusOneTwoHanded() {
     WeaponAttack weaponAttack = createWeaponAttack("Quarterstaff", AttackWield.TWO_HANDED);
-    weaponAttack.getWeapon().setEnhancementBonus(1);
-    weaponAttack.getWeapon().setQualityType(QualityType.MAGIC);
+    weaponAttack.getWeapon()
+        .setEnhancementBonus(1);
+    weaponAttack.getWeapon()
+        .setQualityType(QualityType.MAGIC);
     weaponAttack = ruleService.calculateWeaponAttack(jadzia, weaponAttack);
     assertWeaponAttack(new int[] {4}, new Damage(1, Die.D6), 2, new Critical(20, 2), weaponAttack);
   }
 
   @Test
-  public void testJadziaWithQuarterstaffPlusOnePrimaryHand() throws Exception {
+  public void testJadziaWithQuarterstaffPlusOnePrimaryHand() {
     WeaponAttack weaponAttack = createWeaponAttack("Quarterstaff", AttackWield.PRIMARY_HAND_LIGHT_OFF_HAND);
-    weaponAttack.getWeapon().setEnhancementBonus(1);
-    weaponAttack.getWeapon().setQualityType(QualityType.MAGIC);
+    weaponAttack.getWeapon()
+        .setEnhancementBonus(1);
+    weaponAttack.getWeapon()
+        .setQualityType(QualityType.MAGIC);
     weaponAttack = ruleService.calculateWeaponAttack(jadzia, weaponAttack);
     assertWeaponAttack(new int[] {2}, new Damage(1, Die.D6), 2, new Critical(20, 2), weaponAttack);
   }
 
   @Test
-  public void testJadziaWithQuarterstaffPlusOneOffHand() throws Exception {
+  public void testJadziaWithQuarterstaffPlusOneOffHand() {
     WeaponAttack weaponAttack = createWeaponAttack("Quarterstaff", AttackWield.OFF_HAND);
-    weaponAttack.getWeapon().setEnhancementBonus(1);
-    weaponAttack.getWeapon().setQualityType(QualityType.MAGIC);
+    weaponAttack.getWeapon()
+        .setEnhancementBonus(1);
+    weaponAttack.getWeapon()
+        .setQualityType(QualityType.MAGIC);
     weaponAttack = ruleService.calculateWeaponAttack(jadzia, weaponAttack);
     assertWeaponAttack(new int[] {2}, new Damage(1, Die.D6), 1, new Critical(20, 2), weaponAttack);
   }
 
   @Test
-  public void testJadziaWithSling() throws Exception {
+  public void testJadziaWithSling() {
     WeaponAttack weaponAttack = createWeaponAttack("Sling", AttackWield.ONE_HAND);
     weaponAttack = ruleService.calculateWeaponAttack(jadzia, weaponAttack);
     assertWeaponAttack(new int[] {+4}, new Damage(1, Die.D4), 1, new Critical(20, 2), weaponAttack);
   }
 
   @Test
-  public void testWorfWithGreataxe() throws Exception {
+  public void testWorfWithGreataxe() {
     WeaponAttack weaponAttack = createWeaponAttack("Greataxe", AttackWield.TWO_HANDED);
-    weaponAttack.getWeapon().setQualityType(QualityType.MASTERWORK);
+    weaponAttack.getWeapon()
+        .setQualityType(QualityType.MASTERWORK);
     weaponAttack = ruleService.calculateWeaponAttack(worf, weaponAttack);
     assertWeaponAttack(new int[] {+11}, new Damage(1, Die.D12), 7, new Critical(20, 3), weaponAttack);
   }
 
   @Test
-  public void testRodrekrWithDwarvenWaraxe() throws Exception {
+  public void testRodrekrWithDwarvenWaraxe() {
     WeaponAttack weaponAttack = createWeaponAttack("Waraxe, dwarven", AttackWield.ONE_HAND);
-    weaponAttack.getWeapon().setQualityType(QualityType.MASTERWORK);
+    weaponAttack.getWeapon()
+        .setQualityType(QualityType.MASTERWORK);
     weaponAttack = ruleService.calculateWeaponAttack(rodrekr, weaponAttack);
     assertWeaponAttack(new int[] {+11}, new Damage(1, Die.D10), 6, new Critical(20, 3), weaponAttack);
   }
 
   @Test
-  public void testRodrekrWithCrossbowLight() throws Exception {
+  public void testRodrekrWithCrossbowLight() {
     WeaponAttack weaponAttack = createWeaponAttack("Crossbow, light", AttackWield.ONE_HAND);
     weaponAttack = ruleService.calculateWeaponAttack(rodrekr, weaponAttack);
     assertWeaponAttack(new int[] {+7}, new Damage(1, Die.D8), 0, new Critical(19, 2), weaponAttack);
   }
 
   @Test
-  public void testThoreWithDagger() throws Exception {
+  public void testThoreWithDagger() {
     WeaponAttack weaponAttack = createWeaponAttack("Dagger", AttackWield.ONE_HAND);
     weaponAttack = ruleService.calculateWeaponAttack(thore, weaponAttack);
     assertWeaponAttack(new int[] {+8}, new Damage(1, Die.D4), 1, new Critical(19, 2), weaponAttack);
   }
 
   @Test
-  public void testThoreWithShortSwordMasterworkPrimaryHand() throws Exception {
+  public void testThoreWithShortSwordMasterworkPrimaryHand() {
     WeaponAttack weaponAttack = createWeaponAttack("Sword, short", AttackWield.PRIMARY_HAND_LIGHT_OFF_HAND);
-    weaponAttack.getWeapon().setQualityType(QualityType.MASTERWORK);
+    weaponAttack.getWeapon()
+        .setQualityType(QualityType.MASTERWORK);
     weaponAttack = ruleService.calculateWeaponAttack(thore, weaponAttack);
     assertWeaponAttack(new int[] {+8}, new Damage(1, Die.D6), 1, new Critical(19, 2), weaponAttack);
   }
 
   @Test
-  public void testThoreWithShortSwordOffHand() throws Exception {
+  public void testThoreWithShortSwordOffHand() {
     WeaponAttack weaponAttack = createWeaponAttack("Sword, short", AttackWield.OFF_HAND);
     weaponAttack = ruleService.calculateWeaponAttack(thore, weaponAttack);
     assertWeaponAttack(new int[] {+7}, new Damage(1, Die.D6), 0, new Critical(19, 2), weaponAttack);
   }
 
   @Test
-  public void testThoreWithRapierOfPuncturing() throws Exception {
+  public void testThoreWithRapierOfPuncturing() {
     WeaponAttack weaponAttack = createWeaponAttack("Rapier of Puncturing", AttackWield.ONE_HAND);
     weaponAttack = ruleService.calculateWeaponAttack(thore, weaponAttack);
     assertWeaponAttack(new int[] {+10}, new Damage(1, Die.D6), 3, new Critical(18, 2), weaponAttack);
   }
 
   @Test
-  public void testThoreWithCompositeLongbow() throws Exception {
+  public void testThoreWithCompositeLongbow() {
     WeaponAttack weaponAttack = createWeaponAttack("Longbow, composite", AttackWield.TWO_HANDED);
     weaponAttack = ruleService.calculateWeaponAttack(thore, weaponAttack);
     assertWeaponAttack(new int[] {+8}, new Damage(1, Die.D8), 1, new Critical(20, 3), weaponAttack);
   }
 
   @Test
-  public void testKyraWithScimitar() throws Exception {
+  public void testKyraWithScimitar() {
     WeaponAttack weaponAttack = createWeaponAttack("Scimitar", AttackWield.ONE_HAND);
     weaponAttack = ruleService.calculateWeaponAttack(kyra, weaponAttack);
     assertWeaponAttack(new int[] {+1}, new Damage(1, Die.D6), 1, new Critical(18, 2), weaponAttack);
   }
 
   @Test
-  public void testKyraWithSling() throws Exception {
+  public void testKyraWithSling() {
     WeaponAttack weaponAttack = createWeaponAttack("Sling", AttackWield.ONE_HAND);
     weaponAttack = ruleService.calculateWeaponAttack(kyra, weaponAttack);
     assertWeaponAttack(new int[] {-1}, new Damage(1, Die.D4), 1, new Critical(20, 2), weaponAttack);
   }
 
   @Test
-  public void testMerisielWithRapier() throws Exception {
+  public void testMerisielWithRapier() {
     WeaponAttack weaponAttack = createWeaponAttack("Rapier", AttackWield.ONE_HAND);
     weaponAttack = ruleService.calculateWeaponAttack(merisiel, weaponAttack);
     assertWeaponAttack(new int[] {+3}, new Damage(1, Die.D6), 1, new Critical(18, 2), weaponAttack);
   }
 
   @Test
-  public void testEzrenWithQuaterstaff() throws Exception {
+  public void testEzrenWithQuaterstaff() {
     WeaponAttack weaponAttack = createWeaponAttack("Quarterstaff", AttackWield.TWO_HANDED);
     weaponAttack = ruleService.calculateWeaponAttack(ezren, weaponAttack);
     assertWeaponAttack(new int[] {+1}, new Damage(1, Die.D6), 1, new Critical(20, 2), weaponAttack);
   }
 
   @Test
-  public void testEzrenWithCrossbowLight() throws Exception {
+  public void testEzrenWithCrossbowLight() {
     WeaponAttack weaponAttack = createWeaponAttack("Crossbow, light", AttackWield.ONE_HAND);
     weaponAttack = ruleService.calculateWeaponAttack(ezren, weaponAttack);
     assertWeaponAttack(new int[] {+0}, new Damage(1, Die.D8), 0, new Critical(19, 2), weaponAttack);
   }
 
   @Test
-  public void testValerosWithLongsword() throws Exception {
+  public void testValerosWithLongsword() {
     WeaponAttack weaponAttack = createWeaponAttack("Longsword", AttackWield.TWO_HANDED);
     weaponAttack = ruleService.calculateWeaponAttack(valeros, weaponAttack);
     assertWeaponAttack(new int[] {+5}, new Damage(1, Die.D8), 4, new Critical(19, 2), weaponAttack);
   }
 
   @Test
-  public void testValerosWithShortBow() throws Exception {
+  public void testValerosWithShortBow() {
     WeaponAttack weaponAttack = createWeaponAttack("Shortbow", AttackWield.TWO_HANDED);
     weaponAttack = ruleService.calculateWeaponAttack(valeros, weaponAttack);
     assertWeaponAttack(new int[] {+3}, new Damage(1, Die.D6), 0, new Critical(20, 3), weaponAttack);
   }
 
   @Test
-  public void testValerosWithLongswordAndModifier() throws Exception {
+  public void testValerosWithLongswordAndModifier() {
     WeaponAttack weaponAttack = createWeaponAttack("Longsword", AttackWield.TWO_HANDED);
     weaponAttack.setAttackBonusModifier(1);
     weaponAttack.setDamageBonusModifier(1);
@@ -286,7 +299,7 @@ public class DnDv35RuleServiceWeaponAttackTest extends DnDv35RuleServiceTestCase
   }
 
   @Test
-  public void testGetAttackBonusesMelee() throws Exception {
+  public void testGetAttackBonusesMelee() {
     final DnDv35RuleServiceImpl dndv35RuleService = (DnDv35RuleServiceImpl) ruleService;
 
     final WeaponAttack daggerWeaponAttack = createWeaponAttack("Dagger", AttackWield.ONE_HAND);
@@ -360,7 +373,7 @@ public class DnDv35RuleServiceWeaponAttackTest extends DnDv35RuleServiceTestCase
   }
 
   @Test
-  public void testGetAttackBonusesOffHand() throws Exception {
+  public void testGetAttackBonusesOffHand() {
     final DnDv35RuleServiceImpl dndv35RuleService = (DnDv35RuleServiceImpl) ruleService;
 
     final WeaponAttack shortSwordWeaponAttack = createWeaponAttack("Sword, short", AttackWield.OFF_HAND);
@@ -412,7 +425,7 @@ public class DnDv35RuleServiceWeaponAttackTest extends DnDv35RuleServiceTestCase
   private List<CharacterFeat> createCharacterFeat(final String featname) {
     final Feat feat = new Feat();
     feat.setName(featname);
-    final List<CharacterFeat> characterFeats = new ArrayList<CharacterFeat>();
+    final List<CharacterFeat> characterFeats = new ArrayList<>();
     characterFeats.add(new CharacterFeat(feat));
     return characterFeats;
   }
@@ -424,7 +437,7 @@ public class DnDv35RuleServiceWeaponAttackTest extends DnDv35RuleServiceTestCase
   }
 
   @Test
-  public void testGetAttackBonusesRanged() throws Exception {
+  public void testGetAttackBonusesRanged() {
     final DnDv35RuleServiceImpl dndv35RuleService = (DnDv35RuleServiceImpl) ruleService;
 
     final WeaponAttack oneHandWeaponAttack = createWeaponAttack("Crossbow, light", AttackWield.ONE_HAND);
@@ -474,8 +487,8 @@ public class DnDv35RuleServiceWeaponAttackTest extends DnDv35RuleServiceTestCase
   }
 
   @Test
-  public void testGetDamageBonus() throws Exception {
-    final List<CharacterFeat> emptyFeats = new ArrayList<CharacterFeat>();
+  public void testGetDamageBonus() {
+    final List<CharacterFeat> emptyFeats = new ArrayList<>();
     assertDamageBonus(0, "Dagger", AttackWield.ONE_HAND, 0, emptyFeats);
     assertDamageBonus(1, "Dagger", AttackWield.ONE_HAND, 1, emptyFeats);
     assertDamageBonus(2, "Dagger of Venom", AttackWield.ONE_HAND, 1, emptyFeats);
@@ -492,7 +505,7 @@ public class DnDv35RuleServiceWeaponAttackTest extends DnDv35RuleServiceTestCase
   }
 
   @Test
-  public void testGetMeleeWeaponStrengthBonus() throws Exception {
+  public void testGetMeleeWeaponStrengthBonus() {
 
     // Off-Hand Light Weapon with strength bonus
     assertMeleeWeaponStrengthBonus(1, "Sword, short", AttackWield.OFF_HAND, 2);
@@ -527,7 +540,7 @@ public class DnDv35RuleServiceWeaponAttackTest extends DnDv35RuleServiceTestCase
   }
 
   @Test
-  public void testGetRangedWeaponStrengthBonus() throws Exception {
+  public void testGetRangedWeaponStrengthBonus() {
     // Projectile Weapon
     assertRangedWeaponStrengthBonus(0, "Crossbow, light", 1);
 
@@ -555,11 +568,11 @@ public class DnDv35RuleServiceWeaponAttackTest extends DnDv35RuleServiceTestCase
   }
 
   @Test
-  public void testGetFeatDamageBonus() throws Exception {
+  public void testGetFeatDamageBonus() {
     final DnDv35RuleServiceImpl dndv35RuleService = (DnDv35RuleServiceImpl) ruleService;
     final Weapon dagger = getWeaponByName("Dagger");
 
-    final List<CharacterFeat> emptyFeats = new ArrayList<CharacterFeat>();
+    final List<CharacterFeat> emptyFeats = new ArrayList<>();
     int damageBonus = dndv35RuleService.getFeatDamageBonus(emptyFeats, dagger);
     assertEquals(0, damageBonus);
 
@@ -579,8 +592,8 @@ public class DnDv35RuleServiceWeaponAttackTest extends DnDv35RuleServiceTestCase
   }
 
   @Test
-  public void testGetTwoWeaponsFightingModifier() throws Exception {
-    final List<CharacterFeat> emptyList = new ArrayList<CharacterFeat>();
+  public void testGetTwoWeaponsFightingModifier() {
+    final List<CharacterFeat> emptyList = new ArrayList<>();
     final List<CharacterFeat> twoWeaponFighting = createTwoWeaponFightingFeats();
 
     final Weapon lightWeapon = getWeaponByName("Dagger");
@@ -610,7 +623,7 @@ public class DnDv35RuleServiceWeaponAttackTest extends DnDv35RuleServiceTestCase
     twoWeaponFighting.setName("Two-Weapon Fighting");
 
     final CharacterFeat characterFeat = new CharacterFeat(twoWeaponFighting);
-    final List<CharacterFeat> characterFeats = new ArrayList<CharacterFeat>(1);
+    final List<CharacterFeat> characterFeats = new ArrayList<>(1);
     characterFeats.add(characterFeat);
     return characterFeats;
   }
@@ -623,7 +636,7 @@ public class DnDv35RuleServiceWeaponAttackTest extends DnDv35RuleServiceTestCase
   }
 
   @Test
-  public void testGetAttackWields() throws Exception {
+  public void testGetAttackWields() {
     // Double Weapon
     assertAttackWields("Quarterstaff",
                        EnumSet.of(AttackWield.OFF_HAND, AttackWield.PRIMARY_HAND_LIGHT_OFF_HAND, AttackWield.TWO_HANDED));
@@ -665,7 +678,7 @@ public class DnDv35RuleServiceWeaponAttackTest extends DnDv35RuleServiceTestCase
   }
 
   @Test
-  public void testGetWeaponFocus() throws Exception {
+  public void testGetWeaponFocus() {
     final List<CharacterFeat> characterFeats = valeros.getCharacterFeats();
     final Weapon weapon = getWeaponByName("Cold Iron Longsword");
 

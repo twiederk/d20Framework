@@ -21,7 +21,7 @@ public interface ClassDao {
    *
    * @return All character classes of the game system.
    */
-  public List<CharacterClass> getAllCharacterClasses(List<Skill> allSkills, List<Ability> allAbilities);
+  List<CharacterClass> getAllCharacterClasses(List<Skill> allSkills, List<Ability> allAbilities);
 
   /**
    * Deletes the given skill from all character classes.
@@ -29,7 +29,7 @@ public interface ClassDao {
    * @param skill
    *     The skill to delete from all character classes.
    */
-  public void deleteSkill(Skill skill);
+  void deleteSkill(Skill skill);
 
   /**
    * Updates a character class to the persistent layer.
@@ -37,7 +37,7 @@ public interface ClassDao {
    * @param characterClass
    *     The character class to update.
    */
-  public void updateCharacterClass(CharacterClass characterClass);
+  void updateCharacterClass(CharacterClass characterClass);
 
   /**
    * Creates a character class in the persistent layer.
@@ -47,7 +47,7 @@ public interface ClassDao {
    *
    * @return The created character class.
    */
-  public CharacterClass createCharacterClass(CharacterClass characterClass);
+  CharacterClass createCharacterClass(CharacterClass characterClass);
 
   /**
    * Adds the given skill as class skill to the given list of character classes.
@@ -57,5 +57,5 @@ public interface ClassDao {
    * @param characterClasses
    *     The character classes to add the skill to.
    */
-  public void addSkill(Skill skill, List<CharacterClass> characterClasses);
+  void addSkill(Skill skill, List<CharacterClass> characterClasses);
 }

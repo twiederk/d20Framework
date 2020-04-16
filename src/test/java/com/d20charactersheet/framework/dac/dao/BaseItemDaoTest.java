@@ -33,7 +33,7 @@ public abstract class BaseItemDaoTest {
   protected ItemDao itemDao;
 
   @Test
-  public void testGetAllWeapons() throws Exception {
+  public void testGetAllWeapons() {
     final List<WeaponFamily> allWeaponTypes = itemDao.getAllWeaponFamilies();
     final List<Weapon> weapons = itemDao.getAllWeapons(allWeaponTypes);
     assertNotNull(weapons);
@@ -41,15 +41,17 @@ public abstract class BaseItemDaoTest {
   }
 
   @Test
-  public void testWeapon() throws Exception {
+  public void testWeapon() {
     final List<WeaponFamily> allWeaponTypes = itemDao.getAllWeaponFamilies();
     final List<Weapon> allWeapons = itemDao.getAllWeapons(allWeaponTypes);
     final Weapon silverDagger = getWeaponByName("Silver Dagger", allWeapons);
     assertEquals("Silver Dagger", silverDagger.getName());
     assertEquals(322.0f, silverDagger.getCost(), 0.0f);
     assertEquals(1.0f, silverDagger.getWeight(), 0.0f);
-    assertEquals(19, silverDagger.getCritical().getHit());
-    assertEquals(2, silverDagger.getCritical().getMultiplier());
+    assertEquals(19, silverDagger.getCritical()
+        .getHit());
+    assertEquals(2, silverDagger.getCritical()
+        .getMultiplier());
     assertEquals(WeaponType.SIMPLE, silverDagger.getWeaponType());
     assertEquals(CombatType.MELEE_WEAPON, silverDagger.getCombatType());
     assertEquals(WeaponEncumbrance.LIGHT_HANDED, silverDagger.getWeaponEncumbrance());
@@ -67,21 +69,21 @@ public abstract class BaseItemDaoTest {
   }
 
   @Test
-  public void testGetAllArmor() throws Exception {
+  public void testGetAllArmor() {
     final List<Armor> armor = itemDao.getAllArmor();
     assertNotNull(armor);
     assertEquals(38, armor.size());
   }
 
   @Test
-  public void testGetAllGoods() throws Exception {
+  public void testGetAllGoods() {
     final List<Good> goods = itemDao.getAllGoods();
     assertNotNull(goods);
     assertEquals(131, goods.size());
   }
 
   @Test
-  public void testGetWeaponsOfBelvador() throws Exception {
+  public void testGetWeaponsOfBelvador() {
     final Character character = new Character();
     character.setId(0);
     final List<WeaponFamily> allWeaponTypes = itemDao.getAllWeaponFamilies();
@@ -96,7 +98,7 @@ public abstract class BaseItemDaoTest {
   }
 
   @Test
-  public void testGetArmorOfBelvador() throws Exception {
+  public void testGetArmorOfBelvador() {
     final Character character = new Character();
     character.setId(0);
     final List<ItemGroup> armor = characterDao.getArmor(character, itemDao.getAllArmor());
@@ -105,7 +107,7 @@ public abstract class BaseItemDaoTest {
   }
 
   @Test
-  public void testGetGoodsOfBelvador() throws Exception {
+  public void testGetGoodsOfBelvador() {
     final Character character = new Character();
     character.setId(0);
     final List<ItemGroup> goods = characterDao.getGoods(character, itemDao.getAllGoods());
@@ -126,7 +128,7 @@ public abstract class BaseItemDaoTest {
   }
 
   @Test
-  public void testCreateWeapon() throws Exception {
+  public void testCreateWeapon() {
     Weapon weapon = createWeapon();
     weapon = itemDao.createWeapon(weapon);
     assertNotNull(weapon);
@@ -228,7 +230,7 @@ public abstract class BaseItemDaoTest {
   }
 
   @Test
-  public void testCreateArmor() throws Exception {
+  public void testCreateArmor() {
     Armor armor = createArmor();
     armor = itemDao.createArmor(armor);
     assertNotNull(armor);
@@ -299,7 +301,7 @@ public abstract class BaseItemDaoTest {
   }
 
   @Test
-  public void testCreateGood() throws Exception {
+  public void testCreateGood() {
     Good good = createGood();
     good = itemDao.createGood(good);
     assertNotNull(good);

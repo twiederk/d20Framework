@@ -21,7 +21,7 @@ public interface RaceService {
    *
    * @return All races of the game system.
    */
-  public List<Race> getAllRaces(List<CharacterClass> allCharacterClasses, List<Ability> allAbilities);
+  List<Race> getAllRaces(List<CharacterClass> allCharacterClasses, List<Ability> allAbilities);
 
   /**
    * Creates a new race and sets its id.
@@ -31,7 +31,7 @@ public interface RaceService {
    *
    * @return The created race with the id set.
    */
-  public Race createRace(Race race);
+  Race createRace(Race race);
 
   /**
    * Updates the race.
@@ -39,7 +39,7 @@ public interface RaceService {
    * @param race
    *     The race to update.
    */
-  public void updateRace(Race race);
+  void updateRace(Race race);
 
   /**
    * Returns the race by the given id.
@@ -51,7 +51,7 @@ public interface RaceService {
    *
    * @return The race by the given id.
    */
-  public Race findRaceById(int raceId, List<Race> races);
+  Race findRaceById(int raceId, List<Race> races);
 
   /**
    * Find race by name.
@@ -63,5 +63,5 @@ public interface RaceService {
    *
    * @return The race with the given name.
    */
-  public Race findRaceByName(String name, List<Race> races);
+  Race findRaceByName(String name, List<Race> races);
 }

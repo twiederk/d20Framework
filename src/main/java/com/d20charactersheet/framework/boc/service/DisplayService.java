@@ -52,7 +52,7 @@ public interface DisplayService {
    *
    * @return The displayable alignment value.
    */
-  public String getDisplayAlignment(Alignment alignment);
+  String getDisplayAlignment(Alignment alignment);
 
   /**
    * Returns the displayable language dependent class level. Each class level is separated by a comma. Example: Wizard
@@ -63,7 +63,7 @@ public interface DisplayService {
    *
    * @return The displayable class levels.
    */
-  public String getDisplayClassLevels(List<ClassLevel> classLevels);
+  String getDisplayClassLevels(List<ClassLevel> classLevels);
 
   /**
    * Returns a modifier containg a prefix sign. Plus(+) positive valus, minus(-) negative values. Zero has no prefix.
@@ -73,7 +73,7 @@ public interface DisplayService {
    *
    * @return The modifier with the prefix sign.
    */
-  public String getDisplayModifier(int modifier);
+  String getDisplayModifier(int modifier);
 
   /**
    * Returns the base attack bonus devided in multiple attacks. Example: base attack bonus +7 => +7/+2
@@ -83,7 +83,7 @@ public interface DisplayService {
    *
    * @return The base attack bonus devided by multiple attacks.
    */
-  public String getDisplayBaseAttackBonus(int baseAttackBonus);
+  String getDisplayBaseAttackBonus(int baseAttackBonus);
 
   /**
    * Returns the formular to calculate the armor class. Example: 10 + (+2) +
@@ -93,7 +93,7 @@ public interface DisplayService {
    *
    * @return The formular to calculate the armor class.
    */
-  public String getDisplayArmourClassFormular(int dexterityModifier);
+  String getDisplayArmourClassFormular(int dexterityModifier);
 
   /**
    * Returns the displayable and language dependent sex.
@@ -103,7 +103,7 @@ public interface DisplayService {
    *
    * @return The displayable and language dependent sex.
    */
-  public String getDisplaySex(Sex sex);
+  String getDisplaySex(Sex sex);
 
   /**
    * Returns the language dependent error message of the given error.
@@ -113,7 +113,7 @@ public interface DisplayService {
    *
    * @return The language dependent error message of the given error.
    */
-  public String getErrorMessage(RuleError ruleError);
+  String getErrorMessage(RuleError ruleError);
 
   /**
    * Returns the displayable and language dependent class level. Example: Bard (6)
@@ -123,16 +123,17 @@ public interface DisplayService {
    *
    * @return The displayable and language dependent class level. Example: Bard (6)
    */
-  public String getDisplayClassLevel(ClassLevel classLevel);
+  String getDisplayClassLevel(ClassLevel classLevel);
 
   /**
    * Returns the formula to calculate the initiative and cmb. Example: +2 +
    *
-   * @param modifier The modifier to display.
+   * @param modifier
+   *     The modifier to display.
    *
    * @return The formula to calculate the initiative and cmb.
    */
-  public String getDisplaySimpleFormular(int modifier);
+  String getDisplaySimpleFormular(int modifier);
 
   /**
    * Returns the displayable and language dependent attribute. Example: Dexterity.
@@ -142,7 +143,7 @@ public interface DisplayService {
    *
    * @return The displayable and language dependent attribute.
    */
-  public String getDisplayAttribute(Attribute attribute);
+  String getDisplayAttribute(Attribute attribute);
 
   /**
    * Returns the displayable and language dependent feat type. Example: Item Creation.
@@ -152,7 +153,7 @@ public interface DisplayService {
    *
    * @return The displayable and language dependent feat type.
    */
-  public String getDisplayFeatType(FeatType featType);
+  String getDisplayFeatType(FeatType featType);
 
   /**
    * Returns the displayable and language dependent die name.
@@ -162,7 +163,7 @@ public interface DisplayService {
    *
    * @return The displayable and language dependent die name.
    */
-  public String getDisplayDie(Die die);
+  String getDisplayDie(Die die);
 
   /**
    * Returns the displayable and language dependent name of the base attack bonus.
@@ -172,7 +173,7 @@ public interface DisplayService {
    *
    * @return The displayable and language dependent name of the base attack bonus.
    */
-  public String getDisplayBaseAttackBonus(BaseAttackBonus baseAttackBonus);
+  String getDisplayBaseAttackBonus(BaseAttackBonus baseAttackBonus);
 
   /**
    * Returns weight with language specific unit (lb.). Decimal part is only displayed if decimal part exists.
@@ -182,7 +183,7 @@ public interface DisplayService {
    *
    * @return The weight with unit to display.
    */
-  public String getDisplayWeight(float weight);
+  String getDisplayWeight(float weight);
 
   /**
    * Returns the cost as cold pieces. Decimal part is only display if necessary.
@@ -192,7 +193,7 @@ public interface DisplayService {
    *
    * @return The cost as cold pieces.
    */
-  public String getDisplayCost(float cost);
+  String getDisplayCost(float cost);
 
   /**
    * Returns displayable, language dependent weapon type.
@@ -202,7 +203,7 @@ public interface DisplayService {
    *
    * @return Displayable, language dependent weapon type.
    */
-  public String getDisplayWeaponType(WeaponType weaponFamily);
+  String getDisplayWeaponType(WeaponType weaponFamily);
 
   /**
    * Returns humanreadable, language dependent armor type.
@@ -212,7 +213,7 @@ public interface DisplayService {
    *
    * @return Humanreadable, language dependent armor type.
    */
-  public String getDisplayArmorType(ArmorType armorType);
+  String getDisplayArmorType(ArmorType armorType);
 
   /**
    * Returns humanreadable, language dependent good type.
@@ -222,7 +223,7 @@ public interface DisplayService {
    *
    * @return Humanreadable, language dependent armor type.
    */
-  public String getDisplayGoodType(GoodType goodType);
+  String getDisplayGoodType(GoodType goodType);
 
   /**
    * Returns humanreadable critical.
@@ -232,7 +233,7 @@ public interface DisplayService {
    *
    * @return Humanreadable critical.
    */
-  public String getDisplayCritical(Critical critical);
+  String getDisplayCritical(Critical critical);
 
   /**
    * Returns the damage humanreadable and language dependent.
@@ -242,7 +243,7 @@ public interface DisplayService {
    *
    * @return The damage humanreadable and language dependent.
    */
-  public String getDisplayDamage(Weapon weapon);
+  String getDisplayDamage(Weapon weapon);
 
   /**
    * Returns the damage for display.
@@ -254,7 +255,7 @@ public interface DisplayService {
    *
    * @return The damage humanreadable and language dependent.
    */
-  public String getDisplayDamage(Damage damage, int bonus);
+  String getDisplayDamage(Damage damage, int bonus);
 
   /**
    * Returns the damage for display.
@@ -264,7 +265,7 @@ public interface DisplayService {
    *
    * @return The damage humanreadable and language dependent.
    */
-  public String getDisplayDamage(WeaponAttack weaponAttack);
+  String getDisplayDamage(WeaponAttack weaponAttack);
 
   /**
    * Returns the size humanreadable and language dependent.
@@ -274,7 +275,7 @@ public interface DisplayService {
    *
    * @return The size humanreadable and language dependent.
    */
-  public String getDisplaySize(Size size);
+  String getDisplaySize(Size size);
 
   /**
    * Return ability type as humanreadable and language dependent.
@@ -284,7 +285,7 @@ public interface DisplayService {
    *
    * @return Ability type as humanreadable and language dependent.
    */
-  public String getDisplayAbilityType(AbilityType abilityType);
+  String getDisplayAbilityType(AbilityType abilityType);
 
   /**
    * Displays the first line of a note.
@@ -294,7 +295,7 @@ public interface DisplayService {
    *
    * @return The first line of the note.
    */
-  public String getDisplayNoteFirstLine(Note note);
+  String getDisplayNoteFirstLine(Note note);
 
   /**
    * Displays the name of an item. If the item is a masterwork, this displayed as part of the name. Example Silver
@@ -305,7 +306,7 @@ public interface DisplayService {
    *
    * @return The display name of the item.
    */
-  public String getDisplayItem(Item item);
+  String getDisplayItem(Item item);
 
   /**
    * Displays the quality type.
@@ -315,7 +316,7 @@ public interface DisplayService {
    *
    * @return The displayable quality type.
    */
-  public String getDisplayQualityType(QualityType qualityType);
+  String getDisplayQualityType(QualityType qualityType);
 
   /**
    * Returns the spell level for display. Example: 2nd-LEVEL SPELLS
@@ -325,7 +326,7 @@ public interface DisplayService {
    *
    * @return The displayable level.
    */
-  public String getDisplaySpellLevel(int level);
+  String getDisplaySpellLevel(int level);
 
   /**
    * Returns the spell components in a comma separated list.
@@ -335,7 +336,7 @@ public interface DisplayService {
    *
    * @return The spell components in a comma separated list.
    */
-  public String getDisplaySpellComponents(Spell spell);
+  String getDisplaySpellComponents(Spell spell);
 
   /**
    * Returns the range increment with distance unit. Range increment of zero displays a dash(-). Example: 10 Feet
@@ -345,14 +346,14 @@ public interface DisplayService {
    *
    * @return The range increment with unit for display.
    */
-  public String getDisplayRangeIncrement(int rangeIncrement);
+  String getDisplayRangeIncrement(int rangeIncrement);
 
   /**
    * Returns the distance unit (Feet).
    *
    * @return The distance unit (Feet).
    */
-  public String getDisplayUnitDistanceShort();
+  String getDisplayUnitDistanceShort();
 
   /**
    * Returns the ammunition of the weapon attack.
@@ -362,7 +363,7 @@ public interface DisplayService {
    *
    * @return The ammunition of the weapon attack.
    */
-  public String getDisplayAmmunition(WeaponAttack weaponAttack);
+  String getDisplayAmmunition(WeaponAttack weaponAttack);
 
   /**
    * Returns the attack wield for display.
@@ -372,7 +373,7 @@ public interface DisplayService {
    *
    * @return The attack wield for display.
    */
-  public String getDisplayAttackWield(final AttackWield attackWield);
+  String getDisplayAttackWield(final AttackWield attackWield);
 
   /**
    * Returns the combat type for display.
@@ -382,7 +383,7 @@ public interface DisplayService {
    *
    * @return The combat type for display.
    */
-  public String getDisplayCombatType(CombatType combatType);
+  String getDisplayCombatType(CombatType combatType);
 
   /**
    * Returns the weapon category for display.
@@ -392,7 +393,7 @@ public interface DisplayService {
    *
    * @return The weapon category for display.
    */
-  public String getDisplayWeaponCategory(WeaponCategory weaponCategory);
+  String getDisplayWeaponCategory(WeaponCategory weaponCategory);
 
   /**
    * Returns the weapon encumbrance for display.
@@ -402,7 +403,7 @@ public interface DisplayService {
    *
    * @return The weapon encumbrance for display.
    */
-  public String getDisplayWeaponEncumbrance(WeaponEncumbrance weaponEncumbrance);
+  String getDisplayWeaponEncumbrance(WeaponEncumbrance weaponEncumbrance);
 
   /**
    * Returns the name of the save for display.
@@ -412,7 +413,7 @@ public interface DisplayService {
    *
    * @return The name of the save.
    */
-  public String getDisplaySave(Save save);
+  String getDisplaySave(Save save);
 
   /**
    * Returns the abbreviation of an attribute name.
@@ -422,7 +423,7 @@ public interface DisplayService {
    *
    * @return The abbreviation of an attribute name.
    */
-  public String getDisplayAttributeShort(Attribute attribute);
+  String getDisplayAttributeShort(Attribute attribute);
 
   /**
    * Returns the complete school of spell, containing school, sub school and descriptors. Exampel Conjuration
@@ -433,7 +434,7 @@ public interface DisplayService {
    *
    * @return The complete schoof of the spell.
    */
-  public String getDisplaySpellSchool(final Spell spell);
+  String getDisplaySpellSchool(final Spell spell);
 
   /**
    * Returns the school of the spell.
@@ -443,7 +444,7 @@ public interface DisplayService {
    *
    * @return The school of the spell.
    */
-  public String getDisplaySchool(final School school);
+  String getDisplaySchool(final School school);
 
   /**
    * Returns the sub school for display
@@ -453,7 +454,7 @@ public interface DisplayService {
    *
    * @return The sub school for display
    */
-  public String getDisplaySubSchool(final SubSchool subSchool);
+  String getDisplaySubSchool(final SubSchool subSchool);
 
   /**
    * Returns the casting time for display.
@@ -463,7 +464,7 @@ public interface DisplayService {
    *
    * @return The casting time for display.
    */
-  public String getDisplayCastingTime(CastingTime castingTime);
+  String getDisplayCastingTime(CastingTime castingTime);
 
   /**
    * Returns descriptor for display.
@@ -473,7 +474,7 @@ public interface DisplayService {
    *
    * @return Descriptor for display.
    */
-  public String getDisplayDescriptor(Descriptor descriptor);
+  String getDisplayDescriptor(Descriptor descriptor);
 
   /**
    * Returns the range for display.
@@ -483,7 +484,7 @@ public interface DisplayService {
    *
    * @return The range for display.
    */
-  public String getDisplayRange(Range range);
+  String getDisplayRange(Range range);
 
   /**
    * Returns spell resistance for display.
@@ -493,7 +494,7 @@ public interface DisplayService {
    *
    * @return Spell resistance for display.
    */
-  public String getDisplaySpellResistance(SpellResistance spellResistance);
+  String getDisplaySpellResistance(SpellResistance spellResistance);
 
   /**
    * Returns the class of the ability to display.
@@ -503,7 +504,7 @@ public interface DisplayService {
    *
    * @return The class of the ability to display.
    */
-  public String getDisplayAbilityClass(Ability ability);
+  String getDisplayAbilityClass(Ability ability);
 
   /**
    * Returns the number of known spells in relation to allowed known spells [3 / 5]. If no known spells are allowed
@@ -518,7 +519,7 @@ public interface DisplayService {
    *
    * @return The number of known spells in relation to allowed known spells.
    */
-  public String getDisplayNumberOfKnownSpells(int numberOfKnownSpells, int maxNumberOfKnownSpells, int numberOfSpells);
+  String getDisplayNumberOfKnownSpells(int numberOfKnownSpells, int maxNumberOfKnownSpells, int numberOfSpells);
 
   /**
    * Returns heading of spell slot level.
@@ -528,7 +529,7 @@ public interface DisplayService {
    *
    * @return Heading of spell slot level.
    */
-  public String getDisplaySpellSlotLevel(int level);
+  String getDisplaySpellSlotLevel(int level);
 
   /**
    * Returns the abbreviation of a spell school.
@@ -538,7 +539,7 @@ public interface DisplayService {
    *
    * @return The abbreviation of a spell school.
    */
-  public String getDisplaySchoolShort(final School school);
+  String getDisplaySchoolShort(final School school);
 
   /**
    * Returns displayable the casting typ.
@@ -548,7 +549,7 @@ public interface DisplayService {
    *
    * @return Displayable the casting typ.
    */
-  public String getDisplayCastingType(CastingType castingType);
+  String getDisplayCastingType(CastingType castingType);
 
   /**
    * Returns displayable spell source.
@@ -558,7 +559,7 @@ public interface DisplayService {
    *
    * @return Displayable spell source.
    */
-  public String getDisplaySpellSource(SpellSource spellSource);
+  String getDisplaySpellSource(SpellSource spellSource);
 
   /**
    * Returns feat name with number of required spell slots in brakets.
@@ -568,5 +569,5 @@ public interface DisplayService {
    *
    * @return Feat name with number of required spell slots in brakets.
    */
-  public String getDisplayMetamagicFeat(Feat feat);
+  String getDisplayMetamagicFeat(Feat feat);
 }

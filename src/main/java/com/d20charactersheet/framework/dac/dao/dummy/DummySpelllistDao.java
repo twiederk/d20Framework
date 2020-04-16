@@ -66,7 +66,7 @@ public class DummySpelllistDao implements SpelllistDao {
 
   @Override
   public List<Spell> getAllSpells() {
-    final List<Spell> allSpells = new ArrayList<Spell>();
+    final List<Spell> allSpells = new ArrayList<>();
     for (final DataRow dataRow : spellTable) {
       final Spell spell = selectSpell(dataRow);
       allSpells.add(spell);
@@ -124,7 +124,7 @@ public class DummySpelllistDao implements SpelllistDao {
   }
 
   public List<Spelllist> getAllSpelllists(final List<Spell> allSpells) {
-    final List<Spelllist> allSpelllists = new ArrayList<Spelllist>();
+    final List<Spelllist> allSpelllists = new ArrayList<>();
     for (final DataRow dataRow : spelllistTable) {
       final Spelllist spelllist = selectSpelllist(dataRow);
       assignSpells(spelllist, allSpells);
@@ -146,7 +146,7 @@ public class DummySpelllistDao implements SpelllistDao {
 
   private void assignSpells(final Spelllist spelllist, final List<Spell> allSpells) {
     final List<DataRow> dataRows = spelllistSpellTable.select(0, spelllist.getId());
-    final Map<Integer, List<Spell>> spells = new HashMap<Integer, List<Spell>>();
+    final Map<Integer, List<Spell>> spells = new HashMap<>();
     for (final DataRow dataRow : dataRows) {
       final Spell spell = getSpellById(dataRow.getInt(1), allSpells);
       final int level = dataRow.getInt(2);
@@ -165,11 +165,7 @@ public class DummySpelllistDao implements SpelllistDao {
   }
 
   private void assignSpell(final Map<Integer, List<Spell>> spells, final Spell spell, final int level) {
-    List<Spell> spellsOfLevel = spells.get(level);
-    if (spellsOfLevel == null) {
-      spellsOfLevel = new ArrayList<Spell>();
-      spells.put(level, spellsOfLevel);
-    }
+    List<Spell> spellsOfLevel = spells.computeIfAbsent(level, k -> new ArrayList<>());
     spellsOfLevel.add(spell);
   }
 
@@ -223,7 +219,7 @@ public class DummySpelllistDao implements SpelllistDao {
   @Override
   public void createSpelllevel(final Spelllist spelllist, final Spell spell, final int level) {
     spelllistSpellTable.forEach(dataRow -> {
-      if (dataRow.getInt(0) == spelllist.getId() && dataRow.getInt(1) == spell.getId() && dataRow.getInt(2) == level) {
+      if (dataRow.getInt(0) == spelllist.getId() && dataRow.getInt(1) == spell.getId()) {
         throw new IllegalArgumentException("Spell already added to this spelllist add this level");
       }
     });
@@ -288,7 +284,7 @@ public class DummySpelllistDao implements SpelllistDao {
 
   @Override
   public List<KnownSpellsTable> getAllKnownSpellsTables() {
-    final List<KnownSpellsTable> allKnownSpellsTables = new ArrayList<KnownSpellsTable>(knownSpellsTablesTable.getNumberOfRows());
+    final List<KnownSpellsTable> allKnownSpellsTables = new ArrayList<>(knownSpellsTablesTable.getNumberOfRows());
     for (final DataRow dataRow : knownSpellsTablesTable) {
       final KnownSpellsTable knownSpellsTabel = new KnownSpellsTable();
       knownSpellsTabel.setId(dataRow.getId());
@@ -320,8 +316,7 @@ public class DummySpelllistDao implements SpelllistDao {
 
   @Override
   public List<SpellsPerDayTable> getAllSpellsPerDayTables() {
-    final List<SpellsPerDayTable> allSpellsPerDayTables = new ArrayList<SpellsPerDayTable>(
-        spellsPerDayTablesTable.getNumberOfRows());
+    final List<SpellsPerDayTable> allSpellsPerDayTables = new ArrayList<>(spellsPerDayTablesTable.getNumberOfRows());
     for (final DataRow dataRow : spellsPerDayTablesTable) {
       final SpellsPerDayTable spellsPerDayTable = new SpellsPerDayTable();
       spellsPerDayTable.setId(dataRow.getId());

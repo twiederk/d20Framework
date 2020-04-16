@@ -13,10 +13,7 @@ public interface ImportEquipment {
    * Imports equipment.
    *
    * @return List of import reports of the imported equipment.
-   *
-   * @throws Exception
-   *     Thrown if import fails.
    */
-  public List<ImportReport<? extends Item>> importEquipment() throws Exception;
+  List<ImportReport<? extends Item>> importEquipment();
 
 }

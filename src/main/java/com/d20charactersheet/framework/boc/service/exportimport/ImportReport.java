@@ -23,7 +23,7 @@ public class ImportReport<T> {
    */
   public ImportReport(final T importObject) {
     this.importObject = importObject;
-    importMessages = new ArrayList<ImportMessage>();
+    importMessages = new ArrayList<>();
   }
 
   /**

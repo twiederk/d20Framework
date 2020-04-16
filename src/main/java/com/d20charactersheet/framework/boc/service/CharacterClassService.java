@@ -21,7 +21,7 @@ public interface CharacterClassService {
    *
    * @return All character classes of the game system.
    */
-  public List<CharacterClass> getAllCharacterClasses(List<Skill> allSkills, List<Ability> allAbilities);
+  List<CharacterClass> getAllCharacterClasses(List<Skill> allSkills, List<Ability> allAbilities);
 
   /**
    * Deletes the skill from all character classes.
@@ -29,7 +29,7 @@ public interface CharacterClassService {
    * @param skill
    *     The skill to delete.
    */
-  public void deleteSkill(Skill skill);
+  void deleteSkill(Skill skill);
 
   /**
    * Updates the character class in the persistent layer.
@@ -37,7 +37,7 @@ public interface CharacterClassService {
    * @param characterClass
    *     The character class to update.
    */
-  public void updateCharacterClass(CharacterClass characterClass);
+  void updateCharacterClass(CharacterClass characterClass);
 
   /**
    * Creates a character class with valid id.
@@ -47,7 +47,7 @@ public interface CharacterClassService {
    *
    * @return The created character class with valid id.
    */
-  public CharacterClass createCharacterClass(CharacterClass characterClass);
+  CharacterClass createCharacterClass(CharacterClass characterClass);
 
   /**
    * Adds the skill as class skill to the character class.
@@ -57,7 +57,7 @@ public interface CharacterClassService {
    * @param characterClasses
    *     The character classes to add the skill to.
    */
-  public void addSkill(Skill skill, List<CharacterClass> characterClasses);
+  void addSkill(Skill skill, List<CharacterClass> characterClasses);
 
   /**
    * Find class by name.
@@ -69,6 +69,6 @@ public interface CharacterClassService {
    *
    * @return The class with the given name
    */
-  public CharacterClass findClassByName(String name, List<CharacterClass> allClasses);
+  CharacterClass findClassByName(String name, List<CharacterClass> allClasses);
 
 }

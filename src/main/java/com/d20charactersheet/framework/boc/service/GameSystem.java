@@ -29,14 +29,14 @@ public interface GameSystem {
    *
    * @return The name of the game system.
    */
-  public String getName();
+  String getName();
 
   /**
    * Returns the id of the game system.
    *
    * @return The id of the game system.
    */
-  public int getId();
+  int getId();
 
   /**
    * Set the character service.
@@ -44,7 +44,7 @@ public interface GameSystem {
    * @param characterService
    *     The character service.
    */
-  public void setCharacterService(CharacterService characterService);
+  void setCharacterService(CharacterService characterService);
 
   /**
    * Set the skill service.
@@ -52,7 +52,7 @@ public interface GameSystem {
    * @param skillService
    *     The skill service.
    */
-  public void setSkillService(SkillService skillService);
+  void setSkillService(SkillService skillService);
 
   /**
    * Set the feat service.
@@ -60,7 +60,7 @@ public interface GameSystem {
    * @param featService
    *     The feat service.
    */
-  public void setFeatService(FeatService featService);
+  void setFeatService(FeatService featService);
 
   /**
    * Set the character class service.
@@ -68,7 +68,7 @@ public interface GameSystem {
    * @param characterClassService
    *     The character class service.
    */
-  public void setCharacterClassService(CharacterClassService characterClassService);
+  void setCharacterClassService(CharacterClassService characterClassService);
 
   /**
    * Set the item service.
@@ -76,7 +76,7 @@ public interface GameSystem {
    * @param itemService
    *     The item service.
    */
-  public void setItemService(ItemService itemService);
+  void setItemService(ItemService itemService);
 
   /**
    * Set the race service.
@@ -84,7 +84,7 @@ public interface GameSystem {
    * @param raceService
    *     The race service.
    */
-  public void setRaceService(RaceService raceService);
+  void setRaceService(RaceService raceService);
 
   /**
    * Set the ability service.
@@ -92,7 +92,7 @@ public interface GameSystem {
    * @param abilityService
    *     The ability service.
    */
-  public void setAbilityService(AbilityService abilityService);
+  void setAbilityService(AbilityService abilityService);
 
   /**
    * Set the image service.
@@ -100,7 +100,7 @@ public interface GameSystem {
    * @param imageService
    *     The image service.
    */
-  public void setImageService(ImageService imageService);
+  void setImageService(ImageService imageService);
 
   /**
    * Set the rule service.
@@ -108,7 +108,7 @@ public interface GameSystem {
    * @param ruleService
    *     The rule service.
    */
-  public void setRuleService(RuleService ruleService);
+  void setRuleService(RuleService ruleService);
 
   /**
    * Set the display service.
@@ -116,7 +116,7 @@ public interface GameSystem {
    * @param displayService
    *     The display service.
    */
-  public void setDisplayService(DisplayService displayService);
+  void setDisplayService(DisplayService displayService);
 
   /**
    * Set the spelllist service.
@@ -124,7 +124,7 @@ public interface GameSystem {
    * @param spelllistService
    *     The SpelllistService
    */
-  public void setSpelllistService(SpelllistService spelllistService);
+  void setSpelllistService(SpelllistService spelllistService);
 
   /**
    * Sets the XpService.
@@ -132,7 +132,7 @@ public interface GameSystem {
    * @param xpService
    *     The XpService
    */
-  public void setXpService(XpService xpService);
+  void setXpService(XpService xpService);
 
   /**
    * Sets the ExportImportService.
@@ -140,7 +140,7 @@ public interface GameSystem {
    * @param exportImportService
    *     The ExportImportService.
    */
-  public void setExportImportService(ExportImportService exportImportService);
+  void setExportImportService(ExportImportService exportImportService);
 
   /**
    * Sets the BodyService.
@@ -148,225 +148,227 @@ public interface GameSystem {
    * @param bodyService
    *     The BodyService.
    */
-  public void setBodyService(BodyService bodyService);
+  void setBodyService(BodyService bodyService);
+
   /**
    * Returns the skill service.
    *
    * @return The skill service.
    */
-  public SkillService getSkillService();
+  SkillService getSkillService();
 
   /**
    * Returns the feat service.
    *
    * @return The feat service.
    */
-  public FeatService getFeatService();
+  FeatService getFeatService();
 
   /**
    * Returns the character class service.
    *
    * @return The character class service.
    */
-  public CharacterClassService getCharacterClassService();
+  CharacterClassService getCharacterClassService();
 
   /**
    * Returns the item service.
    *
    * @return The item service.
    */
-  public ItemService getItemService();
+  ItemService getItemService();
 
   /**
    * Returns the ability service.
    *
    * @return The ability service.
    */
-  public AbilityService getAbilityService();
+  AbilityService getAbilityService();
 
   /**
    * Returns the race service.
    *
    * @return The race service.
    */
-  public RaceService getRaceService();
+  RaceService getRaceService();
 
   /**
    * Returns the character service.
    *
    * @return The character service.
    */
-  public CharacterService getCharacterService();
+  CharacterService getCharacterService();
 
   /**
    * Returns the image service.
    *
    * @return The image service.
    */
-  public ImageService getImageService();
+  ImageService getImageService();
 
   /**
    * Returns the rule service.
    *
    * @return The rule service.
    */
-  public RuleService getRuleService();
+  RuleService getRuleService();
 
   /**
    * Returns the display service.
    *
    * @return The display service.
    */
-  public DisplayService getDisplayService();
+  DisplayService getDisplayService();
 
   /**
    * Returns the SpelllistService.
    *
    * @return The SpelllistService.
    */
-  public SpelllistService getSpelllistService();
+  SpelllistService getSpelllistService();
 
   /**
    * Returns the ExportImportService.
    *
    * @return The ExportImportService.
    */
-  public ExportImportService getExportImportService();
+  ExportImportService getExportImportService();
 
   /**
    * Returns the XpService.
    *
    * @return The XpService.
    */
-  public XpService getXpService();
+  XpService getXpService();
 
   /**
    * Returns the BodyService.
+   *
    * @return The BodyService.
    */
-  public BodyService getBodyService();
+  BodyService getBodyService();
 
   /**
    * Returns all skills of the game system.
    *
    * @return All skills of the game system.
    */
-  public List<Skill> getAllSkills();
+  List<Skill> getAllSkills();
 
   /**
    * Returns all character classes of the game system.
    *
    * @return All character classes of the game system.
    */
-  public List<CharacterClass> getAllCharacterClasses();
+  List<CharacterClass> getAllCharacterClasses();
 
   /**
    * Returns all feats of the game system.
    *
    * @return All feats of the game system.
    */
-  public List<Feat> getAllFeats();
+  List<Feat> getAllFeats();
 
   /**
    * Returns all weapons of the game system.
    *
    * @return All weapons of the game system.
    */
-  public List<Weapon> getAllWeapons();
+  List<Weapon> getAllWeapons();
 
   /**
    * Returns all weapon families.
    *
    * @return All weapon families.
    */
-  public List<WeaponFamily> getAllWeaponFamilies();
+  List<WeaponFamily> getAllWeaponFamilies();
 
   /**
    * Returns all armor of the game system.
    *
    * @return All armor of the game system.
    */
-  public List<Armor> getAllArmor();
+  List<Armor> getAllArmor();
 
   /**
    * Returns all goods of the game system.
    *
    * @return All goods of the game system.
    */
-  public List<Good> getAllGoods();
+  List<Good> getAllGoods();
 
   /**
    * Returns all races of the game system.
    *
    * @return All races of the game system.
    */
-  public List<Race> getAllRaces();
+  List<Race> getAllRaces();
 
   /**
    * Returns all abilities of the game system.
    *
    * @return All abilities of the game system.
    */
-  public List<Ability> getAllAbilities();
+  List<Ability> getAllAbilities();
 
   /**
    * Returns all spells.
    *
    * @return All spells.
    */
-  public List<Spell> getAllSpells();
+  List<Spell> getAllSpells();
 
   /**
    * Returns all spell lists.
    *
    * @return All spell lists.
    */
-  public List<Spelllist> getAllSpelllists();
+  List<Spelllist> getAllSpelllists();
 
   /**
    * Returns all xp tables.
    *
    * @return All xp tables.
    */
-  public List<XpTable> getAllXpTables();
+  List<XpTable> getAllXpTables();
 
   /**
    * Returns all known spells tables.
    *
    * @return All known spells tables.
    */
-  public List<KnownSpellsTable> getAllKnownSpellsTables();
+  List<KnownSpellsTable> getAllKnownSpellsTables();
 
   /**
    * Returns all spells per day tables.
    *
    * @return All spells per day tables.
    */
-  public List<SpellsPerDayTable> getAllSpellsPerDayTables();
+  List<SpellsPerDayTable> getAllSpellsPerDayTables();
 
   /**
    * Clears the game system.
    */
-  public void clear();
+  void clear();
 
   /**
    * Loads the game system.
    */
-  public void load();
+  void load();
 
   /**
    * Returns true, if the game system is loaded.
    *
    * @return True, if the game system is loaded.
    */
-  public boolean isLoaded();
+  boolean isLoaded();
 
   /**
    * Returns all characters.
    *
    * @return All characters.
    */
-  public List<Character> getAllCharacters();
+  List<Character> getAllCharacters();
 
   /**
    * Returns the character of the given id.
@@ -376,7 +378,7 @@ public interface GameSystem {
    *
    * @return The character of the given id.
    */
-  public Character getCharacter(int id);
+  Character getCharacter(int id);
 
   /**
    * Delete the character, including its images.
@@ -384,7 +386,7 @@ public interface GameSystem {
    * @param character
    *     The character to delete.
    */
-  public void deleteCharacter(Character character);
+  void deleteCharacter(Character character);
 
   /**
    * Delete the skill from the game system.
@@ -392,7 +394,7 @@ public interface GameSystem {
    * @param skill
    *     The skill to delete.
    */
-  public void deleteSkill(Skill skill);
+  void deleteSkill(Skill skill);
 
   /**
    * Delete the feat from the game system.
@@ -400,7 +402,7 @@ public interface GameSystem {
    * @param feat
    *     The feat to delete.
    */
-  public void deleteFeat(Feat feat);
+  void deleteFeat(Feat feat);
 
   /**
    * Delete spell from spell list.
@@ -410,6 +412,6 @@ public interface GameSystem {
    * @param spell
    *     The spell to delete from the spell list.
    */
-  public void deleteSpellFromSpelllist(Spelllist spelllist, Spell spell);
+  void deleteSpellFromSpelllist(Spelllist spelllist, Spell spell);
 
 }

@@ -24,7 +24,7 @@ public abstract class BaseRaceDaoTest {
   protected SpelllistDao spelllistDao;
 
   @Test
-  public void testGetAllRaces() throws Exception {
+  public void testGetAllRaces() {
     final List<Race> allRaces = getAllRaces();
     assertNotNull(allRaces);
     assertEquals(19, allRaces.size());
@@ -42,10 +42,10 @@ public abstract class BaseRaceDaoTest {
   }
 
   @Test
-  public void testRaceHuman() throws Exception {
-    final List<Ability> allAbilities = abilityDao
-        .getAllAbilities(spelllistDao.getAllSpelllists(spelllistDao.getAllSpells()), spelllistDao.getAllKnownSpellsTables(),
-                         spelllistDao.getAllSpellsPerDayTables());
+  public void testRaceHuman() {
+    final List<Ability> allAbilities = abilityDao.getAllAbilities(spelllistDao.getAllSpelllists(spelllistDao.getAllSpells()),
+                                                                  spelllistDao.getAllKnownSpellsTables(),
+                                                                  spelllistDao.getAllSpellsPerDayTables());
     final List<CharacterClass> characterClasses = characterClassDao.getAllCharacterClasses(skillDao.getAllSkills(), allAbilities);
     final List<Race> races = raceDao.getAllRaces(characterClasses, allAbilities);
     final Race human = races.get(0);
@@ -59,7 +59,7 @@ public abstract class BaseRaceDaoTest {
   }
 
   @Test
-  public void testCreateRace() throws Exception {
+  public void testCreateRace() {
     Race race = raceDao.createRace(createRace());
     assertNotNull(race);
     assertTrue(race.getId() > 0);
@@ -83,10 +83,10 @@ public abstract class BaseRaceDaoTest {
   }
 
   private List<Ability> createAbilities() {
-    final List<Ability> allAbilities = abilityDao
-        .getAllAbilities(spelllistDao.getAllSpelllists(spelllistDao.getAllSpells()), spelllistDao.getAllKnownSpellsTables(),
-                         spelllistDao.getAllSpellsPerDayTables());
-    final List<Ability> abilities = new ArrayList<Ability>();
+    final List<Ability> allAbilities = abilityDao.getAllAbilities(spelllistDao.getAllSpelllists(spelllistDao.getAllSpells()),
+                                                                  spelllistDao.getAllKnownSpellsTables(),
+                                                                  spelllistDao.getAllSpellsPerDayTables());
+    final List<Ability> abilities = new ArrayList<>();
     for (int i = 0; i < 10; i++) {
       abilities.add(allAbilities.get(i));
     }
@@ -119,7 +119,7 @@ public abstract class BaseRaceDaoTest {
   }
 
   @Test
-  public void testUpdateRace() throws Exception {
+  public void testUpdateRace() {
     final Race originalRace = getRaceById(0);
     final Race updateRace = createRace();
 

@@ -14,7 +14,7 @@ public interface FeatService {
    *
    * @return All static feats.
    */
-  public List<Feat> getAllFeats();
+  List<Feat> getAllFeats();
 
   /**
    * Creates a feat with the given parameters and stores it to the persistent layer.
@@ -24,7 +24,7 @@ public interface FeatService {
    *
    * @return The created feat with a valid id.
    */
-  public Feat createFeat(Feat feat);
+  Feat createFeat(Feat feat);
 
   /**
    * Updates the feat.
@@ -32,7 +32,7 @@ public interface FeatService {
    * @param feat
    *     The feat to update.
    */
-  public void updateFeat(Feat feat);
+  void updateFeat(Feat feat);
 
   /**
    * Deletes the feat.
@@ -40,7 +40,7 @@ public interface FeatService {
    * @param feat
    *     The feat to delete.
    */
-  public void deleteFeat(Feat feat);
+  void deleteFeat(Feat feat);
 
   /**
    * Returns the feat of the given id.
@@ -52,7 +52,7 @@ public interface FeatService {
    *
    * @return The feat of the given id.
    */
-  public Feat findFeatById(int featId, List<Feat> allFeats);
+  Feat findFeatById(int featId, List<Feat> allFeats);
 
   /**
    * Find feat by name.
@@ -64,5 +64,5 @@ public interface FeatService {
    *
    * @return The feat with the given name.
    */
-  public Feat findFeatByName(String name, List<Feat> allFeats);
+  Feat findFeatByName(String name, List<Feat> allFeats);
 }

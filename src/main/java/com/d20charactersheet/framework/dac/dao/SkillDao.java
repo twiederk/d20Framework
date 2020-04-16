@@ -14,7 +14,7 @@ public interface SkillDao {
    *
    * @return All available skills.
    */
-  public List<Skill> getAllSkills();
+  List<Skill> getAllSkills();
 
   /**
    * Create skill in persistent layer.
@@ -24,7 +24,7 @@ public interface SkillDao {
    *
    * @return The created skill (containing the id).
    */
-  public Skill createSkill(Skill skill);
+  Skill createSkill(Skill skill);
 
   /**
    * Updates the skill in the persistent layer.
@@ -34,7 +34,7 @@ public interface SkillDao {
    *
    * @return The updated skill.
    */
-  public Skill updateSkill(Skill skill);
+  Skill updateSkill(Skill skill);
 
   /**
    * Delete the skill from the persisten layer.
@@ -42,7 +42,7 @@ public interface SkillDao {
    * @param skill
    *     The skill to delete.
    */
-  public void deleteSkill(Skill skill);
+  void deleteSkill(Skill skill);
 
   /**
    * Returns the description of the skill with the given id.
@@ -52,6 +52,6 @@ public interface SkillDao {
    *
    * @return The description of the skill.
    */
-  public String getSkillDescription(int skillId);
+  String getSkillDescription(int skillId);
 
 }

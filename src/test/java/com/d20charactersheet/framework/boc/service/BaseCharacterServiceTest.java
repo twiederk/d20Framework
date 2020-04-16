@@ -1,6 +1,6 @@
 package com.d20charactersheet.framework.boc.service;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -13,7 +13,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.assertj.core.api.Assertions;
 import org.junit.After;
 import org.junit.Test;
 
@@ -57,7 +56,7 @@ public abstract class BaseCharacterServiceTest {
   protected Race human;
 
   @After
-  public void tearDown() throws Exception {
+  public void tearDown() {
     fighter = null;
     wizard = null;
     human = null;
@@ -73,12 +72,13 @@ public abstract class BaseCharacterServiceTest {
   protected abstract int getNumberOfCharacters();
 
   @Test
-  public void testGetBelvador() throws Exception {
+  public void testGetBelvador() {
     final Character belvador = gameSystem.getCharacter(0);
     assertNotNull(belvador);
     assertEquals(0, belvador.getId());
     assertEquals("Belvador the Summoner", belvador.getName());
-    assertEquals(1, belvador.getXpTable().getId());
+    assertEquals(1, belvador.getXpTable()
+        .getId());
   }
 
   @Test
@@ -99,14 +99,16 @@ public abstract class BaseCharacterServiceTest {
   }
 
   @Test
-  public void testUpdateClassLevel() throws Exception {
+  public void testUpdateClassLevel() {
     final CharacterService characterService = gameSystem.getCharacterService();
     final Character belvador = gameSystem.getCharacter(0);
-    final ClassLevel wizardClassLevel = belvador.getClassLevels().get(0);
+    final ClassLevel wizardClassLevel = belvador.getClassLevels()
+        .get(0);
     wizardClassLevel.setLevel(10);
 
     final Character character = characterService.updateCharacter(belvador);
-    assertEquals(wizardClassLevel, character.getClassLevels().get(0));
+    assertEquals(wizardClassLevel, character.getClassLevels()
+        .get(0));
 
     // tear down
     wizardClassLevel.setLevel(5);
@@ -114,7 +116,7 @@ public abstract class BaseCharacterServiceTest {
   }
 
   @Test
-  public void testCreateCharacter() throws Exception {
+  public void testCreateCharacter() {
     final CharacterService characterService = gameSystem.getCharacterService();
     final ImageService imageService = gameSystem.getImageService();
 
@@ -124,7 +126,8 @@ public abstract class BaseCharacterServiceTest {
     final Sex sex = Sex.MALE;
     final ClassLevel classLevel = new ClassLevel(fighter, 1);
     final Alignment alignment = Alignment.NEUTRAL;
-    final XpTable xpTable = gameSystem.getAllXpTables().get(0);
+    final XpTable xpTable = gameSystem.getAllXpTables()
+        .get(0);
     Character character = createCharacter(name, player, race, sex, classLevel, alignment, xpTable);
 
     // test
@@ -134,8 +137,10 @@ public abstract class BaseCharacterServiceTest {
     assertEquals(name, character.getName());
     assertEquals(player, character.getPlayer());
     assertEquals(race, character.getRace());
-    assertEquals(1, character.getClassLevels().size());
-    final ClassLevel newClassLevel = character.getClassLevels().get(0);
+    assertEquals(1, character.getClassLevels()
+        .size());
+    final ClassLevel newClassLevel = character.getClassLevels()
+        .get(0);
     assertTrue(newClassLevel.getId() != -1);
     assertEquals(classLevel.getCharacterClass(), newClassLevel.getCharacterClass());
     assertEquals(classLevel.getLevel(), newClassLevel.getLevel());
@@ -152,14 +157,15 @@ public abstract class BaseCharacterServiceTest {
   }
 
   @Test
-  public void testCreateCharacterWithIllegalValues() throws Exception {
+  public void testCreateCharacterWithIllegalValues() {
     final String name = "testCreateCharacterWithIllegalValues";
     final String player = PLAYER_NAME;
     final Race race = human;
     final Sex sex = Sex.MALE;
     final ClassLevel classLevel = new ClassLevel(fighter, 1);
     final Alignment alignment = Alignment.NEUTRAL;
-    final XpTable xpTable = gameSystem.getAllXpTables().get(0);
+    final XpTable xpTable = gameSystem.getAllXpTables()
+        .get(0);
 
     assertException(null, player, race, sex, classLevel, alignment, xpTable);
     assertException(name, null, race, sex, classLevel, alignment, xpTable);
@@ -197,7 +203,7 @@ public abstract class BaseCharacterServiceTest {
     character.setPlayer(player);
     character.setRace(race);
     character.setSex(sex);
-    final List<ClassLevel> classLevels = new LinkedList<ClassLevel>();
+    final List<ClassLevel> classLevels = new LinkedList<>();
     if (classLevel != null) {
       classLevels.add(classLevel);
     }
@@ -208,7 +214,7 @@ public abstract class BaseCharacterServiceTest {
   }
 
   @Test
-  public void testDeleteCharacter() throws Exception {
+  public void testDeleteCharacter() {
     final CharacterService characterService = gameSystem.getCharacterService();
 
     final String name = "testDeleteCharacter";
@@ -217,7 +223,8 @@ public abstract class BaseCharacterServiceTest {
     final Sex sex = Sex.MALE;
     final ClassLevel classLevel = new ClassLevel(fighter, 1);
     final Alignment alignment = Alignment.NEUTRAL;
-    final XpTable xpTable = gameSystem.getAllXpTables().get(0);
+    final XpTable xpTable = gameSystem.getAllXpTables()
+        .get(0);
     Character character = createCharacter(name, player, race, sex, classLevel, alignment, xpTable);
     character.setStrength(10);
     character.setDexterity(10);
@@ -228,31 +235,36 @@ public abstract class BaseCharacterServiceTest {
 
     character = characterService.createCharacter(character, gameSystem.getAllSkills());
     final int id = character.getId();
-    final int numberOfCharacters = gameSystem.getAllCharacters().size();
+    final int numberOfCharacters = gameSystem.getAllCharacters()
+        .size();
 
     // test
     characterService.deleteCharacter(character);
     final Character deletedCharacter = gameSystem.getCharacter(id);
 
     assertNull(deletedCharacter);
-    assertEquals(numberOfCharacters - 1, gameSystem.getAllCharacters().size());
+    assertEquals(numberOfCharacters - 1, gameSystem.getAllCharacters()
+        .size());
 
   }
 
   @Test
-  public void testGetCharacterWithListenSkill() throws Exception {
+  public void testGetCharacterWithListenSkill() {
     final Character belvador = gameSystem.getCharacter(0);
     final CharacterSkill listen = getCharacterSkill(belvador, "Listen");
     assertNotNull(listen);
-    assertEquals(29, listen.getSkill().getId());
+    assertEquals(29, listen.getSkill()
+        .getId());
     assertEquals(0.0f, listen.getRank(), 0.0f);
     assertEquals(2, listen.getModifier());
-    assertTrue(listen.getSkill().isUntrained());
+    assertTrue(listen.getSkill()
+                   .isUntrained());
   }
 
   private CharacterSkill getCharacterSkill(final Character character, final String name) {
     for (final CharacterSkill characterSkill : character.getCharacterSkills()) {
-      if (name.equals(characterSkill.getSkill().getName())) {
+      if (name.equals(characterSkill.getSkill()
+                          .getName())) {
         return characterSkill;
       }
     }
@@ -260,21 +272,23 @@ public abstract class BaseCharacterServiceTest {
   }
 
   @Test
-  public void testGetCharacterWithAllSkills() throws Exception {
+  public void testGetCharacterWithAllSkills() {
     final Character belvador = gameSystem.getCharacter(0);
-    assertEquals(44, belvador.getCharacterSkills().size());
+    assertEquals(44, belvador.getCharacterSkills()
+        .size());
   }
 
   @Test
-  public void testInitiativeModifier() throws Exception {
+  public void testInitiativeModifier() {
     final Character belvador = gameSystem.getCharacter(0);
     assertEquals(0, belvador.getInitiativeModifier());
   }
 
   @Test
-  public void testWeapons() throws Exception {
+  public void testWeapons() {
     final Character belvador = gameSystem.getCharacter(0);
-    final List<ItemGroup> weapons = belvador.getEquipment().getWeapons();
+    final List<ItemGroup> weapons = belvador.getEquipment()
+        .getWeapons();
     assertNotNull(weapons);
     assertEquals(3, weapons.size());
     assertItem("Quarterstaff", 1, weapons.get(0));
@@ -283,17 +297,19 @@ public abstract class BaseCharacterServiceTest {
   }
 
   @Test
-  public void testArmor() throws Exception {
+  public void testArmor() {
     final Character belvador = gameSystem.getCharacter(0);
-    final List<ItemGroup> armor = belvador.getEquipment().getArmor();
+    final List<ItemGroup> armor = belvador.getEquipment()
+        .getArmor();
     assertNotNull(armor);
     assertEquals(0, armor.size());
   }
 
   @Test
-  public void testGoods() throws Exception {
+  public void testGoods() {
     final Character belvador = gameSystem.getCharacter(0);
-    final List<ItemGroup> goods = belvador.getEquipment().getGoods();
+    final List<ItemGroup> goods = belvador.getEquipment()
+        .getGoods();
     assertNotNull(goods);
     assertEquals(19, goods.size());
     assertItem("Backpack", 1, goods.get(0));
@@ -302,7 +318,8 @@ public abstract class BaseCharacterServiceTest {
   }
 
   private void assertItem(final String name, final int number, final ItemGroup itemGroup) {
-    assertEquals(name, itemGroup.getItem().getName());
+    assertEquals(name, itemGroup.getItem()
+        .getName());
     assertEquals(number, itemGroup.getNumber());
   }
 
@@ -314,7 +331,7 @@ public abstract class BaseCharacterServiceTest {
   }
 
   @Test
-  public void testCreateNote() throws Exception {
+  public void testCreateNote() {
     final CharacterService characterService = gameSystem.getCharacterService();
 
     final Note note = new Note();
@@ -322,17 +339,19 @@ public abstract class BaseCharacterServiceTest {
     note.setText("TestNote");
 
     final Character belvador = gameSystem.getCharacter(0);
-    final int numberOfNotes = belvador.getNotes().size();
+    final int numberOfNotes = belvador.getNotes()
+        .size();
 
     final Note createdNote = characterService.createNote(note, belvador);
     assertTrue(createdNote.getId() >= 0);
-    assertEquals(numberOfNotes + 1, belvador.getNotes().size());
+    assertEquals(numberOfNotes + 1, belvador.getNotes()
+        .size());
 
     characterService.deleteNote(note, belvador);
   }
 
   @Test
-  public void testUpdateCharacterAbilities() throws Exception {
+  public void testUpdateCharacterAbilities() {
     Character belvador = gameSystem.getCharacter(0);
     CharacterAbility familiar = getCharacterAbilityByName("Familiar", belvador);
     familiar.setOwned(false);
@@ -363,7 +382,10 @@ public abstract class BaseCharacterServiceTest {
   private CharacterAbility getCharacterAbilityByName(final String name, final Character character) {
     for (final ClassLevel classLevel : character.getClassLevels()) {
       for (final CharacterAbility characterAbility : classLevel.getCharacterAbilities()) {
-        if (characterAbility.getClassAbility().getAbility().getName().equals(name)) {
+        if (characterAbility.getClassAbility()
+            .getAbility()
+            .getName()
+            .equals(name)) {
           return characterAbility;
         }
       }
@@ -372,9 +394,9 @@ public abstract class BaseCharacterServiceTest {
   }
 
   @Test
-  public void testRemoveCharacterAbilities() throws Exception {
+  public void testRemoveCharacterAbilities() {
     final CharacterClass characterClass = createCharacterClass();
-    List<CharacterAbility> characterAbilities = new ArrayList<CharacterAbility>();
+    List<CharacterAbility> characterAbilities = new ArrayList<>();
     characterAbilities.add(createCharacterAbility(1));
     characterAbilities.add(createCharacterAbility(2));
     characterAbilities.add(createCharacterAbility(3));
@@ -385,9 +407,9 @@ public abstract class BaseCharacterServiceTest {
   }
 
   @Test
-  public void testAddCharacterAbilities() throws Exception {
+  public void testAddCharacterAbilities() {
     final CharacterClass characterClass = createCharacterClass();
-    final List<CharacterAbility> characterAbilities = new ArrayList<CharacterAbility>();
+    final List<CharacterAbility> characterAbilities = new ArrayList<>();
     characterAbilities.add(createCharacterAbility(1));
     final CharacterServiceImpl characterService = (CharacterServiceImpl) gameSystem.getCharacterService();
     final Character character = new Character();
@@ -399,7 +421,7 @@ public abstract class BaseCharacterServiceTest {
   }
 
   private CharacterClass createCharacterClass() {
-    final List<ClassAbility> classAbilities = new ArrayList<ClassAbility>(2);
+    final List<ClassAbility> classAbilities = new ArrayList<>(2);
     classAbilities.add(createClassAbility(1));
     classAbilities.add(createClassAbility(2));
 
@@ -425,7 +447,7 @@ public abstract class BaseCharacterServiceTest {
   }
 
   @Test
-  public void testWeaponAttacks() throws Exception {
+  public void testWeaponAttacks() {
     final Character belvador = gameSystem.getCharacter(0);
 
     final List<WeaponAttack> weaponAttacks = belvador.getWeaponAttacks();
@@ -451,10 +473,11 @@ public abstract class BaseCharacterServiceTest {
   }
 
   @Test
-  public void testGetKnownSpells() throws Exception {
+  public void testGetKnownSpells() {
     final Character belvador = gameSystem.getCharacter(0);
 
-    final SpelllistAbility spelllistAbility = belvador.getSpelllistAbilities().get(0);
+    final SpelllistAbility spelllistAbility = belvador.getSpelllistAbilities()
+        .get(0);
     final List<KnownSpell> knownSpells = belvador.getKnownSpells(spelllistAbility.getSpelllist());
     assertNotNull("Character spells can't be null", knownSpells);
     assertEquals("Wrong number of character spells", 31, knownSpells.size());
@@ -464,7 +487,9 @@ public abstract class BaseCharacterServiceTest {
 
   private boolean contains(final String name, final List<KnownSpell> knownSpells) {
     for (final KnownSpell knownSpell : knownSpells) {
-      if (knownSpell.getSpell().getName().equals(name)) {
+      if (knownSpell.getSpell()
+          .getName()
+          .equals(name)) {
         return true;
       }
     }
@@ -472,7 +497,7 @@ public abstract class BaseCharacterServiceTest {
   }
 
   @Test
-  public void testCreateKnownSpells() throws Exception {
+  public void testCreateKnownSpells() {
 
     final SpelllistService spelllistService = gameSystem.getSpelllistService();
     final Spell acidArrow = spelllistService.findSpellByName("Acid Arrow", gameSystem.getAllSpells());
@@ -487,7 +512,8 @@ public abstract class BaseCharacterServiceTest {
     characterService.createKnownSpell(belvador, knownSpell);
 
     assertTrue(knownSpell.getId() > 0);
-    final SpelllistAbility spelllistAbility = belvador.getSpelllistAbilities().get(0);
+    final SpelllistAbility spelllistAbility = belvador.getSpelllistAbilities()
+        .get(0);
     final List<KnownSpell> knownSpells = belvador.getKnownSpells(spelllistAbility.getSpelllist());
     assertEquals(32, knownSpells.size());
 
@@ -496,10 +522,12 @@ public abstract class BaseCharacterServiceTest {
   }
 
   @Test
-  public void testDeleteKnownSpells() throws Exception {
+  public void testDeleteKnownSpells() {
     final Character belvador = gameSystem.getCharacter(0);
-    final SpelllistAbility spelllistAbility = belvador.getSpelllistAbilities().get(0);
-    final KnownSpell knownSpell = belvador.getKnownSpells(spelllistAbility.getSpelllist()).get(0);
+    final SpelllistAbility spelllistAbility = belvador.getSpelllistAbilities()
+        .get(0);
+    final KnownSpell knownSpell = belvador.getKnownSpells(spelllistAbility.getSpelllist())
+        .get(0);
 
     final CharacterService characterService = gameSystem.getCharacterService();
     characterService.deleteKnownSpell(belvador, knownSpell);
@@ -512,7 +540,7 @@ public abstract class BaseCharacterServiceTest {
   }
 
   @Test
-  public void testGetCharacterWithSpellSlots() throws Exception {
+  public void testGetCharacterWithSpellSlots() {
     final Character belvador = gameSystem.getCharacter(0);
 
     final List<SpellSlot> spellSlots = belvador.getSpellSlots();
@@ -550,7 +578,9 @@ public abstract class BaseCharacterServiceTest {
   private int countSpell(final List<SpellSlot> spellSlots, final String name) {
     int count = 0;
     for (final SpellSlot spellSlot : spellSlots) {
-      if (spellSlot.getSpell().getName().equals(name)) {
+      if (spellSlot.getSpell()
+          .getName()
+          .equals(name)) {
         count++;
       }
     }
@@ -571,7 +601,8 @@ public abstract class BaseCharacterServiceTest {
     int count = 0;
     for (final SpellSlot spellSlot : spellSlots) {
       for (final SpelllistAbility spelllistAbility : spellSlot.getSpelllistAbilities()) {
-        if (spelllistAbility.getName().equals(name)) {
+        if (spelllistAbility.getName()
+            .equals(name)) {
           count++;
         }
       }
@@ -583,7 +614,8 @@ public abstract class BaseCharacterServiceTest {
     int count = 0;
     for (final SpellSlot spellSlot : spellSlots) {
       for (final Feat feat : spellSlot.getMetamagicFeats()) {
-        if (feat.getName().equals(name)) {
+        if (feat.getName()
+            .equals(name)) {
           count++;
         }
       }
@@ -592,17 +624,19 @@ public abstract class BaseCharacterServiceTest {
   }
 
   @Test
-  public void testUpdateSpellSlot() throws Exception {
+  public void testUpdateSpellSlot() {
     final CharacterService characterService = gameSystem.getCharacterService();
     Character belvador = characterService.findCharacterByName("Belvador the Summoner", gameSystem.getAllCharacters());
     SpellSlot spellSlot = findSpellSlotById(belvador, 1);
     final SpellSlot copySpellSlot = copySpellSlot(spellSlot);
 
-    final Spell detectPoison = gameSystem.getSpelllistService().findSpellByName("Detect Poison", gameSystem.getAllSpells());
+    final Spell detectPoison = gameSystem.getSpelllistService()
+        .findSpellByName("Detect Poison", gameSystem.getAllSpells());
     spellSlot.setSpell(detectPoison);
     spellSlot.setCast(true);
-    final List<Feat> metamagicFeats = new LinkedList<Feat>();
-    metamagicFeats.add(gameSystem.getFeatService().findFeatByName("Empower Spell", gameSystem.getAllFeats()));
+    final List<Feat> metamagicFeats = new LinkedList<>();
+    metamagicFeats.add(gameSystem.getFeatService()
+                           .findFeatByName("Empower Spell", gameSystem.getAllFeats()));
     spellSlot.setMetamagicFeats(metamagicFeats);
 
     characterService.updateSpellSlot(spellSlot);
@@ -613,7 +647,8 @@ public abstract class BaseCharacterServiceTest {
     assertEquals(copySpellSlot.getId(), spellSlot.getId());
     assertEquals(copySpellSlot.getLevel(), spellSlot.getLevel());
     assertEquals(copySpellSlot.getSpelllistAbilities(), spellSlot.getSpelllistAbilities());
-    assertEquals("Detect Poison", spellSlot.getSpell().getName());
+    assertEquals("Detect Poison", spellSlot.getSpell()
+        .getName());
     assertEquals(metamagicFeats, spellSlot.getMetamagicFeats());
     assertTrue(spellSlot.isCast());
 
@@ -636,23 +671,25 @@ public abstract class BaseCharacterServiceTest {
     copySpellSlot.setSpell(spellSlot.getSpell());
     copySpellSlot.setLevel(spellSlot.getLevel());
     copySpellSlot.setCast(spellSlot.isCast());
-    copySpellSlot.setSpelllistAbilities(new LinkedList<SpelllistAbility>(spellSlot.getSpelllistAbilities()));
-    copySpellSlot.setMetamagicFeats(new LinkedList<Feat>(spellSlot.getMetamagicFeats()));
+    copySpellSlot.setSpelllistAbilities(new LinkedList<>(spellSlot.getSpelllistAbilities()));
+    copySpellSlot.setMetamagicFeats(new LinkedList<>(spellSlot.getMetamagicFeats()));
     return copySpellSlot;
   }
 
   @Test
-  public void testCreateSpellSlot() throws Exception {
+  public void testCreateSpellSlot() {
     final CharacterService characterService = gameSystem.getCharacterService();
     final Character belvador = characterService.findCharacterByName("Belvador the Summoner", gameSystem.getAllCharacters());
-    final SpellSlot originalSpellSlot = belvador.getSpellSlots().get(0);
+    final SpellSlot originalSpellSlot = belvador.getSpellSlots()
+        .get(0);
     final SpellSlot newSpellSlot = copySpellSlot(originalSpellSlot);
     newSpellSlot.setId(0);
 
     final SpellSlot createdSpellSlot = characterService.createSpellSlot(belvador, newSpellSlot);
     assertNotNull(createdSpellSlot);
     assertTrue("Created spell slot must have id > 0", newSpellSlot.getId() > 0);
-    assertEquals(18, belvador.getSpellSlots().size());
+    assertEquals(18, belvador.getSpellSlots()
+        .size());
 
     // tear down
     characterService.deleteSpellSlot(createdSpellSlot);
@@ -660,11 +697,11 @@ public abstract class BaseCharacterServiceTest {
   }
 
   @Test
-  public void testCalculateSpellSlot_increaseLevel() throws Exception {
+  public void testCalculateSpellSlot_increaseLevel() {
     final CharacterService characterService = gameSystem.getCharacterService();
     final Character belvador = characterService.findCharacterByName("Belvador the Summoner", gameSystem.getAllCharacters());
 
-    final List<SpellSlot> backupSpellSlots = new LinkedList<SpellSlot>(belvador.getSpellSlots());
+    final List<SpellSlot> backupSpellSlots = new LinkedList<>(belvador.getSpellSlots());
 
     // increase level
     // Wizard (6), INT: 18, Spells - Wizard, School Specialisation - Conjuration
@@ -672,12 +709,16 @@ public abstract class BaseCharacterServiceTest {
     // Specialisation: 1, 1, 1, 1
     // Intelli. Bonus: 0, 1, 1, 1
     // Total_________: 5, 5, 5, 4 => 19
-    belvador.getClassLevels().get(0).setLevel(6);
+    belvador.getClassLevels()
+        .get(0)
+        .setLevel(6);
 
-    final List<SpellSlot> spellSlots = gameSystem.getRuleService().calculateSpellSlots(belvador);
+    final List<SpellSlot> spellSlots = gameSystem.getRuleService()
+        .calculateSpellSlots(belvador);
     characterService.updateSpellSlots(belvador, spellSlots);
 
-    assertEquals(19, belvador.getSpellSlots().size());
+    assertEquals(19, belvador.getSpellSlots()
+        .size());
 
     // tear down
     for (final SpellSlot spellSlot : belvador.getSpellSlots()) {
@@ -689,11 +730,11 @@ public abstract class BaseCharacterServiceTest {
   }
 
   @Test
-  public void testCalculateSpellSlot_decreaseLevel() throws Exception {
+  public void testCalculateSpellSlot_decreaseLevel() {
     final CharacterService characterService = gameSystem.getCharacterService();
     final Character belvador = characterService.findCharacterByName("Belvador the Summoner", gameSystem.getAllCharacters());
 
-    final List<SpellSlot> backupSpellSlots = new LinkedList<SpellSlot>(belvador.getSpellSlots());
+    final List<SpellSlot> backupSpellSlots = new LinkedList<>(belvador.getSpellSlots());
 
     // decrease level
     // Wizard (4), INT: 18, Spells - Wizard, School Specialisation - Conjuration
@@ -701,12 +742,16 @@ public abstract class BaseCharacterServiceTest {
     // Specialisation: 1, 1, 1, 1
     // Intelli. Bonus: 0, 1, 1, 1
     // Total_________: 5, 5, 4, 0 => 14
-    belvador.getClassLevels().get(0).setLevel(4);
+    belvador.getClassLevels()
+        .get(0)
+        .setLevel(4);
 
-    final List<SpellSlot> spellSlots = gameSystem.getRuleService().calculateSpellSlots(belvador);
+    final List<SpellSlot> spellSlots = gameSystem.getRuleService()
+        .calculateSpellSlots(belvador);
     characterService.updateSpellSlots(belvador, spellSlots);
 
-    assertEquals(14, belvador.getSpellSlots().size());
+    assertEquals(14, belvador.getSpellSlots()
+        .size());
 
     // tear down
     for (final SpellSlot spellSlot : belvador.getSpellSlots()) {
@@ -718,7 +763,7 @@ public abstract class BaseCharacterServiceTest {
   }
 
   @Test
-  public void testUpdateCharacterSkill() throws Exception {
+  public void testUpdateCharacterSkill() {
     final CharacterService characterService = gameSystem.getCharacterService();
     Character belvador = characterService.findCharacterByName("Belvador the Summoner", gameSystem.getAllCharacters());
 
@@ -762,7 +807,7 @@ public abstract class BaseCharacterServiceTest {
 
     // Assert
     Body body = belvador.getBody();
-    body.getBodyParts().stream()
+    body.getBodyParts()
         .forEach(bodyPart -> assertThat(body.getItemOfBodyPart(bodyPart)).isEqualTo(Item.EMPTY_ITEM));
   }
 
@@ -771,21 +816,23 @@ public abstract class BaseCharacterServiceTest {
     // Arrange
     final CharacterService characterService = gameSystem.getCharacterService();
     Character belvador = characterService.findCharacterByName("Belvador the Summoner", gameSystem.getAllCharacters());
-    belvador.getBody().equip(BodyPart.BOTH_HANDS, Item.EMPTY_ITEM);
+    belvador.getBody()
+        .equip(BodyPart.BOTH_HANDS, Item.EMPTY_ITEM);
 
     // Act
     Body body = characterService.updateBody(belvador);
 
     // Assert
     assertThat(body).isNotNull();
-    body.getBodyParts().stream()
+    body.getBodyParts()
         .forEach(bodyPart -> assertThat(body.getItemOfBodyPart(bodyPart)).isEqualTo(Item.EMPTY_ITEM));
   }
 
   private CharacterSkill findSkillByName(final Character character, final String name) {
     for (final CharacterSkill characterSkill : character.getCharacterSkills()) {
       final Skill skill = characterSkill.getSkill();
-      if (skill.getName().equals(name)) {
+      if (skill.getName()
+          .equals(name)) {
         return characterSkill;
       }
     }

@@ -17,14 +17,14 @@ public abstract class BaseFeatDaoTest {
   protected FeatDao featDao;
 
   @Test
-  public void testGetAllFeats() throws Exception {
+  public void testGetAllFeats() {
     final List<Feat> allFeats = featDao.getAllFeats();
     assertNotNull(allFeats);
     assertEquals(109, allFeats.size());
   }
 
   @Test
-  public void testGetFeatsOfCharacter() throws Exception {
+  public void testGetFeatsOfCharacter() {
     final Character belvador = new Character();
     belvador.setId(0);
     final List<CharacterFeat> characterFeats = characterDao.getCharacterFeats(belvador, featDao.getAllFeats());

@@ -62,7 +62,7 @@ public class DummyAbilityDao implements AbilityDao {
   @Override
   public List<Ability> getAllAbilities(final List<Spelllist> allSpelllists, final List<KnownSpellsTable> allKnownSpellsTables,
       final List<SpellsPerDayTable> allSpellsPerDayTables) {
-    final List<Ability> allAbilities = new ArrayList<Ability>();
+    final List<Ability> allAbilities = new ArrayList<>();
     final AbilityBuilderFactory abilityBuilderFactory = createAbilityBuilderFactory(allSpelllists, allKnownSpellsTables,
                                                                                     allSpellsPerDayTables);
     for (final DataRow dataRow : abilityTable) {
@@ -97,7 +97,7 @@ public class DummyAbilityDao implements AbilityDao {
   }
 
   private Map<String, String> selectAbilityProperties(final int id) {
-    final Map<String, String> abilityProperties = new HashMap<String, String>();
+    final Map<String, String> abilityProperties = new HashMap<>();
     final List<DataRow> dataRows = abilityPropertyTable.select(0, id);
     for (final DataRow dataRow : dataRows) {
       final String key = dataRow.getString(1);

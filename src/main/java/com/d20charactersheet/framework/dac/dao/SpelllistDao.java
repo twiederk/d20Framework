@@ -17,7 +17,7 @@ public interface SpelllistDao {
    *
    * @return All spells from the persistent layer.
    */
-  public List<Spell> getAllSpells();
+  List<Spell> getAllSpells();
 
   /**
    * Returns all spell lists from the persistent layer.
@@ -27,7 +27,7 @@ public interface SpelllistDao {
    *
    * @return All spell lists from the persistent layer.
    */
-  public List<Spelllist> getAllSpelllists(List<Spell> allSpells);
+  List<Spelllist> getAllSpelllists(List<Spell> allSpells);
 
   /**
    * Returns the description of the spell.
@@ -37,7 +37,7 @@ public interface SpelllistDao {
    *
    * @return The description of the spell.
    */
-  public String getSpellDescription(int spellId);
+  String getSpellDescription(int spellId);
 
   /**
    * Creates a new spell in the persistent layer.
@@ -47,7 +47,7 @@ public interface SpelllistDao {
    *
    * @return The spell with the new id in the persistance layer.
    */
-  public Spell createSpell(Spell spell);
+  Spell createSpell(Spell spell);
 
   /**
    * Delete a spell.
@@ -55,7 +55,7 @@ public interface SpelllistDao {
    * @param spell
    *     The spell to delete.
    */
-  public void deleteSpell(Spell spell);
+  void deleteSpell(Spell spell);
 
   /**
    * Update a spell.
@@ -63,7 +63,7 @@ public interface SpelllistDao {
    * @param spell
    *     The spell to update.
    */
-  public void updateSpell(Spell spell);
+  void updateSpell(Spell spell);
 
   /**
    * Assign a spell to a spell list with the given level.
@@ -75,7 +75,7 @@ public interface SpelllistDao {
    * @param level
    *     The level to add the spell to the spell list.
    */
-  public void createSpelllevel(Spelllist spelllist, Spell spell, int level);
+  void createSpelllevel(Spelllist spelllist, Spell spell, int level);
 
   /**
    * Update the level of a spell assigned to a spell list.
@@ -87,7 +87,7 @@ public interface SpelllistDao {
    * @param level
    *     The level to update.
    */
-  public void updateSpelllevel(Spelllist spelllist, Spell spell, int level);
+  void updateSpelllevel(Spelllist spelllist, Spell spell, int level);
 
   /**
    * Delete a spell assignment.
@@ -97,7 +97,7 @@ public interface SpelllistDao {
    * @param spell
    *     The spell to delete.
    */
-  public void deleteSpelllevel(Spelllist spelllist, Spell spell);
+  void deleteSpelllevel(Spelllist spelllist, Spell spell);
 
   /**
    * Create a spell list with name and short name, but without spell assignments.
@@ -107,7 +107,7 @@ public interface SpelllistDao {
    *
    * @return The spell list with the new it from the persistant layer.
    */
-  public Spelllist createSpelllist(Spelllist spelllist);
+  Spelllist createSpelllist(Spelllist spelllist);
 
   /**
    * Delete spellist. Deletes name and short name, but no spell assignments.
@@ -115,7 +115,7 @@ public interface SpelllistDao {
    * @param spelllist
    *     The spell list to delete.
    */
-  public void deleteSpelllist(Spelllist spelllist);
+  void deleteSpelllist(Spelllist spelllist);
 
   /**
    * Update the name and short name of a spell list.
@@ -123,20 +123,20 @@ public interface SpelllistDao {
    * @param spelllist
    *     The spell list to update.
    */
-  public void updateSpelllist(Spelllist spelllist);
+  void updateSpelllist(Spelllist spelllist);
 
   /**
    * Returns all known spells tables.
    *
    * @return All known spells tables.
    */
-  public List<KnownSpellsTable> getAllKnownSpellsTables();
+  List<KnownSpellsTable> getAllKnownSpellsTables();
 
   /**
    * Returns all spells per day tables.
    *
    * @return All spells per day tables.
    */
-  public List<SpellsPerDayTable> getAllSpellsPerDayTables();
+  List<SpellsPerDayTable> getAllSpellsPerDayTables();
 
 }

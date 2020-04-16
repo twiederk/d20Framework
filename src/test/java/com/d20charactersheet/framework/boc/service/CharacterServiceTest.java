@@ -9,7 +9,7 @@ import com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35CharacterStor
 public class CharacterServiceTest extends BaseCharacterServiceTest {
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     final Universe universe = new DnDv35Universe();
     gameSystem = universe.getGameSystem();
     final CharacterClassService characterClassService = gameSystem.getCharacterClassService();
@@ -21,7 +21,7 @@ public class CharacterServiceTest extends BaseCharacterServiceTest {
   }
 
   @Override
-  public void testDeleteCharacter() throws Exception {
+  public void testDeleteCharacter() {
     // can only be implemented with an ImageService
   }
 

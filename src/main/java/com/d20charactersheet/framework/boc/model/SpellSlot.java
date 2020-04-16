@@ -54,8 +54,8 @@ public class SpellSlot implements Serializable {
   public SpellSlot() {
     this.id = NEW_ID;
     this.spell = EMPTY_SPELL;
-    this.spelllistAbilities = new LinkedList<SpelllistAbility>();
-    this.metamagicFeats = new LinkedList<Feat>();
+    this.spelllistAbilities = new LinkedList<>();
+    this.metamagicFeats = new LinkedList<>();
   }
 
   /**
@@ -211,7 +211,7 @@ public class SpellSlot implements Serializable {
    * @return Spell lists the spell must belong to.
    */
   public List<Spelllist> getSpelllists() {
-    final List<Spelllist> spelllists = new LinkedList<Spelllist>();
+    final List<Spelllist> spelllists = new LinkedList<>();
     for (final SpelllistAbility spelllistAbility : spelllistAbilities) {
       final Spelllist spelllist = spelllistAbility.getSpelllist();
       if (!spelllists.contains(spelllist)) {

@@ -49,5 +49,5 @@ public enum SubSchool {
   SUMMONING, /**
    * Teleportation
    */
-  TELEPORTATION;
+  TELEPORTATION
 }

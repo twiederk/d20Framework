@@ -23,6 +23,6 @@ public interface ExportCharacter {
    * @throws Exception
    *     Thrown if the export fails.
    */
-  public void exportCharacters(String gameSystemName, final File exportFile, List<Character> characters) throws Exception;
+  void exportCharacters(String gameSystemName, final File exportFile, List<Character> characters) throws Exception;
 
 }

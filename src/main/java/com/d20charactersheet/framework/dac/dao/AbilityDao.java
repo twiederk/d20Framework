@@ -25,7 +25,7 @@ public interface AbilityDao {
    *
    * @return All abilities.
    */
-  public List<Ability> getAllAbilities(List<Spelllist> allSpelllists, List<KnownSpellsTable> allKnownSpellsTables,
+  List<Ability> getAllAbilities(List<Spelllist> allSpelllists, List<KnownSpellsTable> allKnownSpellsTables,
       List<SpellsPerDayTable> allSpellsPerDayTables);
 
   /**
@@ -36,7 +36,7 @@ public interface AbilityDao {
    *
    * @return The created ability with the id set.
    */
-  public Ability createAbility(Ability ability);
+  Ability createAbility(Ability ability);
 
   /**
    * Updates the ability in the persistent layer.
@@ -44,7 +44,7 @@ public interface AbilityDao {
    * @param ability
    *     The ability to update.
    */
-  public void updateAbility(Ability ability);
+  void updateAbility(Ability ability);
 
   /**
    * Deletes class ability.
@@ -52,7 +52,7 @@ public interface AbilityDao {
    * @param ability
    *     Ability to delete.
    */
-  public void deleteAbility(Ability ability);
+  void deleteAbility(Ability ability);
 
   /**
    * Creates the AbilityBuilderFactory with the given spelllists.
@@ -66,7 +66,7 @@ public interface AbilityDao {
    *
    * @return The AbilityBuilderFactory.
    */
-  public AbilityBuilderFactory createAbilityBuilderFactory(List<Spelllist> allSpelllists,
-      List<KnownSpellsTable> allKnownSpellsTables, List<SpellsPerDayTable> allSpellsPerDayTables);
+  AbilityBuilderFactory createAbilityBuilderFactory(List<Spelllist> allSpelllists, List<KnownSpellsTable> allKnownSpellsTables,
+      List<SpellsPerDayTable> allSpellsPerDayTables);
 
 }

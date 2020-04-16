@@ -67,7 +67,7 @@ public class ExportImportServiceTest {
   private ExportImportService exportImportService;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     final Universe universe = new DnDv35Universe();
     gameSystem = universe.getGameSystem();
     exportImportService = new ExportImportServiceImpl();
@@ -85,7 +85,7 @@ public class ExportImportServiceTest {
     // test note
     final Date noteDate = new SimpleDateFormat("yyyyMMdd HH:mm").parse("20130413 15:30");
     final String noteText = "My test note!";
-    final List<Note> notes = new ArrayList<Note>();
+    final List<Note> notes = new ArrayList<>();
     final Note note = new Note();
     note.setDate(noteDate);
     note.setText(noteText);
@@ -98,7 +98,7 @@ public class ExportImportServiceTest {
     itemGroup.setNumber(2);
     belvador.getEquipment().getArmor().add(itemGroup);
 
-    final List<Character> characters = new LinkedList<Character>();
+    final List<Character> characters = new LinkedList<>();
     characters.add(belvador);
 
     final File exportFile = exportImportService.exportCharacters(gameSystem, EXPORT_CHARACTERS_FILE, characters);

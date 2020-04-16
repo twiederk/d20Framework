@@ -24,16 +24,16 @@ import com.d20charactersheet.framework.dac.dao.BaseClassDaoTest;
 public class DummyClassDaoTest extends BaseClassDaoTest {
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     characterClassDao = new DummyClassDao(CLASS, CLASS_SKILL, CLASS_ABILITY);
     skillDao = new DummySkillDao(SKILL);
     abilityDao = new DummyAbilityDao(ABILITY, ABILITY_PROPERTY);
     spelllistDao = new DummySpelllistDao(SPELL, SPELLLIST, SPELLLIST_SPELL, KNOWN_SPELLS_TABLE, KNOWN_SPELLS_LEVEL,
                                          SPELLS_PER_DAY_TABLE, SPELLS_PER_DAY_LEVEL);
 
-    final List<Ability> allAbilities = abilityDao
-        .getAllAbilities(spelllistDao.getAllSpelllists(spelllistDao.getAllSpells()), spelllistDao.getAllKnownSpellsTables(),
-                         spelllistDao.getAllSpellsPerDayTables());
+    final List<Ability> allAbilities = abilityDao.getAllAbilities(spelllistDao.getAllSpelllists(spelllistDao.getAllSpells()),
+                                                                  spelllistDao.getAllKnownSpellsTables(),
+                                                                  spelllistDao.getAllSpellsPerDayTables());
     allCharacterClasses = characterClassDao.getAllCharacterClasses(skillDao.getAllSkills(), allAbilities);
   }
 

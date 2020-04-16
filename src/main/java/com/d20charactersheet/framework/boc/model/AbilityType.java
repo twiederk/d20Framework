@@ -23,6 +23,6 @@ public enum AbilityType {
   /**
    * Supernatural ability
    */
-  SUPERNATURAL;
+  SUPERNATURAL
 
 }

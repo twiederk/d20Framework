@@ -39,7 +39,7 @@ public class DummyRaceDao implements RaceDao {
   }
 
   private List<Race> selectAllRaces(final List<CharacterClass> allCharacterClasses, final List<Ability> allAbilities) {
-    final List<Race> allRaces = new ArrayList<Race>(raceTable.getNumberOfRows());
+    final List<Race> allRaces = new ArrayList<>(raceTable.getNumberOfRows());
     for (final DataRow dataRow : raceTable) {
       final Race race = selectRace(dataRow, allCharacterClasses, allAbilities);
       allRaces.add(race);
@@ -83,7 +83,7 @@ public class DummyRaceDao implements RaceDao {
   }
 
   private List<Ability> getAbilities(final int raceId, final List<Ability> allAbilities) {
-    final List<Ability> abilities = new ArrayList<Ability>();
+    final List<Ability> abilities = new ArrayList<>();
     for (final DataRow dataRow : raceAbilityTable) {
       if (dataRow.getId() == raceId) {
         final Ability ability = getAbility((Integer) dataRow.get(1), allAbilities);

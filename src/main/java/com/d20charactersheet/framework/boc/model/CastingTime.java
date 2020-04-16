@@ -34,6 +34,6 @@ public enum CastingTime {
   ONE_SWIFT_ACTION, /**
    * Specific casting time
    */
-  SPECIFIC;
+  SPECIFIC
 
 }
