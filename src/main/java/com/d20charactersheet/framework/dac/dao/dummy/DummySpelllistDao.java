@@ -222,6 +222,11 @@ public class DummySpelllistDao implements SpelllistDao {
 
   @Override
   public void createSpelllevel(final Spelllist spelllist, final Spell spell, final int level) {
+    spelllistSpellTable.forEach(dataRow -> {
+      if (dataRow.getInt(0) == spelllist.getId() && dataRow.getInt(1) == spell.getId() && dataRow.getInt(2) == level) {
+        throw new IllegalArgumentException("Spell already added to this spelllist add this level");
+      }
+    });
     spelllistSpellTable.insert(new Object[] {spelllist.getId(), spell.getId(), level});
   }
 

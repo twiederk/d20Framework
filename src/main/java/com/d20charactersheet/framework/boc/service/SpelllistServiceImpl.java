@@ -81,15 +81,18 @@ public class SpelllistServiceImpl implements SpelllistService {
   }
 
   @Override
-  public void createSpelllevel(final Spelllist spelllist, final Spell spell, final int level) {
+  public boolean createSpelllevel(final Spelllist spelllist, final Spell spell, final int level) {
+    if (spelllist.getAllSpells().contains(spell)) {
+      return false;
+    }
     spelllistDao.createSpelllevel(spelllist, spell, level);
     List<Spell> spells = spelllist.getSpellsOfLevel(level);
     if (spells == null) {
-      spells = new ArrayList<Spell>();
+      spells = new ArrayList<>();
     }
     spells.add(spell);
     spelllist.getSpellsByLevel().put(level, spells);
-
+    return true;
   }
 
   @Override

@@ -8,10 +8,14 @@ import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35Spelll
 import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35SpellsPerDayStorage.SPELLS_PER_DAY_LEVEL;
 import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35SpellsPerDayStorage.SPELLS_PER_DAY_TABLE;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -33,7 +37,7 @@ public class SpelllistServiceTest {
   private SpelllistService spelllistService;
 
   @Before
-  public void setUp() throws Exception {
+  public void setUp() {
     spelllistService = new SpelllistServiceImpl(
         new DummySpelllistDao(SPELL, SPELLLIST, SPELLLIST_SPELL, KNOWN_SPELLS_TABLE, KNOWN_SPELLS_LEVEL, SPELLS_PER_DAY_TABLE,
                               SPELLS_PER_DAY_LEVEL));
@@ -55,7 +59,7 @@ public class SpelllistServiceTest {
   }
 
   @Test
-  public void testGetSpellDescription() throws Exception {
+  public void testGetSpellDescription() {
     Spell spell = new Spell();
     spell.setId(1);
 
@@ -66,7 +70,7 @@ public class SpelllistServiceTest {
   }
 
   @Test
-  public void testCreateAndDeleteSpell() throws Exception {
+  public void testCreateAndDeleteSpell() {
     Spell spell = createSpell();
 
     spell = spelllistService.createSpell(spell);
@@ -126,7 +130,7 @@ public class SpelllistServiceTest {
   }
 
   @Test
-  public void testCreateAndDeleteSpelllist() throws Exception {
+  public void testCreateAndDeleteSpelllist() {
     Spelllist spelllist = new Spelllist();
     spelllist.setName("testName");
     spelllist.setShortname("testShortname");
@@ -147,7 +151,69 @@ public class SpelllistServiceTest {
   }
 
   @Test
-  public void testUpdateSpelllist() throws Exception {
+  public void createSpelllevel_spellNewToEmptySpelllist_spellAdded() {
+    // Arrange
+    Spell spell = new Spell();
+    spell.setId(1);
+
+    // Act
+    boolean result = spelllistService.createSpelllevel(new Spelllist(), spell, 1);
+
+    // Assert
+    assertTrue(result);
+  }
+
+  @Test
+  public void createSpelllevel_spellNewToSpelllist_spellAdded() {
+    // Arrange
+    Spell existingSpell = new Spell();
+    existingSpell.setId(1);
+
+    List<Spell> spells = new ArrayList<>();
+    spells.add(existingSpell);
+
+    Map<Integer, List<Spell>> spellsByLevel = new HashMap<>();
+    spellsByLevel.put(1, spells);
+
+    Spelllist spelllist = new Spelllist();
+    spelllist.setSpellsByLevel(spellsByLevel);
+    spelllistService.createSpelllevel(spelllist, existingSpell, 1);
+
+    Spell newSpell = new Spell();
+    newSpell.setId(2);
+
+    // Act
+    boolean result = spelllistService.createSpelllevel(new Spelllist(), newSpell, 1);
+
+    // Assert
+    assertTrue(result);
+  }
+
+  @Test
+  public void createSpelllevel_spellAlreadyPartOfSpelllist_spellNotAdded() {
+    // Arrange
+    Spell spell = new Spell();
+    spell.setId(1);
+
+    List<Spell> spells = new ArrayList<>();
+    spells.add(spell);
+
+    Map<Integer, List<Spell>> spellsByLevel = new HashMap<>();
+    spellsByLevel.put(1, spells);
+
+    Spelllist spelllist = new Spelllist();
+    spelllist.setSpellsByLevel(spellsByLevel);
+    spelllistService.createSpelllevel(spelllist, spell, 1);
+
+    // Act
+    boolean result = spelllistService.createSpelllevel(spelllist, spell, 1);
+
+    // Assert
+    assertFalse(result);
+  }
+
+  @Test
+  public void testUpdateSpelllist() {
     final Spelllist spelllist = spelllistService.getAllSpelllists(spelllistService.getAllSpells()).get(0);
 
     final String originalName = spelllist.getName();
@@ -173,14 +239,14 @@ public class SpelllistServiceTest {
   }
 
   @Test
-  public void testGetAllKnownSpellsTables() throws Exception {
+  public void testGetAllKnownSpellsTables() {
     final List<KnownSpellsTable> allKnownSpellsTables = spelllistService.getAllKnownSpellsTables();
     assertNotNull(allKnownSpellsTables);
     assertEquals(4, allKnownSpellsTables.size());
   }
 
   @Test
-  public void testGetAllSpellsPerDayTables() throws Exception {
+  public void testGetAllSpellsPerDayTables() {
     final List<SpellsPerDayTable> allSpellsPerDayTables = spelllistService.getAllSpellsPerDayTables();
     assertNotNull(allSpellsPerDayTables);
     assertEquals(8, allSpellsPerDayTables.size());

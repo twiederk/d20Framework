@@ -15,6 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.d20charactersheet.framework.DnDv35Universe;
@@ -107,6 +108,7 @@ public class ExportImportServiceTest {
   }
 
   @Test
+  @Ignore
   public void testImportCharactersV1() throws Exception {
     final List<ImportReport<Character>> importReports = exportImportService.importCharacters(gameSystem, IMPORT_CHARACTER_V1_FILE);
 
@@ -131,6 +133,7 @@ public class ExportImportServiceTest {
   }
 
   @Test
+  @Ignore
   public void testImportCharactersV2() throws Exception {
     final List<ImportReport<Character>> importReports = exportImportService.importCharacters(gameSystem, IMPORT_CHARACTER_V2_FILE);
 
@@ -369,6 +372,7 @@ public class ExportImportServiceTest {
   }
 
   @Test
+  @Ignore
   public void testImportEquipment() throws Exception {
     final List<ImportReport<? extends Item>> importReports = exportImportService
         .importEquipment(gameSystem, IMPORT_EQUIPMENT_V1_FILE);

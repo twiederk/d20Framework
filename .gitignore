@@ -1,2 +1,9 @@
+# IntelliJ
 .idea
+
+# maven
 target
+
+# project management
+misc
+ToDos.txt

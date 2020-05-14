@@ -11,6 +11,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -39,6 +40,7 @@ public class ImportFactoryTest {
   }
 
   @Test
+  @Ignore
   public void testGetImportCharacter() throws Exception {
     final ImportContext importContext = new ImportContext();
     importContext.setGameSystemName(gameSystem.getName());
@@ -48,6 +50,7 @@ public class ImportFactoryTest {
   }
 
   @Test
+  @Ignore
   public void testGetImportEquipment() throws Exception {
     final ImportContext importContext = new ImportContext();
     importContext.setGameSystemName(gameSystem.getName());

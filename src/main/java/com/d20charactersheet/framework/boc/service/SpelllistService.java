@@ -99,7 +99,7 @@ public interface SpelllistService {
    * @param level
    *     The level to assign the spell to the spell list.
    */
-  public void createSpelllevel(Spelllist spelllist, Spell spell, int level);
+  public boolean createSpelllevel(Spelllist spelllist, Spell spell, int level);
 
   /**
    * Update a spell assignment.
