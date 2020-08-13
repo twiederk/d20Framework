@@ -82,7 +82,11 @@ public class SpellsPerDayTable {
    * @return The number of spells per day according to caster and spell level.
    */
   public int getSpellsPerDay(final int spellcasterLevel, final int spellLevel) {
-    return spellsPerDay[spellcasterLevel - 1][spellLevel];
+    try {
+      return spellsPerDay[spellcasterLevel - 1][spellLevel];
+    } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
+      return NO_ACCESS;
+    }
   }
 
   @Override
@@ -110,10 +114,7 @@ public class SpellsPerDayTable {
       return false;
     }
     final SpellsPerDayTable other = (SpellsPerDayTable) obj;
-    if (id != other.id) {
-      return false;
-    }
-    return true;
+    return id == other.id;
   }
 
 }
