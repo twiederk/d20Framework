@@ -1,11 +1,11 @@
 package com.d20charactersheet.framework.boc.model;
 
+import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * The body of a humanoid character.
@@ -21,10 +21,8 @@ public class HumanoidBody implements Body {
     bodySlots = new HashMap<>();
     EnumSet<BodyPart> humanoidBodyParts = EnumSet.allOf(BodyPart.class);
     humanoidBodyParts.remove(BodyPart.NONE);
-    try {
-      humanoidBodyParts.forEach(bodyPart -> bodySlots.put(bodyPart, Item.EMPTY_ITEM));
-    } catch (NoClassDefFoundError noClassDefFoundError) {
-      // problem occured with static access to this::clear on Lenovo devices with Android 6
+    for (BodyPart bodyPart : humanoidBodyParts) {
+      bodySlots.put(bodyPart, Item.EMPTY_ITEM);
     }
   }
 
@@ -50,6 +48,12 @@ public class HumanoidBody implements Body {
 
   @Override
   public List<Item> getEquippedItems() {
-    return bodySlots.values().stream().filter(item -> !item.equals(Item.EMPTY_ITEM)).collect(Collectors.toList());
+    List<Item> equippedItems = new ArrayList<>();
+    for (Item item : bodySlots.values()) {
+      if (!item.equals(Item.EMPTY_ITEM)) {
+        equippedItems.add(item);
+      }
+    }
+    return equippedItems;
   }
 }

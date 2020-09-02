@@ -1,7 +1,6 @@
 package com.d20charactersheet.framework.dac.dao;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
@@ -18,17 +17,25 @@ public abstract class BaseFeatDaoTest {
 
   @Test
   public void testGetAllFeats() {
+
+    // Act
     final List<Feat> allFeats = featDao.getAllFeats();
-    assertNotNull(allFeats);
-    assertEquals(109, allFeats.size());
+
+    // Assert
+    assertThat(allFeats).hasSize(109);
   }
 
   @Test
   public void testGetFeatsOfCharacter() {
+    // Arrange
     final Character belvador = new Character();
     belvador.setId(0);
+
+    // Act
     final List<CharacterFeat> characterFeats = characterDao.getCharacterFeats(belvador, featDao.getAllFeats());
-    assertNotNull(characterFeats);
-    assertEquals(3, characterFeats.size());
+
+    // Assert
+    assertThat(characterFeats).hasSize(3);
   }
+
 }

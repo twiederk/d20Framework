@@ -39,8 +39,7 @@ public class PathfinderRuleServiceImpl extends AbstractRuleServiceImpl {
   public int getSkillModifier(final Character character, final CharacterSkill characterSkill) {
     final int attributeModifier = getAttributeModifier(character, characterSkill.getSkill().getAttribute());
     final int skillBoost = getSkillBoost(character, characterSkill);
-    final int skillModifier = attributeModifier + skillBoost + (int) characterSkill.getRank() + characterSkill.getModifier();
-    return skillModifier;
+    return attributeModifier + skillBoost + (int) characterSkill.getRank() + characterSkill.getModifier();
   }
 
   int getSkillBoost(final Character character, final CharacterSkill characterSkill) {
@@ -103,19 +102,15 @@ public class PathfinderRuleServiceImpl extends AbstractRuleServiceImpl {
       case MEDIUM:
         return 0;
       case LARGE_LONG:
-        return 1;
       case LARGE_TALL:
         return 1;
       case HUGE_LONG:
-        return 2;
       case HUGE_TALL:
         return 2;
       case GARGANTUAN_LONG:
-        return 4;
       case GARGANTUAN_TALL:
         return 4;
       case COLOSSAL_LONG:
-        return 8;
       case COLOSSAL_TALL:
         return 8;
       default:

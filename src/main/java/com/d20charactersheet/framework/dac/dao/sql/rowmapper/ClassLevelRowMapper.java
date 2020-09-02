@@ -1,13 +1,14 @@
 package com.d20charactersheet.framework.dac.dao.sql.rowmapper;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 
 import com.d20charactersheet.framework.boc.model.CharacterClass;
 import com.d20charactersheet.framework.boc.model.ClassLevel;
-import com.d20charactersheet.framework.dac.dao.DataRow;
-import com.d20charactersheet.framework.dac.dao.RowMapper;
+import com.d20charactersheet.framework.dac.dao.sql.DataRow;
+import com.d20charactersheet.framework.dac.dao.sql.RowMapper;
 
 /**
  * Maps a row of the table character_class_level to a ClassLevel object.
@@ -31,7 +32,7 @@ public class ClassLevelRowMapper implements RowMapper {
      */
     @NotNull
     @Override
-    public Object mapRow(@NotNull DataRow dataRow) throws java.sql.SQLException {
+    public Object mapRow(@NotNull DataRow dataRow) throws SQLException {
         // id, charakter_class_id, level
         final CharacterClass characterClass = getCharacterClass(dataRow.getInt(1));
         final ClassLevel classLevel = new ClassLevel(characterClass);

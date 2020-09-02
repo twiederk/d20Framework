@@ -135,8 +135,7 @@ public class ImportCharacterV2Xml extends ImportCharacterV1Xml {
     protected NodeList getItemNodes(final Node characterElement, final int index) {
       final Node equipmentElement = characterElement.getChildNodes().item(NODE_INDEX_EQUIPMENT);
       final Node itemsNode = equipmentElement.getChildNodes().item(index);
-      final NodeList itemNodes = itemsNode.getChildNodes();
-      return itemNodes;
+      return itemsNode.getChildNodes();
     }
   }
 

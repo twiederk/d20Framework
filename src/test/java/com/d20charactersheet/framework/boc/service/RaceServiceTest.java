@@ -1,5 +1,6 @@
 package com.d20charactersheet.framework.boc.service;
 
+import static com.d20charactersheet.framework.boc.model.CharacterClass.AnyCharacterClass.ANY_CHARACTER_CLASS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -7,13 +8,13 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import com.d20charactersheet.framework.DnDv35Universe;
 import com.d20charactersheet.framework.boc.model.Ability;
-import com.d20charactersheet.framework.boc.model.CharacterClass;
 import com.d20charactersheet.framework.boc.model.Race;
 import com.d20charactersheet.framework.boc.model.Size;
 
@@ -47,7 +48,7 @@ public class RaceServiceTest {
     race.setName("testName");
     race.setSize(Size.MEDIUM);
     race.setBaseLandSpeed(30);
-    race.setFavoredCharacterClass(CharacterClass.ANY_CHARACTER_CLASS);
+    race.setFavoredCharacterClass(ANY_CHARACTER_CLASS);
     race.setAbilities(createAbilities());
     return race;
   }
@@ -63,29 +64,29 @@ public class RaceServiceTest {
 
   @Test
   public void testUpdateRace() {
-    final Race originalRace = getRaceById(0);
+    final Race originalRace = getRaceById();
     final Race updateRace = createRace();
-    updateRace.setId(originalRace.getId());
+    updateRace.setId(Objects.requireNonNull(originalRace).getId());
     raceService.updateRace(updateRace);
     gameSystem.clear();
 
-    final Race updatedRace = getRaceById(0);
-    assertEquals("testName", updatedRace.getName());
+    final Race updatedRace = getRaceById();
+    assertEquals("testName", Objects.requireNonNull(updatedRace).getName());
     assertEquals(Size.MEDIUM, updatedRace.getSize());
     assertEquals(30, updatedRace.getBaseLandSpeed());
-    assertEquals(CharacterClass.ANY_CHARACTER_CLASS, updatedRace.getFavoredCharacterClass());
+    assertEquals(ANY_CHARACTER_CLASS, updatedRace.getFavoredCharacterClass());
     assertEquals(10, updatedRace.getAbilities().size());
 
     raceService.updateRace(originalRace);
   }
 
-  private Race getRaceById(final int raceId) {
+  private Race getRaceById() {
     for (final Race race : gameSystem.getAllRaces()) {
-      if (race.getId() == raceId) {
+      if (race.getId() == 0) {
         return race;
       }
     }
-    fail("Can't get race by id " + raceId);
+    fail("Can't get race by id " + 0);
     return null;
   }
 }

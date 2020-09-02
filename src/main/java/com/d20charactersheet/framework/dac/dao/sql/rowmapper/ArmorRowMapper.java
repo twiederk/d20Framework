@@ -1,11 +1,12 @@
 package com.d20charactersheet.framework.dac.dao.sql.rowmapper;
 
+import java.sql.SQLException;
+
 import org.jetbrains.annotations.NotNull;
 
 import com.d20charactersheet.framework.boc.model.Armor;
 import com.d20charactersheet.framework.boc.model.ArmorType;
-import com.d20charactersheet.framework.dac.dao.BaseRowMapper;
-import com.d20charactersheet.framework.dac.dao.DataRow;
+import com.d20charactersheet.framework.dac.dao.sql.DataRow;
 
 /**
  * Maps an armor from the persistent layer to an Armor object.
@@ -14,7 +15,7 @@ public class ArmorRowMapper extends BaseRowMapper {
 
     @NotNull
     @Override
-    public Object mapRow(@NotNull DataRow dataRow) throws java.sql.SQLException {
+    public Object mapRow(@NotNull DataRow dataRow) throws SQLException {
         // armor.id, armor_text.name, cost, weight, armor_bonus, armor_penalty, armor_type_id
         final Armor armor = new Armor();
         armor.setId(dataRow.getInt(0));

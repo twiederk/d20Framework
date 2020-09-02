@@ -147,10 +147,7 @@ public class Skill implements Serializable {
       return false;
     }
     final Skill other = (Skill) obj;
-    if (id != other.id) {
-      return false;
-    }
-    return true;
+    return id == other.id;
   }
 
 }

@@ -1,9 +1,8 @@
 package com.d20charactersheet.framework.dac.dao;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static com.d20charactersheet.framework.boc.model.CharacterClass.AnyCharacterClass.ANY_CHARACTER_CLASS;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +24,12 @@ public abstract class BaseRaceDaoTest {
 
   @Test
   public void testGetAllRaces() {
+
+    // Act
     final List<Race> allRaces = getAllRaces();
-    assertNotNull(allRaces);
-    assertEquals(19, allRaces.size());
+
+    // Assert
+    assertThat(allRaces).hasSize(19);
   }
 
   private List<Race> getAllRaces() {
@@ -37,39 +39,46 @@ public abstract class BaseRaceDaoTest {
 
     final List<CharacterClass> allCharacterClasses = characterClassDao
         .getAllCharacterClasses(skillDao.getAllSkills(), allAbilities);
-    final List<Race> allRaces = raceDao.getAllRaces(allCharacterClasses, allAbilities);
-    return allRaces;
+    return raceDao.getAllRaces(allCharacterClasses, allAbilities);
   }
 
   @Test
   public void testRaceHuman() {
-    final List<Ability> allAbilities = abilityDao.getAllAbilities(spelllistDao.getAllSpelllists(spelllistDao.getAllSpells()),
-                                                                  spelllistDao.getAllKnownSpellsTables(),
-                                                                  spelllistDao.getAllSpellsPerDayTables());
+
+    // Arrange
+    final List<Ability> allAbilities = abilityDao
+        .getAllAbilities(spelllistDao.getAllSpelllists(spelllistDao.getAllSpells()), spelllistDao.getAllKnownSpellsTables(),
+                         spelllistDao.getAllSpellsPerDayTables());
     final List<CharacterClass> characterClasses = characterClassDao.getAllCharacterClasses(skillDao.getAllSkills(), allAbilities);
     final List<Race> races = raceDao.getAllRaces(characterClasses, allAbilities);
-    final Race human = races.get(0);
-    assertHuman(human);
-  }
 
-  private void assertHuman(final Race human) {
-    assertNotNull(human);
-    assertEquals(0, human.getId());
-    assertEquals("Human", human.getName());
+    // Act
+    final Race human = races.get(0);
+
+    // Assert
+    assertThat(human).isNotNull();
+    assertThat(human.getId()).isEqualTo(0);
+    assertThat(human.getName()).isEqualTo("Human");
   }
 
   @Test
   public void testCreateRace() {
-    Race race = raceDao.createRace(createRace());
-    assertNotNull(race);
-    assertTrue(race.getId() > 0);
+    // Arrange
+    Race raceToCreate = createRace();
 
-    race = getRaceFromService(race.getId());
+    // Act
+    Race createdRace = raceDao.createRace(raceToCreate);
 
-    assertRace(race);
+    // Assert
+    assertThat(createdRace).isNotNull();
+    assertThat(createdRace.getId()).isNotEqualTo(0);
 
-    raceDao.deleteRace(race);
+    Race persistedRace = getRaceFromService(createdRace.getId());
+    assertThat(persistedRace).isNotNull();
+    assertRace(persistedRace);
 
+    // tear down
+    raceDao.deleteRace(persistedRace);
   }
 
   private Race createRace() {
@@ -83,9 +92,9 @@ public abstract class BaseRaceDaoTest {
   }
 
   private List<Ability> createAbilities() {
-    final List<Ability> allAbilities = abilityDao.getAllAbilities(spelllistDao.getAllSpelllists(spelllistDao.getAllSpells()),
-                                                                  spelllistDao.getAllKnownSpellsTables(),
-                                                                  spelllistDao.getAllSpellsPerDayTables());
+    final List<Ability> allAbilities = abilityDao
+        .getAllAbilities(spelllistDao.getAllSpelllists(spelllistDao.getAllSpells()), spelllistDao.getAllKnownSpellsTables(),
+                         spelllistDao.getAllSpellsPerDayTables());
     final List<Ability> abilities = new ArrayList<>();
     for (int i = 0; i < 10; i++) {
       abilities.add(allAbilities.get(i));
@@ -103,12 +112,6 @@ public abstract class BaseRaceDaoTest {
     return null;
   }
 
-  private void assertAbilities(final Race race) {
-    final List<Ability> abilities = race.getAbilities();
-    assertNotNull(abilities);
-    assertEquals(10, abilities.size());
-  }
-
   private CharacterClass getBarbarian() {
     final List<Ability> allAbilities = abilityDao
         .getAllAbilities(spelllistDao.getAllSpelllists(spelllistDao.getAllSpells()), spelllistDao.getAllKnownSpellsTables(),
@@ -120,39 +123,47 @@ public abstract class BaseRaceDaoTest {
 
   @Test
   public void testUpdateRace() {
-    final Race originalRace = getRaceById(0);
+    // Arrange
+    final Race originalRace = getRaceById();
     final Race updateRace = createRace();
 
+    // Act
     raceDao.updateRace(updateRace);
 
-    final Race updatedRace = getRaceById(0);
+    // Assert
+    final Race updatedRace = getRaceById();
+    assertThat(updatedRace).isNotNull();
     assertRace(updatedRace);
 
+    // tear down
     raceDao.updateRace(originalRace);
   }
 
   private void assertRace(final Race race) {
-    assertEquals("testName", race.getName());
-    assertEquals(Size.MEDIUM, race.getSize());
-    assertEquals(30, race.getBaseLandSpeed());
-    assertEquals(getBarbarian(), race.getFavoredCharacterClass());
-    assertAbilities(race);
+    assertThat(race.getName()).isEqualTo("testName");
+    assertThat(race.getSize()).isEqualTo(Size.MEDIUM);
+    assertThat(race.getBaseLandSpeed()).isEqualTo(30);
+    assertThat(race.getFavoredCharacterClass()).isEqualTo(getBarbarian());
+
+    final List<Ability> abilities = race.getAbilities();
+    assertThat(abilities).isNotNull();
+    assertThat(abilities.size()).isEqualTo(10);
   }
 
-  private Race getRaceById(final int raceId) {
+  private Race getRaceById() {
     for (final Race race : getAllRaces()) {
-      if (race.getId() == raceId) {
+      if (race.getId() == 0) {
         fixSettingOfAnyCharacterClass(race);
         return race;
       }
     }
-    fail("Can't get race by id " + raceId);
+    fail("Can't get race by id " + 0);
     return null;
   }
 
   private void fixSettingOfAnyCharacterClass(final Race race) {
     if (race.getFavoredCharacterClass() == null) {
-      race.setFavoredCharacterClass(CharacterClass.ANY_CHARACTER_CLASS);
+      race.setFavoredCharacterClass(ANY_CHARACTER_CLASS);
     }
   }
 }

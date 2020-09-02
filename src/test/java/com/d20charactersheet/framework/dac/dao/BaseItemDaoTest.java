@@ -1,9 +1,6 @@
 package com.d20charactersheet.framework.dac.dao;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
@@ -34,62 +31,80 @@ public abstract class BaseItemDaoTest {
 
   @Test
   public void testGetAllWeapons() {
+    // Arrange
     final List<WeaponFamily> allWeaponTypes = itemDao.getAllWeaponFamilies();
+
+    // Act
     final List<Weapon> weapons = itemDao.getAllWeapons(allWeaponTypes);
-    assertNotNull(weapons);
-    assertEquals(110, weapons.size());
+
+    // Assert
+    assertThat(weapons).hasSize(110);
   }
 
   @Test
   public void testWeapon() {
+    // Arrange
     final List<WeaponFamily> allWeaponTypes = itemDao.getAllWeaponFamilies();
     final List<Weapon> allWeapons = itemDao.getAllWeapons(allWeaponTypes);
-    final Weapon silverDagger = getWeaponByName("Silver Dagger", allWeapons);
-    assertEquals("Silver Dagger", silverDagger.getName());
-    assertEquals(322.0f, silverDagger.getCost(), 0.0f);
-    assertEquals(1.0f, silverDagger.getWeight(), 0.0f);
-    assertEquals(19, silverDagger.getCritical()
-        .getHit());
-    assertEquals(2, silverDagger.getCritical()
-        .getMultiplier());
-    assertEquals(WeaponType.SIMPLE, silverDagger.getWeaponType());
-    assertEquals(CombatType.MELEE_WEAPON, silverDagger.getCombatType());
-    assertEquals(WeaponEncumbrance.LIGHT_HANDED, silverDagger.getWeaponEncumbrance());
-    assertEquals(WeaponCategory.NORMAL_WEAPON, silverDagger.getWeaponCategory());
+
+    // Act
+    final Weapon silverDagger = getWeaponByName(allWeapons);
+
+    // Assert
+    assertThat(silverDagger.getName()).isEqualTo("Silver Dagger");
+    assertThat(silverDagger.getCost()).isEqualTo(322.0f);
+    assertThat(silverDagger.getWeight()).isEqualTo(1.0f);
+    assertThat(silverDagger.getCritical().getHit()).isEqualTo(19);
+    assertThat(silverDagger.getCritical().getMultiplier()).isEqualTo(2);
+    assertThat(silverDagger.getWeaponType()).isEqualTo(WeaponType.SIMPLE);
+    assertThat(silverDagger.getCombatType()).isEqualTo(CombatType.MELEE_WEAPON);
+    assertThat(silverDagger.getWeaponEncumbrance()).isEqualTo(WeaponEncumbrance.LIGHT_HANDED);
+    assertThat(silverDagger.getWeaponCategory()).isEqualTo(WeaponCategory.NORMAL_WEAPON);
 
   }
 
-  private Weapon getWeaponByName(final String name, final List<Weapon> allWeapons) {
+  private Weapon getWeaponByName(final List<Weapon> allWeapons) {
     for (final Weapon weapon : allWeapons) {
-      if (weapon.getName().equals(name)) {
+      if (weapon.getName().equals("Silver Dagger")) {
         return weapon;
       }
     }
-    throw new IllegalArgumentException("Can't find weapon with name: " + name);
+    throw new IllegalArgumentException("Can't find weapon with name: " + "Silver Dagger");
   }
 
   @Test
   public void testGetAllArmor() {
+
+    // Act
     final List<Armor> armor = itemDao.getAllArmor();
-    assertNotNull(armor);
-    assertEquals(38, armor.size());
+
+    // Assert
+    assertThat(armor).hasSize(38);
   }
 
   @Test
   public void testGetAllGoods() {
+    // Arrange
+
+    // Act
     final List<Good> goods = itemDao.getAllGoods();
-    assertNotNull(goods);
-    assertEquals(131, goods.size());
+
+    // Assert
+    assertThat(goods).hasSize(131);
   }
 
   @Test
   public void testGetWeaponsOfBelvador() {
+    // Arrange
     final Character character = new Character();
     character.setId(0);
     final List<WeaponFamily> allWeaponTypes = itemDao.getAllWeaponFamilies();
+
+    // Act
     final List<ItemGroup> weapons = characterDao.getWeapons(character, itemDao.getAllWeapons(allWeaponTypes));
-    assertNotNull(weapons);
-    assertEquals(3, weapons.size());
+
+    // Assert
+    assertThat(weapons).hasSize(3);
     assertItem(weapons.get(0), "Quarterstaff", "A quarterstaff is a double weapon.", 1);
     assertItem(weapons.get(1), "Crossbow, light", "You draw a light crossbow back by pulling a lever.", 1);
     assertItem(weapons.get(2), "Bolts, crossbow (10)",
@@ -99,20 +114,28 @@ public abstract class BaseItemDaoTest {
 
   @Test
   public void testGetArmorOfBelvador() {
+    // Arrange
     final Character character = new Character();
     character.setId(0);
+
+    // Act
     final List<ItemGroup> armor = characterDao.getArmor(character, itemDao.getAllArmor());
-    assertNotNull(armor);
-    assertEquals(0, armor.size());
+
+    // Assert
+    assertThat(armor).isEmpty();
   }
 
   @Test
   public void testGetGoodsOfBelvador() {
+    // Arrange
     final Character character = new Character();
     character.setId(0);
+
+    // Act
     final List<ItemGroup> goods = characterDao.getGoods(character, itemDao.getAllGoods());
-    assertNotNull(goods);
-    assertEquals(19, goods.size());
+
+    // Assert
+    assertThat(goods).hasSize(19);
     assertItem(goods.get(0), "Backpack", "A backpack is a leather pack carried on the back, typically with straps to secure it.",
                1);
     assertItem(goods.get(1), "Waterskin", "A waterskin is a leather pouch with a narrow neck that is used for holding water.", 1);
@@ -122,17 +145,24 @@ public abstract class BaseItemDaoTest {
   }
 
   private void assertItem(final ItemGroup itemGroup, final String name, final String description, final int number) {
-    assertEquals(name, itemGroup.getItem().getName());
-    assertTrue(itemGroup.getItem().getDescription().startsWith(description));
-    assertEquals(number, itemGroup.getNumber());
+    assertThat(itemGroup.getItem().getName()).isEqualTo(name);
+    assertThat(itemGroup.getItem().getDescription()).startsWith(description);
+    assertThat(itemGroup.getNumber()).isEqualTo(number);
   }
 
   @Test
   public void testCreateWeapon() {
+    // Arrange
     Weapon weapon = createWeapon();
+
+    // Act
     weapon = itemDao.createWeapon(weapon);
-    assertNotNull(weapon);
-    assertTrue(weapon.getId() > 0);
+
+    // Assert
+    assertThat(weapon).isNotNull();
+    assertThat(weapon.getId()).isGreaterThan(0);
+
+    // tear down
     itemDao.deleteWeapon(weapon);
   }
 
@@ -158,6 +188,7 @@ public abstract class BaseItemDaoTest {
 
   @Test
   public void testUpdateWeapon() {
+    // Arrange
     final List<WeaponFamily> allWeaponTypes = itemDao.getAllWeaponFamilies();
     Weapon weapon = itemDao.getAllWeapons(allWeaponTypes).get(0);
     final Weapon backup = backupWeapon(weapon);
@@ -178,8 +209,10 @@ public abstract class BaseItemDaoTest {
     weaponFamily.setName("testWeaponFamily");
     weapon.setWeaponFamily(weaponFamily);
 
+    // Act
     itemDao.updateWeapon(weapon);
 
+    // Assert
     weapon = (Weapon) getItemById(weaponId, itemDao.getAllWeapons(allWeaponTypes));
     assertWeaponUpdate(weapon);
 
@@ -215,26 +248,33 @@ public abstract class BaseItemDaoTest {
   }
 
   private void assertWeaponUpdate(final Weapon weapon) {
-    assertNotNull(weapon);
-    assertEquals("testUpdate", weapon.getName());
-    assertEquals(WeaponType.EXOTIC, weapon.getWeaponType());
-    assertEquals(10.0f, weapon.getCost(), 0.0f);
-    assertEquals(100.0f, weapon.getWeight(), 0.0f);
-    assertFalse(weapon.isMagic());
-    assertEquals(1, weapon.getDamage().getNumberOfDice());
-    assertEquals(Die.D10, weapon.getDamage().getDie());
-    assertEquals(0, weapon.getEnhancementBonus());
-    assertEquals(20, weapon.getCritical().getHit());
-    assertEquals(2, weapon.getCritical().getMultiplier());
-    assertEquals("testUpdateDescription", weapon.getDescription());
+    assertThat(weapon).isNotNull();
+    assertThat(weapon.getName()).isEqualTo("testUpdate");
+    assertThat(weapon.getWeaponType()).isEqualTo(WeaponType.EXOTIC);
+    assertThat(weapon.getCost()).isEqualTo(10.0f);
+    assertThat(weapon.getWeight()).isEqualTo(100.0f);
+    assertThat(weapon.isMagic()).isFalse();
+    assertThat(weapon.getDamage().getNumberOfDice()).isEqualTo(1);
+    assertThat(weapon.getDamage().getDie()).isEqualTo(Die.D10);
+    assertThat(weapon.getEnhancementBonus()).isEqualTo(0);
+    assertThat(weapon.getCritical().getHit()).isEqualTo(20);
+    assertThat(weapon.getCritical().getMultiplier()).isEqualTo(2);
+    assertThat(weapon.getDescription()).isEqualTo("testUpdateDescription");
   }
 
   @Test
   public void testCreateArmor() {
+    // Arrange
     Armor armor = createArmor();
+
+    // Act
     armor = itemDao.createArmor(armor);
-    assertNotNull(armor);
-    assertTrue(armor.getId() > 0);
+
+    // Assert
+    assertThat(armor).isNotNull();
+    assertThat(armor.getId()).isGreaterThan(0);
+
+    // tear down
     itemDao.deleteArmor(armor);
   }
 
@@ -253,6 +293,7 @@ public abstract class BaseItemDaoTest {
 
   @Test
   public void testUpdateArmor() {
+    // Arrange
     Armor armor = itemDao.getAllArmor().get(0);
     final Armor backup = backupArmor(armor);
     final int armorId = armor.getId();
@@ -265,8 +306,10 @@ public abstract class BaseItemDaoTest {
     armor.setArmorCheckPenalty(-1);
     armor.setDescription("testUpdateDescription");
 
+    // Act
     itemDao.updateArmor(armor);
 
+    // Assert
     armor = (Armor) getItemById(armorId, itemDao.getAllArmor());
     assertArmorUpdate(armor);
 
@@ -289,23 +332,30 @@ public abstract class BaseItemDaoTest {
   }
 
   private void assertArmorUpdate(final Armor armor) {
-    assertNotNull(armor);
-    assertEquals("testUpdate", armor.getName());
-    assertEquals(ArmorType.LIGHT, armor.getArmorType());
-    assertEquals(10.0f, armor.getCost(), 0.0f);
-    assertEquals(100.0f, armor.getWeight(), 0.0f);
-    assertFalse(armor.isMagic());
-    assertEquals(1, armor.getArmorBonus());
-    assertEquals(-1, armor.getArmorCheckPenalty());
-    assertEquals("testUpdateDescription", armor.getDescription());
+    assertThat(armor).isNotNull();
+    assertThat(armor.getName()).isEqualTo("testUpdate");
+    assertThat(armor.getArmorType()).isEqualTo(ArmorType.LIGHT);
+    assertThat(armor.getCost()).isEqualTo(10.0f);
+    assertThat(armor.getWeight()).isEqualTo(100.0f);
+    assertThat(armor.isMagic()).isFalse();
+    assertThat(armor.getArmorBonus()).isEqualTo(1);
+    assertThat(armor.getArmorCheckPenalty()).isEqualTo(-1);
+    assertThat(armor.getDescription()).isEqualTo("testUpdateDescription");
   }
 
   @Test
   public void testCreateGood() {
+    // Arrange
     Good good = createGood();
+
+    // Act
     good = itemDao.createGood(good);
-    assertNotNull(good);
-    assertTrue(good.getId() > 0);
+
+    // Assert
+    assertThat(good).isNotNull();
+    assertThat(good.getId()).isGreaterThan(0);
+
+    // tear down
     itemDao.deleteGood(good);
   }
 
@@ -322,6 +372,7 @@ public abstract class BaseItemDaoTest {
 
   @Test
   public void testUpdateGood() {
+    // Arrange
     Good good = itemDao.getAllGoods().get(0);
     final Good backup = backupGood(good);
     final int goodId = good.getId();
@@ -332,8 +383,10 @@ public abstract class BaseItemDaoTest {
     good.setQualityType(QualityType.NORMAL);
     good.setDescription("testUpdateDescription");
 
+    // Act
     itemDao.updateGood(good);
 
+    // Assert
     good = (Good) getItemById(goodId, itemDao.getAllGoods());
     assertGoodUpdate(good);
 
@@ -354,13 +407,13 @@ public abstract class BaseItemDaoTest {
   }
 
   private void assertGoodUpdate(final Good good) {
-    assertNotNull(good);
-    assertEquals("testUpdate", good.getName());
-    assertEquals(GoodType.CLOTHING, good.getGoodType());
-    assertEquals(10.0f, good.getCost(), 0.0f);
-    assertEquals(100.0f, good.getWeight(), 0.0f);
-    assertFalse(good.isMagic());
-    assertEquals("testUpdateDescription", good.getDescription());
+    assertThat(good).isNotNull();
+    assertThat(good.getName()).isEqualTo("testUpdate");
+    assertThat(good.getGoodType()).isEqualTo(GoodType.CLOTHING);
+    assertThat(good.getCost()).isEqualTo(10.0f);
+    assertThat(good.getWeight()).isEqualTo(100.0f);
+    assertThat(good.isMagic()).isFalse();
+    assertThat(good.getDescription()).isEqualTo("testUpdateDescription");
   }
 
 }

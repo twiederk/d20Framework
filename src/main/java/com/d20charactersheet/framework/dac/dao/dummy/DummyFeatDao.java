@@ -70,20 +70,18 @@ public class DummyFeatDao implements FeatDao {
    * @see com.d20charactersheet.framework.dac.dao.FeatDao#createFeat(com.d20charactersheet.framework.boc.model.Feat)
    */
   @Override
-  public Feat createFeat(final Feat feat) {
+  public void createFeat(final Feat feat) {
     feat.setId(featTable.getNewId());
     insertFeat(feat);
-    return feat;
   }
 
   /**
    * @see com.d20charactersheet.framework.dac.dao.FeatDao#updateFeat(com.d20charactersheet.framework.boc.model.Feat)
    */
   @Override
-  public Feat updateFeat(final Feat feat) {
+  public void updateFeat(final Feat feat) {
     deleteFeat(feat);
     insertFeat(feat);
-    return feat;
   }
 
   private void insertFeat(final Feat feat) {

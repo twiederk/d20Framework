@@ -211,10 +211,9 @@ public class DummyClassDao implements ClassDao {
    * @see com.d20charactersheet.framework.dac.dao.ClassDao#createCharacterClass(com.d20charactersheet.framework.boc.model.CharacterClass)
    */
   @Override
-  public CharacterClass createCharacterClass(final CharacterClass characterClass) {
+  public void createCharacterClass(final CharacterClass characterClass) {
     characterClass.setId(characterClassTable.getNewId());
     insertCharacterClass(characterClass);
-    return characterClass;
   }
 
   /**

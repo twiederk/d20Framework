@@ -2,9 +2,7 @@ package com.d20charactersheet.framework.dac.dao;
 
 import static com.d20charactersheet.framework.boc.service.ImageService.DEFAULT_CHARACTER_IMAGE_ID;
 import static com.d20charactersheet.framework.boc.service.ImageService.DEFAULT_THUMB_IMAGE_ID;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 
@@ -14,16 +12,25 @@ public abstract class BaseImageDaoTest {
 
   @Test
   public void testGetImage() {
+
+    // Act
     final byte[] imageData = imageDao.getImage(DEFAULT_CHARACTER_IMAGE_ID);
-    assertNotNull(imageData);
+
+    // Assert
+    assertThat(imageData).isNotNull();
   }
 
   @Test
   public void testCreateImage() {
+    // Arrange
     final byte[] imageData = imageDao.getImage(DEFAULT_CHARACTER_IMAGE_ID);
+
+    // Act
     final int imageId = imageDao.createImage(imageData);
-    assertTrue(imageId != DEFAULT_CHARACTER_IMAGE_ID);
-    assertTrue(imageId != DEFAULT_THUMB_IMAGE_ID);
+
+    // Assert
+    assertThat(imageId).isNotEqualTo(DEFAULT_CHARACTER_IMAGE_ID);
+    assertThat(imageId).isNotEqualTo(DEFAULT_THUMB_IMAGE_ID);
 
     // clean up
     imageDao.deleteImage(imageId);
@@ -31,10 +38,14 @@ public abstract class BaseImageDaoTest {
 
   @Test
   public void testDeleteImage() {
+    // Arrange
     byte[] imageData = imageDao.getImage(DEFAULT_CHARACTER_IMAGE_ID);
     final int imageId = imageDao.createImage(imageData);
+
+    // Act
     imageDao.deleteImage(imageId);
-    imageData = imageDao.getImage(imageId);
-    assertNull(imageData);
+
+    // Assert
+    assertThat(imageDao.getImage(imageId)).isNull();
   }
 }

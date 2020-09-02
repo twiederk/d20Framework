@@ -449,8 +449,7 @@ public class ImportCharacterV1Xml extends XmlImport implements ImportCharacter {
     private Date getDate(final Node dateNode, final DateFormat dateFormat, final ImportReport<Character> importReport) {
       try {
         final String textContent = dateNode.getTextContent();
-        final Date date = dateFormat.parse(textContent);
-        return date;
+        return dateFormat.parse(textContent);
       } catch (final ParseException parseException) {
         parseException.printStackTrace();
         final String message = "Can't parse date of note, use current date instead";
@@ -769,8 +768,7 @@ public class ImportCharacterV1Xml extends XmlImport implements ImportCharacter {
     protected NodeList getItemNodes(final Node characterElement, final int index) {
       final Node equipmentElement = characterElement.getChildNodes().item(NODE_INDEX_EQUIPMENT);
       final Node itemsNode = equipmentElement.getChildNodes().item(index);
-      final NodeList itemNodes = itemsNode.getChildNodes();
-      return itemNodes;
+      return itemsNode.getChildNodes();
     }
 
     private List<ItemGroup> getItems(final NodeList itemNodes, final List<? extends Item> items,

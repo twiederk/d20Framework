@@ -101,10 +101,7 @@ public class Critical implements Serializable {
     if (hit != other.hit) {
       return false;
     }
-    if (multiplier != other.multiplier) {
-      return false;
-    }
-    return true;
+    return multiplier == other.multiplier;
   }
 
 }

@@ -131,9 +131,7 @@ public abstract class AbstractDisplayService implements DisplayService {
     if (rangeIncrement == 0) {
       return "-";
     }
-    final StringBuilder output = new StringBuilder();
-    output.append(rangeIncrement).append(" ").append(getDisplayUnitDistanceShort());
-    return output.toString();
+    return rangeIncrement + " " + getDisplayUnitDistanceShort();
   }
 
   @Override
@@ -146,11 +144,7 @@ public abstract class AbstractDisplayService implements DisplayService {
 
   @Override
   public String getDisplaySpellSchool(final Spell spell) {
-    final StringBuilder output = new StringBuilder();
-    output.append(getSchool(spell));
-    output.append(getSubSchool(spell));
-    output.append(getDescriptors(spell));
-    return output.toString();
+    return getSchool(spell) + getSubSchool(spell) + getDescriptors(spell);
   }
 
   private String getSchool(final Spell spell) {
@@ -189,10 +183,7 @@ public abstract class AbstractDisplayService implements DisplayService {
   }
 
   public String getDisplayMetamagicFeat(final Feat feat) {
-    final StringBuilder output = new StringBuilder();
-    output.append(feat.getName());
-    output.append(" (").append(feat.getSpellSlot()).append(")");
-    return output.toString();
+    return feat.getName() + " (" + feat.getSpellSlot() + ")";
   }
 
 }

@@ -420,10 +420,7 @@ public class Spell implements Serializable {
       return false;
     }
     final Spell other = (Spell) obj;
-    if (id != other.id) {
-      return false;
-    }
-    return true;
+    return id == other.id;
   }
 
   /**

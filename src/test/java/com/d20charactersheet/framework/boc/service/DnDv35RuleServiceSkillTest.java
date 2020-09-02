@@ -183,7 +183,7 @@ public class DnDv35RuleServiceSkillTest extends DnDv35RuleServiceTestCase {
     final Character character = new Character();
     character.setStrength(14);
 
-    final CharacterSkill characterSkill = createCharacterSkill(Attribute.STRENGTH, 3, 2);
+    final CharacterSkill characterSkill = createCharacterSkill(3);
     final int skillModifier = ruleService.getSkillModifier(character, characterSkill);
     assertEquals(7, skillModifier);
   }
@@ -193,7 +193,7 @@ public class DnDv35RuleServiceSkillTest extends DnDv35RuleServiceTestCase {
     final Character character = new Character();
     character.setStrength(14);
 
-    final CharacterSkill characterSkill = createCharacterSkill(Attribute.STRENGTH, 3.5f, 2);
+    final CharacterSkill characterSkill = createCharacterSkill(3.5f);
     final int skillModifier = ruleService.getSkillModifier(character, characterSkill);
     assertEquals(7, skillModifier);
   }
@@ -203,19 +203,19 @@ public class DnDv35RuleServiceSkillTest extends DnDv35RuleServiceTestCase {
     final Character character = new Character();
     character.setStrength(14);
 
-    final CharacterSkill characterSkill = createCharacterSkill(Attribute.STRENGTH, 3.5f, 2);
+    final CharacterSkill characterSkill = createCharacterSkill(3.5f);
     final DieRoll skillRoll = ruleService.rollSkill(character, characterSkill);
     assertTrue(skillRoll.getResult() > 7);
     assertTrue(skillRoll.getResult() < 28);
   }
 
-  private CharacterSkill createCharacterSkill(final Attribute attribute, final float rank, final int modifier) {
+  private CharacterSkill createCharacterSkill(final float rank) {
     final Skill skill = new Skill();
-    skill.setAttribute(attribute);
+    skill.setAttribute(Attribute.STRENGTH);
 
     final CharacterSkill characterSkill = new CharacterSkill(skill);
     characterSkill.setRank(rank);
-    characterSkill.setModifier(modifier);
+    characterSkill.setModifier(2);
     return characterSkill;
   }
 

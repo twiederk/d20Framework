@@ -1,11 +1,12 @@
 package com.d20charactersheet.framework.dac.dao.sql.rowmapper;
 
+import java.sql.SQLException;
+
 import org.jetbrains.annotations.NotNull;
 
 import com.d20charactersheet.framework.boc.model.Good;
 import com.d20charactersheet.framework.boc.model.GoodType;
-import com.d20charactersheet.framework.dac.dao.BaseRowMapper;
-import com.d20charactersheet.framework.dac.dao.DataRow;
+import com.d20charactersheet.framework.dac.dao.sql.DataRow;
 
 /**
  * Maps a good from database to Good object.
@@ -14,7 +15,7 @@ public class GoodRowMapper extends BaseRowMapper {
 
     @NotNull
     @Override
-    public Object mapRow(@NotNull DataRow dataRow) throws java.sql.SQLException {
+    public Object mapRow(@NotNull DataRow dataRow) throws SQLException {
         // good.id, good_text.name, cost, weight, good_type_id
         final Good good = new Good();
         good.setId(dataRow.getInt(0));

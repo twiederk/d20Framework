@@ -1,5 +1,7 @@
 package com.d20charactersheet.framework.dac.dao.dummy;
 
+import static com.d20charactersheet.framework.boc.model.CharacterClass.AnyCharacterClass.ANY_CHARACTER_CLASS;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,8 +36,7 @@ public class DummyRaceDao implements RaceDao {
 
   @Override
   public List<Race> getAllRaces(final List<CharacterClass> allCharacterClasses, final List<Ability> allAbilities) {
-    final List<Race> allRaces = selectAllRaces(allCharacterClasses, allAbilities);
-    return allRaces;
+    return selectAllRaces(allCharacterClasses, allAbilities);
   }
 
   private List<Race> selectAllRaces(final List<CharacterClass> allCharacterClasses, final List<Ability> allAbilities) {
@@ -70,7 +71,7 @@ public class DummyRaceDao implements RaceDao {
   }
 
   private CharacterClass getCharacterClass(final int characterClassId, final List<CharacterClass> allCharacterClasses) {
-    if (characterClassId == CharacterClass.ANY_CHARACTER_CLASS.getId()) {
+    if (characterClassId == ANY_CHARACTER_CLASS.getId()) {
       return null;
     }
 

@@ -260,10 +260,7 @@ public class SpellSlot implements Serializable {
       return false;
     }
     final SpellSlot other = (SpellSlot) obj;
-    if (id != other.id) {
-      return false;
-    }
-    return true;
+    return id == other.id;
   }
 
 }

@@ -10,11 +10,6 @@ import java.util.List;
  */
 public class CharacterClass implements Serializable {
 
-  /**
-   * Special object representing any character class
-   */
-  public static final CharacterClass ANY_CHARACTER_CLASS = new AnyCharacterClass();
-
   private static final long serialVersionUID = -4273293681688637609L;
 
   private int id;
@@ -244,16 +239,18 @@ public class CharacterClass implements Serializable {
       return false;
     }
     final CharacterClass other = (CharacterClass) obj;
-    if (id != other.id) {
-      return false;
-    }
-    return true;
+    return id == other.id;
   }
 
   /**
    * Special Object Pattern to represent any character class by an entity.
    */
   public static class AnyCharacterClass extends CharacterClass {
+
+    /**
+     * Special object representing any character class
+     */
+    public static final CharacterClass ANY_CHARACTER_CLASS = new AnyCharacterClass();
 
     private static final long serialVersionUID = -4894505396895224186L;
 

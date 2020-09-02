@@ -181,10 +181,7 @@ public class Spelllist implements Serializable {
       return false;
     }
     final Spelllist other = (Spelllist) obj;
-    if (id != other.id) {
-      return false;
-    }
-    return true;
+    return id == other.id;
   }
 
   /**

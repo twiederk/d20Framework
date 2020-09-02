@@ -1,11 +1,12 @@
 package com.d20charactersheet.framework.dac.dao.sql.rowmapper;
 
+import java.sql.SQLException;
+
 import org.jetbrains.annotations.NotNull;
 
 import com.d20charactersheet.framework.boc.model.Attribute;
 import com.d20charactersheet.framework.boc.model.Skill;
-import com.d20charactersheet.framework.dac.dao.BaseRowMapper;
-import com.d20charactersheet.framework.dac.dao.DataRow;
+import com.d20charactersheet.framework.dac.dao.sql.DataRow;
 
 /**
  * Maps character independent skill data to a skill.
@@ -17,7 +18,7 @@ public class SkillRowMapper extends BaseRowMapper {
      */
     @NotNull
     @Override
-    public Object mapRow(@NotNull DataRow dataRow) throws java.sql.SQLException {
+    public Object mapRow(@NotNull DataRow dataRow) throws SQLException {
         final Skill skill = new Skill();
         skill.setId(dataRow.getInt(0));
         skill.setAttribute((Attribute) getEnum(dataRow.getInt(1), Attribute.values()));

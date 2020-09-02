@@ -44,10 +44,8 @@ public interface ClassDao {
    *
    * @param characterClass
    *     The character class to create.
-   *
-   * @return The created character class.
    */
-  CharacterClass createCharacterClass(CharacterClass characterClass);
+  void createCharacterClass(CharacterClass characterClass);
 
   /**
    * Adds the given skill as class skill to the given list of character classes.

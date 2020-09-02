@@ -147,7 +147,7 @@ public class DummyCharacterDao implements CharacterDao {
     return allCharacters;
   }
 
-  private final Character selectCharacter(final DataRow characterTableRow, final List<CharacterClass> allCharacterClasses,
+  private Character selectCharacter(final DataRow characterTableRow, final List<CharacterClass> allCharacterClasses,
       final List<Race> allRaces, final List<XpTable> allXpTables) {
 
     final Character character = new Character();
@@ -262,8 +262,7 @@ public class DummyCharacterDao implements CharacterDao {
       final List<XpTable> allXpTables) {
     for (final DataRow characterRow : characterTable) {
       if (characterId == characterRow.getId()) {
-        final Character character = selectCharacter(characterRow, allCharacterClasses, allRaces, allXpTables);
-        return character;
+        return selectCharacter(characterRow, allCharacterClasses, allRaces, allXpTables);
       }
     }
     return null;
@@ -533,7 +532,7 @@ public class DummyCharacterDao implements CharacterDao {
 
   private Date parseDate(final String dateParameter) {
     final DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
-    Date date = null;
+    Date date;
     try {
       date = dateFormat.parse(dateParameter);
     } catch (final ParseException parseException) {
@@ -545,8 +544,7 @@ public class DummyCharacterDao implements CharacterDao {
 
   private String formatDate(final Date date) {
     final DateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
-    final String formatDate = dateFormat.format(date);
-    return formatDate;
+    return dateFormat.format(date);
   }
 
   @Override
@@ -637,13 +635,12 @@ public class DummyCharacterDao implements CharacterDao {
   }
 
   @Override
-  public CharacterAbility createCharacterAbility(final Character character, final CharacterClass characterClass,
+  public void createCharacterAbility(final Character character, final CharacterClass characterClass,
       final CharacterAbility characterAbility) {
     characterAbility.setId(characterAbilityTable.getNewId());
     characterAbilityTable.insert(new Object[] {characterAbility.getId(), character.getId(), characterClass.getId(),
         characterAbility.getClassAbility().getAbility().getId(), daoUtil.setBoolean(characterAbility.isOwned())
     });
-    return characterAbility;
   }
 
   @Override
@@ -1033,7 +1030,7 @@ public class DummyCharacterDao implements CharacterDao {
       item = findItem(itemId, allWeapons);
     } else if (Armor.class.getSimpleName().equals(itemclass)) {
       item = findItem(itemId, allArmor);
-    } else if (Armor.class.getSimpleName().equals(itemclass)) {
+    } else if (Good.class.getSimpleName().equals(itemclass)) {
       item = findItem(itemId, allGoods);
     } else {
       throw new IllegalArgumentException("Can't find item with id: " + itemId + " and itemclass: " + itemclass);
@@ -1042,7 +1039,12 @@ public class DummyCharacterDao implements CharacterDao {
   }
 
   private Item findItem(final int itemId, final List<? extends Item> allItems) {
-    return allItems.stream().filter(item -> item.getId() == itemId).findFirst().get();
+    for (Item item : allItems) {
+      if (item.getId() == itemId) {
+        return item;
+      }
+    }
+    throw new IllegalArgumentException("Can't find item with id: " + itemId);
   }
 
   @Override

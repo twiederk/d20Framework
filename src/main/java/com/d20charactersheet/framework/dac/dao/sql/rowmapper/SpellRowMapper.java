@@ -1,10 +1,11 @@
 package com.d20charactersheet.framework.dac.dao.sql.rowmapper;
 
+import java.sql.SQLException;
+
 import org.jetbrains.annotations.NotNull;
 
 import com.d20charactersheet.framework.boc.model.Spell;
-import com.d20charactersheet.framework.dac.dao.BaseRowMapper;
-import com.d20charactersheet.framework.dac.dao.DataRow;
+import com.d20charactersheet.framework.dac.dao.sql.DataRow;
 import com.d20charactersheet.framework.dac.dao.util.SpellSerializor;
 
 /**
@@ -16,7 +17,7 @@ public class SpellRowMapper extends BaseRowMapper {
 
     @NotNull
     @Override
-    public Object mapRow(@NotNull DataRow dataRow) throws java.sql.SQLException {
+    public Object mapRow(@NotNull DataRow dataRow) throws SQLException {
         // id, name, components, casting_time, range, effect, duraction, saving_throw, spell_resistance,
         // short_description, description, mat_component, focus
         final Spell spell = new Spell();

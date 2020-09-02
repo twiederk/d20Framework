@@ -66,6 +66,7 @@ public class ExportImportServiceTest {
   private GameSystem gameSystem;
   private ExportImportService exportImportService;
 
+  @SuppressWarnings("ResultOfMethodCallIgnored")
   @Before
   public void setUp() {
     final Universe universe = new DnDv35Universe();
@@ -383,66 +384,59 @@ public class ExportImportServiceTest {
     assertEquals(279, importReports.size());
 
     final Weapon dagger = (Weapon) getItemByName("Dagger", importReports);
-    final WeaponFamily weaponFamily = getWeaponFamilyByName("Dagger");
-    assertWeapon("Dagger", 2.0f, 1.0f, QualityType.NORMAL,
-                 "You get a +2 bonus on Sleight of Hand checks made to conceal a dagger on your body (see the Sleight of Hand skill)",
-                 WeaponType.SIMPLE, new Damage(1, Die.D4), new Critical(19, 2), CombatType.MELEE_WEAPON,
-                 WeaponEncumbrance.LIGHT_HANDED, WeaponCategory.NORMAL_WEAPON, 0, weaponFamily, 10, dagger);
+    final WeaponFamily weaponFamily = getWeaponFamilyByName();
+    assertWeapon(new Damage(1, Die.D4), new Critical(19, 2), weaponFamily, dagger);
 
     final Armor scaleMail = (Armor) getItemByName("Scale Mail", importReports);
-    assertArmor("Scale Mail", 50.0f, 30.0f, QualityType.NORMAL, "The suit includes gauntlets.", ArmorType.MEDIUM, 4, -4, scaleMail);
+    assertArmor(scaleMail);
 
     final Good winterBlanket = (Good) getItemByName("Winter Blanket", importReports);
-    assertGood("Winter Blanket", 0.5f, 3f, QualityType.NORMAL,
-               "A thick, quilted, wool blanket made to keep you warm in cold weather.", GoodType.ADVENTURING_GEAR, winterBlanket);
+    assertGood(winterBlanket);
 
   }
 
-  private WeaponFamily getWeaponFamilyByName(final String name) {
+  private WeaponFamily getWeaponFamilyByName() {
     for (final WeaponFamily weaponFamily : gameSystem.getAllWeaponFamilies()) {
-      if (weaponFamily.getName().equals(name)) {
+      if (weaponFamily.getName().equals("Dagger")) {
         return weaponFamily;
       }
     }
-    throw new IllegalArgumentException("Can't find weapon family with name: " + name);
+    throw new IllegalArgumentException("Can't find weapon family with name: " + "Dagger");
   }
 
-  private void assertWeapon(final String name, final float cost, final float weight, final QualityType qualityType,
-      final String description, final WeaponType weaponType, final Damage damage, final Critical critical,
-      final CombatType combatType, final WeaponEncumbrance weaponEncumbrance, final WeaponCategory weaponCategory,
-      final int enhancementBonus, final WeaponFamily weaponFamily, final int rangeIncrement, final Weapon weapon) {
-    assertItem(name, cost, weight, qualityType, description, weapon);
-    assertEquals(weaponType, weapon.getWeaponType());
+  private void assertWeapon(final Damage damage, final Critical critical, final WeaponFamily weaponFamily, final Weapon weapon) {
+    assertItem("Dagger", (float) 2.0, (float) 1.0,
+               "You get a +2 bonus on Sleight of Hand checks made to conceal a dagger on your body (see the Sleight of Hand skill)",
+               weapon);
+    assertEquals(WeaponType.SIMPLE, weapon.getWeaponType());
     assertEquals(damage, weapon.getDamage());
     assertEquals(critical, weapon.getCritical());
-    assertEquals(combatType, weapon.getCombatType());
-    assertEquals(weaponEncumbrance, weapon.getWeaponEncumbrance());
-    assertEquals(weaponCategory, weapon.getWeaponCategory());
-    assertEquals(enhancementBonus, weapon.getEnhancementBonus());
+    assertEquals(CombatType.MELEE_WEAPON, weapon.getCombatType());
+    assertEquals(WeaponEncumbrance.LIGHT_HANDED, weapon.getWeaponEncumbrance());
+    assertEquals(WeaponCategory.NORMAL_WEAPON, weapon.getWeaponCategory());
+    assertEquals(0, weapon.getEnhancementBonus());
     assertEquals(weaponFamily, weapon.getWeaponFamily());
-    assertEquals(rangeIncrement, weapon.getRangeIncrement());
+    assertEquals(10, weapon.getRangeIncrement());
   }
 
-  private void assertArmor(final String name, final float cost, final float weight, final QualityType qualityType,
-      final String description, final ArmorType armorType, final int bonus, final int penalty, final Armor armor) {
-    assertItem(name, cost, weight, qualityType, description, armor);
-    assertEquals(armorType, armor.getArmorType());
-    assertEquals(bonus, armor.getArmorBonus());
-    assertEquals(penalty, armor.getArmorCheckPenalty());
+  private void assertArmor(final Armor armor) {
+    assertItem("Scale Mail", (float) 50.0, (float) 30.0, "The suit includes gauntlets.", armor);
+    assertEquals(ArmorType.MEDIUM, armor.getArmorType());
+    assertEquals(4, armor.getArmorBonus());
+    assertEquals(-4, armor.getArmorCheckPenalty());
   }
 
-  private void assertGood(final String name, final float cost, final float weight, final QualityType qualityType,
-      final String description, final GoodType goodType, final Good good) {
-    assertItem(name, cost, weight, qualityType, description, good);
-    assertEquals(goodType, good.getGoodType());
+  private void assertGood(final Good good) {
+    assertItem("Winter Blanket", (float) 0.5, (float) 3.0, "A thick, quilted, wool blanket made to keep you warm in cold weather.",
+               good);
+    assertEquals(GoodType.ADVENTURING_GEAR, good.getGoodType());
   }
 
-  private void assertItem(final String name, final float cost, final float weight, final QualityType qualityType,
-      final String description, final Item item) {
+  private void assertItem(final String name, final float cost, final float weight, final String description, final Item item) {
     assertEquals(name, item.getName());
     assertEquals(cost, item.getCost(), 0.0f);
     assertEquals(weight, item.getWeight(), 0.0f);
-    assertEquals(qualityType, item.getQualityType());
+    assertEquals(QualityType.NORMAL, item.getQualityType());
     assertEquals(description, item.getDescription());
   }
 

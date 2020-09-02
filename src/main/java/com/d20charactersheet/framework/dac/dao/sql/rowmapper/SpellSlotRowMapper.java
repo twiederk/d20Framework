@@ -1,5 +1,6 @@
 package com.d20charactersheet.framework.dac.dao.sql.rowmapper;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
@@ -7,8 +8,8 @@ import org.jetbrains.annotations.NotNull;
 import com.androidash.memorydb.DaoUtil;
 import com.d20charactersheet.framework.boc.model.Spell;
 import com.d20charactersheet.framework.boc.model.SpellSlot;
-import com.d20charactersheet.framework.dac.dao.DataRow;
-import com.d20charactersheet.framework.dac.dao.RowMapper;
+import com.d20charactersheet.framework.dac.dao.sql.DataRow;
+import com.d20charactersheet.framework.dac.dao.sql.RowMapper;
 
 /**
  * Maps raw data to SpellSlot instance.
@@ -31,7 +32,7 @@ public class SpellSlotRowMapper implements RowMapper {
 
     @NotNull
     @Override
-    public Object mapRow(@NotNull DataRow dataRow) throws java.sql.SQLException {
+    public Object mapRow(@NotNull DataRow dataRow) throws SQLException {
         final SpellSlot spellSlot = new SpellSlot();
         spellSlot.setId(dataRow.getInt(0));
         spellSlot.setSpell(getSpellOfSpellSlot(dataRow.getInt(1)));

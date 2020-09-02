@@ -28,14 +28,4 @@ public class ExtraFeatsAbility extends Ability {
     this.numberOfFeats = numberOfFeats;
   }
 
-  @Override
-  public boolean equals(final Object obj) {
-    return super.equals(obj);
-  }
-
-  @Override
-  public int hashCode() {
-    return super.hashCode();
-  }
-
 }

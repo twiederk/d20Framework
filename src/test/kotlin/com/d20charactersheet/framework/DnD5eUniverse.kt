@@ -1,7 +1,9 @@
 package com.d20charactersheet.framework
 
 import com.d20charactersheet.framework.boc.service.*
-import com.d20charactersheet.framework.dac.dao.jdbc.*
+import com.d20charactersheet.framework.dac.dao.sql.*
+import com.d20charactersheet.framework.dac.dao.sql.jdbc.JdbcDatabase
+import com.d20charactersheet.framework.dac.dao.sql.jdbc.JdbcHelper
 
 
 class DnD5eUniverse : AbstractUniverse() {
@@ -12,11 +14,13 @@ class DnD5eUniverse : AbstractUniverse() {
         jdbcHelper.executeSqlScript("/create_database.sql")
         jdbcHelper.executeSqlScript("/dnd5e_phb_data.sql")
 
-        val skillDao = JdbcSkillDao(jdbcHelper.connection)
-        val spelllistDao = JdbcSpelllistDao(jdbcHelper.connection)
-        val abilityDao = JdbcAbilityDao(jdbcHelper.connection)
-        val classDao = JdbcClassDao(jdbcHelper.connection)
-        val raceDao = JdbcRaceDao(jdbcHelper.connection)
+        val jdbcDatabase = JdbcDatabase(jdbcHelper.connection)
+
+        val skillDao = SqlSkillDao(jdbcDatabase)
+        val spelllistDao = SqlSpelllistDao(jdbcDatabase)
+        val abilityDao = SqlAbilityDao(jdbcDatabase)
+        val classDao = SqlClassDao(jdbcDatabase)
+        val raceDao = SqlRaceDao(jdbcDatabase)
 
         gameSystem = GameSystemCacheImpl(3, "Dungeons & Dragons 5e")
         gameSystem.skillService = SkillServiceImpl(skillDao)

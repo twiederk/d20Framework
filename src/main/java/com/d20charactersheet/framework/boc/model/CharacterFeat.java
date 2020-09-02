@@ -73,9 +73,7 @@ public class CharacterFeat implements Serializable {
 
   @Override
   public String toString() {
-    final StringBuilder output = new StringBuilder();
-    output.append(feat.getName()).append("(").append(category).append(")");
-    return output.toString();
+    return feat.getName() + "(" + category + ")";
   }
 
 }

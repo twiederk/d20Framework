@@ -1,9 +1,6 @@
 package com.d20charactersheet.framework.dac.dao;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -95,96 +92,107 @@ public abstract class BaseCharacterDaoTest {
 
   @Test
   public void testGetAllCharacters() {
+
+    // Act
     final List<Character> characters = characterDao.getAllCharacters(allCharacterClasses, allRaces, allXpTables);
-    assertNotNull(characters);
+
+    // Assert
+    assertThat(characters).hasSize(1);
   }
 
   @Test
   public void testGetCharacter() {
-    final List<Character> characters = characterDao.getAllCharacters(allCharacterClasses, allRaces, allXpTables);
-    assertNotNull(characters);
 
-    for (final Character character : characters) {
-      assertNotNull(characterDao.getCharacter(character.getId(), allCharacterClasses, allRaces, allXpTables));
-    }
+    // Act
+    Character belvador = characterDao.getCharacter(0, allCharacterClasses, allRaces, allXpTables);
+
+    // Assert
+    assertThat(belvador).isNotNull();
   }
 
   @Test
   public void testUpdateAttribute() {
+    // Arrange
     Character character = characterDao.getCharacter(0, allCharacterClasses, allRaces, allXpTables);
     final int oldStrength = character.getStrength();
-
     character.setStrength(20);
+
+    // Act
     final Character updatedCharacter = characterDao.updateCharacter(character);
-    assertNotNull(updatedCharacter);
 
+    // Assert
+    assertThat(updatedCharacter).isNotNull();
     character = characterDao.getCharacter(0, allCharacterClasses, allRaces, allXpTables);
-    assertEquals(20, character.getStrength());
+    assertThat(character.getStrength()).isEqualTo(20);
 
+    // tear down
     character.setStrength(oldStrength);
-    character = characterDao.updateCharacter(character);
-    assertEquals(oldStrength, character.getStrength());
+    characterDao.updateCharacter(character);
   }
 
   @Test
   public void testUpdateClassLevel() {
+    // Arrange
     final Character belvador = characterDao.getCharacter(0, allCharacterClasses, allRaces, allXpTables);
     final List<ClassLevel> oldClassLevels = belvador.getClassLevels();
-    assertNotNull(oldClassLevels);
 
     final List<ClassLevel> classLevels = new ArrayList<>();
     final ClassLevel classLevel = new ClassLevel(wizard, 10);
     classLevels.add(classLevel);
     belvador.setClassLevels(classLevels);
 
+    // Act
     final Character character = characterDao.updateCharacter(belvador);
-    assertEquals(classLevel, character.getClassLevels().get(0));
 
+    // Assert
+    assertThat(character.getClassLevels().get(0)).isEqualTo(classLevel);
+
+    // tear down
     character.setClassLevels(oldClassLevels);
     characterDao.updateCharacter(character);
   }
 
   @Test
   public void testCreateCharacter() {
+    // Arrange
     final String name = "name";
     final String player = "player";
     final Race race = human;
     final Sex sex = Sex.MALE;
     final ClassLevel classLevel = new ClassLevel(fighter, 1);
     final Alignment alignment = Alignment.NEUTRAL;
-    final XpTable xpTable = xpDao.getAllXpTables()
-        .get(0);
+    final XpTable xpTable = xpDao.getAllXpTables().get(0);
 
-    final Character newCharacter = createCharacter(name, player, race, sex, classLevel, alignment, xpTable);
+    final Character newCharacter = createCharacter(name, race, sex, classLevel, alignment, xpTable);
 
-    // test
+    // Act
     final Character character = characterDao.createCharacter(newCharacter);
 
-    assertNotNull(character);
-    assertTrue(character.getId() >= 0);
-    assertEquals(name, character.getName());
-    assertEquals(player, character.getPlayer());
-    assertEquals(race, character.getRace());
-    assertEquals(1, character.getClassLevels().size());
-    assertEquals(classLevel.getCharacterClass(), character.getClassLevels().get(0).getCharacterClass());
-    assertEquals(classLevel.getLevel(), character.getClassLevels().get(0).getLevel());
-    assertEquals(alignment, character.getAlignment());
+    // Assert
+    assertThat(character).isNotNull();
+    assertThat(character.getId()).isGreaterThanOrEqualTo(0);
+    assertThat(character.getName()).isEqualTo(name);
+    assertThat(character.getPlayer()).isEqualTo(player);
+    assertThat(character.getRace()).isEqualTo(race);
+    assertThat(character.getClassLevels()).hasSize(1);
+    assertThat(character.getClassLevels().get(0).getCharacterClass()).isEqualTo(classLevel.getCharacterClass());
+    assertThat(character.getClassLevels().get(0).getLevel()).isEqualTo(classLevel.getLevel());
+    assertThat(character.getAlignment()).isEqualTo(alignment);
 
-    // clean up
+    // tear down
     characterDao.deleteCharacter(character);
   }
 
   @Test
   public void testDeleteCharacter() {
+    // Arrange
     final String name = "testDeleteCharacter";
-    final String player = "player";
     final Race race = human;
     final Sex sex = Sex.MALE;
     final ClassLevel classLevel = new ClassLevel(fighter, 1);
     final Alignment alignment = Alignment.NEUTRAL;
-    final XpTable xpTable = xpDao.getAllXpTables()
-        .get(0);
-    final Character newCharacter = createCharacter(name, player, race, sex, classLevel, alignment, xpTable);
+    final XpTable xpTable = xpDao.getAllXpTables().get(0);
+    final Character newCharacter = createCharacter(name, race, sex, classLevel, alignment, xpTable);
     newCharacter.setStrength(10);
     newCharacter.setDexterity(10);
     newCharacter.setConstitution(10);
@@ -193,23 +201,23 @@ public abstract class BaseCharacterDaoTest {
     newCharacter.setCharisma(10);
     final Character character = characterDao.createCharacter(newCharacter);
     final int id = character.getId();
-    final int numberOfCharacters = characterDao.getAllCharacters(allCharacterClasses, allRaces, allXpTables)
-        .size();
+    final int numberOfCharacters = characterDao.getAllCharacters(allCharacterClasses, allRaces, allXpTables).size();
 
-    // test
+    // Act
     characterDao.deleteCharacter(character);
-    final Character deletedCharacter = characterDao.getCharacter(id, allCharacterClasses, allRaces, allXpTables);
 
-    assertNull(deletedCharacter);
-    assertEquals(numberOfCharacters - 1, characterDao.getAllCharacters(allCharacterClasses, allRaces, allXpTables).size());
+    // Assert
+    final Character deletedCharacter = characterDao.getCharacter(id, allCharacterClasses, allRaces, allXpTables);
+    assertThat(deletedCharacter).isNull();
+    assertThat(characterDao.getAllCharacters(allCharacterClasses, allRaces, allXpTables)).hasSize(numberOfCharacters - 1);
 
   }
 
-  private Character createCharacter(final String name, final String player, final Race race, final Sex sex,
-      final ClassLevel classLevel, final Alignment alignment, final XpTable xpTable) {
+  private Character createCharacter(final String name, final Race race, final Sex sex, final ClassLevel classLevel,
+      final Alignment alignment, final XpTable xpTable) {
     final Character character = new Character();
     character.setName(name);
-    character.setPlayer(player);
+    character.setPlayer("player");
     character.setRace(race);
     character.setSex(sex);
     final List<ClassLevel> classLevels = new LinkedList<>();
@@ -230,15 +238,45 @@ public abstract class BaseCharacterDaoTest {
 
   @Test
   public void testGetAllNotes() {
+    // Arrange
     final Character belvador = new Character();
     belvador.setId(0);
+
+    // Act
     final List<Note> notes = characterDao.getNotes(belvador);
-    assertNotNull(notes);
-    assertEquals(0, notes.size());
+
+    // Assert
+    assertThat(notes).hasSize(0);
   }
 
   @Test
-  public void testCreateAndDeleteNote() {
+  public void testCreateNote() {
+    // Arrange
+    final Note note = new Note();
+    final Date date = new Date();
+    note.setDate(date);
+    note.setText("newNote");
+
+    final Character belvador = new Character();
+    belvador.setId(0);
+
+    // Act
+    characterDao.createNote(note, belvador);
+
+    // Assert
+    assertThat(note.getId()).isGreaterThanOrEqualTo(0);
+
+    List<Note> notes = characterDao.getNotes(belvador);
+    assertThat(notes).hasSize(1);
+
+    // tear down
+    characterDao.deleteNote(note);
+
+  }
+
+  @Test
+  public void testDeleteNote() {
+    // Arrange
     final Note note = new Note();
     final Date date = new Date();
     note.setDate(date);
@@ -247,34 +285,35 @@ public abstract class BaseCharacterDaoTest {
     final Character belvador = new Character();
     belvador.setId(0);
     characterDao.createNote(note, belvador);
-    assertTrue(note.getId() >= 0);
 
-    List<Note> notes = characterDao.getNotes(belvador);
-    assertEquals(1, notes.size());
-
+    // Act
     characterDao.deleteNote(note);
-    notes = characterDao.getNotes(belvador);
-    assertEquals(0, notes.size());
 
+    // Assert
+    List<Note> notes = characterDao.getNotes(belvador);
+    assertThat(notes).hasSize(0);
   }
 
   @Test
   public void testGetKnownSpells() {
+    // Arrange
     final Character belvador = new Character();
     belvador.setId(0);
 
     final List<Spell> allSpells = spelllistDao.getAllSpells();
     final List<Spelllist> allSpelllists = spelllistDao.getAllSpelllists(allSpells);
 
+    // Act
     final List<KnownSpell> knownSpells = characterDao.getKnownSpells(belvador, allSpelllists, allSpells);
-    assertNotNull(knownSpells);
-    assertEquals("Wrong number of character spells", 31, knownSpells.size());
-    assertTrue(contains("Arcane Mark", knownSpells));
+
+    // Assert
+    assertThat(knownSpells).hasSize(31);
+    assertThat(contains(knownSpells)).isTrue();
   }
 
-  private boolean contains(final String name, final List<KnownSpell> knownSpells) {
+  private boolean contains(final List<KnownSpell> knownSpells) {
     for (final KnownSpell knownSpell : knownSpells) {
-      if (knownSpell.getSpell().getName().equals(name)) {
+      if (knownSpell.getSpell().getName().equals("Arcane Mark")) {
         return true;
       }
     }
@@ -283,41 +322,43 @@ public abstract class BaseCharacterDaoTest {
 
   @Test
   public void testGetSpellSlots() {
+    // Arrange
     final Character belvador = new Character();
     belvador.setId(0);
-
     final List<Spell> allSpells = spelllistDao.getAllSpells();
 
+    // Act
     final List<SpellSlot> spellSlots = characterDao.getSpellSlots(belvador, allSpells, allAbilities, allFeats);
-    assertNotNull("SpellSlots can't be null", spellSlots);
-    assertEquals(17, spellSlots.size());
+
+    // Assert
+    assertThat(spellSlots).hasSize(17);
 
     // spell slots per level
-    assertEquals(5, countLevel(spellSlots, 0));
-    assertEquals(5, countLevel(spellSlots, 1));
-    assertEquals(4, countLevel(spellSlots, 2));
-    assertEquals(3, countLevel(spellSlots, 3));
+    assertThat(countLevel(spellSlots, 0)).isEqualTo(5);
+    assertThat(countLevel(spellSlots, 1)).isEqualTo(5);
+    assertThat(countLevel(spellSlots, 2)).isEqualTo(4);
+    assertThat(countLevel(spellSlots, 3)).isEqualTo(3);
 
     // number of spells
-    assertEquals(2, countSpell(spellSlots, "Detect Magic"));
-    assertEquals(1, countSpell(spellSlots, "Ray of Frost"));
-    assertEquals(1, countSpell(spellSlots, "Light"));
-    assertEquals(1, countSpell(spellSlots, "Mage Hand"));
-    assertEquals(1, countSpell(spellSlots, "Mage Armor"));
-    assertEquals(1, countSpell(spellSlots, "Mount"));
-    assertEquals(3, countSpell(spellSlots, "Magic Missile"));
-    assertEquals(2, countSpell(spellSlots, "Acid Arrow"));
-    assertEquals(2, countSpell(spellSlots, "Summon Monster II"));
-    assertEquals(1, countSpell(spellSlots, "Levitate"));
-    assertEquals(1, countSpell(spellSlots, "Summon Monster III"));
-    assertEquals(1, countSpell(spellSlots, "Lightning Bolt"));
+    assertThat(countSpell(spellSlots, "Detect Magic")).isEqualTo(2);
+    assertThat(countSpell(spellSlots, "Ray of Frost")).isEqualTo(1);
+    assertThat(countSpell(spellSlots, "Light")).isEqualTo(1);
+    assertThat(countSpell(spellSlots, "Mage Hand")).isEqualTo(1);
+    assertThat(countSpell(spellSlots, "Mage Armor")).isEqualTo(1);
+    assertThat(countSpell(spellSlots, "Mount")).isEqualTo(1);
+    assertThat(countSpell(spellSlots, "Magic Missile")).isEqualTo(3);
+    assertThat(countSpell(spellSlots, "Acid Arrow")).isEqualTo(2);
+    assertThat(countSpell(spellSlots, "Summon Monster II")).isEqualTo(2);
+    assertThat(countSpell(spellSlots, "Levitate")).isEqualTo(1);
+    assertThat(countSpell(spellSlots, "Summon Monster III")).isEqualTo(1);
+    assertThat(countSpell(spellSlots, "Lightning Bolt")).isEqualTo(1);
 
     // number of SpelllistAbilities
-    assertEquals(13, countSpelllistAbility(spellSlots, "Spells - Wizard"));
-    assertEquals(4, countSpelllistAbility(spellSlots, "School Specialization - Conjuration"));
+    assertThat(countSpelllistAbility(spellSlots, "Spells - Wizard")).isEqualTo(13);
+    assertThat(countSpelllistAbility(spellSlots, "School Specialization - Conjuration")).isEqualTo(4);
 
     // number of meta magic feats
-    assertEquals(1, countMetaMagicFeats(spellSlots, "Extend Spell"));
+    assertThat(countMetaMagicFeats(spellSlots)).isEqualTo(1);
   }
 
   private int countSpell(final List<SpellSlot> spellSlots, final String name) {
@@ -352,11 +393,11 @@ public abstract class BaseCharacterDaoTest {
     return count;
   }
 
-  private int countMetaMagicFeats(final List<SpellSlot> spellSlots, final String name) {
+  private int countMetaMagicFeats(final List<SpellSlot> spellSlots) {
     int count = 0;
     for (final SpellSlot spellSlot : spellSlots) {
       for (final Feat feat : spellSlot.getMetamagicFeats()) {
-        if (feat.getName().equals(name)) {
+        if (feat.getName().equals("Extend Spell")) {
           count++;
         }
       }
@@ -366,6 +407,7 @@ public abstract class BaseCharacterDaoTest {
 
   @Test
   public void testUpdateSpellSlot() {
+    // Arrange
     final Character belvador = new Character();
     belvador.setId(0);
 
@@ -381,17 +423,19 @@ public abstract class BaseCharacterDaoTest {
     metamagicFeats.add(findFeatByName("Empower Spell", allFeats));
     spellSlot.setMetamagicFeats(metamagicFeats);
 
+    // Act
     characterDao.updateSpellSlot(spellSlot);
 
+    // Assert
     spellSlots = characterDao.getSpellSlots(belvador, allSpells, allAbilities, allFeats);
     spellSlot = findSpellSlotById(1, spellSlots);
 
-    assertEquals(copySpellSlot.getId(), spellSlot.getId());
-    assertEquals(copySpellSlot.getLevel(), spellSlot.getLevel());
-    assertEquals(copySpellSlot.getSpelllistAbilities(), spellSlot.getSpelllistAbilities());
-    assertEquals("Detect Poison", spellSlot.getSpell().getName());
-    assertEquals(metamagicFeats, spellSlot.getMetamagicFeats());
-    assertTrue(spellSlot.isCast());
+    assertThat(spellSlot.getId()).isEqualTo(copySpellSlot.getId());
+    assertThat(spellSlot.getLevel()).isEqualTo(copySpellSlot.getLevel());
+    assertThat(spellSlot.getSpelllistAbilities()).isEqualTo(copySpellSlot.getSpelllistAbilities());
+    assertThat(spellSlot.getSpell().getName()).isEqualTo("Detect Poison");
+    assertThat(spellSlot.getMetamagicFeats()).isEqualTo(metamagicFeats);
+    assertThat(spellSlot.isCast()).isTrue();
 
     // tear down
     characterDao.updateSpellSlot(copySpellSlot);
@@ -438,6 +482,7 @@ public abstract class BaseCharacterDaoTest {
 
   @Test
   public void testCreateSpellSlot() {
+    // Arrange
     final List<Spell> allSpells = spelllistDao.getAllSpells();
 
     final Character character = new Character();
@@ -448,64 +493,68 @@ public abstract class BaseCharacterDaoTest {
     spellSlot.setLevel(1);
     spellSlot.setCast(true);
     List<SpelllistAbility> spelllistAbilities = new ArrayList<>(1);
-    spelllistAbilities.add((SpelllistAbility) findAbilityByName("Spells - Wizard", allAbilities));
+    spelllistAbilities.add((SpelllistAbility) findAbilityByName(allAbilities));
     spellSlot.setSpelllistAbilities(spelllistAbilities);
 
     List<Feat> metamagicFeats = new ArrayList<>(1);
     metamagicFeats.add(findFeatByName("Extend Spell", featDao.getAllFeats()));
     spellSlot.setMetamagicFeats(metamagicFeats);
 
+    // Act
     spellSlot = characterDao.createSpellSlot(character, spellSlot);
-    assertNotNull(spellSlot);
+
+    // Assert
+    assertThat(spellSlot).isNotNull();
     final int spellSlotId = spellSlot.getId();
-    assertTrue(spellSlotId > 0);
+    assertThat(spellSlotId).isGreaterThan(0);
 
     final List<SpellSlot> spellSlots = characterDao.getSpellSlots(character, allSpells, allAbilities, allFeats);
     final SpellSlot createdSpellSlot = findSpellSlotById(spellSlotId, spellSlots);
 
-    assertEquals("Magic Missile", createdSpellSlot.getSpell().getName());
-    assertEquals(1, createdSpellSlot.getLevel());
-    assertTrue(createdSpellSlot.isCast());
+    assertThat(createdSpellSlot.getSpell().getName()).isEqualTo("Magic Missile");
+    assertThat(createdSpellSlot.getLevel()).isEqualTo(1);
+    assertThat(createdSpellSlot.isCast()).isTrue();
 
     spelllistAbilities = createdSpellSlot.getSpelllistAbilities();
-    assertNotNull(spelllistAbilities);
-    assertEquals(1, spelllistAbilities.size());
-    assertEquals("Spells - Wizard", createdSpellSlot.getSpelllistAbilities().get(0).getName());
+    assertThat(spelllistAbilities).hasSize(1);
+    assertThat(createdSpellSlot.getSpelllistAbilities().get(0).getName()).isEqualTo("Spells - Wizard");
 
     metamagicFeats = createdSpellSlot.getMetamagicFeats();
-    assertNotNull(metamagicFeats);
-    assertEquals(1, metamagicFeats.size());
-    assertEquals("Extend Spell", metamagicFeats.get(0).getName());
+    assertThat(metamagicFeats).hasSize(1);
+    assertThat(metamagicFeats.get(0).getName()).isEqualTo("Extend Spell");
 
     // tear down
     characterDao.deleteSpellSlot(createdSpellSlot);
   }
 
-  private Ability findAbilityByName(final String name, final List<Ability> allAbilities) {
+  private Ability findAbilityByName(final List<Ability> allAbilities) {
     for (final Ability ability : allAbilities) {
-      if (ability.getName().equals(name)) {
+      if (ability.getName().equals("Spells - Wizard")) {
         return ability;
       }
     }
-    throw new IllegalArgumentException("Can't find ability with name: " + name);
+    throw new IllegalArgumentException("Can't find ability with name: " + "Spells - Wizard");
   }
 
   @Test
   public void testUpdateCharacterSkill() {
+    // Arrange
     final Character belvador = new Character();
     belvador.setId(0);
 
     List<CharacterSkill> characterSkills = characterDao.getCharacterSkills(belvador, allSkills);
-    CharacterSkill concentration = findSkillByName(characterSkills, "Concentration");
+    CharacterSkill concentration = findSkillByName(characterSkills);
     final int modifierBackup = concentration.getModifier();
     concentration.setModifier(-1);
 
+    // Act
     characterDao.updateCharacterSkill(belvador, concentration);
 
+    // Assert
     characterSkills = characterDao.getCharacterSkills(belvador, allSkills);
-    concentration = findSkillByName(characterSkills, "Concentration");
+    concentration = findSkillByName(characterSkills);
 
-    assertEquals(-1, concentration.getModifier());
+    assertThat(concentration.getModifier()).isEqualTo(-1);
 
     // tear down
     concentration.setModifier(modifierBackup);
@@ -513,14 +562,14 @@ public abstract class BaseCharacterDaoTest {
 
   }
 
-  private CharacterSkill findSkillByName(final List<CharacterSkill> characterSkills, final String name) {
+  private CharacterSkill findSkillByName(final List<CharacterSkill> characterSkills) {
     for (final CharacterSkill characterSkill : characterSkills) {
       final Skill skill = characterSkill.getSkill();
-      if (skill.getName().equals(name)) {
+      if (skill.getName().equals("Concentration")) {
         return characterSkill;
       }
     }
-    throw new IllegalArgumentException("Can't find character skill with a skill named: " + name);
+    throw new IllegalArgumentException("Can't find character skill with a skill named: " + "Concentration");
   }
 
 }

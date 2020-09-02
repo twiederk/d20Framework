@@ -109,10 +109,7 @@ public class Damage implements Serializable {
     if (die != other.die) {
       return false;
     }
-    if (numberOfDice != other.numberOfDice) {
-      return false;
-    }
-    return true;
+    return numberOfDice == other.numberOfDice;
   }
 
 }

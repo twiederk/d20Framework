@@ -70,10 +70,10 @@ public enum Size {
    */
   COLOSSAL_LONG(30.0f, 20);
 
-  private float space;
-  private int reach;
+  private final float space;
+  private final int reach;
 
-  private Size(final float space, final int reach) {
+  Size(final float space, final int reach) {
     this.space = space;
     this.reach = reach;
   }

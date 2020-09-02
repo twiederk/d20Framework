@@ -198,7 +198,7 @@ public class SpelllistAbilityBuilder extends DefaultAbilityBuilder {
   private boolean getAttributeBonusSpellSlots(final AbilityConfig abilityConfig) {
     boolean attributeBonusSpellSlots = false;
     try {
-      attributeBonusSpellSlots = getBoolean(abilityConfig, KEY_ATTRIBUTE_BONUS_SPELL_SLOTS);
+      attributeBonusSpellSlots = getBoolean(abilityConfig);
     } catch (final Exception e) {
       // failed to get attribute bonus spell slots from ability config
     }

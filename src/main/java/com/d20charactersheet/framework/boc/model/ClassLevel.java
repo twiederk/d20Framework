@@ -1,5 +1,7 @@
 package com.d20charactersheet.framework.boc.model;
 
+import static com.d20charactersheet.framework.boc.model.CharacterClass.AnyCharacterClass.ANY_CHARACTER_CLASS;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +40,7 @@ public class ClassLevel implements Serializable {
    *     The level.
    */
   public ClassLevel(final CharacterClass characterClass, final int level) {
-    if (characterClass.getId() == CharacterClass.ANY_CHARACTER_CLASS.getId()) {
+    if (characterClass.getId() == ANY_CHARACTER_CLASS.getId()) {
       throw new IllegalArgumentException("Can' create ClassLevel of ANY_CHARACTER_CLASS");
     }
     if (level < 1) {
@@ -154,10 +156,7 @@ public class ClassLevel implements Serializable {
       return false;
     }
     final ClassLevel other = (ClassLevel) obj;
-    if (id != other.id) {
-      return false;
-    }
-    return true;
+    return id == other.id;
   }
 
 }

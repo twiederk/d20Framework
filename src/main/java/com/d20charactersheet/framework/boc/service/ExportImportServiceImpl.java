@@ -51,8 +51,7 @@ public class ExportImportServiceImpl implements ExportImportService {
     importContext.setAllAbilities(gameSystem.getAllAbilities());
 
     final ImportCharacter importCharacter = importFactory.getImportCharacter(importContext, importFile);
-    final List<ImportReport<Character>> importReports = importCharacter.importCharacters();
-    return importReports;
+    return importCharacter.importCharacters();
   }
 
   @Override
@@ -73,8 +72,7 @@ public class ExportImportServiceImpl implements ExportImportService {
     importContext.setAllGoods(gameSystem.getAllGoods());
 
     final ImportEquipment importEquipment = importFactory.getImportEquipment(importContext, importFile);
-    final List<ImportReport<? extends Item>> importReports = importEquipment.importEquipment();
-    return importReports;
+    return importEquipment.importEquipment();
   }
 
 }

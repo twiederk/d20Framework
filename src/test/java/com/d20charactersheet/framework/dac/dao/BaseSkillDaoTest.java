@@ -1,8 +1,6 @@
 package com.d20charactersheet.framework.dac.dao;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
@@ -21,31 +19,38 @@ public abstract class BaseSkillDaoTest {
 
   @Test
   public void testGetAllSkills() {
+
+    // Act
     final List<Skill> allSkills = skillDao.getAllSkills();
-    assertEquals(44, allSkills.size());
-    final Skill skill = getSkill(allSkills, SKILL_ID_CLIMB);
-    assertNotNull(skill);
-    assertEquals(skill.getId(), SKILL_ID_CLIMB);
-    assertEquals("Climb", skill.getName());
-    assertTrue(skill.getDescription()
-                   .startsWith("<b>Check: </b> With a successful Climb check"));
-    assertEquals(Attribute.STRENGTH, skill.getAttribute());
-    assertTrue(skill.isUntrained());
+
+    // Assert
+    assertThat(allSkills).hasSize(44);
+    final Skill skill = getSkill(allSkills);
+    assertThat(skill).isNotNull();
+    assertThat(skill.getId()).isEqualTo(SKILL_ID_CLIMB);
+    assertThat(skill.getName()).isEqualTo("Climb");
+    assertThat(skill.getDescription()).isNull();
+    assertThat(skill.getAttribute()).isEqualTo(Attribute.STRENGTH);
+    assertThat(skill.isUntrained()).isTrue();
   }
 
   @Test
   public void testGetCharacterSkills() {
+    // Arrange
     final Character belvador = new Character();
     belvador.setId(0);
 
+    // Act
     final List<CharacterSkill> characterSkills = characterDao.getCharacterSkills(belvador, skillDao.getAllSkills());
-    assertNotNull(characterSkills);
-    assertEquals(10, characterSkills.size());
+
+    // Assert
+    assertThat(characterSkills).isNotNull();
+    assertThat(characterSkills.size()).isEqualTo(10);
   }
 
-  protected Skill getSkill(final List<Skill> allSkills, final int skillId) {
+  protected Skill getSkill(final List<Skill> allSkills) {
     for (final Skill skill : allSkills) {
-      if (skill.getId() == skillId) {
+      if (skill.getId() == BaseSkillDaoTest.SKILL_ID_CLIMB) {
         return skill;
       }
     }
@@ -54,15 +59,15 @@ public abstract class BaseSkillDaoTest {
 
   @Test
   public void testUpdateSkill() {
+    // Arrange
     final String nameTest = "testName";
     final String descriptionTest = "descriptionTest";
     final Attribute attributeTest = Attribute.STRENGTH;
     final boolean untrainedTest = false;
 
-    final Skill skill = skillDao.getAllSkills()
-        .get(0);
+    final Skill skill = skillDao.getAllSkills().get(0);
     final String nameOrginal = skill.getName();
-    final String descriptionOrginal = skill.getDescription();
+    final String descriptionOrginal = skillDao.getSkillDescription(skill.getId());
     final Attribute attributeOrginal = skill.getAttribute();
     final boolean untrainedOrginal = skill.isUntrained();
 
@@ -71,13 +76,15 @@ public abstract class BaseSkillDaoTest {
     skill.setAttribute(attributeTest);
     skill.setUntrained(untrainedTest);
 
+    // Act
     final Skill updatedSkill = skillDao.updateSkill(skill);
 
-    assertNotNull(updatedSkill);
-    assertEquals(nameTest, updatedSkill.getName());
-    assertEquals(descriptionTest, updatedSkill.getDescription());
-    assertEquals(attributeTest, updatedSkill.getAttribute());
-    assertEquals(untrainedTest, updatedSkill.isUntrained());
+    // Assert
+    assertThat(updatedSkill).isNotNull();
+    assertThat(updatedSkill.getName()).isEqualTo(nameTest);
+    assertThat(updatedSkill.getDescription()).isEqualTo(descriptionTest);
+    assertThat(updatedSkill.getAttribute()).isEqualTo(attributeTest);
+    assertThat(updatedSkill.isUntrained()).isEqualTo(untrainedTest);
 
     // clean up
     skill.setName(nameOrginal);
@@ -90,6 +97,7 @@ public abstract class BaseSkillDaoTest {
 
   @Test
   public void testCreateSkill() {
+    // Arrange
     final String nameTest = "testName";
     final String descriptionTest = "descriptionTest";
     final Attribute attributeTest = Attribute.STRENGTH;
@@ -101,14 +109,16 @@ public abstract class BaseSkillDaoTest {
     newSkill.setAttribute(attributeTest);
     newSkill.setUntrained(untrainedTest);
 
+    // Act
     final Skill skill = skillDao.createSkill(newSkill);
 
-    assertNotNull(skill);
-    assertTrue(skill.getId() >= 0);
-    assertEquals(nameTest, skill.getName());
-    assertEquals(descriptionTest, skill.getDescription());
-    assertEquals(attributeTest, skill.getAttribute());
-    assertEquals(untrainedTest, skill.isUntrained());
+    // Assert
+    assertThat(skill).isNotNull();
+    assertThat(skill.getId()).isGreaterThanOrEqualTo(0);
+    assertThat(skill.getName()).isEqualTo(nameTest);
+    assertThat(skill.getDescription()).isEqualTo(descriptionTest);
+    assertThat(skill.getAttribute()).isEqualTo(attributeTest);
+    assertThat(skill.isUntrained()).isEqualTo(untrainedTest);
 
     // clean up
     skillDao.deleteSkill(skill);
@@ -116,6 +126,7 @@ public abstract class BaseSkillDaoTest {
 
   @Test
   public void testDeleteSkill() {
+    // Arrange
     final String nameTest = "testName";
     final String descriptionTest = "descriptionTest";
     final Attribute attributeTest = Attribute.STRENGTH;
@@ -130,10 +141,21 @@ public abstract class BaseSkillDaoTest {
     final Skill skill = skillDao.createSkill(newSkill);
     final int numberOfSkills = skillDao.getAllSkills().size();
 
-    // test
+    // Act
     skillDao.deleteSkill(skill);
 
-    assertEquals(numberOfSkills - 1, skillDao.getAllSkills().size());
+    // Assert
+    assertThat(skillDao.getAllSkills()).hasSize(numberOfSkills - 1);
+  }
+
+  @Test
+  public void testGetSkillDescription() {
+
+    // Act
+    String description = skillDao.getSkillDescription(BaseSkillDaoTest.SKILL_ID_CLIMB);
+
+    // Assert
+    assertThat(description).startsWith("<b>Check: </b> With a successful Climb check,");
   }
 
 }

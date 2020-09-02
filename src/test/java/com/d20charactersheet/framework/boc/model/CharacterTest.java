@@ -6,7 +6,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -285,15 +284,18 @@ public class CharacterTest {
     final Character belvador = gameSystem.getCharacter(0);
     final Equipment equipment = belvador.getEquipment();
     Map<BodyPart, List<Item>> bodyParts = new HashMap<>();
-    Arrays.stream(BodyPart.values()).forEach(bodyPart -> bodyParts.put(bodyPart, new LinkedList<>()));
+    for (BodyPart bodyPart : BodyPart.values()) {
+      bodyParts.put(bodyPart, new LinkedList<>());
+    }
     BodyService bodyService = gameSystem.getBodyService();
 
     for (ItemGroup itemGroup : equipment.getItems()) {
       // Act
       Item item = itemGroup.getItem();
       EnumSet<BodyPart> itemBodyParts = bodyService.calculateBodyParts(item);
-      itemBodyParts.forEach(bodyPart -> bodyParts.get(bodyPart)
-          .add(item));
+      for (BodyPart bodyPart : itemBodyParts) {
+        bodyParts.get(bodyPart).add(item);
+      }
     }
 
     // Assert
@@ -322,15 +324,18 @@ public class CharacterTest {
     final Character nascan = gameSystem.getCharacter(1);
     final Equipment equipment = nascan.getEquipment();
     Map<BodyPart, List<Item>> bodyParts = new HashMap<>();
-    Arrays.stream(BodyPart.values()).forEach(bodyPart -> bodyParts.put(bodyPart, new LinkedList<>()));
+    for (BodyPart bodyPart : BodyPart.values()) {
+      bodyParts.put(bodyPart, new LinkedList<>());
+    }
     BodyService bodyService = gameSystem.getBodyService();
 
     for (ItemGroup itemGroup : equipment.getItems()) {
       // Act
       Item item = itemGroup.getItem();
       EnumSet<BodyPart> itemBodyParts = bodyService.calculateBodyParts(item);
-      itemBodyParts.forEach(bodyPart -> bodyParts.get(bodyPart)
-          .add(item));
+      for (BodyPart bodyPart : itemBodyParts) {
+        bodyParts.get(bodyPart).add(item);
+      }
     }
 
     // Assert
@@ -359,15 +364,18 @@ public class CharacterTest {
     final Character tocDerJuengere = gameSystem.getCharacter(13);
     final Equipment equipment = tocDerJuengere.getEquipment();
     Map<BodyPart, List<Item>> bodyParts = new HashMap<>();
-    Arrays.stream(BodyPart.values()).forEach(bodyPart -> bodyParts.put(bodyPart, new LinkedList<>()));
+    for (BodyPart bodyPart : BodyPart.values()) {
+      bodyParts.put(bodyPart, new LinkedList<>());
+    }
     BodyService bodyService = gameSystem.getBodyService();
 
     for (ItemGroup itemGroup : equipment.getItems()) {
       // Act
       Item item = itemGroup.getItem();
       EnumSet<BodyPart> itemBodyParts = bodyService.calculateBodyParts(item);
-      itemBodyParts.forEach(bodyPart -> bodyParts.get(bodyPart)
-          .add(item));
+      for (BodyPart bodyPart : itemBodyParts) {
+        bodyParts.get(bodyPart).add(item);
+      }
     }
 
     // Assert
@@ -427,6 +435,11 @@ public class CharacterTest {
   }
 
   private boolean containsSpell(final String name, final List<KnownSpell> knownSpells) {
-    return knownSpells.stream().anyMatch(knownSpell -> knownSpell.getSpell().getName().equals(name));
+    for (KnownSpell knowSpell : knownSpells) {
+      if (knowSpell.getSpell().getName().equals(name)) {
+        return true;
+      }
+    }
+    return false;
   }
 }

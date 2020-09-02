@@ -31,9 +31,7 @@ public class DefaultAbilityBuilder implements AbilityBuilder {
 
   String getClassname(final AbilityConfig abilityConfig) {
     final String packageName = Ability.class.getPackage().getName();
-    final StringBuilder classname = new StringBuilder();
-    classname.append(packageName).append(".").append(abilityConfig.getClassname());
-    return classname.toString();
+    return packageName + "." + abilityConfig.getClassname();
   }
 
   void fillAbility(final Ability ability, final AbilityConfig abilityConfig) {
@@ -48,8 +46,8 @@ public class DefaultAbilityBuilder implements AbilityBuilder {
     return Integer.parseInt(value);
   }
 
-  boolean getBoolean(final AbilityConfig abilityConfig, final String key) {
-    final String value = abilityConfig.getProperties().get(key);
+  boolean getBoolean(final AbilityConfig abilityConfig) {
+    final String value = abilityConfig.getProperties().get(SpelllistAbilityBuilder.KEY_ATTRIBUTE_BONUS_SPELL_SLOTS);
     return Boolean.parseBoolean(value);
   }
 

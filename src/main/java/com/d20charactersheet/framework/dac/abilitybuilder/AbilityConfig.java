@@ -169,8 +169,7 @@ public class AbilityConfig {
     if (rawValue == null) {
       throw new IllegalArgumentException("Can't find property: " + propertyKey);
     }
-    final int value = Integer.parseInt(rawValue);
-    return value;
+    return Integer.parseInt(rawValue);
   }
 
   @Override

@@ -1,11 +1,12 @@
 package com.d20charactersheet.framework.dac.dao.sql.rowmapper;
 
+import java.sql.SQLException;
+
 import org.jetbrains.annotations.NotNull;
 
 import com.d20charactersheet.framework.boc.model.AbilityType;
 import com.d20charactersheet.framework.dac.abilitybuilder.AbilityConfig;
-import com.d20charactersheet.framework.dac.dao.BaseRowMapper;
-import com.d20charactersheet.framework.dac.dao.DataRow;
+import com.d20charactersheet.framework.dac.dao.sql.DataRow;
 
 /**
  * Maps a data row to a ability instance.
@@ -14,7 +15,7 @@ public class AbilityConfigRowMapper extends BaseRowMapper {
 
     @NotNull
     @Override
-    public Object mapRow(@NotNull DataRow dataRow) throws java.sql.SQLException {
+    public Object mapRow(@NotNull DataRow dataRow) throws SQLException {
         final AbilityConfig abilityConfig = new AbilityConfig();
         abilityConfig.setId(dataRow.getInt(0));
         abilityConfig.setName(dataRow.getString(1));

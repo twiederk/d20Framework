@@ -95,10 +95,7 @@ public class KnownSpell implements Serializable {
       return false;
     }
     final KnownSpell other = (KnownSpell) obj;
-    if (id != other.id) {
-      return false;
-    }
-    return true;
+    return id == other.id;
   }
 
 }

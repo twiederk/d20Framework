@@ -1,5 +1,6 @@
 package com.d20charactersheet.framework.dac.dao.sql.rowmapper;
 
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -7,8 +8,7 @@ import java.util.Locale;
 import org.jetbrains.annotations.NotNull;
 
 import com.d20charactersheet.framework.boc.model.Note;
-import com.d20charactersheet.framework.dac.dao.BaseRowMapper;
-import com.d20charactersheet.framework.dac.dao.DataRow;
+import com.d20charactersheet.framework.dac.dao.sql.DataRow;
 
 /**
  * Maps a data row to a new note instance. The date of the note is stored as text in the database with the format given
@@ -31,7 +31,7 @@ public class NoteRowMapper extends BaseRowMapper {
 
     @NotNull
     @Override
-    public Object mapRow(@NotNull DataRow dataRow) throws java.sql.SQLException {
+    public Object mapRow(@NotNull DataRow dataRow) throws SQLException {
         // id, date, text
         final Note note = new Note();
         note.setId(dataRow.getInt(0));

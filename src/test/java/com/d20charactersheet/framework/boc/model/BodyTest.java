@@ -19,7 +19,9 @@ public class BodyTest {
 
     // Assert
     assertThat(bodyParts).hasSize(15);
-    bodyParts.forEach(bodyPart -> assertThat(body.getItemOfBodyPart(bodyPart)).isEqualTo(Item.EMPTY_ITEM));
+    for (BodyPart bodyPart : bodyParts) {
+      assertThat(body.getItemOfBodyPart(bodyPart)).isEqualTo(Item.EMPTY_ITEM);
+    }
   }
 
   @Test

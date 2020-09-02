@@ -1,13 +1,13 @@
 package com.d20charactersheet.framework.dac.dao.sql.rowmapper;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 
 import com.d20charactersheet.framework.boc.model.CharacterAbility;
 import com.d20charactersheet.framework.boc.model.ClassAbility;
-import com.d20charactersheet.framework.dac.dao.BaseRowMapper;
-import com.d20charactersheet.framework.dac.dao.DataRow;
+import com.d20charactersheet.framework.dac.dao.sql.DataRow;
 
 /**
  * Maps data row to new CharacterAbility instance.
@@ -29,7 +29,7 @@ public class CharacterAbilityRowMapper extends BaseRowMapper {
 
     @NotNull
     @Override
-    public Object mapRow(@NotNull DataRow dataRow) throws java.sql.SQLException {
+    public Object mapRow(@NotNull DataRow dataRow) throws SQLException {
         // id, ability_id, owned
         final CharacterAbility characterAbility = new CharacterAbility();
         characterAbility.setId(dataRow.getInt(0));

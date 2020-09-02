@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.d20charactersheet.framework.boc.model.Ability;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
+import com.d20charactersheet.framework.boc.model.CharacterClass.AnyCharacterClass;
 import com.d20charactersheet.framework.boc.model.Race;
 import com.d20charactersheet.framework.dac.dao.RaceDao;
 
@@ -29,7 +30,7 @@ public class RaceServiceImpl implements RaceService {
     final List<Race> allRaces = raceDao.getAllRaces(allCharacterClasses, allAbilities);
     for (final Race race : allRaces) {
       if (race.getFavoredCharacterClass() == null) {
-        race.setFavoredCharacterClass(CharacterClass.ANY_CHARACTER_CLASS);
+        race.setFavoredCharacterClass(AnyCharacterClass.ANY_CHARACTER_CLASS);
       }
     }
     return allRaces;

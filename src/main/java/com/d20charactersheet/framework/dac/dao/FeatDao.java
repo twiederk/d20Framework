@@ -21,20 +21,16 @@ public interface FeatDao {
    *
    * @param feat
    *     The feat to create.
-   *
-   * @return The created feat.
    */
-  Feat createFeat(Feat feat);
+  void createFeat(Feat feat);
 
   /**
    * Updates the feat.
    *
    * @param feat
    *     The feat to update.
-   *
-   * @return The updated feat.
    */
-  Feat updateFeat(Feat feat);
+  void updateFeat(Feat feat);
 
   /**
    * Deletes the feat.

@@ -24,15 +24,15 @@ public class DieTest {
   @Test
   public void testRollDice() {
     for (final Die die : Die.values()) {
-      assertDie(die, 3);
+      assertDice(die);
     }
   }
 
-  private void assertDie(final Die die, final int numberOfDice) {
+  private void assertDice(final Die die) {
     for (int i = 0; i < 10; i++) {
-      final int result = die.roll(numberOfDice);
-      assertTrue(result >= numberOfDice);
-      assertTrue(result <= numberOfDice * die.max());
+      final int result = die.roll(3);
+      assertTrue(result >= 3);
+      assertTrue(result <= 3 * die.max());
 
     }
   }

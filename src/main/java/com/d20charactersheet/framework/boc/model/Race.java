@@ -156,10 +156,7 @@ public class Race implements Serializable {
       return false;
     }
     final Race other = (Race) obj;
-    if (id != other.id) {
-      return false;
-    }
-    return true;
+    return id == other.id;
   }
 
 }

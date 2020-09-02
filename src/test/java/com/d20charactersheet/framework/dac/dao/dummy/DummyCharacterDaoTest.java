@@ -33,6 +33,7 @@ import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35Spells
 import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35SpellsPerDayStorage.SPELLS_PER_DAY_TABLE;
 import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35XpStorage.XP_LEVEL;
 import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35XpStorage.XP_TABLE;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -68,25 +69,36 @@ public class DummyCharacterDaoTest extends BaseCharacterDaoTest {
   }
 
   @Test
+  @Override
+  public void testGetAllCharacters() {
+
+    // Act
+    final List<Character> characters = characterDao.getAllCharacters(allCharacterClasses, allRaces, allXpTables);
+
+    // Assert
+    assertThat(characters).hasSize(14);
+  }
+
+  @Test
   public void testDummyCharacters() {
     final List<Character> allCharacters = characterDao.getAllCharacters(allCharacterClasses, allRaces, allXpTables);
     final Character belvador = allCharacters.get(0);
-    assertStats(belvador, 0, "Belvador the Summoner", "Torsten", 2, Sex.MALE, Alignment.CHAOTIC_GOOD, 13129);
+    assertStats(belvador, 0, "Belvador the Summoner", 2, Alignment.CHAOTIC_GOOD, 13129);
     assertCharacterClassLevels(belvador, new Object[][] {{"Wizard", 5}});
 
     final Character nascan = allCharacters.get(1);
-    assertStats(nascan, 1, "Nascan Schwarzhaut", "Torsten", 0, Sex.MALE, Alignment.NEUTRAL, 24500);
+    assertStats(nascan, 1, "Nascan Schwarzhaut", 0, Alignment.NEUTRAL, 24500);
     assertCharacterClassLevels(nascan, new Object[][] {{"Ranger", 4}, {"Rogue", 3}});
   }
 
-  private void assertStats(final Character character, final int id, final String name, final String player, final int raceId,
-      final Sex sex, final Alignment alignment, final int experiencePoints) {
+  private void assertStats(final Character character, final int id, final String name, final int raceId, final Alignment alignment,
+      final int experiencePoints) {
     assertNotNull(character);
     assertEquals(id, character.getId());
     assertEquals(name, character.getName());
-    assertEquals(player, character.getPlayer());
+    assertEquals("Torsten", character.getPlayer());
     assertEquals(raceId, character.getRace().getId());
-    assertEquals(sex, character.getSex());
+    assertEquals(Sex.MALE, character.getSex());
     assertEquals(alignment, character.getAlignment());
     assertEquals(experiencePoints, character.getExperiencePoints());
   }

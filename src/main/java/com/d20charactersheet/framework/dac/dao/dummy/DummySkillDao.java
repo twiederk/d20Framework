@@ -46,7 +46,6 @@ public class DummySkillDao implements SkillDao {
     skill.setName((String) dataRow.get(1));
     skill.setAttribute(getAttribute((Integer) dataRow.get(2)));
     skill.setUntrained(getUntrained((Integer) dataRow.get(3)));
-    skill.setDescription((String) dataRow.get(4));
     return skill;
   }
 
@@ -117,8 +116,7 @@ public class DummySkillDao implements SkillDao {
     if (dataRows.size() != 1) {
       throw new IllegalArgumentException("Can't find skill with id: " + skillId);
     }
-    final String description = dataRows.get(0).getString(4);
-    return description;
+    return dataRows.get(0).getString(4);
   }
 
 }

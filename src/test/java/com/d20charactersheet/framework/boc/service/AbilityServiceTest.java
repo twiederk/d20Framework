@@ -46,9 +46,8 @@ public class AbilityServiceTest {
 
   @Test
   public void testUpdateAbility() {
-    final int ABILITY_ID = 0;
 
-    final Ability sourceAbility = getAbilityById(ABILITY_ID);
+    final Ability sourceAbility = getAbilityById();
 
     final Ability updateAbility = new Ability();
     updateAbility.setId(sourceAbility.getId());
@@ -58,7 +57,7 @@ public class AbilityServiceTest {
 
     abilityService.updateAbility(updateAbility);
 
-    final Ability destAbility = getAbilityById(ABILITY_ID);
+    final Ability destAbility = getAbilityById();
     assertEquals("updateName", destAbility.getName());
     assertEquals("updateDescription", destAbility.getDescription());
     assertEquals(AbilityType.SUPERNATURAL, destAbility.getAbilityType());
@@ -68,16 +67,18 @@ public class AbilityServiceTest {
 
   }
 
-  private Ability getAbilityById(final int abilityId) {
+  private Ability getAbilityById() {
+    final int ABILITY_ID = 0;
+
     final List<Ability> allAbilities = abilityService
         .getAllAbilities(spelllistService.getAllSpelllists(spelllistService.getAllSpells()),
                          spelllistService.getAllKnownSpellsTables(), spelllistService.getAllSpellsPerDayTables());
     for (final Ability ability : allAbilities) {
-      if (ability.getId() == abilityId) {
+      if (ability.getId() == ABILITY_ID) {
         return ability;
       }
     }
-    throw new IllegalArgumentException("Can't find ability with id: " + abilityId);
+    throw new IllegalArgumentException("Can't find ability with id: " + 0);
   }
 
 }

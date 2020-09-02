@@ -17,8 +17,7 @@ public class ImportFactoryImpl implements ImportFactory, XmlConstants {
   public ImportCharacter getImportCharacter(final ImportContext importContext, final File importFile) throws Exception {
     final Document document = parseDocument(importFile);
     checkGameSystem(importContext.getGameSystemName(), document.getDocumentElement());
-    final ImportCharacter importCharacter = getImportCharacter(importContext, document);
-    return importCharacter;
+    return getImportCharacter(importContext, document);
   }
 
   private ImportCharacter getImportCharacter(final ImportContext importContext, final Document document) {
@@ -39,27 +38,22 @@ public class ImportFactoryImpl implements ImportFactory, XmlConstants {
   public ImportEquipment getImportEquipment(final ImportContext importContext, final File importFile) throws Exception {
     final Document document = parseDocument(importFile);
     checkGameSystem(importContext.getGameSystemName(), document.getDocumentElement());
-    final ImportEquipment importEquipment = getImportEquipment(importContext, document);
-    return importEquipment;
+    return getImportEquipment(importContext, document);
   }
 
   private ImportEquipment getImportEquipment(final ImportContext importContext, final Document document) {
     final int version = getVersion(document);
 
-    switch (version) {
-      case 1:
-        return new ImportEquipmentV1Xml(importContext, document);
-
-      default:
-        throw new IllegalArgumentException("Can't find ImportEquipment for version: " + version);
+    if (version == 1) {
+      return new ImportEquipmentV1Xml(importContext, document);
     }
+    throw new IllegalArgumentException("Can't find ImportEquipment for version: " + version);
   }
 
   private Document parseDocument(final File importFile) throws Exception {
     final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     final DocumentBuilder builder = factory.newDocumentBuilder();
-    final Document document = builder.parse(importFile);
-    return document;
+    return builder.parse(importFile);
   }
 
   void checkGameSystem(final String gameSystemName, final Element documentElement) {

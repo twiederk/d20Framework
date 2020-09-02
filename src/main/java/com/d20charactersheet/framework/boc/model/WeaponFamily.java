@@ -75,9 +75,6 @@ public class WeaponFamily implements Serializable {
       return false;
     }
     final WeaponFamily other = (WeaponFamily) obj;
-    if (id != other.id) {
-      return false;
-    }
-    return true;
+    return id == other.id;
   }
 }

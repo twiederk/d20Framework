@@ -1,5 +1,6 @@
 package com.d20charactersheet.framework.dac.dao.sql.rowmapper;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
@@ -7,8 +8,8 @@ import org.jetbrains.annotations.NotNull;
 import com.d20charactersheet.framework.boc.model.KnownSpell;
 import com.d20charactersheet.framework.boc.model.Spell;
 import com.d20charactersheet.framework.boc.model.Spelllist;
-import com.d20charactersheet.framework.dac.dao.DataRow;
-import com.d20charactersheet.framework.dac.dao.RowMapper;
+import com.d20charactersheet.framework.dac.dao.sql.DataRow;
+import com.d20charactersheet.framework.dac.dao.sql.RowMapper;
 
 /**
  * Maps raw data to KnownSpell class.
@@ -33,7 +34,7 @@ public class KnownSpellRowMapper implements RowMapper {
 
     @NotNull
     @Override
-    public Object mapRow(@NotNull DataRow dataRow) throws java.sql.SQLException {
+    public Object mapRow(@NotNull DataRow dataRow) throws SQLException {
         final KnownSpell knownSpell = new KnownSpell();
         knownSpell.setId(dataRow.getInt(0));
         knownSpell.setSpelllist(getSpelllist(dataRow.getInt(1)));

@@ -46,10 +46,7 @@ public class XpServiceImpl implements XpService {
     final XpTable xpTable = character.getXpTable();
     final int minExperiencePoints = getNextLevelAt(xpTable, characterLevel - 1);
     final int maxExperiencePoints = getNextLevelAt(xpTable, characterLevel) - 1;
-    if (experiencePoints >= minExperiencePoints && experiencePoints <= maxExperiencePoints) {
-      return true;
-    }
-    return false;
+    return experiencePoints >= minExperiencePoints && experiencePoints <= maxExperiencePoints;
   }
 
 }

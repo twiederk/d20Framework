@@ -137,10 +137,7 @@ public class KnownSpellsTable {
       return false;
     }
     final KnownSpellsTable other = (KnownSpellsTable) obj;
-    if (id != other.id) {
-      return false;
-    }
-    return true;
+    return id == other.id;
   }
 
 }

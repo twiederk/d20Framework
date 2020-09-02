@@ -255,9 +255,6 @@ public class WeaponAttack implements Serializable {
       return false;
     }
     final WeaponAttack other = (WeaponAttack) obj;
-    if (id != other.id) {
-      return false;
-    }
-    return true;
+    return id == other.id;
   }
 }

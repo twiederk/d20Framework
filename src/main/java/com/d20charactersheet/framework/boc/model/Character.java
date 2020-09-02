@@ -608,10 +608,7 @@ public class Character implements Serializable {
       return false;
     }
     final Character other = (Character) obj;
-    if (id != other.id) {
-      return false;
-    }
-    return true;
+    return id == other.id;
   }
 
   /**
@@ -753,8 +750,7 @@ public class Character implements Serializable {
    * @return All abilities of the character.
    */
   public List<Ability> getAllAbilities() {
-    final List<Ability> allAbilities = new ArrayList<>();
-    allAbilities.addAll(stats.getRace().getAbilities());
+    final List<Ability> allAbilities = new ArrayList<>(stats.getRace().getAbilities());
     for (final CharacterClass characterClass : getCharacterClasses()) {
       for (final ClassAbility classAbility : characterClass.getClassAbilities()) {
         allAbilities.add(classAbility.getAbility());

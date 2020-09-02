@@ -116,11 +116,7 @@ public class DummySpelllistDao implements SpelllistDao {
 
   private boolean isSet(final int components, final int position) {
     final int mask = 1 << position;
-    final boolean isSet = (components & mask) > 0;
-    if (isSet) {
-      return true;
-    }
-    return false;
+    return (components & mask) > 0;
   }
 
   public List<Spelllist> getAllSpelllists(final List<Spell> allSpells) {
@@ -165,7 +161,11 @@ public class DummySpelllistDao implements SpelllistDao {
   }
 
   private void assignSpell(final Map<Integer, List<Spell>> spells, final Spell spell, final int level) {
-    List<Spell> spellsOfLevel = spells.computeIfAbsent(level, k -> new ArrayList<>());
+    List<Spell> spellsOfLevel = spells.get(level);
+    if (spellsOfLevel == null) {
+      spellsOfLevel = new ArrayList<>();
+      spells.put(level, spellsOfLevel);
+    }
     spellsOfLevel.add(spell);
   }
 
@@ -175,8 +175,7 @@ public class DummySpelllistDao implements SpelllistDao {
     if (dataRows.size() != 1) {
       throw new IllegalArgumentException("Can't get spell with id: " + spellId);
     }
-    final String description = dataRows.get(0).getString(11);
-    return description;
+    return dataRows.get(0).getString(11);
   }
 
   @Override
@@ -218,11 +217,11 @@ public class DummySpelllistDao implements SpelllistDao {
 
   @Override
   public void createSpelllevel(final Spelllist spelllist, final Spell spell, final int level) {
-    spelllistSpellTable.forEach(dataRow -> {
+    for (DataRow dataRow : spelllistSpellTable) {
       if (dataRow.getInt(0) == spelllist.getId() && dataRow.getInt(1) == spell.getId()) {
         throw new IllegalArgumentException("Spell already added to this spelllist add this level");
       }
-    });
+    }
     spelllistSpellTable.insert(new Object[] {spelllist.getId(), spell.getId(), level});
   }
 

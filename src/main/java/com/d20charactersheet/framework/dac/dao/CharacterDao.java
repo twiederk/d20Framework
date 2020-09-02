@@ -343,9 +343,8 @@ public interface CharacterDao {
    * @param characterAbility
    *     The CharacterAbility to create.
    *
-   * @return The created CharacterAbility.
    */
-  CharacterAbility createCharacterAbility(Character character, CharacterClass characterClass, CharacterAbility characterAbility);
+  void createCharacterAbility(Character character, CharacterClass characterClass, CharacterAbility characterAbility);
 
   /**
    * Delete CharacterAbility.

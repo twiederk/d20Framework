@@ -96,10 +96,7 @@ public class Note implements Serializable {
       return false;
     }
     final Note other = (Note) obj;
-    if (id != other.id) {
-      return false;
-    }
-    return true;
+    return id == other.id;
   }
 
   @Override

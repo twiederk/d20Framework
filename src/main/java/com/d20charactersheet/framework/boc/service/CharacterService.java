@@ -376,10 +376,8 @@ public interface CharacterService {
    *     The character to create known spell to.
    * @param knownSpell
    *     The known spell to create.
-   *
-   * @return The created known spell.
    */
-  KnownSpell createKnownSpell(Character character, KnownSpell knownSpell);
+  void createKnownSpell(Character character, KnownSpell knownSpell);
 
   /**
    * Delete known spell from character.

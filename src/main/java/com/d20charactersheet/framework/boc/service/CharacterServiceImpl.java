@@ -450,10 +450,9 @@ public class CharacterServiceImpl implements CharacterService {
   }
 
   @Override
-  public KnownSpell createKnownSpell(final Character character, final KnownSpell knownSpell) {
+  public void createKnownSpell(final Character character, final KnownSpell knownSpell) {
     final KnownSpell newKnownSpell = characterDao.createKnownSpell(character, knownSpell);
     character.getKnownSpells().add(newKnownSpell);
-    return newKnownSpell;
   }
 
   @Override

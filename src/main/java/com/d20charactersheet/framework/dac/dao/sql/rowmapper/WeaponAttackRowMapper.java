@@ -1,5 +1,6 @@
 package com.d20charactersheet.framework.dac.dao.sql.rowmapper;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
@@ -7,8 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import com.d20charactersheet.framework.boc.model.AttackWield;
 import com.d20charactersheet.framework.boc.model.Weapon;
 import com.d20charactersheet.framework.boc.model.WeaponAttack;
-import com.d20charactersheet.framework.dac.dao.BaseRowMapper;
-import com.d20charactersheet.framework.dac.dao.DataRow;
+import com.d20charactersheet.framework.dac.dao.sql.DataRow;
 
 /**
  * Maps data row to new WeaponAttack instance.
@@ -30,7 +30,7 @@ public class WeaponAttackRowMapper extends BaseRowMapper {
 
     @NotNull
     @Override
-    public Object mapRow(@NotNull DataRow dataRow) throws java.sql.SQLException {
+    public Object mapRow(@NotNull DataRow dataRow) throws SQLException {
         // id, name, description, attack_wield_id, weapon_id, ammunition
         final WeaponAttack weaponAttack = new WeaponAttack();
         weaponAttack.setId(dataRow.getInt(0));

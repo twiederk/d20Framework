@@ -280,7 +280,7 @@ public class ExportCharacterXml extends XmlExport implements ExportCharacter {
     final Element spellSlotElement = document.createElement(TAG_SPELLSLOT);
     spellSlotElement.appendChild(createElementWithText(TAG_SPELL, spellSlot.getSpell().getName()));
     spellSlotElement.appendChild(createElementWithText(TAG_LEVEL, spellSlot.getLevel()));
-    spellSlotElement.appendChild(createElementWithText(TAG_CAST, spellSlot.isCast()));
+    spellSlotElement.appendChild(createElementWithText(spellSlot.isCast()));
     spellSlotElement.appendChild(createElementSpelllistAbilities(spellSlot.getSpelllistAbilities()));
     spellSlotElement.appendChild(createElementMeatamagicFeats(spellSlot.getMetamagicFeats()));
     return spellSlotElement;

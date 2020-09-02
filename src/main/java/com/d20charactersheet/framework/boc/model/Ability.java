@@ -115,10 +115,7 @@ public class Ability implements Serializable {
       return false;
     }
     final Ability other = (Ability) obj;
-    if (id != other.id) {
-      return false;
-    }
-    return true;
+    return id == other.id;
   }
 
 }

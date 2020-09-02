@@ -95,10 +95,7 @@ public class XpTable implements Serializable {
       return false;
     }
     final XpTable other = (XpTable) obj;
-    if (id != other.id) {
-      return false;
-    }
-    return true;
+    return id == other.id;
   }
 
 }

@@ -44,16 +44,6 @@ public class SpelllistAbility extends Ability {
     this.spelllist = spelllist;
   }
 
-  @Override
-  public boolean equals(final Object obj) {
-    return super.equals(obj);
-  }
-
-  @Override
-  public int hashCode() {
-    return super.hashCode();
-  }
-
   /**
    * Returns attribute to get extra spell slots for the spell list.
    *

@@ -77,13 +77,11 @@ public class DummyAbilityDao implements AbilityDao {
     final Map<String, String> abilityProperties = selectAbilityProperties(dataRow.getId());
     abilityConfig.setProperties(abilityProperties);
     final AbilityBuilder abilityBuilder = abilityBuilderFactory.getAbilityBuilder(abilityConfig.getClassname());
-    final Ability ability = createAbility(abilityConfig, abilityBuilder);
-    return ability;
+    return createAbility(abilityConfig, abilityBuilder);
   }
 
   private Ability createAbility(final AbilityConfig abilityConfig, final AbilityBuilder abilityBuilder) {
-    final Ability ability = abilityBuilder.createAbility(abilityConfig);
-    return ability;
+    return abilityBuilder.createAbility(abilityConfig);
   }
 
   private AbilityConfig selectAbilityConfig(final DataRow dataRow) {

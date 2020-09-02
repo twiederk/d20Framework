@@ -210,10 +210,7 @@ public class Feat implements Serializable {
       return false;
     }
     final Feat other = (Feat) obj;
-    if (id != other.id) {
-      return false;
-    }
-    return true;
+    return id == other.id;
   }
 
   /**

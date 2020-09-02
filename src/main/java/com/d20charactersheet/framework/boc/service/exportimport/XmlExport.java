@@ -26,8 +26,8 @@ public abstract class XmlExport implements XmlConstants {
     document = builder.newDocument();
   }
 
-  Element createElementWithText(final String name, final boolean text) {
-    final Element element = document.createElement(name);
+  Element createElementWithText(final boolean text) {
+    final Element element = document.createElement(XmlConstants.TAG_CAST);
     element.setTextContent(Boolean.toString(text));
     return element;
   }

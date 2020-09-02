@@ -28,14 +28,4 @@ public class ExtraSkillPointsAbility extends Ability {
     this.skillPoints = skillPoints;
   }
 
-  @Override
-  public boolean equals(final Object obj) {
-    return super.equals(obj);
-  }
-
-  @Override
-  public int hashCode() {
-    return super.hashCode();
-  }
-
 }

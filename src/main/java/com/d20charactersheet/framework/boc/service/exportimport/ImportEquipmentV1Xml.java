@@ -45,10 +45,8 @@ public class ImportEquipmentV1Xml extends XmlImport implements ImportEquipment {
   @Override
   public List<ImportReport<? extends Item>> importEquipment() {
 
-    final List<ImportReport<? extends Item>> importReports = new ArrayList<>();
-
     final NodeList weaponList = document.getElementsByTagName(TAG_WEAPON);
-    importReports.addAll(importItems(weaponList, new ImportWeapon()));
+    final List<ImportReport<? extends Item>> importReports = new ArrayList<>(importItems(weaponList, new ImportWeapon()));
 
     final NodeList armorList = document.getElementsByTagName(TAG_ARMOR);
     importReports.addAll(importItems(armorList, new ImportArmor()));
@@ -153,15 +151,13 @@ public class ImportEquipmentV1Xml extends XmlImport implements ImportEquipment {
     private Damage getDamage(final Element damageElement) {
       final int numberOfDice = Integer.parseInt(damageElement.getAttribute(ATTRIBUTE_NUMBEROFDICE));
       final Die die = Enum.valueOf(Die.class, damageElement.getAttribute(ATTRIBUTE_DIE));
-      final Damage damage = new Damage(numberOfDice, die);
-      return damage;
+      return new Damage(numberOfDice, die);
     }
 
     private Critical getCritical(final Element criticalElement) {
       final int hit = Integer.parseInt(criticalElement.getAttribute(ATTRIBUTE_HIT));
       final int multiplier = Integer.parseInt(criticalElement.getAttribute(ATTRIBUTE_MULTIPIER));
-      final Critical critical = new Critical(hit, multiplier);
-      return critical;
+      return new Critical(hit, multiplier);
     }
 
     private WeaponFamily getFamily(final Node familyNode, final ImportReport<Weapon> importReport) {

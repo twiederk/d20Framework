@@ -1,5 +1,6 @@
 package com.d20charactersheet.framework.dac.dao.sql.rowmapper;
 
+import java.sql.SQLException;
 import java.util.EnumSet;
 
 import org.jetbrains.annotations.NotNull;
@@ -9,8 +10,7 @@ import com.d20charactersheet.framework.boc.model.BaseAttackBonus;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
 import com.d20charactersheet.framework.boc.model.Die;
 import com.d20charactersheet.framework.boc.model.Save;
-import com.d20charactersheet.framework.dac.dao.BaseRowMapper;
-import com.d20charactersheet.framework.dac.dao.DataRow;
+import com.d20charactersheet.framework.dac.dao.sql.DataRow;
 
 /**
  * Maps a data row to a character class.
@@ -22,7 +22,7 @@ public class ClassRowMapper extends BaseRowMapper {
      */
     @NotNull
     @Override
-    public Object mapRow(@NotNull DataRow dataRow) throws java.sql.SQLException {
+    public Object mapRow(@NotNull DataRow dataRow) throws SQLException {
         // id, name, base_attack_bonus, saves, alignments, skill_points_per_level, hit_die_id
         final CharacterClass characterClass = new CharacterClass();
         characterClass.setId(dataRow.getInt(0));

@@ -52,12 +52,7 @@ public class ClassAbility implements Serializable {
 
   @Override
   public String toString() {
-    final StringBuilder output = new StringBuilder();
-    output.append(ability.getName());
-    output.append(" (");
-    output.append(level);
-    output.append(")");
-    return output.toString();
+    return ability.getName() + " (" + level + ")";
 
   }
 

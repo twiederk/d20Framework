@@ -140,8 +140,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
    */
   @Override
   public int getSpeed(final Character character) {
-    final int speed = character.getRace().getBaseLandSpeed();
-    return speed;
+    return character.getRace().getBaseLandSpeed();
   }
 
   /**
@@ -154,10 +153,13 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   }
 
   private int calculateArmorBonus(List<Item> equippedItems) {
-    return equippedItems.stream().
-        filter(item -> item instanceof Armor).
-        mapToInt(item -> ((Armor) item).getArmorBonus()).
-        sum();
+    int armorBonus = 0;
+    for (Item item : equippedItems) {
+      if (item instanceof Armor) {
+        armorBonus += ((Armor) item).getArmorBonus();
+      }
+    }
+    return armorBonus;
   }
 
   /**
@@ -188,10 +190,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
    * @see com.d20charactersheet.framework.boc.service.RuleService#isTrained(com.d20charactersheet.framework.boc.model.CharacterSkill)
    */
   public boolean isTrained(final CharacterSkill characterSkill) {
-    if (characterSkill.getSkill().isUntrained() || characterSkill.getRank() > 0) {
-      return true;
-    }
-    return false;
+    return characterSkill.getSkill().isUntrained() || characterSkill.getRank() > 0;
   }
 
   int getAbilityBonus(final Character character) {
@@ -248,8 +247,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
     final int baseSave = getBaseSave(character, save);
     final int attributeModifier = getSaveAttributeModifier(character, save);
     final int modifier = getSaveModifier(character, save);
-    final int saveModifier = baseSave + attributeModifier + modifier;
-    return saveModifier;
+    return baseSave + attributeModifier + modifier;
   }
 
   /**
@@ -364,9 +362,8 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   @Override
   public float getGold(final Character character) {
     final Money money = character.getMoney();
-    final float gold = money.getPlatinum() * 10 + money.getGold() //
+    return money.getPlatinum() * 10 + money.getGold() //
         + money.getSilver() / 10.0f + money.getCopper() / 100.0f;
-    return gold;
   }
 
   @Override
@@ -383,9 +380,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   private boolean isCarriable(final Item item) {
     if (item instanceof Good) {
       final Good good = (Good) item;
-      if (good.getGoodType().equals(GoodType.MOUNT) || good.getGoodType().equals(GoodType.MOUNT_GEAR)) {
-        return false;
-      }
+      return !good.getGoodType().equals(GoodType.MOUNT) && !good.getGoodType().equals(GoodType.MOUNT_GEAR);
     }
     return true;
   }
@@ -397,8 +392,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
     final int strengthModifier = getModifier(character.getStrength());
     final int specialSizeModifier = getSpecialSizeModifier(character.getRace().getSize());
     final int cmbModifer = character.getCmbModifier();
-    final int combatManeuverBonus = baseAttackBonus + strengthModifier + specialSizeModifier + cmbModifer;
-    return combatManeuverBonus;
+    return baseAttackBonus + strengthModifier + specialSizeModifier + cmbModifer;
   }
 
   public int getCombatManeuverDefence(final Character character) {
@@ -408,9 +402,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
     final int dexterityModifier = getModifier(character.getDexterity());
     final int specialSizeModifier = getSpecialSizeModifier(character.getRace().getSize());
     final int cmdModifer = character.getCmdModifier();
-    final int combatManeuverDefence =
-        10 + baseAttackBonus + strengthModifier + dexterityModifier + specialSizeModifier + cmdModifer;
-    return combatManeuverDefence;
+    return 10 + baseAttackBonus + strengthModifier + dexterityModifier + specialSizeModifier + cmdModifer;
   }
 
   public abstract int getSpecialSizeModifier(final Size size);
@@ -470,9 +462,6 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   private int getAttackEnhancementBonus(final Weapon weapon) {
     int enhancementBonus;
     switch (weapon.getQualityType()) {
-      case NORMAL:
-        enhancementBonus = 0;
-        break;
 
       case MASTERWORK:
         enhancementBonus = 1;
@@ -482,6 +471,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
         enhancementBonus = weapon.getEnhancementBonus();
         break;
 
+      case NORMAL:
       default:
         enhancementBonus = 0;
         break;
@@ -496,8 +486,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
     final int twoWeaponFighting = getTwoWeaponFighting(weaponAttack.getAttackWield(), weapon, characterFeats);
     final int weaponFocus = getWeaponFocus(characterFeats, weapon);
 
-    final int featBonus = twoWeaponFighting + weaponFocus;
-    return featBonus;
+    return twoWeaponFighting + weaponFocus;
   }
 
   int getTwoWeaponFighting(final AttackWield attackWield, final Weapon weapon, final List<CharacterFeat> characterFeats) {
@@ -537,11 +526,8 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   }
 
   private boolean isLightOrDoubleWeapon(final Weapon weapon) {
-    if (WeaponEncumbrance.LIGHT_HANDED.equals(weapon.getWeaponEncumbrance()) //
-        || WeaponCategory.DOUBLE_WEAPON.equals(weapon.getWeaponCategory())) {
-      return true;
-    }
-    return false;
+    return WeaponEncumbrance.LIGHT_HANDED.equals(weapon.getWeaponEncumbrance()) //
+        || WeaponCategory.DOUBLE_WEAPON.equals(weapon.getWeaponCategory());
   }
 
   int calculateAttributeModifier(final Character character, final Weapon weapon) {
@@ -571,13 +557,10 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   private boolean isFinesseWeapon(final Weapon weapon) {
     // With a light weapon, rapier, whip, or spiked chain made for a creature of your size category,
     // you may use your Dexterity modifier instead of your Strength modifier on attack rolls.
-    if (WeaponEncumbrance.LIGHT_HANDED.equals(weapon.getWeaponEncumbrance()) //
+    return WeaponEncumbrance.LIGHT_HANDED.equals(weapon.getWeaponEncumbrance()) //
         || isWeaponFamily(weapon, WEAPON_FAMILIY_RAPIER) //
         || isWeaponFamily(weapon, WEAPON_FAMILIY_WHIP) //
-        || isWeaponFamily(weapon, WEAPON_FAMILIY_CHAIN_SPIKED)) {
-      return true;
-    }
-    return false;
+        || isWeaponFamily(weapon, WEAPON_FAMILIY_CHAIN_SPIKED);
   }
 
   private boolean isCharacterFeat(final String featname, final List<CharacterFeat> characterFeats) {
@@ -602,8 +585,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   }
 
   Damage getDamage(final Damage weaponDamage) {
-    final Damage attackDamage = new Damage(weaponDamage.getNumberOfDice(), weaponDamage.getDie());
-    return attackDamage;
+    return new Damage(weaponDamage.getNumberOfDice(), weaponDamage.getDie());
   }
 
   int getDamageBonus(final WeaponAttack weaponAttack, final int strengthModifier, final List<CharacterFeat> characterFeats) {
@@ -613,8 +595,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
     final int featBonus = getFeatDamageBonus(characterFeats, weapon);
     final int damageBonusModifier = weaponAttack.getDamageBonusModifier();
 
-    final int damageBonus = enhancementBonus + strengthBonus + featBonus + damageBonusModifier;
-    return damageBonus;
+    return enhancementBonus + strengthBonus + featBonus + damageBonusModifier;
   }
 
   int getWeaponStrengthBonus(final Weapon weapon, final AttackWield attackWield, final int strengthModifier) {
@@ -694,27 +675,18 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
 
   private boolean isBow(final Weapon weapon) {
     final String weaponFamily = weapon.getWeaponFamily().getName();
-    if (weaponFamily.equalsIgnoreCase(WEAPON_FAMILIY_LONGBOW) //
-        || weaponFamily.equalsIgnoreCase(WEAPON_FAMILIY_SHORTBOW)) {
-      return true;
-    }
-    return false;
+    return weaponFamily.equalsIgnoreCase(WEAPON_FAMILIY_LONGBOW) //
+        || weaponFamily.equalsIgnoreCase(WEAPON_FAMILIY_SHORTBOW);
   }
 
   private boolean isWeaponFamily(final Weapon weapon, final String weaponFamilyName) {
-    if (weapon.getWeaponFamily().getName().equalsIgnoreCase(weaponFamilyName)) {
-      return true;
-    }
-    return false;
+    return weapon.getWeaponFamily().getName().equalsIgnoreCase(weaponFamilyName);
   }
 
   private boolean isCompositeBow(final Weapon weapon) {
     final String weaponFamily = weapon.getWeaponFamily().getName();
-    if (weaponFamily.equalsIgnoreCase(WEAPON_FAMILIY_COMPOSITE_LONGBOW) //
-        || weaponFamily.equalsIgnoreCase(WEAPON_FAMILIY_COMPOSITE_SHORTBOW)) {
-      return true;
-    }
-    return false;
+    return weaponFamily.equalsIgnoreCase(WEAPON_FAMILIY_COMPOSITE_LONGBOW) //
+        || weaponFamily.equalsIgnoreCase(WEAPON_FAMILIY_COMPOSITE_SHORTBOW);
   }
 
   int getFeatDamageBonus(final List<CharacterFeat> characterFeats, final Weapon weapon) {
@@ -730,8 +702,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   }
 
   Critical getCritical(final Critical weaponCritical) {
-    final Critical attackCritical = new Critical(weaponCritical.getHit(), weaponCritical.getMultiplier());
-    return attackCritical;
+    return new Critical(weaponCritical.getHit(), weaponCritical.getMultiplier());
   }
 
   @Override
@@ -772,31 +743,23 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
 
   @Override
   public boolean isCritical(final DieRoll dieRoll, final Critical critical) {
-    if (dieRoll.getRolls()[0] >= critical.getHit()) {
-      return true;
-    }
-    return false;
+    return dieRoll.getRolls()[0] >= critical.getHit();
   }
 
   @Override
   public boolean isFumble(final DieRoll dieRoll) {
-    if (dieRoll.getRolls()[0] == 1) {
-      return true;
-    }
-    return false;
+    return dieRoll.getRolls()[0] == 1;
   }
 
   public EnumSet<AttackWield> getAttackWields(final Weapon weapon) {
-    EnumSet<AttackWield> attackWields = EnumSet.noneOf(AttackWield.class);
+    EnumSet<AttackWield> attackWields;
     if (WeaponCategory.DOUBLE_WEAPON.equals(weapon.getWeaponCategory())) {
       attackWields = EnumSet.of(AttackWield.OFF_HAND, AttackWield.PRIMARY_HAND_LIGHT_OFF_HAND, AttackWield.TWO_HANDED);
     } else {
       if (CombatType.MELEE_WEAPON.equals(weapon.getCombatType())) {
         switch (weapon.getWeaponEncumbrance()) {
-          case LIGHT_HANDED:
-            attackWields = EnumSet.allOf(AttackWield.class);
-            break;
 
+          case LIGHT_HANDED:
           case ONE_HANDED:
             attackWields = EnumSet.allOf(AttackWield.class);
             break;
@@ -813,9 +776,6 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
         switch (weapon.getWeaponEncumbrance()) {
 
           case LIGHT_HANDED:
-            attackWields = EnumSet.of(AttackWield.ONE_HAND, AttackWield.TWO_HANDED);
-            break;
-
           case ONE_HANDED:
             attackWields = EnumSet.of(AttackWield.ONE_HAND, AttackWield.TWO_HANDED);
             break;
@@ -938,8 +898,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   @Override
   public int getSpellcasterLevel(final Character character, final SpelllistAbility spelllistAbility) {
     final CharacterClass clazz = getClassOfAbility(character, spelllistAbility);
-    final int level = getLevelOfClass(character, clazz);
-    return level;
+    return getLevelOfClass(character, clazz);
   }
 
   private CharacterClass getClassOfAbility(final Character character, final Ability ability) {
@@ -974,7 +933,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
     return spellSlots;
   }
 
-  private List<SpellSlot> calculateSpellSlots(final Character character, final SpelllistAbility spelllistAbility,
+  private void calculateSpellSlots(final Character character, final SpelllistAbility spelllistAbility,
       final List<SpellSlot> spellSlots) {
     final int spellCasterLevel = getSpellcasterLevel(character, spelllistAbility);
 
@@ -984,7 +943,6 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
     // get slots of attribute bonus
     createAttributeBonusSlots(character, spelllistAbility, spellSlots);
 
-    return spellSlots;
   }
 
   void createSpellsPerDaySlots(final SpelllistAbility spelllistAbility, final int spellCasterLevel,
@@ -1095,11 +1053,8 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   }
 
   private boolean equals(final SpellSlot spellSlot, final SpellSlot characterSpellSlot) {
-    if (spellSlot.getLevel() == characterSpellSlot.getLevel() && equals(spellSlot.getSpelllistAbilities(),
-                                                                        characterSpellSlot.getSpelllistAbilities())) {
-      return true;
-    }
-    return false;
+    return spellSlot.getLevel() == characterSpellSlot.getLevel() && equals(spellSlot.getSpelllistAbilities(),
+                                                                           characterSpellSlot.getSpelllistAbilities());
   }
 
   private boolean equals(final List<SpelllistAbility> spelllistAbilities,
@@ -1118,8 +1073,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   @Override
   public List<Spell> getSpellSelection(final Character character, final SpellSlot spellSlot) {
     final List<Spell> spellSelectionOfLevel = getSpellSelectionOfLevel(character, spellSlot);
-    final List<Spell> spellSelection = getSpellSelectionOfSchool(spellSelectionOfLevel, spellSlot);
-    return spellSelection;
+    return getSpellSelectionOfSchool(spellSelectionOfLevel, spellSlot);
   }
 
   private List<Spell> getSpellSelectionOfLevel(final Character character, final SpellSlot spellSlot) throws RuleException {
@@ -1197,8 +1151,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
       final Spell spell) {
     final int spellLevel = getSpelllevelOfSpell(spelllist, spell);
     final int attributeBonus = getAttributeModifier(character, spellAttribute);
-    final int spellSaveDifficultyClass = 10 + spellLevel + attributeBonus;
-    return spellSaveDifficultyClass;
+    return 10 + spellLevel + attributeBonus;
   }
 
   private int getSpelllevelOfSpell(final Spelllist spelllist, final Spell spell) {

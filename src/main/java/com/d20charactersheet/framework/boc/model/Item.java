@@ -118,10 +118,7 @@ public abstract class Item implements Serializable {
       return false;
     }
     final Item other = (Item) obj;
-    if (id != other.id) {
-      return false;
-    }
-    return true;
+    return id == other.id;
   }
 
   @Override

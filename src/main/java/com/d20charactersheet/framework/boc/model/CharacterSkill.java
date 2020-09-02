@@ -100,13 +100,9 @@ public class CharacterSkill implements Serializable {
     }
     final CharacterSkill other = (CharacterSkill) obj;
     if (skill == null) {
-      if (other.skill != null) {
-        return false;
-      }
-    } else if (!skill.equals(other.skill)) {
-      return false;
-    }
-    return true;
+      return other.skill == null;
+    } else
+      return skill.equals(other.skill);
   }
 
   /**

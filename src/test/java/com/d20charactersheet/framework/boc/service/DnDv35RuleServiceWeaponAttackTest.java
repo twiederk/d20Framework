@@ -489,17 +489,17 @@ public class DnDv35RuleServiceWeaponAttackTest extends DnDv35RuleServiceTestCase
   @Test
   public void testGetDamageBonus() {
     final List<CharacterFeat> emptyFeats = new ArrayList<>();
-    assertDamageBonus(0, "Dagger", AttackWield.ONE_HAND, 0, emptyFeats);
-    assertDamageBonus(1, "Dagger", AttackWield.ONE_HAND, 1, emptyFeats);
-    assertDamageBonus(2, "Dagger of Venom", AttackWield.ONE_HAND, 1, emptyFeats);
-    assertDamageBonus(3, "Assassin Dagger", AttackWield.ONE_HAND, 1, emptyFeats);
-    assertDamageBonus(1, "Sling", AttackWield.ONE_HAND, 1, emptyFeats);
+    assertDamageBonus(0, "Dagger", 0, emptyFeats);
+    assertDamageBonus(1, "Dagger", 1, emptyFeats);
+    assertDamageBonus(2, "Dagger of Venom", 1, emptyFeats);
+    assertDamageBonus(3, "Assassin Dagger", 1, emptyFeats);
+    assertDamageBonus(1, "Sling", 1, emptyFeats);
   }
 
-  private void assertDamageBonus(final int expected, final String weaponName, final AttackWield attackWield,
-      final int strenghModifier, final List<CharacterFeat> characterFeats) {
+  private void assertDamageBonus(final int expected, final String weaponName, final int strenghModifier,
+      final List<CharacterFeat> characterFeats) {
     final DnDv35RuleServiceImpl dndv35RuleService = (DnDv35RuleServiceImpl) ruleService;
-    final WeaponAttack weaponAttack = createWeaponAttack(weaponName, attackWield);
+    final WeaponAttack weaponAttack = createWeaponAttack(weaponName, AttackWield.ONE_HAND);
     final int damageBonus = dndv35RuleService.getDamageBonus(weaponAttack, strenghModifier, characterFeats);
     assertEquals(expected, damageBonus);
   }

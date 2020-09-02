@@ -34,8 +34,7 @@ public class XmlImport implements XmlConstants {
 
   protected Date getDate(final Node node, final DateFormat dateFormat) throws ParseException {
     final String textContent = node.getTextContent();
-    final Date date = dateFormat.parse(textContent);
-    return date;
+    return dateFormat.parse(textContent);
   }
 
   protected float getFloat(final Node node) {

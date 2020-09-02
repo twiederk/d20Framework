@@ -44,8 +44,7 @@ public class DnDv35RuleServiceImpl extends AbstractRuleServiceImpl {
   @Override
   public int getSkillModifier(final Character character, final CharacterSkill characterSkill) {
     final int attributeModifier = getAttributeModifier(character, characterSkill.getSkill().getAttribute());
-    final int skillModifier = attributeModifier + (int) Math.floor(characterSkill.getRank()) + characterSkill.getModifier();
-    return skillModifier;
+    return attributeModifier + (int) Math.floor(characterSkill.getRank()) + characterSkill.getModifier();
   }
 
   /**
@@ -112,19 +111,15 @@ public class DnDv35RuleServiceImpl extends AbstractRuleServiceImpl {
       case MEDIUM:
         return 0;
       case LARGE_LONG:
-        return 4;
       case LARGE_TALL:
         return 4;
       case HUGE_LONG:
-        return 8;
       case HUGE_TALL:
         return 8;
       case GARGANTUAN_LONG:
-        return 12;
       case GARGANTUAN_TALL:
         return 12;
       case COLOSSAL_LONG:
-        return 16;
       case COLOSSAL_TALL:
         return 16;
       default:

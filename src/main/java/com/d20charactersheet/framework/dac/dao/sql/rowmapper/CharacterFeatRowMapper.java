@@ -1,13 +1,13 @@
 package com.d20charactersheet.framework.dac.dao.sql.rowmapper;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 
 import com.d20charactersheet.framework.boc.model.CharacterFeat;
 import com.d20charactersheet.framework.boc.model.Feat;
-import com.d20charactersheet.framework.dac.dao.BaseRowMapper;
-import com.d20charactersheet.framework.dac.dao.DataRow;
+import com.d20charactersheet.framework.dac.dao.sql.DataRow;
 
 /**
  * Maps the data of a character feat row to a CharacterFeat instance.
@@ -31,7 +31,7 @@ public class CharacterFeatRowMapper extends BaseRowMapper {
      * Maps the data of a character feat row to an Character Feat, using the list of all static feats.
      */
     @NotNull
-    public Object mapRow(@NotNull DataRow dataRow) throws java.sql.SQLException {
+    public Object mapRow(@NotNull DataRow dataRow) throws SQLException {
         final Feat feat = getFeat(dataRow.getInt(1));
         final CharacterFeat characterFeat = new CharacterFeat(feat);
         characterFeat.setId(dataRow.getInt(0));
