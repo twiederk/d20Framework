@@ -38,7 +38,7 @@ class SpellsPerDayTableTest {
         underTest.spellsPerDay = arrayOf(IntArray(10), IntArray(10))
 
         // Act
-        val spellsPerDay = underTest.getSpellsPerDay(0, 10)
+        val spellsPerDay = underTest.getSpellsPerDay(1, 10)
 
         // Assert
         assertThat(spellsPerDay).isEqualTo(SpellsPerDayTable.NO_ACCESS)

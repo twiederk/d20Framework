@@ -87,7 +87,29 @@ public class KnownSpellsTable {
    * @return Number of known spells of given caster and spell level.
    */
   public int getKnownSpells(final int spellcasterLevel, final int spellLevel) {
-    return knownSpells[spellcasterLevel - 1][spellLevel];
+    try {
+      int boundedSpellCasterLevel = boundSpellCasterLevel(spellcasterLevel);
+      int boundedSpellLevel = boundSpellLevel(spellLevel, boundedSpellCasterLevel);
+      return knownSpells[boundedSpellCasterLevel - 1][boundedSpellLevel];
+    } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
+      return 0;
+    }
+  }
+
+  private int boundSpellLevel(int spellLevel, int boundedSpellCasterLevel) {
+    int boundedSpellLevel = spellLevel;
+    if (spellLevel >= knownSpells[boundedSpellCasterLevel - 1].length) {
+      boundedSpellLevel = knownSpells[boundedSpellCasterLevel - 1].length - 1;
+    }
+    return boundedSpellLevel;
+  }
+
+  private int boundSpellCasterLevel(int spellcasterLevel) {
+    int boundedSpellCasterLevel = spellcasterLevel;
+    if (spellcasterLevel >= knownSpells.length) {
+      boundedSpellCasterLevel = knownSpells.length;
+    }
+    return boundedSpellCasterLevel;
   }
 
   @Override

@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
  */
 public class HumanoidBody implements Body {
 
-  private Map<BodyPart, Item> bodySlots;
+  private final Map<BodyPart, Item> bodySlots;
 
   /**
    * Creates a HumanoidBody with all body parts
@@ -21,7 +21,11 @@ public class HumanoidBody implements Body {
     bodySlots = new HashMap<>();
     EnumSet<BodyPart> humanoidBodyParts = EnumSet.allOf(BodyPart.class);
     humanoidBodyParts.remove(BodyPart.NONE);
-    humanoidBodyParts.forEach(this::clear);
+    try {
+      humanoidBodyParts.forEach(bodyPart -> bodySlots.put(bodyPart, Item.EMPTY_ITEM));
+    } catch (NoClassDefFoundError noClassDefFoundError) {
+      // problem occured with static access to this::clear on Lenovo devices with Android 6
+    }
   }
 
   @Override
