@@ -21,7 +21,7 @@ class RaceRowMapper(private val allCharacterClasses: List<CharacterClass>) : Bas
         val race = Race()
         race.id = dataRow.getInt(0)
         race.name = dataRow.getString(1)
-        race.size = getEnum(dataRow.getInt(2), Size.values() as Array<Enum<*>>) as Size
+        race.size = Size.values()[dataRow.getInt(2)]
         race.baseLandSpeed = dataRow.getInt(3)
         race.favoredCharacterClass = getCharacterClass(dataRow.getInt(4), allCharacterClasses)
         return race

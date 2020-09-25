@@ -1,6 +1,5 @@
 package com.d20charactersheet.framework.boc.service;
 
-import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35SkillStorage.SKILL;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -11,7 +10,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.d20charactersheet.framework.boc.model.Skill;
-import com.d20charactersheet.framework.dac.dao.dummy.DummySkillDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlSkillDao;
+import com.d20charactersheet.framework.dac.dao.sql.jdbc.JdbcDatabase;
+import com.d20charactersheet.framework.dac.dao.sql.jdbc.JdbcHelper;
 
 public class SkillServiceTest {
 
@@ -19,7 +20,16 @@ public class SkillServiceTest {
 
   @Before
   public void setUp() {
-    skillService = new SkillServiceImpl(new DummySkillDao(SKILL));
+    JdbcHelper jdbcHelper = new JdbcHelper();
+
+    jdbcHelper.executeSqlScript("/create_database.sql");
+    jdbcHelper.executeSqlScript("/dndv35_phb_data.sql");
+    jdbcHelper.executeSqlScript("/dndv35_phb_spell.sql");
+    jdbcHelper.executeSqlScript("/dndv35_phb_character.sql");
+
+    JdbcDatabase jdbcDatabase = new JdbcDatabase(jdbcHelper.getConnection());
+
+    skillService = new SkillServiceImpl(new SqlSkillDao(jdbcDatabase));
   }
 
   @Test

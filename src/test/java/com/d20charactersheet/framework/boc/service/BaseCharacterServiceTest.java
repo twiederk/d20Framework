@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -126,8 +125,7 @@ public abstract class BaseCharacterServiceTest {
     final Sex sex = Sex.MALE;
     final ClassLevel classLevel = new ClassLevel(fighter, 1);
     final Alignment alignment = Alignment.NEUTRAL;
-    final XpTable xpTable = gameSystem.getAllXpTables()
-        .get(0);
+    final XpTable xpTable = gameSystem.getAllXpTables().get(0);
     Character character = createCharacter(name, player, race, sex, classLevel, alignment, xpTable);
 
     // test
@@ -137,10 +135,8 @@ public abstract class BaseCharacterServiceTest {
     assertEquals(name, character.getName());
     assertEquals(player, character.getPlayer());
     assertEquals(race, character.getRace());
-    assertEquals(1, character.getClassLevels()
-        .size());
-    final ClassLevel newClassLevel = character.getClassLevels()
-        .get(0);
+    assertEquals(1, character.getClassLevels().size());
+    final ClassLevel newClassLevel = character.getClassLevels().get(0);
     assertTrue(newClassLevel.getId() != -1);
     assertEquals(classLevel.getCharacterClass(), newClassLevel.getCharacterClass());
     assertEquals(classLevel.getLevel(), newClassLevel.getLevel());
@@ -233,16 +229,12 @@ public abstract class BaseCharacterServiceTest {
 
     character = characterService.createCharacter(character, gameSystem.getAllSkills());
     final int id = character.getId();
-    final int numberOfCharacters = gameSystem.getAllCharacters()
-        .size();
+    final int numberOfCharacters = gameSystem.getAllCharacters().size();
 
     // test
     characterService.deleteCharacter(character);
-    final Character deletedCharacter = gameSystem.getCharacter(id);
 
-    assertNull(deletedCharacter);
-    assertEquals(numberOfCharacters - 1, gameSystem.getAllCharacters()
-        .size());
+    assertEquals(numberOfCharacters - 1, gameSystem.getAllCharacters().size());
 
   }
 

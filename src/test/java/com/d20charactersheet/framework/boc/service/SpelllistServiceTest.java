@@ -1,12 +1,5 @@
 package com.d20charactersheet.framework.boc.service;
 
-import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35KnownSpellsStorage.KNOWN_SPELLS_LEVEL;
-import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35KnownSpellsStorage.KNOWN_SPELLS_TABLE;
-import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35SpellStorage.SPELL;
-import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35SpelllistStorage.SPELLLIST;
-import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35SpelllistStorage.SPELLLIST_SPELL;
-import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35SpellsPerDayStorage.SPELLS_PER_DAY_LEVEL;
-import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35SpellsPerDayStorage.SPELLS_PER_DAY_TABLE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -30,7 +23,9 @@ import com.d20charactersheet.framework.boc.model.SpellResistance;
 import com.d20charactersheet.framework.boc.model.Spelllist;
 import com.d20charactersheet.framework.boc.model.SpellsPerDayTable;
 import com.d20charactersheet.framework.boc.model.SubSchool;
-import com.d20charactersheet.framework.dac.dao.dummy.DummySpelllistDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlSpelllistDao;
+import com.d20charactersheet.framework.dac.dao.sql.jdbc.JdbcDatabase;
+import com.d20charactersheet.framework.dac.dao.sql.jdbc.JdbcHelper;
 
 public class SpelllistServiceTest {
 
@@ -38,9 +33,16 @@ public class SpelllistServiceTest {
 
   @Before
   public void setUp() {
-    spelllistService = new SpelllistServiceImpl(
-        new DummySpelllistDao(SPELL, SPELLLIST, SPELLLIST_SPELL, KNOWN_SPELLS_TABLE, KNOWN_SPELLS_LEVEL, SPELLS_PER_DAY_TABLE,
-                              SPELLS_PER_DAY_LEVEL));
+    JdbcHelper jdbcHelper = new JdbcHelper();
+
+    jdbcHelper.executeSqlScript("/create_database.sql");
+    jdbcHelper.executeSqlScript("/dndv35_phb_data.sql");
+    jdbcHelper.executeSqlScript("/dndv35_phb_spell.sql");
+    jdbcHelper.executeSqlScript("/dndv35_phb_character.sql");
+
+    JdbcDatabase jdbcDatabase = new JdbcDatabase(jdbcHelper.getConnection());
+
+    spelllistService = new SpelllistServiceImpl(new SqlSpelllistDao(jdbcDatabase));
   }
 
   @Test
@@ -97,6 +99,8 @@ public class SpelllistServiceTest {
     assertEquals("1 round + 1 round per three levels", newSpell.getDuration());
     assertEquals("none", newSpell.getSavingThrow());
     assertEquals(SpellResistance.NO, newSpell.getSpellResistance());
+
+    spelllistService.getSpellDescription(newSpell);
     assertTrue(newSpell.getDescription().startsWith("An arrow of acid springs from your hand and speeds to its target."));
     assertEquals("Powdered rhubarb leaf and an adder's stomach.", newSpell.getMaterialComponent());
     assertEquals("A dart.", newSpell.getFocus());

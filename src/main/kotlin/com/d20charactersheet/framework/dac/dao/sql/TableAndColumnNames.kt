@@ -1,5 +1,4 @@
 package com.d20charactersheet.framework.dac.dao.sql
-
 /**
  * Constants of table and column names in the SQLite3 database.
  */
@@ -142,6 +141,9 @@ object TableAndColumnNames {
 
     /** Table of spell slot meatamagic feats  */
     const val TABLE_CHARAKTER_SPELL_SLOT_FEAT = "charakter_spell_slot_feat"
+
+    /** Table of body parts of character */
+    const val TABLE_CHARAKTER_BODY_PART = "charakter_body_part"
 
     /* ======= */
     /* COLUMNS */
@@ -505,6 +507,16 @@ object TableAndColumnNames {
     /** spell slot id column  */
     const val COLUMN_SPELL_SLOT_ID = "spell_slot_id"
 
+    // columns of charakter_body_part_table
+    /** id of body part */
+    const val COLUMN_BODY_PART_ID = "body_part_id"
+
+    /** id of item */
+    const val COLUMN_ITEM_ID = "item_id"
+
+    /** java class of item (Weapon, Armor, Good) */
+    const val COLUMN_ITEMCLASS = "itemclass"
+
     /* ============= */
     /* WHERE CLAUSES */
     /* ============= */
@@ -540,6 +552,11 @@ object TableAndColumnNames {
     const val SQL_GET_CHARACTER_ABILITIES = (SELECT + "id, ability_id, owned" //
             + FROM + TABLE_CHARAKTER_ABILITY //
             + WHERE + "charakter_id = ? AND class_id = ?")
+
+    /** Select body parts of one character from database */
+    const val SQL_GET_CHARACTER_BODY = (SELECT + "id, charakter_id, body_part_id, item_id, itemclass" //
+            + FROM + TABLE_CHARAKTER_BODY_PART //
+            + WHERE + "charakter_id = ?")
 
     // SkillDao
     /** Select all skills  */
@@ -679,3 +696,4 @@ object TableAndColumnNames {
             + FROM + TABLE_CHARAKTER_SPELL_SLOT_FEAT //
             + WHERE + "spell_slot_id = ?")
 }
+

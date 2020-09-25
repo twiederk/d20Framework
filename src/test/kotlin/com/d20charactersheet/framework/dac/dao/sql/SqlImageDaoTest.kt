@@ -32,7 +32,7 @@ class SqlImageDaoTest : BaseImageDaoTest() {
         values.put(TableAndColumnNames.COLUMN_ID, imageId)
         values.put(TableAndColumnNames.COLUMN_IMAGE, imageData)
         synchronized(Database.DB_LOCK) {
-            JdbcDatabase(connection).insertOrThrow(TableAndColumnNames.TABLE_IMAGE, null, values)
+            JdbcDatabase(connection).insertOrThrow(TableAndColumnNames.TABLE_IMAGE, values)
         }
 
     }

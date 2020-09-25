@@ -1,14 +1,5 @@
 package com.d20charactersheet.framework.boc.service;
 
-import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35AbilityStorage.ABILITY;
-import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35AbilityStorage.ABILITY_PROPERTY;
-import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35KnownSpellsStorage.KNOWN_SPELLS_LEVEL;
-import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35KnownSpellsStorage.KNOWN_SPELLS_TABLE;
-import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35SpellStorage.SPELL;
-import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35SpelllistStorage.SPELLLIST;
-import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35SpelllistStorage.SPELLLIST_SPELL;
-import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35SpellsPerDayStorage.SPELLS_PER_DAY_LEVEL;
-import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35SpellsPerDayStorage.SPELLS_PER_DAY_TABLE;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -19,8 +10,10 @@ import org.junit.Test;
 
 import com.d20charactersheet.framework.boc.model.Ability;
 import com.d20charactersheet.framework.boc.model.AbilityType;
-import com.d20charactersheet.framework.dac.dao.dummy.DummyAbilityDao;
-import com.d20charactersheet.framework.dac.dao.dummy.DummySpelllistDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlAbilityDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlSpelllistDao;
+import com.d20charactersheet.framework.dac.dao.sql.jdbc.JdbcDatabase;
+import com.d20charactersheet.framework.dac.dao.sql.jdbc.JdbcHelper;
 
 public class AbilityServiceTest {
 
@@ -29,10 +22,18 @@ public class AbilityServiceTest {
 
   @Before
   public void setUp() {
-    abilityService = new AbilityServiceImpl(new DummyAbilityDao(ABILITY, ABILITY_PROPERTY));
-    spelllistService = new SpelllistServiceImpl(
-        new DummySpelllistDao(SPELL, SPELLLIST, SPELLLIST_SPELL, KNOWN_SPELLS_TABLE, KNOWN_SPELLS_LEVEL, SPELLS_PER_DAY_TABLE,
-                              SPELLS_PER_DAY_LEVEL));
+
+    JdbcHelper jdbcHelper = new JdbcHelper();
+
+    jdbcHelper.executeSqlScript("/create_database.sql");
+    jdbcHelper.executeSqlScript("/dndv35_phb_data.sql");
+    jdbcHelper.executeSqlScript("/dndv35_phb_spell.sql");
+    jdbcHelper.executeSqlScript("/dndv35_phb_character.sql");
+
+    JdbcDatabase jdbcDatabase = new JdbcDatabase(jdbcHelper.getConnection());
+
+    abilityService = new AbilityServiceImpl(new SqlAbilityDao(jdbcDatabase));
+    spelllistService = new SpelllistServiceImpl(new SqlSpelllistDao(jdbcDatabase));
   }
 
   @Test

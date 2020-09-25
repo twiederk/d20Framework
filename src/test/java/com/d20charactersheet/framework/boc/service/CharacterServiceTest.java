@@ -4,7 +4,6 @@ import org.junit.Before;
 
 import com.d20charactersheet.framework.DnDv35Universe;
 import com.d20charactersheet.framework.Universe;
-import com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35CharacterStorage;
 
 public class CharacterServiceTest extends BaseCharacterServiceTest {
 
@@ -27,6 +26,7 @@ public class CharacterServiceTest extends BaseCharacterServiceTest {
 
   @Override
   protected int getNumberOfCharacters() {
-    return DnDv35CharacterStorage.CHARACTER.length;
+    // number of characters in dndv35_phb_character.sql
+    return 14;
   }
 }

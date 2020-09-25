@@ -58,7 +58,7 @@ class JdbcDatabase(private val connection: Connection) : Database {
         return prepareStatement.executeUpdate()
     }
 
-    override fun insertOrThrow(tableName: String, nullColumnHack: Any?, contentValues: ContentValues): Long {
+    override fun insertOrThrow(tableName: String, contentValues: ContentValues): Long {
         val sql = "$INSERT $INTO $tableName (${contentValues.columnNames()}) $VALUES (${contentValues.placeHolder()})"
         val prepareStatement = connection.prepareStatement(sql)
         contentValues.values().forEachIndexed { index, value ->

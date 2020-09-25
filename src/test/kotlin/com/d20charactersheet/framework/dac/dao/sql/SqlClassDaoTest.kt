@@ -23,10 +23,10 @@ class SqlClassDaoTest : BaseClassDaoTest() {
         characterClassDao = SqlClassDao(jdbcDatabase)
         spelllistDao = SqlSpelllistDao(jdbcDatabase)
 
-        val allSpelllists = spelllistDao.getAllSpelllists(spelllistDao.allSpells)
-        val allKnownSpellsTables = spelllistDao.allKnownSpellsTables
-        val allSpellsPerDayTables = spelllistDao.allSpellsPerDayTables
-        allCharacterClasses = characterClassDao.getAllCharacterClasses(skillDao.allSkills,
+        val allSpelllists = spelllistDao.getAllSpelllists(spelllistDao.getAllSpells())
+        val allKnownSpellsTables = spelllistDao.getAllKnownSpellsTables()
+        val allSpellsPerDayTables = spelllistDao.getAllSpellsPerDayTables()
+        allCharacterClasses = characterClassDao.getAllCharacterClasses(skillDao.getAllSkills(),
                 abilityDao.getAllAbilities(allSpelllists, allKnownSpellsTables, allSpellsPerDayTables))
     }
 

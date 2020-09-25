@@ -1,7 +1,7 @@
 package com.d20charactersheet.framework.dac.dao.sql.rowmapper
 
-import com.androidash.memorydb.DaoUtil
 import com.d20charactersheet.framework.boc.model.*
+import com.d20charactersheet.framework.dac.dao.sql.DaoUtil
 import com.d20charactersheet.framework.dac.dao.sql.DataRow
 import com.d20charactersheet.framework.dac.dao.sql.RowMapper
 import java.sql.SQLException
@@ -94,19 +94,6 @@ abstract class BaseRowMapper : RowMapper {
             }
         }
         return enumSet
-    }
-
-    /**
-     * Returns the enum with the proper id.
-     *
-     * @param id
-     * The id of the enum to get.
-     * @param values
-     * The enum values to get the enum from.
-     * @return The enum with the proper id.
-     */
-    fun getEnum(id: Int, values: Array<Enum<*>>): Enum<*> {
-        return daoUtil.getEnum(id, values)
     }
 
     fun getXpTable(xpTableId: Int, allXpTables: List<XpTable>): XpTable {

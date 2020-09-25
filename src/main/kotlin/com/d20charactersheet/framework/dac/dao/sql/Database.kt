@@ -13,7 +13,7 @@ interface Database {
 
     fun delete(tableName: String, whereClause: String, whereArgs: Array<String>): Int
 
-    fun insertOrThrow(tableName: String, nullColumnHack: Any?, contentValues: ContentValues): Long
+    fun insertOrThrow(tableName: String, contentValues: ContentValues): Long
 
     companion object {
         const val DB_LOCK = "DB_LOCK"

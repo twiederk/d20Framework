@@ -1,9 +1,5 @@
 package com.d20charactersheet.framework.boc.service;
 
-import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35ArmorStorage.ARMOR;
-import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35GoodStorage.GOOD;
-import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35WeaponStorage.WEAPON;
-import static com.d20charactersheet.framework.dac.dao.dummy.storage.DnDv35WeaponStorage.WEAPON_FAMILY;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -31,7 +27,9 @@ import com.d20charactersheet.framework.boc.model.WeaponCategory;
 import com.d20charactersheet.framework.boc.model.WeaponEncumbrance;
 import com.d20charactersheet.framework.boc.model.WeaponFamily;
 import com.d20charactersheet.framework.boc.model.WeaponType;
-import com.d20charactersheet.framework.dac.dao.dummy.DummyItemDao;
+import com.d20charactersheet.framework.dac.dao.sql.SqlItemDao;
+import com.d20charactersheet.framework.dac.dao.sql.jdbc.JdbcDatabase;
+import com.d20charactersheet.framework.dac.dao.sql.jdbc.JdbcHelper;
 
 public class ItemServiceTest {
 
@@ -39,7 +37,16 @@ public class ItemServiceTest {
 
   @Before
   public void setUp() {
-    itemService = new ItemServiceImpl(new DummyItemDao(WEAPON_FAMILY, WEAPON, ARMOR, GOOD));
+    JdbcHelper jdbcHelper = new JdbcHelper();
+
+    jdbcHelper.executeSqlScript("/create_database.sql");
+    jdbcHelper.executeSqlScript("/dndv35_phb_data.sql");
+    jdbcHelper.executeSqlScript("/dndv35_phb_spell.sql");
+    jdbcHelper.executeSqlScript("/dndv35_phb_character.sql");
+
+    JdbcDatabase jdbcDatabase = new JdbcDatabase(jdbcHelper.getConnection());
+
+    itemService = new ItemServiceImpl(new SqlItemDao(jdbcDatabase));
   }
 
   @Test

@@ -6,7 +6,9 @@ import com.d20charactersheet.framework.dac.dao.sql.jdbc.JdbcDatabase
 import com.d20charactersheet.framework.dac.dao.sql.jdbc.JdbcHelper
 
 
-class DnD5eUniverse : AbstractUniverse() {
+class DnD5eUniverse : Universe {
+
+    override val gameSystem: GameSystem
 
     init {
         val jdbcHelper = JdbcHelper()
