@@ -39,7 +39,7 @@ open class DefaultAbilityBuilder : AbilityBuilder {
         ability.description = abilityConfig.description
     }
 
-    fun getInt(abilityConfig: AbilityConfig, key: String?): Int {
+    fun getInt(abilityConfig: AbilityConfig, key: String): Int {
         val value = abilityConfig.properties[key]
         return value!!.toInt()
     }

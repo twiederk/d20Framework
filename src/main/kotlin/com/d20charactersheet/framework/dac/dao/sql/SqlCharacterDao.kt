@@ -57,6 +57,7 @@ import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_WE
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_WILL_MISC_MOD
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_WISDOM
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_XP_TABLE_ID
+import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.FROM
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.SELECT
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.SQL_GET_ALL_CHARACTERS
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.SQL_GET_CHARACTER
@@ -944,8 +945,8 @@ class SqlCharacterDao(private val db: Database) : CharacterDao {
         val spellId = arrayOf(spell.id.toString())
         synchronized(Database.DB_LOCK) {
             db.delete(TABLE_CHARAKTER_SPELL_SLOT, "$COLUMN_SPELL_ID = ?", spellId)
-            db.delete(TABLE_CHARAKTER_SPELL_SLOT_ABILITY, TABLE_CHARAKTER_SPELL_SLOT, arrayOf())
-            db.delete(TABLE_CHARAKTER_SPELL_SLOT_FEAT, TABLE_CHARAKTER_SPELL_SLOT, arrayOf())
+            db.delete(TABLE_CHARAKTER_SPELL_SLOT_ABILITY, WHERE_SPELL_SLOT_ID_NOT_IN_TABLE_CHARAKTER_SPELL_SLOT, arrayOf())
+            db.delete(TABLE_CHARAKTER_SPELL_SLOT_FEAT, WHERE_SPELL_SLOT_ID_NOT_IN_TABLE_CHARAKTER_SPELL_SLOT, arrayOf())
         }
     }
 
@@ -1067,6 +1068,7 @@ class SqlCharacterDao(private val db: Database) : CharacterDao {
         private const val WHERE_CHARACTER_ID: String = "$COLUMN_CHARAKTER_ID = ?"
         private const val WHERE_ID: String = "$COLUMN_ID = ?"
         private const val WHERE_SPELLLIST_ID_AND_SPELL_ID: String = "$COLUMN_SPELLLIST_ID = ? AND $COLUMN_SPELL_ID = ?"
+        private const val WHERE_SPELL_SLOT_ID_NOT_IN_TABLE_CHARAKTER_SPELL_SLOT = "$COLUMN_SPELL_SLOT_ID NOT IN ($SELECT $COLUMN_ID $FROM $TABLE_CHARAKTER_SPELL_SLOT)"
         private const val WHERE_CHARAKTER_ID_AND_SKILL_ID: String = "$COLUMN_CHARAKTER_ID = ? AND $COLUMN_SKILL_ID = ?"
     }
 

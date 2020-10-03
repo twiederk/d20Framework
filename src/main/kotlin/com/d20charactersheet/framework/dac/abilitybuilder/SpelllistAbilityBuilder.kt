@@ -5,11 +5,7 @@ import java.util.*
 
 /**
  * Creates a SpelllistAbility which contains a spell list. The id of the spell list is a ability property called
- * spelllist_id.
- */
-class SpelllistAbilityBuilder
-/**
- * Instanciates SpelllistAbilityBuilder with a list of all available spell lists.
+ * spelllist_id. Instanciates SpelllistAbilityBuilder with a list of all available spell lists.
  *
  * @param allSpelllists
  * All spell lists of the game sytem.
@@ -17,8 +13,12 @@ class SpelllistAbilityBuilder
  * All known spell tables of the game system.
  * @param allSpellsPerDayTables
  * All spells per day tables of the game system.
- */(private val allSpelllists: List<Spelllist>, private val allKnownSpellsTables: List<KnownSpellsTable>,
-    private val allSpellsPerDayTables: List<SpellsPerDayTable>) : DefaultAbilityBuilder() {
+ */
+class SpelllistAbilityBuilder(
+        private val allSpelllists: List<Spelllist>,
+        private val allKnownSpellsTables: List<KnownSpellsTable>,
+        private val allSpellsPerDayTables: List<SpellsPerDayTable>) : DefaultAbilityBuilder() {
+
     override fun createAbility(abilityConfig: AbilityConfig): Ability {
         val ability = SpelllistAbility()
         fillAbility(ability, abilityConfig)
@@ -84,7 +84,7 @@ class SpelllistAbilityBuilder
         try {
             val id = getInt(abilityConfig, KEY_SPELL_ATTRIBUTE_ID)
             attribute = Attribute.values()[id]
-        } catch (numberFormatException: NumberFormatException) {
+        } catch (exception: Exception) {
             // failed to read attribute id from ability config
         }
         return attribute
