@@ -11,7 +11,7 @@ class SqlImageDaoTest : BaseImageDaoTest() {
     @Before
     fun setUp() {
         val jdbcHelper = JdbcHelper()
-        jdbcHelper.executeSqlScript("/create_database.sql")
+        jdbcHelper.executeSqlScript("/sql/create_database.sql")
         initImageTable(jdbcHelper.connection)
 
         val jdbcDatabase = JdbcDatabase(jdbcHelper.connection)
@@ -20,7 +20,7 @@ class SqlImageDaoTest : BaseImageDaoTest() {
     }
 
     private fun initImageTable(connection: Connection) {
-        val images = arrayOf("/char_belvador.jpg", "/char_belvador_face.jpg", "/char_default.jpg", "/char_default_face.jpg")
+        val images = arrayOf("/image/char_belvador.jpg", "/image/char_belvador_face.jpg", "/image/char_default.jpg", "/image/char_default_face.jpg")
         images.forEachIndexed { index, imageName ->
             val imageData = getImageData(imageName)
             insertImageAsBlob(connection, index, imageData)

@@ -25,10 +25,10 @@ public class AbilityServiceTest {
 
     JdbcHelper jdbcHelper = new JdbcHelper();
 
-    jdbcHelper.executeSqlScript("/create_database.sql");
-    jdbcHelper.executeSqlScript("/dndv35_phb_data.sql");
-    jdbcHelper.executeSqlScript("/dndv35_phb_spell.sql");
-    jdbcHelper.executeSqlScript("/dndv35_phb_character.sql");
+    jdbcHelper.executeSqlScript("/sql/create_database.sql");
+    jdbcHelper.executeSqlScript("/sql/dndv35_phb_data.sql");
+    jdbcHelper.executeSqlScript("/sql/dndv35_phb_spell.sql");
+    jdbcHelper.executeSqlScript("/sql/dndv35_phb_character.sql");
 
     JdbcDatabase jdbcDatabase = new JdbcDatabase(jdbcHelper.getConnection());
 

@@ -61,15 +61,15 @@ INSERT INTO xp_level VALUES (19, 1, 19, 305000);
 INSERT INTO xp_level VALUES (20, 1, 20, 355000);
 
 
-INSERT INTO race VALUES (0, 'Human', 4, 30, -1 );
-INSERT INTO race VALUES (1, 'Dragonborn', 4, 30, -1 );
-INSERT INTO race VALUES (2, 'Dwarf', 4, 25, -1 );
-INSERT INTO race VALUES (3, 'Elf', 4, 30, -1 );
-INSERT INTO race VALUES (4, 'Gnome', 3, 25, -1 );
-INSERT INTO race VALUES (5, 'Half-Elf', 4, 30, -1 );
-INSERT INTO race VALUES (6, 'Half-Orc', 4, 30, -1 );
-INSERT INTO race VALUES (7, 'Halfling', 3, 25, -1 );
-INSERT INTO race VALUES (8, 'Tiefling', 4, 30, -1 );
+INSERT INTO race VALUES (1, 'Human', 4, 30, -1 );
+INSERT INTO race VALUES (2, 'Dragonborn', 4, 30, -1 );
+INSERT INTO race VALUES (3, 'Dwarf', 4, 25, -1 );
+INSERT INTO race VALUES (4, 'Elf', 4, 30, -1 );
+INSERT INTO race VALUES (5, 'Gnome', 3, 25, -1 );
+INSERT INTO race VALUES (6, 'Half-Elf', 4, 30, -1 );
+INSERT INTO race VALUES (7, 'Half-Orc', 4, 30, -1 );
+INSERT INTO race VALUES (8, 'Halfling', 3, 25, -1 );
+INSERT INTO race VALUES (9, 'Tiefling', 4, 30, -1 );
 
 
 INSERT INTO ability_type VALUES (0, 'Natural');

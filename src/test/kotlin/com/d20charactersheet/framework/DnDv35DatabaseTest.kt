@@ -3,25 +3,19 @@ package com.d20charactersheet.framework
 import com.d20charactersheet.framework.boc.service.*
 import com.d20charactersheet.framework.dac.dao.sql.*
 import com.d20charactersheet.framework.dac.dao.sql.jdbc.JdbcDatabase
-import com.d20charactersheet.framework.dac.dao.sql.jdbc.JdbcHelper
+import org.assertj.core.api.Assertions.assertThat
+import org.junit.Test
+import java.sql.Connection
+import java.sql.DriverManager
 
-class PathfinderUniverse : Universe {
+class DnDv35DatabaseTest {
 
-    override val gameSystem: GameSystem
+    @Test
+    fun getAllCharacters_loadDataFromRealDatabase_dataLoaded() {
 
-    init {
-
-        val jdbcHelper = JdbcHelper()
-
-        jdbcHelper.executeSqlScript("/sql/create_database.sql")
-        jdbcHelper.executeSqlScript("/sql/pathfinder_crb_data.sql")
-        jdbcHelper.executeSqlScript("/sql/pathfinder_crb_spell.sql")
-        jdbcHelper.executeSqlScript("/sql/pathfinder_crb_character.sql")
-        jdbcHelper.executeSqlScript("/sql/pathfinder_apg_data.sql")
-        jdbcHelper.executeSqlScript("/sql/pathfinder_apg_spell.sql")
-        jdbcHelper.executeSqlScript("/sql/pathfinder_arg_data.sql")
-
-        val jdbcDatabase = JdbcDatabase(jdbcHelper.connection)
+        // Arrange
+        val connection: Connection = DriverManager.getConnection("jdbc:sqlite:./src/test/resources/db/dndv35_db_3_1_5")
+        val jdbcDatabase = JdbcDatabase(connection)
 
         val skillService: SkillService = SkillServiceImpl(SqlSkillDao(jdbcDatabase))
         val featService: FeatService = FeatServiceImpl(SqlFeatDao(jdbcDatabase))
@@ -34,7 +28,7 @@ class PathfinderUniverse : Universe {
         val xpService: XpService = XpServiceImpl(SqlXpDao(jdbcDatabase))
         val exportImportService: ExportImportService = ExportImportServiceImpl()
 
-        gameSystem = GameSystemCacheImpl(2, "Pathfinder")
+        val gameSystem = GameSystemCacheImpl(1, "Dungeons & Dragons v.3.5")
         gameSystem.skillService = skillService
         gameSystem.featService = featService
         gameSystem.characterClassService = characterClassService
@@ -46,7 +40,13 @@ class PathfinderUniverse : Universe {
         gameSystem.xpService = xpService
         gameSystem.exportImportService = exportImportService
         gameSystem.bodyService = BodyService()
-        gameSystem.ruleService = PathfinderRuleServiceImpl()
+        gameSystem.ruleService = DnDv35RuleServiceImpl()
+
+        // Act
+        val allCharacters = gameSystem.allCharacters
+
+        // Assert
+        assertThat(allCharacters).hasSize(4)
     }
 
 }

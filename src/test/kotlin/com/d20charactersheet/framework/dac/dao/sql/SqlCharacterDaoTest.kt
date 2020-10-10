@@ -14,10 +14,10 @@ class SqlCharacterDaoTest : BaseCharacterDaoTest() {
     override fun setUp() {
         val jdbcHelper = JdbcHelper()
 
-        jdbcHelper.executeSqlScript("/create_database.sql")
-        jdbcHelper.executeSqlScript("/dndv35_phb_data.sql")
-        jdbcHelper.executeSqlScript("/dndv35_phb_spell.sql")
-        jdbcHelper.executeSqlScript("/dndv35_phb_character.sql")
+        jdbcHelper.executeSqlScript("/sql/create_database.sql")
+        jdbcHelper.executeSqlScript("/sql/dndv35_phb_data.sql")
+        jdbcHelper.executeSqlScript("/sql/dndv35_phb_spell.sql")
+        jdbcHelper.executeSqlScript("/sql/dndv35_phb_character.sql")
 
         val jdbcDatabase = JdbcDatabase(jdbcHelper.connection)
 
@@ -85,6 +85,21 @@ class SqlCharacterDaoTest : BaseCharacterDaoTest() {
             assertThat(classLevel.characterClass.name).isEqualTo(name)
             assertThat(classLevel.level).isEqualTo(level)
         }
+    }
+
+    @Test
+    fun deleteSpellSlots_deleteDetectMagicSpellFromWizardSpelllist_spellSlotsWithDetectMagicAreRemovedFromBelvador() {
+        // Arrange
+        val wizardSpelllist = spelllistDao.getAllSpelllists(spelllistDao.getAllSpells())[4]
+        val detectMagicSpell = spelllistDao.getAllSpells()[133]
+
+        // Act
+        characterDao.deleteSpellSlots(wizardSpelllist, detectMagicSpell)
+
+        // Assert
+        val belvador = characterDao.getCharacter(0, allCharacterClasses, allRaces, allXpTables)
+        val spellSlots = characterDao.getSpellSlots(belvador, spelllistDao.getAllSpells(), allAbilities, allFeats)
+        assertThat(spellSlots).hasSize(15)
     }
 
 }

@@ -13,8 +13,8 @@ class DnD5eUniverse : Universe {
     init {
         val jdbcHelper = JdbcHelper()
 
-        jdbcHelper.executeSqlScript("/create_database.sql")
-        jdbcHelper.executeSqlScript("/dnd5e_phb_data.sql")
+        jdbcHelper.executeSqlScript("/sql/create_database.sql")
+        jdbcHelper.executeSqlScript("/sql/dnd5e_phb_data.sql")
 
         val jdbcDatabase = JdbcDatabase(jdbcHelper.connection)
 

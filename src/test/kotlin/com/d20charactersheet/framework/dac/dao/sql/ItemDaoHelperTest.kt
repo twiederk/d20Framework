@@ -33,10 +33,10 @@ class ItemDaoHelperTest {
     @Before
     fun setUp() {
         val jdbcHelper = JdbcHelper()
-        jdbcHelper.executeSqlScript("/create_database.sql")
-        jdbcHelper.executeSqlScript("/dndv35_phb_data.sql")
-        jdbcHelper.executeSqlScript("/dndv35_phb_spell.sql")
-        jdbcHelper.executeSqlScript("/dndv35_phb_character.sql")
+        jdbcHelper.executeSqlScript("/sql/create_database.sql")
+        jdbcHelper.executeSqlScript("/sql/dndv35_phb_data.sql")
+        jdbcHelper.executeSqlScript("/sql/dndv35_phb_spell.sql")
+        jdbcHelper.executeSqlScript("/sql/dndv35_phb_character.sql")
         val jdbcDatabase = JdbcDatabase(jdbcHelper.connection)
         helper = SqlItemDaoHelper(jdbcDatabase)
         currentItems = createCurrentItems()
