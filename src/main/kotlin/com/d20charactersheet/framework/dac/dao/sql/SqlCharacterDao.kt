@@ -167,8 +167,6 @@ class SqlCharacterDao(private val db: Database) : CharacterDao {
                 character.classLevels = getClassLevels(character, allCharacterClasses)
                 return character
             }
-        } catch (sqlException: SQLException) {
-            //            Logger.error("Can't get character with id: " + id, sqlException);
         } finally {
             queryResult?.close()
         }

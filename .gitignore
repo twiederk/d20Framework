@@ -1,5 +1,6 @@
 # IntelliJ
 .idea
+/framework.iml
 
 # maven
 target
