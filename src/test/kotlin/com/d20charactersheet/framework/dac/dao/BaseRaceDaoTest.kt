@@ -27,12 +27,14 @@ abstract class BaseRaceDaoTest {
         assertThat(allRaces).hasSize(19)
     }
 
-    fun getAllRaces(): List<Race> {
+    private fun getAllRaces(): List<Race> {
         val allAbilities = abilityDao
-                .getAllAbilities(spelllistDao.getAllSpelllists(spelllistDao.getAllSpells()), spelllistDao.getAllKnownSpellsTables(),
-                        spelllistDao.getAllSpellsPerDayTables())
+            .getAllAbilities(
+                spelllistDao.getAllSpelllists(spelllistDao.getAllSpells()), spelllistDao.getAllKnownSpellsTables(),
+                spelllistDao.getAllSpellsPerDayTables()
+            )
         val allCharacterClasses = characterClassDao
-                .getAllCharacterClasses(skillDao.getAllSkills(), allAbilities)
+            .getAllCharacterClasses(skillDao.getAllSkills(), allAbilities)
         return raceDao.getAllRaces(allCharacterClasses, allAbilities)
     }
 

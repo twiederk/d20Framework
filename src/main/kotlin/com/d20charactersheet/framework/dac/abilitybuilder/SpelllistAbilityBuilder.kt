@@ -79,7 +79,7 @@ class SpelllistAbilityBuilder(
         throw IllegalArgumentException("Can't find spells per day table with id: $spellsPerDayTableId")
     }
 
-    private fun getAttribute(abilityConfig: AbilityConfig): Attribute? {
+    private fun getAttribute(abilityConfig: AbilityConfig): Attribute {
         var attribute = Attribute.INTELLIGENCE
         try {
             val id = getInt(abilityConfig, KEY_SPELL_ATTRIBUTE_ID)
@@ -90,7 +90,7 @@ class SpelllistAbilityBuilder(
         return attribute
     }
 
-    private fun getCastingType(abilityConfig: AbilityConfig): CastingType? {
+    private fun getCastingType(abilityConfig: AbilityConfig): CastingType {
         var castingType = CastingType.PREPARED
         try {
             val id = getInt(abilityConfig, KEY_CASTING_TYPE_ID)
@@ -101,7 +101,7 @@ class SpelllistAbilityBuilder(
         return castingType
     }
 
-    private fun getSpellSource(abilityConfig: AbilityConfig): SpellSource? {
+    private fun getSpellSource(abilityConfig: AbilityConfig): SpellSource {
         var spellSource = SpellSource.ARCANE
         try {
             val id = getInt(abilityConfig, KEY_SPELL_SOURCE_ID)

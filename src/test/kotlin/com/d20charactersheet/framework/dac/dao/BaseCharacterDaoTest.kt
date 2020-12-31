@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package com.d20charactersheet.framework.dac.dao
 
 import com.d20charactersheet.framework.boc.model.*
@@ -22,7 +24,7 @@ abstract class BaseCharacterDaoTest {
     protected lateinit var allRaces: List<Race>
     protected lateinit var allXpTables: List<XpTable>
     protected lateinit var allAbilities: List<Ability>
-    protected lateinit var allSkills: List<Skill>
+    private lateinit var allSkills: List<Skill>
     protected lateinit var allFeats: List<Feat>
     protected lateinit var fighter: CharacterClass
     protected lateinit var wizard: CharacterClass
@@ -31,8 +33,10 @@ abstract class BaseCharacterDaoTest {
     @Before
     open fun setUp() {
         allAbilities = abilityDao
-                .getAllAbilities(spelllistDao.getAllSpelllists(spelllistDao.getAllSpells()), spelllistDao.getAllKnownSpellsTables(),
-                        spelllistDao.getAllSpellsPerDayTables())
+            .getAllAbilities(
+                spelllistDao.getAllSpelllists(spelllistDao.getAllSpells()), spelllistDao.getAllKnownSpellsTables(),
+                spelllistDao.getAllSpellsPerDayTables()
+            )
         allSkills = skillDao.getAllSkills()
         allFeats = featDao.getAllFeats()
         allCharacterClasses = characterClassDao.getAllCharacterClasses(allSkills, allAbilities)

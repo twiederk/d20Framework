@@ -68,6 +68,7 @@ public abstract class BaseCharacterServiceTest {
     assertEquals(getNumberOfCharacters(), characters.size());
   }
 
+  @SuppressWarnings("SameReturnValue")
   protected abstract int getNumberOfCharacters();
 
   @Test
@@ -228,7 +229,6 @@ public abstract class BaseCharacterServiceTest {
     character.setCharisma(10);
 
     character = characterService.createCharacter(character, gameSystem.getAllSkills());
-    final int id = character.getId();
     final int numberOfCharacters = gameSystem.getAllCharacters().size();
 
     // test

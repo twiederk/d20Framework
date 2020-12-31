@@ -6,6 +6,7 @@ import java.util.BitSet;
 /**
  * The representation of a spell.
  */
+@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 public class Spell implements Serializable {
 
   private static final long serialVersionUID = 1L;

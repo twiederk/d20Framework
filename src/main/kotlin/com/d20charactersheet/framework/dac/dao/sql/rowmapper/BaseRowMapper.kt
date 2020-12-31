@@ -66,14 +66,12 @@ abstract class BaseRowMapper : RowMapper {
     }
 
     fun parseDate(dateParameter: String?, dateFormat: DateFormat): Date {
-        val date: Date
-        date = try {
+        return try {
             dateFormat.parse(dateParameter)
         } catch (parseException: ParseException) {
             parseException.printStackTrace()
             throw RuntimeException(parseException)
         }
-        return date
     }
 
     fun getQualityType(qualityTypeId: Int): QualityType {

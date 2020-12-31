@@ -80,6 +80,26 @@ public interface RuleService {
   int getArmorClass(Character character);
 
   /**
+   * Returns the flat footed armor class of the character. The armor class is calculated by the formular 10 + armor (without dexterity).
+   *
+   * @param character
+   *     The character to calculate the armor of.
+   *
+   * @return The flat footed armor class of the character
+   */
+  int calculateFlatFootedArmorClass(Character character);
+
+  /**
+   * Returns the touch armor class of the character. The armor class is calculated by the formular 10 + dexterity (without armor).
+   *
+   * @param character
+   *     The character to calculate the armor of.
+   *
+   * @return The touch armor class of the character
+   */
+  int calculateTouchArmorClass(Character character);
+
+  /**
    * Returns all classes the character has no level in.
    *
    * @param character

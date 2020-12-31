@@ -15,9 +15,9 @@ class JdbcHelper {
     fun executeSqlScript(sqlScriptName: String) {
         val sqlScripts = getSqlScriptsFromRawResource(sqlScriptName)
         synchronized(dbLock) {
-            for (sqlScript in sqlScripts!!) {
+            for (sqlScript in sqlScripts.filterNotNull()) {
 //                print(sqlScript)
-                if (sqlScript!!.trim { it <= ' ' }.isEmpty()) {
+                if (sqlScript.trim { it <= ' ' }.isEmpty()) {
                     continue
                 }
                 try {
@@ -31,7 +31,7 @@ class JdbcHelper {
         }
     }
 
-    private fun getSqlScriptsFromRawResource(sqlScriptName: String): Array<String?>? {
+    private fun getSqlScriptsFromRawResource(sqlScriptName: String): Array<String?> {
         val sql = this::class.java.getResource(sqlScriptName).readText()
         return sql.split(";".toRegex()).toTypedArray()
     }

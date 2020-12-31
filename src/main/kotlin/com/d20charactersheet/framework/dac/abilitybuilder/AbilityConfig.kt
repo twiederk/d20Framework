@@ -1,7 +1,8 @@
+@file:Suppress("unused")
+
 package com.d20charactersheet.framework.dac.abilitybuilder
 
 import com.d20charactersheet.framework.boc.model.AbilityType
-import kotlin.collections.HashMap
 
 /**
  * The AbilityConfig contains all information necessary to create a valid Ability instance. It is used in conjunction

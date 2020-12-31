@@ -152,6 +152,23 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
     return 10 + getModifier(character.getDexterity()) + armorBonus + character.getArmorClass();
   }
 
+  /**
+   * @see com.d20charactersheet.framework.boc.service.RuleService#calculateFlatFootedArmorClass(com.d20charactersheet.framework.boc.model.Character)
+   */
+  @Override
+  public int calculateFlatFootedArmorClass(final Character character) {
+    int armorBonus = calculateArmorBonus(character.getEquippedItems());
+    return 10 + armorBonus + character.getArmorClass();
+  }
+
+  /**
+   * @see com.d20charactersheet.framework.boc.service.RuleService#calculateTouchArmorClass(com.d20charactersheet.framework.boc.model.Character)
+   */
+  @Override
+  public int calculateTouchArmorClass(final Character character) {
+    return 10 + getModifier(character.getDexterity());
+  }
+
   private int calculateArmorBonus(List<Item> equippedItems) {
     int armorBonus = 0;
     for (Item item : equippedItems) {

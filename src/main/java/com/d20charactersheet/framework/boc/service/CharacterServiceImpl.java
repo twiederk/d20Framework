@@ -74,9 +74,7 @@ public class CharacterServiceImpl implements CharacterService {
       final List<Ability> allAbilities, final List<Skill> allSkills, final List<Feat> allFeats, final List<Weapon> allWeapons,
       final List<Armor> allArmor, final List<Good> allGoods, final List<Spell> allSpells, final List<XpTable> allXpTables) {
     final Character character = characterDao.getCharacter(id, allCharacterClasses, allRaces, allXpTables);
-    if (character != null) {
-      fillCharacter(character, allAbilities, allSkills, allFeats, allWeapons, allArmor, allGoods, allSpells);
-    }
+    fillCharacter(character, allAbilities, allSkills, allFeats, allWeapons, allArmor, allGoods, allSpells);
     return character;
   }
 
