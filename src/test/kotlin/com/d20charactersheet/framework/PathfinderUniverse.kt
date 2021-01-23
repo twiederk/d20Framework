@@ -46,6 +46,7 @@ class PathfinderUniverse : Universe {
         gameSystem.xpService = xpService
         gameSystem.exportImportService = exportImportService
         gameSystem.bodyService = BodyService()
+        gameSystem.characterCreatorService = CharacterCreatorServiceImpl()
         gameSystem.ruleService = PathfinderRuleServiceImpl()
     }
 

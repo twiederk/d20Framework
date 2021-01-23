@@ -37,6 +37,7 @@ public class GameSystemCacheImpl implements GameSystem {
   private XpService xpService;
   private ExportImportService exportImportService;
   private BodyService bodyService;
+  private CharacterCreatorService characterCreatorService;
 
   private List<Skill> allSkills;
   private List<CharacterClass> allCharacterClasses;
@@ -125,6 +126,11 @@ public class GameSystemCacheImpl implements GameSystem {
   @Override
   public void setBodyService(BodyService bodyService) {
     this.bodyService = bodyService;
+  }
+
+  @Override
+  public void setCharacterCreatorService(CharacterCreatorService characterCreatorService) {
+    this.characterCreatorService = characterCreatorService;
   }
 
   public List<Skill> getAllSkills() {
@@ -297,6 +303,11 @@ public class GameSystemCacheImpl implements GameSystem {
   @Override
   public BodyService getBodyService() {
     return bodyService;
+  }
+
+  @Override
+  public CharacterCreatorService getCharacterCreatorService() {
+    return characterCreatorService;
   }
 
   @Override

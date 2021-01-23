@@ -151,6 +151,14 @@ public interface GameSystem {
   void setBodyService(BodyService bodyService);
 
   /**
+   * Sets the CharacterCreatorService
+   *
+   * @param characterCreatorService
+   *     The CharacterCreatorService
+   */
+  void setCharacterCreatorService(CharacterCreatorService characterCreatorService);
+
+  /**
    * Returns the skill service.
    *
    * @return The skill service.
@@ -247,6 +255,13 @@ public interface GameSystem {
    * @return The BodyService.
    */
   BodyService getBodyService();
+
+  /**
+   * Returns the CharacterCreatorService.
+   *
+   * @return The CharacterCreatorService.
+   */
+  CharacterCreatorService getCharacterCreatorService();
 
   /**
    * Returns all skills of the game system.

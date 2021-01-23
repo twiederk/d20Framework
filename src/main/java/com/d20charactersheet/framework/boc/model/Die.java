@@ -53,12 +53,16 @@ public enum Die {
    */
   D100;
 
-  private static final Random RANDOM = new Random(System.currentTimeMillis());
+  private static Random random = new Random(System.currentTimeMillis());
 
   /**
    * Dice available for hit die of character classes.
    */
   public static final EnumSet<Die> HIT_DICE = EnumSet.of(D4, D6, D8, D10, D12);
+
+  public static void setRandom(Random random) {
+    Die.random = random;
+  }
 
   /**
    * Rolls the die once.
@@ -66,7 +70,7 @@ public enum Die {
    * @return The result of the die roll.
    */
   public int roll() {
-    return RANDOM.nextInt(this.max()) + 1;
+    return random.nextInt(this.max()) + 1;
   }
 
   /**

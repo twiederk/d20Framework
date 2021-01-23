@@ -30,6 +30,7 @@ class DnD5eUniverse : Universe {
         gameSystem.abilityService = AbilityServiceImpl(abilityDao)
         gameSystem.characterClassService = CharacterClassServiceImpl(classDao)
         gameSystem.raceService = RaceServiceImpl(raceDao)
+        gameSystem.characterCreatorService = CharacterCreatorServiceImpl()
     }
 
 
