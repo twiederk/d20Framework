@@ -1,15 +1,10 @@
 package com.d20charactersheet.framework.boc.service;
 
+import com.d20charactersheet.framework.boc.model.*;
+
 import java.util.EnumSet;
 import java.util.LinkedList;
 import java.util.List;
-
-import com.d20charactersheet.framework.boc.model.Feat;
-import com.d20charactersheet.framework.boc.model.School;
-import com.d20charactersheet.framework.boc.model.Spell;
-import com.d20charactersheet.framework.boc.model.SpellSlot;
-import com.d20charactersheet.framework.boc.model.Spelllist;
-import com.d20charactersheet.framework.boc.model.SpelllistAbility;
 
 public class RuleServiceSpelllistTestHelper {
 

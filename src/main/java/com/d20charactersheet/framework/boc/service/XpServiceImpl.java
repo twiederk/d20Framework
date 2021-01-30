@@ -1,10 +1,10 @@
 package com.d20charactersheet.framework.boc.service;
 
-import java.util.List;
-
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.XpTable;
 import com.d20charactersheet.framework.dac.dao.XpDao;
+
+import java.util.List;
 
 /**
  * Handels xp points and leve.
@@ -30,7 +30,7 @@ public class XpServiceImpl implements XpService {
 
   public int getNextLevelAt(final XpTable xpTable, final int level) {
     if (level < 0) {
-      throw new IllegalArgumentException("level must be positiv");
+      throw new IllegalArgumentException("level must be positive");
     }
 
     final int[] levels = xpTable.getLevels();

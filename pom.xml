@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.d20charactersheet</groupId>
   <artifactId>framework</artifactId>
-  <version>3.5.0</version>
+  <version>3.5.1-SNAPSHOT</version>
 
   <name>d20 Framework</name>
   <description>Base framework for d20 game systems.</description>
@@ -98,8 +98,6 @@
   </dependencies>
 
   <build>
-    <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
-    <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
 
     <plugins>
       <plugin>

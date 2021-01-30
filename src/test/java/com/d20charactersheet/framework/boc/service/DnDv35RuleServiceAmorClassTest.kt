@@ -1,7 +1,7 @@
 package com.d20charactersheet.framework.boc.service
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class DnDv35RuleServiceAmorClassTest : DnDv35RuleServiceTestCase() {
 
