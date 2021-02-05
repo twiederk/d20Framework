@@ -1,6 +1,6 @@
-INSERT INTO charakter VALUES( 1, 'Torsten', 'Serio Custode', 1, 0, 1, 1, 0, 17, 15, 15, 11, 15, 12, 12, 12, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0 );
+INSERT INTO charakter VALUES( 2, 'Torsten', 'Serio Custode', 1, 0, 1, 1, 0, 17, 15, 15, 11, 15, 12, 12, 12, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0 );
 
-INSERT INTO charakter_class_level VALUES ( 1, 1, 5, 1 );
+INSERT INTO charakter_class_level VALUES ( 2, 2, 5, 1 );
 
 --INSERT INTO charakter_ability VALUES ( 1, 0, 10, 104, 1 );
 

@@ -28,7 +28,7 @@ public class CharacterClass implements Serializable {
 
   private List<Skill> skills;
 
-  private List<ClassAbility> classAbilities;
+  private List<ClassAbility> classAbilities = new LinkedList<>();
 
   /**
    * Returns the id of the class.

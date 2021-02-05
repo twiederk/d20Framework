@@ -322,13 +322,6 @@ public interface RuleService {
   int getSpecialSizeModifier(Size size);
 
   /**
-   * Returns the name of the game system.
-   *
-   * @return The name of the game system.
-   */
-  String getName();
-
-  /**
    * Returns how many ranks are gained by investing one skill point.
    *
    * @param character
@@ -580,4 +573,16 @@ public interface RuleService {
    * @return The body with the equipped item.
    */
   Body equipItem(Body body, BodyPart bodyPart, Item item);
+
+  /**
+   * Calculates the proficiency bonus.
+   *
+   * @param character
+   *     The character to calculate the proficiency bonus of.
+   *
+   * @return The profiency bonus.
+   */
+  @SuppressWarnings({"SameReturnValue", "unused"})
+  int calculateProficiencyBonus(Character character);
+
 }

@@ -4,10 +4,10 @@ import com.d20charactersheet.framework.DnDv35Universe
 import com.d20charactersheet.framework.Universe
 import com.d20charactersheet.framework.boc.service.CharacterClassService
 import com.d20charactersheet.framework.boc.service.GameSystem
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Assert
-import org.junit.Before
-import org.junit.Test
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import java.util.*
 
 class CharacterTest {
@@ -16,7 +16,7 @@ class CharacterTest {
     private lateinit var gameSystem: GameSystem
     private lateinit var characterClassService: CharacterClassService
 
-    @Before
+    @BeforeEach
     fun setUp() {
         val universe: Universe = DnDv35Universe()
         gameSystem = universe.gameSystem
@@ -219,8 +219,8 @@ class CharacterTest {
         val body = belvador.body
 
         // Assert
-        Assertions.assertThat(body.bodyParts).hasSize(15)
-        Assertions.assertThat(body.getItemOfBodyPart(BodyPart.BOTH_HANDS).name).isEqualTo("Quarterstaff")
+        assertThat(body.bodyParts).hasSize(15)
+        assertThat(body.getItemOfBodyPart(BodyPart.BOTH_HANDS).name).isEqualTo("Quarterstaff")
     }
 
     @Test
@@ -235,7 +235,7 @@ class CharacterTest {
         val body = nascan.body
 
         // Assert
-        Assertions.assertThat(body.bodyParts).hasSize(15)
+        assertThat(body.bodyParts).hasSize(15)
         BodyAssert.assertThat(body).equippedItem(BodyPart.BODY, studdedLeather).equippedItem(BodyPart.OFF_HAND, shortSword)
             .equippedItem(BodyPart.PRIMARY_HAND, battleaxe)
     }
@@ -251,7 +251,7 @@ class CharacterTest {
         val body = tocDerJuengere.body
 
         // Assert
-        Assertions.assertThat(body.bodyParts).hasSize(15)
+        assertThat(body.bodyParts).hasSize(15)
         BodyAssert.assertThat(body).equippedItem(BodyPart.BODY, studdedLeather).equippedItem(BodyPart.PRIMARY_HAND, rapier)
     }
 
@@ -276,23 +276,23 @@ class CharacterTest {
         }
 
         // Assert
-        Assertions.assertThat(bodyParts[BodyPart.HEAD]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.EYES]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.NECK]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.TORSO]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.BODY]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.WAIST]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.SHOULDERS]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.ARMS]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.HANDS]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.FINGERS_LEFT]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.FINGERS_RIGHT]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.FEET]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.OFF_HAND]).extracting("name").containsOnly("Crossbow, light")
-        Assertions.assertThat(bodyParts[BodyPart.PRIMARY_HAND]).extracting("name").containsOnly("Crossbow, light")
-        Assertions.assertThat(bodyParts[BodyPart.HEAD]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.BOTH_HANDS]).extracting("name").containsOnly("Quarterstaff", "Crossbow, light")
-        Assertions.assertThat(bodyParts[BodyPart.NONE]).hasSize(20)
+        assertThat(bodyParts[BodyPart.HEAD]).hasSize(0)
+        assertThat(bodyParts[BodyPart.EYES]).hasSize(0)
+        assertThat(bodyParts[BodyPart.NECK]).hasSize(0)
+        assertThat(bodyParts[BodyPart.TORSO]).hasSize(0)
+        assertThat(bodyParts[BodyPart.BODY]).hasSize(0)
+        assertThat(bodyParts[BodyPart.WAIST]).hasSize(0)
+        assertThat(bodyParts[BodyPart.SHOULDERS]).hasSize(0)
+        assertThat(bodyParts[BodyPart.ARMS]).hasSize(0)
+        assertThat(bodyParts[BodyPart.HANDS]).hasSize(0)
+        assertThat(bodyParts[BodyPart.FINGERS_LEFT]).hasSize(0)
+        assertThat(bodyParts[BodyPart.FINGERS_RIGHT]).hasSize(0)
+        assertThat(bodyParts[BodyPart.FEET]).hasSize(0)
+        assertThat(bodyParts[BodyPart.OFF_HAND]).extracting("name").containsOnly("Crossbow, light")
+        assertThat(bodyParts[BodyPart.PRIMARY_HAND]).extracting("name").containsOnly("Crossbow, light")
+        assertThat(bodyParts[BodyPart.HEAD]).hasSize(0)
+        assertThat(bodyParts[BodyPart.BOTH_HANDS]).extracting("name").containsOnly("Quarterstaff", "Crossbow, light")
+        assertThat(bodyParts[BodyPart.NONE]).hasSize(20)
     }
 
     @Test
@@ -316,23 +316,23 @@ class CharacterTest {
         }
 
         // Assert
-        Assertions.assertThat(bodyParts[BodyPart.HEAD]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.EYES]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.NECK]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.TORSO]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.BODY]).extracting("name").containsOnly("Studded Leather")
-        Assertions.assertThat(bodyParts[BodyPart.WAIST]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.SHOULDERS]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.ARMS]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.HANDS]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.FINGERS_LEFT]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.FINGERS_RIGHT]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.FEET]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.OFF_HAND]).extracting("name").containsOnly("Sword, short", "Battleaxe")
-        Assertions.assertThat(bodyParts[BodyPart.PRIMARY_HAND]).extracting("name").containsOnly("Sword, short", "Battleaxe")
-        Assertions.assertThat(bodyParts[BodyPart.HEAD]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.BOTH_HANDS]).extracting("name").containsOnly("Sword, short", "Battleaxe")
-        Assertions.assertThat(bodyParts[BodyPart.NONE]).hasSize(6)
+        assertThat(bodyParts[BodyPart.HEAD]).hasSize(0)
+        assertThat(bodyParts[BodyPart.EYES]).hasSize(0)
+        assertThat(bodyParts[BodyPart.NECK]).hasSize(0)
+        assertThat(bodyParts[BodyPart.TORSO]).hasSize(0)
+        assertThat(bodyParts[BodyPart.BODY]).extracting("name").containsOnly("Studded Leather")
+        assertThat(bodyParts[BodyPart.WAIST]).hasSize(0)
+        assertThat(bodyParts[BodyPart.SHOULDERS]).hasSize(0)
+        assertThat(bodyParts[BodyPart.ARMS]).hasSize(0)
+        assertThat(bodyParts[BodyPart.HANDS]).hasSize(0)
+        assertThat(bodyParts[BodyPart.FINGERS_LEFT]).hasSize(0)
+        assertThat(bodyParts[BodyPart.FINGERS_RIGHT]).hasSize(0)
+        assertThat(bodyParts[BodyPart.FEET]).hasSize(0)
+        assertThat(bodyParts[BodyPart.OFF_HAND]).extracting("name").containsOnly("Sword, short", "Battleaxe")
+        assertThat(bodyParts[BodyPart.PRIMARY_HAND]).extracting("name").containsOnly("Sword, short", "Battleaxe")
+        assertThat(bodyParts[BodyPart.HEAD]).hasSize(0)
+        assertThat(bodyParts[BodyPart.BOTH_HANDS]).extracting("name").containsOnly("Sword, short", "Battleaxe")
+        assertThat(bodyParts[BodyPart.NONE]).hasSize(6)
     }
 
     @Test
@@ -356,23 +356,23 @@ class CharacterTest {
         }
 
         // Assert
-        Assertions.assertThat(bodyParts[BodyPart.HEAD]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.EYES]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.NECK]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.TORSO]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.BODY]).extracting("name").containsOnly("Studded Leather")
-        Assertions.assertThat(bodyParts[BodyPart.WAIST]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.SHOULDERS]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.ARMS]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.HANDS]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.FINGERS_LEFT]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.FINGERS_RIGHT]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.FEET]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.OFF_HAND]).extracting("name").containsOnly("Rapier", "Crossbow, light")
-        Assertions.assertThat(bodyParts[BodyPart.PRIMARY_HAND]).extracting("name").containsOnly("Rapier", "Crossbow, light")
-        Assertions.assertThat(bodyParts[BodyPart.HEAD]).hasSize(0)
-        Assertions.assertThat(bodyParts[BodyPart.BOTH_HANDS]).extracting("name").containsOnly("Rapier", "Crossbow, light")
-        Assertions.assertThat(bodyParts[BodyPart.NONE]).hasSize(14)
+        assertThat(bodyParts[BodyPart.HEAD]).hasSize(0)
+        assertThat(bodyParts[BodyPart.EYES]).hasSize(0)
+        assertThat(bodyParts[BodyPart.NECK]).hasSize(0)
+        assertThat(bodyParts[BodyPart.TORSO]).hasSize(0)
+        assertThat(bodyParts[BodyPart.BODY]).extracting("name").containsOnly("Studded Leather")
+        assertThat(bodyParts[BodyPart.WAIST]).hasSize(0)
+        assertThat(bodyParts[BodyPart.SHOULDERS]).hasSize(0)
+        assertThat(bodyParts[BodyPart.ARMS]).hasSize(0)
+        assertThat(bodyParts[BodyPart.HANDS]).hasSize(0)
+        assertThat(bodyParts[BodyPart.FINGERS_LEFT]).hasSize(0)
+        assertThat(bodyParts[BodyPart.FINGERS_RIGHT]).hasSize(0)
+        assertThat(bodyParts[BodyPart.FEET]).hasSize(0)
+        assertThat(bodyParts[BodyPart.OFF_HAND]).extracting("name").containsOnly("Rapier", "Crossbow, light")
+        assertThat(bodyParts[BodyPart.PRIMARY_HAND]).extracting("name").containsOnly("Rapier", "Crossbow, light")
+        assertThat(bodyParts[BodyPart.HEAD]).hasSize(0)
+        assertThat(bodyParts[BodyPart.BOTH_HANDS]).extracting("name").containsOnly("Rapier", "Crossbow, light")
+        assertThat(bodyParts[BodyPart.NONE]).hasSize(14)
     }
 
     @Test
@@ -384,7 +384,7 @@ class CharacterTest {
         val equippedItems = belvador.equippedItems
 
         // Assert
-        Assertions.assertThat(equippedItems).extracting("Name").containsOnly("Quarterstaff")
+        assertThat(equippedItems).extracting("Name").containsOnly("Quarterstaff")
     }
 
     @Test
@@ -396,7 +396,7 @@ class CharacterTest {
         val equippedItems = nascan.equippedItems
 
         // Assert
-        Assertions.assertThat(equippedItems).extracting("Name")
+        assertThat(equippedItems).extracting("Name")
             .containsExactlyInAnyOrder("Studded Leather", "Sword, short", "Battleaxe")
     }
 
@@ -409,7 +409,7 @@ class CharacterTest {
         val equippedItems = tocDerJuengere.equippedItems
 
         // Assert
-        Assertions.assertThat(equippedItems).extracting("Name").containsExactlyInAnyOrder("Studded Leather", "Rapier")
+        assertThat(equippedItems).extracting("Name").containsExactlyInAnyOrder("Studded Leather", "Rapier")
     }
 
     private fun containsSpell(name: String, knownSpells: List<KnownSpell>): Boolean {

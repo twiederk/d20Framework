@@ -80,13 +80,78 @@ INSERT INTO ability_type VALUES (2, 'Spell-like');
 INSERT INTO ability_type VALUES (3, 'Supernatural');
 
 
---INSERT INTO ability VALUES ( 0, 'Fast Movement - Barbarian', 'A barbarian''s land speed is faster than the norm for his race by +10 feet. This benefit applies only when he is wearing no armor, light armor, or medium armor and not carrying a heavy load. Apply this bonus before modifying the barbarian''s speed because of any load carried or armor worn.', 1, 'Ability' );
+INSERT INTO ability VALUES ( 1, 'Ability Score Increase (Human)', 'Your ability scores each increase by 1.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 2, 'Ability Score Increase (Dragonborn)', 'Your Strength score increases by 2, and your Charisma score increases by 1.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 3, 'Draconic Ancestry', 'You have draconic ancestry. Choose one type of dragon from the Draconic Ancestry table. Your breath weapon and damage resistance are determined by the dragon type, as shown in the table.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 4, 'Breath Weapon', 'You can use your action to exhale destructive energy. Your draconic ancestry determines the size, shape, and damage type of the exhalation. When you use your breath weapon, each creature in the area of the exhalation must make a saving throw, the type of which is determined by your draconic ancestry. The DC for this saving throw equals 8 + your Constitution modifier + your proficiency bonus. A creature takes 2d6 damage on a failed save, and half as much damage on a successful Not for resale. Permission granted to print or photocopy this document for personal use only. System Reference Document 5.1 6 one. The damage increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th level. After you use your breath weapon, you can’t use it again until you complete a short or long rest.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 5, 'Damage Resistance', 'You have resistance to the damage type associated with your draconic ancestry.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 6, 'Ability Score Increase (Dwarf)', 'Your Constitution score increases by 2', 0, 'Ability' );
+INSERT INTO ability VALUES ( 7, 'Darkvision', 'Accustomed to life underground, you have superior vision in dark and dim conditions. You can see in dim light within 60 feet of you as if it were bright light, and in darkness as if it were dim light. You can''t discern color in darkness, only shades of gray.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 8, 'Dwarven Resilience', 'You have advantage on saving throws against poison, and you have resistance against poison damage.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 9, 'Dwarven Combat Training', 'You have proficiency with the battleaxe, handaxe, light hammer, and warhammer.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 10, 'Tool Proficiency', 'You gain proficiency with the artisan''s tools of your choice: smith''s tools, brewer''s supplies, or mason''s tools.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 11, 'Stonecunning', 'Whenever you make an Intelligence (History) check related to the origin of stonework, you are considered proficient in the History skill and add double your proficiency bonus to the check, instead of your normal proficiency bonus.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 12, 'Ability Score Increase (Elf)', 'Your Dexterity score increases by 2.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 13, 'Keen Senses', 'You have proficiency in the Perception skill.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 14, 'Fey Ancestry', 'You have advantage on saving throws against being charmed, and magic can''t put you to sleep.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 15, 'Trance', 'Elves don''t need to sleep. Instead, they meditate deeply, remaining semiconscious, for 4 hours a day. (The Common word for such meditation is "trance.") While meditating, you can dream after a fashion, such dreams are actually mental exercises that have become reflexive through years of practice. After resting in this way, you gain the same benefit that a human does from 8 hours of sleep.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 16, 'Ability Score Increase (Gnome)', 'Your Intelligence score increases by 2', 0, 'Ability' );
+INSERT INTO ability VALUES ( 17, 'Gnome Cunning', 'You have advantage on all Intelligence, Wisdom, and Charisma saving throws against magic.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 18, 'Ability Score Increase (Half-Efl)', 'Your Charisma score increases by 2, and two other ability scores of your choice increase by 1', 0, 'Ability' );
+INSERT INTO ability VALUES ( 19, 'Skill Versatility', 'You gain proficiency in two skills of your choice.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 20, 'Ability Score Increase (Half-Orc)', 'Your Strength score increases by 2, and your Constitution score increases by 1.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 21, 'Menacing', 'You gain proficiency in the Intimidation skill.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 22, 'Relentless Endurance', 'When you are reduced to 0 hit points but not killed outright, you can drop to 1 hit point instead. You can''t use this feature again until you finish a long rest.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 23, 'Savage Attacks', 'When you score a critical hit with a melee weapon attack, you can roll one of the weapon''s damage dice one additional time and add it to the extra damage of the critical hit.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 24, 'Ability Score Increase (Halfling)', 'Your Dexterity score increases by 2.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 25, 'Lucky', 'When you roll a 1 on the d20 for an attack roll, ability check, or saving throw, you can reroll the die and must use the new roll.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 26, 'Brave', 'You have advantage on saving throws against being frightened.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 27, 'Halfling Nimbleness', 'You can move through the space of any creature that is of a size larger than yours.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 28, 'Ability Score Increase (Tiefling)', 'Your Intelligence score increases by 1, and your Charisma score increases by 2.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 29, 'Hellish Resistance', 'You have resistance to fire damage.', 0, 'Ability' );
+INSERT INTO ability VALUES ( 30, 'Infernal Legacy', 'You know the thaumaturgy cantrip. When you reach 3rd level, you can cast the hellish rebuke spell as a 2nd-level spell once with this trait and regain the ability to do so when you finish a long rest. When you reach 5th level, you can cast the darkness spell once with this trait and regain the ability to do so when you finish a long rest. Charisma is your spellcasting ability for these spells.', 0, 'Ability' );
 
 
 --INSERT INTO ability_property VALUES (11, 'spelllist_id', '7' );
 
 
---INSERT INTO race_ability VALUES (0, 224);
+INSERT INTO race_ability VALUES (1, 1);
+INSERT INTO race_ability VALUES (2, 2);
+INSERT INTO race_ability VALUES (2, 3);
+INSERT INTO race_ability VALUES (2, 4);
+INSERT INTO race_ability VALUES (2, 5);
+INSERT INTO race_ability VALUES (3, 6);
+INSERT INTO race_ability VALUES (3, 7);
+INSERT INTO race_ability VALUES (3, 8);
+INSERT INTO race_ability VALUES (3, 9);
+INSERT INTO race_ability VALUES (3, 10);
+INSERT INTO race_ability VALUES (3, 11);
+INSERT INTO race_ability VALUES (4, 7);
+INSERT INTO race_ability VALUES (4, 12);
+INSERT INTO race_ability VALUES (4, 13);
+INSERT INTO race_ability VALUES (4, 14);
+INSERT INTO race_ability VALUES (4, 15);
+INSERT INTO race_ability VALUES (5, 7);
+INSERT INTO race_ability VALUES (5, 16);
+INSERT INTO race_ability VALUES (5, 17);
+INSERT INTO race_ability VALUES (6, 7);
+INSERT INTO race_ability VALUES (6, 14);
+INSERT INTO race_ability VALUES (6, 18);
+INSERT INTO race_ability VALUES (6, 19);
+INSERT INTO race_ability VALUES (7, 7);
+INSERT INTO race_ability VALUES (7, 20);
+INSERT INTO race_ability VALUES (7, 21);
+INSERT INTO race_ability VALUES (7, 22);
+INSERT INTO race_ability VALUES (7, 23);
+INSERT INTO race_ability VALUES (8, 24);
+INSERT INTO race_ability VALUES (8, 25);
+INSERT INTO race_ability VALUES (8, 26);
+INSERT INTO race_ability VALUES (8, 27);
+INSERT INTO race_ability VALUES (9, 7);
+INSERT INTO race_ability VALUES (9, 28);
+INSERT INTO race_ability VALUES (9, 29);
+INSERT INTO race_ability VALUES (9, 30);
+
 
 
 --INSERT INTO skill VALUES ( 1, 'Appraise', '<b>Check:</b> You can appraise common or well-known objects with a DC 12 Appraise check. Failure means that you estimate the value at 50% to 150% (2d6+3 times 10%,) of its actual value.<br/>Appraising a rare or exotic item requires a successful check against DC 15, 20, or higher. If the check is successful, you estimate the value correctly, failure means you cannot estimate the item''s value. <br/>A magnifying glass gives you a +2 circumstance bonus on Appraise checks involving any item that is small or highly detailed, such as a gem. A merchant''s scale gives you a +2 circumstance bonus on Appraise checks involving any items that are valued by weight, including anything made of precious metals. <br/>These bonuses stack. <br/><b>Action:</b> Appraising an item takes 1 minute (ten consecutive full-round actions). <br/><b>Try Again:</b> No. You cannot try again on the same object, regardless of success. <br/><b>Special:</b> A dwarf gets a +2 racial bonus on Appraise checks that are related to stone or metal items because dwarves are familiar with valuable items of all kinds (especially those made of stone or metal). <br/>The master of a raven familiar gains a +3 bonus on Appraise checks. <br/>A character with the Diligent feat gets a +2 bonus on Appraise checks. <br/><b>Synergy:</b> If you have 5 ranks in any Craft skill, you gain a +2 bonus on Appraise checks related to items made with that Craft skill. <br/><b>Untrained:</b> For common items, failure on an untrained check means no estimate. For rare items, success means an estimate of 50% to 150% (2d6+3 times 10%).', 3, 1 );

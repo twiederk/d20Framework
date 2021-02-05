@@ -1,0 +1,2 @@
+Name: noXmlAndNoSql
+Pattern: !test:exportimport.*&&!file[d20Framework]:src/main/resources/sql/*

@@ -13,11 +13,6 @@ import com.d20charactersheet.framework.boc.model.Skill;
 public class PathfinderRuleServiceImpl extends AbstractRuleServiceImpl {
 
   @Override
-  public String getName() {
-    return "Pathfinder";
-  }
-
-  @Override
   protected int getNumberOfClassFeats(final Character character) {
     return (character.getCharacterLevel() + 1) / 2;
   }
@@ -86,6 +81,11 @@ public class PathfinderRuleServiceImpl extends AbstractRuleServiceImpl {
   @Override
   public float getRankPerSkillPoint(final Character character, final Skill skill) {
     return 1.0f;
+  }
+
+  @Override
+  public int calculateProficiencyBonus(Character character) {
+    return 0;
   }
 
   @Override

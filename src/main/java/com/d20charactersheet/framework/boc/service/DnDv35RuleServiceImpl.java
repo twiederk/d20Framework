@@ -13,11 +13,6 @@ import com.d20charactersheet.framework.boc.model.Skill;
 public class DnDv35RuleServiceImpl extends AbstractRuleServiceImpl {
 
   @Override
-  public String getName() {
-    return "DnD v.3.5";
-  }
-
-  @Override
   protected int getNumberOfClassFeats(final Character character) {
     return 1 + character.getCharacterLevel() / 3;
   }
@@ -95,6 +90,11 @@ public class DnDv35RuleServiceImpl extends AbstractRuleServiceImpl {
       return 1.0f;
     }
     return 0.5f;
+  }
+
+  @Override
+  public int calculateProficiencyBonus(Character character) {
+    return 0;
   }
 
   @Override

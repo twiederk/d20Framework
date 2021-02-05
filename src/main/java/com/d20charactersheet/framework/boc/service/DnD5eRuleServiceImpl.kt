@@ -4,38 +4,41 @@ import com.d20charactersheet.framework.boc.model.*
 
 class DnD5eRuleServiceImpl : AbstractRuleServiceImpl() {
 
-    override fun getName(): String = "DnD 5e"
-
     override fun getMaxClassSkillRank(character: Character?): Int {
-        TODO("Not yet implemented function body")
+        return 0
     }
 
     override fun getMaxCrossClassSkillRank(character: Character?): Float {
-        TODO("Not yet implemented function body")
+        return 0.0f
     }
 
     override fun getSkillPoints(character: Character?, startClass: CharacterClass?): Int {
-        TODO("Not yet implemented function body")
+        return 0
     }
 
     override fun getSkillModifier(character: Character?, characterSkill: CharacterSkill?): Int {
-        TODO("Not yet implemented function body")
+        return 0
     }
 
     override fun getSpentSkillPoints(character: Character?): Int {
-        TODO("Not yet implemented function body")
+        return 0
     }
 
     override fun getSpecialSizeModifier(size: Size?): Int {
-        TODO("Not yet implemented function body")
+        return 0
     }
 
     override fun getRankPerSkillPoint(character: Character?, skill: Skill?): Float {
-        TODO("Not yet implemented function body")
+        return 0.0f
+    }
+
+    override fun calculateProficiencyBonus(character: Character): Int {
+        val levelTotal = character.classLevels.map { classLevel -> classLevel.level }.sum()
+        return levelTotal / 4 + 2
     }
 
     override fun getNumberOfClassFeats(character: Character?): Int {
-        TODO("Not yet implemented function body")
+        return 0
     }
 
 }

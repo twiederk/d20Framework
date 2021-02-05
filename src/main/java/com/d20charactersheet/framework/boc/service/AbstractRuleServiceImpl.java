@@ -38,7 +38,6 @@ import com.d20charactersheet.framework.boc.model.RuleError;
 import com.d20charactersheet.framework.boc.model.RuleException;
 import com.d20charactersheet.framework.boc.model.Save;
 import com.d20charactersheet.framework.boc.model.School;
-import com.d20charactersheet.framework.boc.model.Size;
 import com.d20charactersheet.framework.boc.model.Skill;
 import com.d20charactersheet.framework.boc.model.Spell;
 import com.d20charactersheet.framework.boc.model.SpellSlot;
@@ -421,8 +420,6 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
     final int cmdModifer = character.getCmdModifier();
     return 10 + baseAttackBonus + strengthModifier + dexterityModifier + specialSizeModifier + cmdModifer;
   }
-
-  public abstract int getSpecialSizeModifier(final Size size);
 
   public WeaponAttack calculateWeaponAttack(final Character character, final WeaponAttack weaponAttack) {
     weaponAttack.setAttackBonuses(getAttackBonuses(character, weaponAttack));
@@ -1212,4 +1209,5 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
     body.equip(bodyPart, item);
     return body;
   }
+
 }
