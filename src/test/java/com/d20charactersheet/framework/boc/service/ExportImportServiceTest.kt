@@ -189,7 +189,7 @@ class ExportImportServiceTest {
         Assert.assertEquals(3, weaponAttacks.size.toLong())
         val weaponAttack = weaponAttacks[0]
         Assert.assertEquals("Quarterstaff", weaponAttack.name)
-        Assert.assertEquals("My good old quaterstaff", weaponAttack.description)
+        Assert.assertEquals("My good old quarterstaff", weaponAttack.description)
         Assert.assertEquals(AttackWield.TWO_HANDED, weaponAttack.attackWield)
         Assert.assertEquals(11, weaponAttack.weapon.id.toLong())
         Assert.assertEquals("Quarterstaff", weaponAttack.weapon.name)
@@ -271,9 +271,9 @@ class ExportImportServiceTest {
         val weapons = belvador.equipment.weapons
         Assert.assertNotNull(weapons)
         Assert.assertEquals(3, weapons.size.toLong())
-        val quaterstaff = weapons[0]
-        Assert.assertEquals("Quarterstaff", quaterstaff.item.name)
-        Assert.assertEquals(1, quaterstaff.number.toLong())
+        val quarterstaff = weapons[0]
+        Assert.assertEquals("Quarterstaff", quarterstaff.item.name)
+        Assert.assertEquals(1, quarterstaff.number.toLong())
     }
 
     private fun assertArmor(belvador: Character) {

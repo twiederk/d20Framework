@@ -199,7 +199,7 @@ class DnDv35RuleServiceWeaponAttackTest : DnDv35RuleServiceTestCase() {
     }
 
     @Test
-    fun testEzrenWithQuaterstaff() {
+    fun testEzrenWithQuarterstaff() {
         var weaponAttack = createWeaponAttack("Quarterstaff", AttackWield.TWO_HANDED)
         weaponAttack = ruleService.calculateWeaponAttack(ezren, weaponAttack)
         assertWeaponAttack(intArrayOf(+1), Damage(1, Die.D6), 1, Critical(20, 2), weaponAttack)

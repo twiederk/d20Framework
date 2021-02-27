@@ -443,7 +443,7 @@ public abstract class BaseCharacterServiceTest {
     assertNotNull("Weapon attacks can't be null", weaponAttacks);
     assertEquals("Wrong number of weapon attacks", 3, weaponAttacks.size());
 
-    assertWeaponAttack(weaponAttacks.get(0), 1, "Quarterstaff", "My good old quaterstaff", AttackWield.TWO_HANDED, 0);
+    assertWeaponAttack(weaponAttacks.get(0), 1, "Quarterstaff", "My good old quarterstaff", AttackWield.TWO_HANDED, 0);
     assertWeaponAttack(weaponAttacks.get(1), 2, "Crossbow, light", "", AttackWield.ONE_HAND, 20);
     assertWeaponAttack(weaponAttacks.get(2), 3, "Silver Dagger", "Use against lycanthropes", AttackWield.ONE_HAND, 0);
 

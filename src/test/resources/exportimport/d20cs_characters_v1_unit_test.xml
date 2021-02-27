@@ -72,7 +72,7 @@
     <attacks>
       <attack>
         <name>Quarterstaff</name>
-        <description>My good old quaterstaff</description>
+        <description>My good old quarterstaff</description>
         <attackwield>TWO_HANDED</attackwield>
         <attackweapon>Quarterstaff</attackweapon>
         <attackbonusmod>0</attackbonusmod>

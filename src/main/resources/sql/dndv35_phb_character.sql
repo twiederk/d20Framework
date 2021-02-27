@@ -201,7 +201,7 @@ INSERT INTO charakter_feat VALUES ( 34, 91, 12, 'Evocation' );
 INSERT INTO charakter_feat VALUES ( 35, 62, 13, '' );
 INSERT INTO charakter_feat VALUES ( 36, 28, 13, '' );
 
-INSERT INTO charakter_weapon_attack VALUES ( 1, 0, 'Quarterstaff', 'My good old quaterstaff', 4, 11, 0, 0, 0 );
+INSERT INTO charakter_weapon_attack VALUES ( 1, 0, 'Quarterstaff', 'My good old quarterstaff', 4, 11, 0, 0, 0 );
 INSERT INTO charakter_weapon_attack VALUES ( 2, 0, 'Crossbow, light', '', 3, 14, 20, 0, 0 );
 INSERT INTO charakter_weapon_attack VALUES ( 3, 0, 'Silver Dagger', 'Use against lycanthropes', 3, 92, 0, 0, 0 );
 INSERT INTO charakter_weapon_attack VALUES ( 4, 1, 'Handaxe (Primary Hand)', '', 1, 20, 0, 0, 0 );
