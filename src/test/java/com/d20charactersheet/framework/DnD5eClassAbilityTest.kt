@@ -4,7 +4,7 @@ import com.d20charactersheet.framework.boc.service.GameSystem
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class DnD5eClassAbilitiesTest {
+class DnD5eClassAbilityTest {
 
     private val gameSystem: GameSystem = DnD5eUniverse().gameSystem
 

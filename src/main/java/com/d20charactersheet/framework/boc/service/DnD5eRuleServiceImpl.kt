@@ -4,6 +4,13 @@ import com.d20charactersheet.framework.boc.model.*
 
 class DnD5eRuleServiceImpl : AbstractRuleServiceImpl() {
 
+    override fun calculateProficiencyBonus(character: Character): Int {
+        val levelTotal = character.classLevels.map { classLevel -> classLevel.level }.sum()
+        return levelTotal / 4 + 2
+    }
+
+    override fun getNumberOfFeats(character: Character): Int = character.classLevels.map { it.level / 4 }.sum()
+
     override fun getMaxClassSkillRank(character: Character?): Int {
         return 0
     }
@@ -30,11 +37,6 @@ class DnD5eRuleServiceImpl : AbstractRuleServiceImpl() {
 
     override fun getRankPerSkillPoint(character: Character?, skill: Skill?): Float {
         return 0.0f
-    }
-
-    override fun calculateProficiencyBonus(character: Character): Int {
-        val levelTotal = character.classLevels.map { classLevel -> classLevel.level }.sum()
-        return levelTotal / 4 + 2
     }
 
     override fun getNumberOfClassFeats(character: Character?): Int {

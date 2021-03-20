@@ -6,7 +6,7 @@ import com.d20charactersheet.framework.boc.model.ClassLevel
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class DnD5eRuleServiceTest {
+class DnD5eRuleServiceProficiencyBonusTest {
 
     @Test
     fun calculateProficiencyBonus_singleClass1stLevel_bonusIs2() {
