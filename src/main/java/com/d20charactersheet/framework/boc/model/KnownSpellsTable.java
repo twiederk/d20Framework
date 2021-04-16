@@ -105,11 +105,7 @@ public class KnownSpellsTable {
   }
 
   private int boundSpellCasterLevel(int spellcasterLevel) {
-    int boundedSpellCasterLevel = spellcasterLevel;
-    if (spellcasterLevel >= knownSpells.length) {
-      boundedSpellCasterLevel = knownSpells.length;
-    }
-    return boundedSpellCasterLevel;
+    return Math.min(spellcasterLevel, knownSpells.length);
   }
 
   @Override
