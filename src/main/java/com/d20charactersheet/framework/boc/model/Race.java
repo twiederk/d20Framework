@@ -16,6 +16,7 @@ public class Race implements Serializable {
   private int baseLandSpeed;
   private CharacterClass favoredCharacterClass;
   private List<Ability> abilities;
+  private int imageId;
 
   /**
    * Returns the id of the race.
@@ -129,6 +130,14 @@ public class Race implements Serializable {
    */
   public void setSize(final Size size) {
     this.size = size;
+  }
+
+  public int getImageId() {
+    return imageId;
+  }
+
+  public void setImageId(int imageId) {
+    this.imageId = imageId;
   }
 
   @Override

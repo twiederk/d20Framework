@@ -3,18 +3,26 @@ package com.d20charactersheet.framework
 import com.d20charactersheet.framework.boc.service.*
 import com.d20charactersheet.framework.dac.dao.sql.*
 import com.d20charactersheet.framework.dac.dao.sql.jdbc.JdbcDatabase
+import com.d20charactersheet.framework.dac.dao.sql.jdbc.JdbcHelper
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.nio.file.StandardCopyOption
 import java.sql.Connection
 import java.sql.DriverManager
 
-class DnDv35DatabaseTest {
+class DnD5eDatabaseTest {
 
     @Test
-    fun getAllCharacters_loadDataFromRealDatabase_dataLoaded() {
+    fun getImageId_updateDatabaseWithCustomImage_customImagesHasUpdatedId() {
 
-        // Arrange
-        val connection: Connection = DriverManager.getConnection("jdbc:sqlite:./src/test/resources/db/dndv35_db_4_4_0")
+        // arrange
+        val src = Paths.get("./src/test/resources/db/dnd5e_db_4_3_0")
+        val dest = Paths.get("./src/test/resources/db/dnd5e_db_4_3_0_to_update")
+        Files.copy(src, dest, StandardCopyOption.REPLACE_EXISTING)
+
+        val connection: Connection = DriverManager.getConnection("jdbc:sqlite:./src/test/resources/db/dnd5e_db_4_3_0_to_update")
         val jdbcDatabase = JdbcDatabase(connection)
 
         val skillService: SkillService = SkillServiceImpl(SqlSkillDao(jdbcDatabase))
@@ -28,7 +36,7 @@ class DnDv35DatabaseTest {
         val xpService: XpService = XpServiceImpl(SqlXpDao(jdbcDatabase))
         val exportImportService: ExportImportService = ExportImportServiceImpl()
 
-        val gameSystem = GameSystemCacheImpl(1, "Dungeons & Dragons v.3.5")
+        val gameSystem = GameSystemCacheImpl(1, "DnD 5e")
         gameSystem.skillService = skillService
         gameSystem.featService = featService
         gameSystem.characterClassService = characterClassService
@@ -40,13 +48,23 @@ class DnDv35DatabaseTest {
         gameSystem.xpService = xpService
         gameSystem.exportImportService = exportImportService
         gameSystem.bodyService = BodyService()
-        gameSystem.ruleService = DnDv35RuleServiceImpl()
+        gameSystem.ruleService = DnD5eRuleServiceImpl()
 
-        // Act
-        val allCharacters = gameSystem.allCharacters
+        val jdbcHelper = JdbcHelper("jdbc:sqlite:./src/test/resources/db/dnd5e_db_4_3_0_to_update")
 
-        // Assert
-        assertThat(allCharacters).hasSize(14)
+        // act
+        jdbcHelper.executeSqlScript("/db/dnd5e_upgrade_72_to_73.sql")
+
+        // assert
+        val testCharacter = gameSystem.allCharacters[1]
+        assertThat(testCharacter.name).isEqualTo("test")
+        assertThat(testCharacter.imageId).isEqualTo(40)
+        assertThat(testCharacter.thumbImageId).isEqualTo(41)
+
+        // tear down
+        jdbcHelper.connection.close()
+        connection.close()
+        Files.delete(dest)
     }
 
 }

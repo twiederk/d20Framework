@@ -597,7 +597,7 @@ object TableAndColumnNames {
 
     // RaceDao
     /** Select all races  */
-    const val SQL_GET_ALL_RACES = (SELECT + "id, name, size_id, base_land_speed, fav_class_id" //
+    const val SQL_GET_ALL_RACES = (SELECT + "id, name, size_id, base_land_speed, fav_class_id, image_id" //
             + FROM + TABLE_RACE)
 
     /** Select ability ids of one race  */

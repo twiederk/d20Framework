@@ -24,6 +24,7 @@ class RaceRowMapper(private val allCharacterClasses: List<CharacterClass>) : Bas
         race.size = Size.values()[dataRow.getInt(2)]
         race.baseLandSpeed = dataRow.getInt(3)
         race.favoredCharacterClass = getCharacterClass(dataRow.getInt(4), allCharacterClasses)
+        race.imageId = dataRow.getInt(5)
         return race
     }
 

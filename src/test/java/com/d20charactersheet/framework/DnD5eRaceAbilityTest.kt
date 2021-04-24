@@ -15,7 +15,8 @@ class DnD5eRaceAbilityTest {
         val human = gameSystem.raceService.getAllRaces(gameSystem.allCharacterClasses, gameSystem.allAbilities)[0]
 
         // Assert
-        Assertions.assertThat(human.abilities).extracting("name").containsExactlyInAnyOrder("Ability Score Increase (Human)")
+        Assertions.assertThat(human.abilities).extracting("name")
+            .containsExactlyInAnyOrder("Ability Score Increase (Str +1, Dex +1, Con +1, Int +1, Wis +1, Cha +1)")
     }
 
     @Test
@@ -26,7 +27,7 @@ class DnD5eRaceAbilityTest {
 
         // Assert
         Assertions.assertThat(dragonborn.abilities).extracting("name").containsExactlyInAnyOrder(
-            "Ability Score Increase (Dragonborn)",
+            "Ability Score Increase (Str +2, Cha +1)",
             "Draconic Ancestry",
             "Breath Weapon",
             "Damage Resistance"
@@ -41,7 +42,7 @@ class DnD5eRaceAbilityTest {
 
         // Assert
         Assertions.assertThat(dwarf.abilities).extracting("name").containsExactlyInAnyOrder(
-            "Ability Score Increase (Dwarf)",
+            "Ability Score Increase (Con +2)",
             "Darkvision",
             "Dwarven Resilience",
             "Dwarven Combat Training",
@@ -58,7 +59,7 @@ class DnD5eRaceAbilityTest {
 
         // Assert
         Assertions.assertThat(elf.abilities).extracting("name")
-            .containsExactlyInAnyOrder("Darkvision", "Ability Score Increase (Elf)", "Keen Senses", "Fey Ancestry", "Trance")
+            .containsExactlyInAnyOrder("Darkvision", "Ability Score Increase (Dex +2)", "Keen Senses", "Fey Ancestry", "Trance")
     }
 
     @Test
@@ -69,7 +70,7 @@ class DnD5eRaceAbilityTest {
 
         // Assert
         Assertions.assertThat(gnome.abilities).extracting("name")
-            .containsExactlyInAnyOrder("Darkvision", "Ability Score Increase (Gnome)", "Gnome Cunning")
+            .containsExactlyInAnyOrder("Darkvision", "Ability Score Increase (Int +2)", "Gnome Cunning")
     }
 
     @Test
@@ -82,7 +83,7 @@ class DnD5eRaceAbilityTest {
         Assertions.assertThat(halfElf.abilities).extracting("name").containsExactlyInAnyOrder(
             "Darkvision",
             "Fey Ancestry",
-            "Ability Score Increase (Half-Efl)",
+            "Ability Score Increase (Cha +2. Two other ability scores of your choice increase by 1)",
             "Skill Versatility"
         )
     }
@@ -96,7 +97,7 @@ class DnD5eRaceAbilityTest {
         // Assert
         Assertions.assertThat(halfOrc.abilities).extracting("name").containsExactlyInAnyOrder(
             "Darkvision",
-            "Ability Score Increase (Half-Orc)",
+            "Ability Score Increase (Str +2, Con +1)",
             "Menacing",
             "Relentless Endurance",
             "Savage Attacks"
@@ -111,7 +112,7 @@ class DnD5eRaceAbilityTest {
 
         // Assert
         Assertions.assertThat(halfling.abilities).extracting("name")
-            .containsExactlyInAnyOrder("Ability Score Increase (Halfling)", "Lucky", "Brave", "Halfling Nimbleness")
+            .containsExactlyInAnyOrder("Ability Score Increase (Dex +2)", "Lucky", "Brave", "Halfling Nimbleness")
     }
 
     @Test
@@ -123,7 +124,7 @@ class DnD5eRaceAbilityTest {
         // Assert
         Assertions.assertThat(tiefling.abilities).extracting("name").containsExactlyInAnyOrder(
             "Darkvision",
-            "Ability Score Increase (Tiefling)",
+            "Ability Score Increase (Int +1, Cha +2)",
             "Hellish Resistance",
             "Infernal Legacy"
         )

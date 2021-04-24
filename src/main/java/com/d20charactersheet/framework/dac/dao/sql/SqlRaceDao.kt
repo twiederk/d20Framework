@@ -8,6 +8,7 @@ import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_AB
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_BASE_LAND_SPEED
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_FAV_CLASS_ID
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_ID
+import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_IMAGE_ID
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_NAME
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_RACE_ID
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_SIZE_ID
@@ -19,7 +20,6 @@ import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.TABLE_RAC
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.TABLE_RACE_ABILITY
 import com.d20charactersheet.framework.dac.dao.sql.rowmapper.RaceRowMapper
 import java.sql.SQLException
-import java.util.*
 
 /**
  * Provides access to the tables storing the races in a SQLite database.
@@ -120,6 +120,7 @@ class SqlRaceDao(private val db: Database) : RaceDao {
         contentValues.put(COLUMN_SIZE_ID, race.size.ordinal)
         contentValues.put(COLUMN_BASE_LAND_SPEED, race.baseLandSpeed)
         contentValues.put(COLUMN_FAV_CLASS_ID, race.favoredCharacterClass.id)
+        contentValues.put(COLUMN_IMAGE_ID, race.imageId)
         return contentValues
     }
 

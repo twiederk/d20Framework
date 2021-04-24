@@ -6,11 +6,11 @@ import java.sql.SQLException
 import java.sql.Statement
 
 
-class JdbcHelper {
+class JdbcHelper(connection: String = "jdbc:sqlite::memory:") {
 
     private val dbLock = Any()
 
-    val connection: Connection = DriverManager.getConnection("jdbc:sqlite::memory:")
+    val connection: Connection = DriverManager.getConnection(connection)
 
     fun executeSqlScript(sqlScriptName: String) {
         val sqlScripts = getSqlScriptsFromRawResource(sqlScriptName)

@@ -7,7 +7,6 @@ import com.d20charactersheet.framework.boc.model.Race
 import com.d20charactersheet.framework.boc.model.Size
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
-import java.util.*
 
 abstract class BaseRaceDaoTest {
 
@@ -55,6 +54,7 @@ abstract class BaseRaceDaoTest {
         assertThat(human).isNotNull
         assertThat(human.id).isEqualTo(0)
         assertThat(human.name).isEqualTo("Human")
+        assertThat(human.imageId).isEqualTo(22)
     }
 
     @Test
@@ -68,6 +68,7 @@ abstract class BaseRaceDaoTest {
         // Assert
         assertThat(createdRace).isNotNull
         assertThat(createdRace.id).isNotEqualTo(0)
+        assertThat(createdRace.imageId).isEqualTo(1)
         val persistedRace = getRaceFromService(createdRace.id)
         assertThat(persistedRace).isNotNull
         assertRace(persistedRace)
@@ -82,6 +83,7 @@ abstract class BaseRaceDaoTest {
         race.size = Size.MEDIUM
         race.baseLandSpeed = 30
         race.favoredCharacterClass = getBarbarian()
+        race.imageId = 1
         race.abilities = createAbilities()
         return race
     }
@@ -138,6 +140,7 @@ abstract class BaseRaceDaoTest {
         assertThat(race.size).isEqualTo(Size.MEDIUM)
         assertThat(race.baseLandSpeed).isEqualTo(30)
         assertThat(race.favoredCharacterClass).isEqualTo(getBarbarian())
+        assertThat(race.imageId).isEqualTo(1)
         val abilities = race.abilities
         assertThat(abilities).isNotNull
         assertThat(abilities.size).isEqualTo(10)
