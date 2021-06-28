@@ -21,7 +21,7 @@ class SelectionBoxTest {
         // arrange
         val selectionOption = SelectionOption()
         selectionOption.add(ItemGroup().apply {
-            item = Weapon().apply { name = "Chain mail" }
+            item = Armor().apply { name = "Chain mail"; number = 1 }
         })
 
         // act
@@ -29,6 +29,34 @@ class SelectionBoxTest {
 
         // assert
         assertThat(title).isEqualTo("Chain mail")
+    }
+
+    @Test
+    fun getName_twoItems_namesSeparatedByComa() {
+        // arrange
+        val selectionOption = SelectionOption()
+        selectionOption.add(ItemGroup().apply { item = Armor().apply { name = "Chain mail"; number = 1 } })
+        selectionOption.add(ItemGroup().apply { item = Weapon().apply { name = "Longbow"; number = 1 } })
+
+        // act
+        val title = selectionOption.getTitle()
+
+        // assert
+        assertThat(title).isEqualTo("Chain mail, Longbow")
+    }
+
+    @Test
+    fun getName_twoItemsWithCount_namesSeparatedByComaAndCountInBraces() {
+        // arrange
+        val selectionOption = SelectionOption()
+        selectionOption.add(ItemGroup().apply { item = Weapon().apply { name = "Longbow"; number = 1 } })
+        selectionOption.add(ItemGroup().apply { item = Weapon().apply { name = "Arrow"; number = 20 } })
+
+        // act
+        val title = selectionOption.getTitle()
+
+        // assert
+        assertThat(title).isEqualTo("Longbow, Arrow (20)")
     }
 
 }

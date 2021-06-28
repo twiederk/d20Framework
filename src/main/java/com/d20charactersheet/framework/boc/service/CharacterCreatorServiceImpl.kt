@@ -11,18 +11,13 @@ class CharacterCreatorServiceImpl : CharacterCreatorService {
 
     override fun getEquipmentSelectionBoxes(characterClass: CharacterClass): List<SelectionBox> {
 
-
-        val chainMailOption = chainMailOption()
-
-        val leatherArmorItemGroup = ItemGroup().apply {
-            item = Weapon().apply { name = "Leather" }
-            number = 1
-        }
-
+        val chainMailOption = SelectionOption()
+        chainMailOption.add(ItemGroup().apply { item = Armor().apply { name = "Chain mail" }; number = 1 })
 
         val leatherArmorOption = SelectionOption()
-        leatherArmorOption.add(leatherArmorItemGroup)
-
+        leatherArmorOption.add(ItemGroup().apply { item = Armor().apply { name = "Leather" }; number = 1 })
+        leatherArmorOption.add(ItemGroup().apply { item = Weapon().apply { name = "Longbow" }; number = 1 })
+        leatherArmorOption.add(ItemGroup().apply { item = Weapon().apply { name = "Arrow" }; number = 20 })
 
         val armorSelectionBox = SelectionBox()
         armorSelectionBox.add(chainMailOption)
@@ -31,15 +26,6 @@ class CharacterCreatorServiceImpl : CharacterCreatorService {
         return listOf(armorSelectionBox)
     }
 
-    private fun chainMailOption(): SelectionOption {
-        val chaiMailItemGroup = ItemGroup().apply {
-            item = Weapon().apply { name = "Chain mail" }
-            number = 1
-        }
 
-        val chainMailOption = SelectionOption()
-        chainMailOption.add(chaiMailItemGroup)
-        return chainMailOption
-    }
 
 }

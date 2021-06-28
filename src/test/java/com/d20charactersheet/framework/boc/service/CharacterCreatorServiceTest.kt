@@ -35,7 +35,7 @@ class CharacterCreatorServiceTest {
         assertThat(selectionBoxes).hasSize(1)
         assertThat(selectionBoxes[0].options).hasSize(2)
         assertThat(selectionBoxes[0].options[0].getTitle()).isEqualTo("Chain mail")
-        assertThat(selectionBoxes[0].options[1].getTitle()).isEqualTo("Leather")
+        assertThat(selectionBoxes[0].options[1].getTitle()).isEqualTo("Leather, Longbow, Arrow (20)")
     }
 
 }

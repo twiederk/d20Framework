@@ -5,13 +5,16 @@ class SelectionOption {
 
     val itemGroups: MutableList<ItemGroup> = mutableListOf()
 
-
-    fun getTitle(): String {
-        if (itemGroups.isEmpty()) return ""
-        return itemGroups[0].item.name
-    }
-
     fun add(itemGroup: ItemGroup) {
         itemGroups.add(itemGroup)
+    }
+
+    fun getTitle(): String = itemGroups
+        .map { extractItemName(it) }
+        .joinToString { it }
+
+    private fun extractItemName(itemGroup: ItemGroup) = when (itemGroup.number) {
+        1 -> itemGroup.item.name
+        else -> "${itemGroup.item.name} (${itemGroup.number})"
     }
 }
