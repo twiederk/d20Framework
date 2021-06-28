@@ -2,11 +2,14 @@ package com.d20charactersheet.framework.boc.service;
 
 import java.util.List;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.d20charactersheet.framework.boc.model.Armor;
 import com.d20charactersheet.framework.boc.model.Good;
 import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.Weapon;
 import com.d20charactersheet.framework.boc.model.WeaponFamily;
+import com.d20charactersheet.framework.boc.model.WeaponType;
 
 /**
  * Provides services to handle items.
@@ -120,4 +123,6 @@ public interface ItemService {
    */
   Item getItemById(int itemId, List<? extends Item> items);
 
+  @NotNull
+  List<Weapon> filterWeaponsByType(@NotNull WeaponType weaponType);
 }

@@ -8,4 +8,8 @@ class SelectionBox {
         options.add(selectionOption)
     }
 
+    fun addAll(selectionOptions: List<SelectionOption>) {
+        options.addAll(selectionOptions)
+    }
+
 }

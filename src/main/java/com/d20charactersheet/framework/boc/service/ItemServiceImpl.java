@@ -3,6 +3,8 @@ package com.d20charactersheet.framework.boc.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.d20charactersheet.framework.boc.model.Armor;
 import com.d20charactersheet.framework.boc.model.Critical;
 import com.d20charactersheet.framework.boc.model.Good;
@@ -11,6 +13,7 @@ import com.d20charactersheet.framework.boc.model.RuleError;
 import com.d20charactersheet.framework.boc.model.RuleException;
 import com.d20charactersheet.framework.boc.model.Weapon;
 import com.d20charactersheet.framework.boc.model.WeaponFamily;
+import com.d20charactersheet.framework.boc.model.WeaponType;
 import com.d20charactersheet.framework.dac.dao.ItemDao;
 
 /**
@@ -111,6 +114,12 @@ public class ItemServiceImpl implements ItemService {
       }
     }
     throw new IllegalArgumentException("Can't find item with id: " + itemId);
+  }
+
+  @NotNull
+  @Override
+  public List<Weapon> filterWeaponsByType(@NotNull WeaponType weaponType) {
+    return null;
   }
 
 }

@@ -1,10 +1,10 @@
 package com.d20charactersheet.framework.boc.service
 
-import com.d20charactersheet.framework.boc.model.CharacterClass
-import com.d20charactersheet.framework.boc.model.Die
-import com.d20charactersheet.framework.boc.model.SelectionBox
+import com.d20charactersheet.framework.boc.model.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 import java.util.*
 
 class CharacterCreatorServiceTest {
@@ -27,15 +27,28 @@ class CharacterCreatorServiceTest {
     @Test
     fun getEquipmentSelection_fighter_getCompleteSelectionForFighter() {
         // arrange
+        val itemService: ItemService = mock()
+        whenever(itemService.filterWeaponsByType(WeaponType.MARTIAL)).thenReturn(
+            listOf(
+                Weapon().apply { name = "Longsword" },
+                Weapon().apply { name = "Battleaxe" },
+                Weapon().apply { name = "Bastardsword" },
+                Weapon().apply { name = "Two-Handed sword" },
+                Weapon().apply { name = "Helberd" },
+            )
+        )
 
         // act
-        val selectionBoxes: List<SelectionBox> = underTest.getEquipmentSelectionBoxes(CharacterClass())
+        val selectionBoxes: List<SelectionBox> = underTest.getEquipmentSelectionBoxes(CharacterClass(), itemService)
 
         // assert
-        assertThat(selectionBoxes).hasSize(1)
+        assertThat(selectionBoxes).hasSize(2)
+
         assertThat(selectionBoxes[0].options).hasSize(2)
         assertThat(selectionBoxes[0].options[0].getTitle()).isEqualTo("Chain mail")
         assertThat(selectionBoxes[0].options[1].getTitle()).isEqualTo("Leather, Longbow, Arrow (20)")
+
+        assertThat(selectionBoxes[1].options).hasSize(5)
     }
 
 }

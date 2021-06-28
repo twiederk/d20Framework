@@ -7,6 +7,6 @@ interface CharacterCreatorService {
 
     fun rollAttributeWithStandardMethod(): Int
 
-    fun getEquipmentSelectionBoxes(characterClass: CharacterClass): List<SelectionBox>
+    fun getEquipmentSelectionBoxes(characterClass: CharacterClass, itemService: ItemService): List<SelectionBox>
 
 }

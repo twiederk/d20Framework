@@ -9,7 +9,7 @@ class CharacterCreatorServiceImpl : CharacterCreatorService {
         return rolls.sum() - (rolls.minOrNull() ?: 0)
     }
 
-    override fun getEquipmentSelectionBoxes(characterClass: CharacterClass): List<SelectionBox> {
+    override fun getEquipmentSelectionBoxes(characterClass: CharacterClass, itemService: ItemService): List<SelectionBox> {
 
         val chainMailOption = SelectionOption()
         chainMailOption.add(ItemGroup().apply { item = Armor().apply { name = "Chain mail" }; number = 1 })
@@ -23,9 +23,27 @@ class CharacterCreatorServiceImpl : CharacterCreatorService {
         armorSelectionBox.add(chainMailOption)
         armorSelectionBox.add(leatherArmorOption)
 
-        return listOf(armorSelectionBox)
+
+        val martialWeapons: List<Weapon> = itemService.filterWeaponsByType(WeaponType.MARTIAL)
+        val martialWeaponsSelectionOptions: List<SelectionOption> = createSelectionOptions(martialWeapons)
+        val primaryHandSelectionBox = SelectionBox()
+        primaryHandSelectionBox.addAll(martialWeaponsSelectionOptions)
+
+
+
+        return listOf(armorSelectionBox, primaryHandSelectionBox)
     }
 
+    private fun createSelectionOptions(weapons: List<Weapon>): List<SelectionOption> {
+        val itemGroups = weapons.map { ItemGroup().apply { item = it; number = 1 } }
+        val selectionOptions = mutableListOf<SelectionOption>()
+        for (itemGroup in itemGroups) {
+            val selectionOption = SelectionOption()
+            selectionOption.add(itemGroup)
+            selectionOptions.add(selectionOption)
+        }
+        return selectionOptions
+    }
 
 
 }
