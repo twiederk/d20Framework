@@ -21,7 +21,7 @@ class SpellSerializor {
             school = data.substring(0, index)
         }
         return try {
-            School.valueOf(school.toUpperCase())
+            School.valueOf(school.uppercase())
         } catch (exception: Exception) {
             School.ABJURATION
         }
@@ -43,7 +43,7 @@ class SpellSerializor {
             subSchool = data.substring(beginIndex + 1, endIndex)
         }
         return try {
-            SubSchool.valueOf(subSchool.toUpperCase())
+            SubSchool.valueOf(subSchool.uppercase())
         } catch (exception: Exception) {
             SubSchool.NONE
         }
@@ -66,8 +66,10 @@ class SpellSerializor {
             descriptors = arrayOfNulls(descriptorStrings.size)
             for (i in descriptorStrings.indices) {
                 try {
-                    descriptors[i] = Descriptor.valueOf(descriptorStrings[i].trim { it <= ' ' }.toUpperCase() //
-                            .replace('-', '_').replace(' ', '_'))
+                    descriptors[i] = Descriptor.valueOf(
+                        descriptorStrings[i].trim { it <= ' ' }.uppercase() //
+                            .replace('-', '_').replace(' ', '_')
+                    )
                 } catch (exception: Exception) {
                     return arrayOf(Descriptor.NONE)
                 }

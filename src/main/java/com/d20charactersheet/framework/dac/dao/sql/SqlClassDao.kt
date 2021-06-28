@@ -1,10 +1,7 @@
 package com.d20charactersheet.framework.dac.dao.sql
 
 
-import com.d20charactersheet.framework.boc.model.Ability
-import com.d20charactersheet.framework.boc.model.CharacterClass
-import com.d20charactersheet.framework.boc.model.ClassAbility
-import com.d20charactersheet.framework.boc.model.Skill
+import com.d20charactersheet.framework.boc.model.*
 import com.d20charactersheet.framework.dac.dao.ClassDao
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_ABILITY_ID
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_ALIGNMENTS
@@ -21,11 +18,15 @@ import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.SELECT
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.SQL_GET_ALL_CLASSES
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.SQL_GET_CLASS_ABILITIES
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.SQL_GET_CLASS_SKILLS
+import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.SQL_GET_STARTER_PACK_BOXES
+import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.SQL_GET_STARTER_PACK_BOX_OPTION_QUERIES
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.TABLE_CLASS
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.TABLE_CLASS_ABILITY
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.TABLE_CLASS_SKILL
 import com.d20charactersheet.framework.dac.dao.sql.rowmapper.ClassAbilityRowMapper
 import com.d20charactersheet.framework.dac.dao.sql.rowmapper.ClassRowMapper
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.StarterBoxOptionQueryRowMapper
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.StarterPackBoxRowMapper
 import java.sql.SQLException
 import java.util.*
 
@@ -35,6 +36,8 @@ import java.util.*
 class SqlClassDao(private val db: Database) : ClassDao {
 
     private val classRowMapper: RowMapper = ClassRowMapper()
+    private val starterPackBoxRowMapper: RowMapper = StarterPackBoxRowMapper()
+    private val starterPackBoxOptionQueryRowMapper: RowMapper = StarterBoxOptionQueryRowMapper()
 
     companion object {
         private const val SQL_GET_ID: String = SELECT + "id FROM " + TABLE_CLASS + " WHERE rowid = ?"
@@ -225,6 +228,57 @@ class SqlClassDao(private val db: Database) : ClassDao {
                 check(rowId != -1L) { "Can't insert skill ($skill) to class ($characterClass)" }
             }
         }
+    }
+
+    override fun getStarterPackBoxesWithQueries(classId: Int): Map<StarterPackBox, List<StarterPackQuery>> {
+        val starterPackBoxQueries = mutableMapOf<StarterPackBox, List<StarterPackQuery>>()
+        val starterPackBoxes = selectClassStarterPackBoxTable(classId)
+        for (starterPackBox in starterPackBoxes) {
+            val starterPackBoxOptionQueries = selectStarterBoxQueries(starterPackBox.id)
+            starterPackBoxQueries[starterPackBox] = starterPackBoxOptionQueries
+        }
+        return starterPackBoxQueries
+    }
+
+    private fun selectClassStarterPackBoxTable(classId: Int): List<StarterPackBox> {
+        val starterPackBoxes: MutableList<StarterPackBox> = mutableListOf()
+        var queryResult: QueryResult? = null
+        try {
+            queryResult = db.rawQuery(SQL_GET_STARTER_PACK_BOXES, arrayOf(classId.toString()))
+            queryResult.moveToFirst()
+            while (!queryResult.isAfterLast()) {
+                val selectionBox = starterPackBoxRowMapper.mapRow(queryResult.getDataRow()) as StarterPackBox
+                starterPackBoxes.add(selectionBox)
+                queryResult.moveToNext()
+            }
+        } catch (sqlException: SQLException) {
+            println("Can't get starter pack boxes $sqlException")
+            sqlException.printStackTrace()
+        } finally {
+            queryResult?.close()
+        }
+        return starterPackBoxes
+    }
+
+    private fun selectStarterBoxQueries(starterBoxId: Int): List<StarterPackQuery> {
+        val starterPackQueries: MutableList<StarterPackQuery> = mutableListOf()
+        var queryResult: QueryResult? = null
+        try {
+            queryResult = db.rawQuery(SQL_GET_STARTER_PACK_BOX_OPTION_QUERIES, arrayOf(starterBoxId.toString()))
+            queryResult.moveToFirst()
+            while (!queryResult.isAfterLast()) {
+                val starterPackBoxOptionQuery =
+                    starterPackBoxOptionQueryRowMapper.mapRow(queryResult.getDataRow()) as StarterPackQuery
+                starterPackQueries.add(starterPackBoxOptionQuery)
+                queryResult.moveToNext()
+            }
+        } catch (sqlException: SQLException) {
+            println("Can't get starter pack box option queries $sqlException")
+            sqlException.printStackTrace()
+        } finally {
+            queryResult?.close()
+        }
+        return starterPackQueries
     }
 
     private fun setEnum(enumset: EnumSet<*>): Int {

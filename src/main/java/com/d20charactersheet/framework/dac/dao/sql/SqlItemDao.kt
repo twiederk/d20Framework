@@ -1,9 +1,6 @@
 package com.d20charactersheet.framework.dac.dao.sql
 
-import com.d20charactersheet.framework.boc.model.Armor
-import com.d20charactersheet.framework.boc.model.Good
-import com.d20charactersheet.framework.boc.model.Weapon
-import com.d20charactersheet.framework.boc.model.WeaponFamily
+import com.d20charactersheet.framework.boc.model.*
 import com.d20charactersheet.framework.dac.dao.ItemDao
 
 /**
@@ -19,6 +16,7 @@ class SqlItemDao(db: Database) : ItemDao {
     private val weaponHelper = WeaponHelper(db, helper)
     private val armorHelper = ArmorHelper(db, helper)
     private val goodHelper = GoodHelper(db, helper)
+    private val equipmentPackHelper = EquipmentPackHelper(db)
 
     override fun getAllWeapons(allWeaponFamilies: List<WeaponFamily>): List<Weapon> {
         return weaponHelper.getAllWeapons(allWeaponFamilies)
@@ -30,6 +28,10 @@ class SqlItemDao(db: Database) : ItemDao {
 
     override fun getAllGoods(): List<Good> {
         return goodHelper.allGoods
+    }
+
+    override fun getAllEquipmentPacks(allItems: List<Item>): List<EquipmentPack> {
+        return equipmentPackHelper.getAllEquipmentPacks(allItems)
     }
 
     override fun createWeapon(weapon: Weapon): Weapon {

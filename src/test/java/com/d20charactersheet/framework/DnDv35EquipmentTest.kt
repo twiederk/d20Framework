@@ -4,9 +4,9 @@ import com.d20charactersheet.framework.boc.service.GameSystem
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class DnD5eEquipmentTest {
+class DnDv35EquipmentTest {
 
-    private val gameSystem: GameSystem = DnD5eUniverse().gameSystem
+    private val gameSystem: GameSystem = DnDv35Universe().gameSystem
 
     @Test
     fun getAllWeapon() {
@@ -15,7 +15,7 @@ class DnD5eEquipmentTest {
         val allWeapons = gameSystem.allWeapons
 
         // Assert
-        assertThat(allWeapons).hasSize(47)
+        assertThat(allWeapons).hasSize(110)
     }
 
     @Test
@@ -25,7 +25,7 @@ class DnD5eEquipmentTest {
         val allArmor = gameSystem.allArmor
 
         // Assert
-        assertThat(allArmor).hasSize(13)
+        assertThat(allArmor).hasSize(38)
     }
 
     @Test
@@ -35,7 +35,7 @@ class DnD5eEquipmentTest {
         val allGoods = gameSystem.allGoods
 
         // Assert
-        assertThat(allGoods).hasSize(158)
+        assertThat(allGoods).hasSize(131)
     }
 
     @Test

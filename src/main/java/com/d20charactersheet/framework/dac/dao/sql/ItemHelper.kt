@@ -5,7 +5,6 @@ import com.d20charactersheet.framework.boc.model.Item
 import com.d20charactersheet.framework.boc.model.ItemGroup
 import com.d20charactersheet.framework.dac.dao.sql.rowmapper.ItemGroupRowMapper
 import java.sql.SQLException
-import java.util.*
 
 /**
  * Helper to retrieve all items of a specific implementation (weapon, armor, good) from the database. Retrieves all items
@@ -83,7 +82,7 @@ internal open class ItemHelper(val db: Database, val helper: SqlItemDaoHelper) {
     private fun mapAndAddItemGroup(queryResult: QueryResult, characterItem: MutableList<ItemGroup>,
                                    itemGroupRowMapper: ItemGroupRowMapper) {
         try {
-            val itemGroup = itemGroupRowMapper.mapRow(queryResult.getDataRow()) as ItemGroup
+            val itemGroup = itemGroupRowMapper.mapRow(queryResult.getDataRow())
             characterItem.add(itemGroup)
         } catch (exception: Exception) {
             //            Logger.error("Can't map item group, skipping it", exception);

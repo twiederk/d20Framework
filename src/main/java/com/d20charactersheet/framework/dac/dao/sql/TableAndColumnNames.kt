@@ -1,4 +1,5 @@
 package com.d20charactersheet.framework.dac.dao.sql
+
 /**
  * Constants of table and column names in the SQLite3 database.
  */
@@ -7,6 +8,7 @@ object TableAndColumnNames {
     /* ==== */
     /* SQL */
     /* ==== */
+
     /** Key word SELECT  */
     const val SELECT = "SELECT "
 
@@ -58,6 +60,12 @@ object TableAndColumnNames {
     /** Table of goods  */
     const val TABLE_GOOD = "good"
 
+    /** Table of equipment packs */
+    private const val TABLE_EQUIPMENT_PACK = "equipment_pack"
+
+    /** Table of equipment pack item groups */
+    private const val TABLE_EQUIPMENT_PACK_ITEM_GROUP = "equipment_pack_item_group"
+
     /** Table of abilities  */
     const val TABLE_ABILITY = "ability"
 
@@ -69,6 +77,12 @@ object TableAndColumnNames {
 
     /** Table of class abilities  */
     const val TABLE_CLASS_ABILITY = "class_ability"
+
+    /** Table of starter pack boxes */
+    private const val TABLE_CLASS_STARTER_PACK_BOX = "class_starter_pack_box"
+
+    /** Table of starter pack boxes */
+    private const val TABLE_CLASS_STARTER_PACK_BOX_OPTION_QUERY = "class_starter_pack_option_query"
 
     /** Table of xp tables  */
     private const val TABLE_XP_TABLE = "xp_table"
@@ -579,7 +593,7 @@ object TableAndColumnNames {
             + "id, name, prerequisit, benefit, feat_type_id, fighter, multiple, stack, spell_slot" //
             + FROM + TABLE_FEAT)
 
-    // CharacterClassDao
+    // ClassDao
     /** Select all character classes  */
     const val SQL_GET_ALL_CLASSES = (SELECT
             + "id, name, saves, alignments, base_attack_bonus, skill_points_per_level, hit_die_id" //
@@ -589,6 +603,18 @@ object TableAndColumnNames {
     const val SQL_GET_CLASS_ABILITIES = (SELECT + "ability_id, level" //
             + FROM + TABLE_CLASS_ABILITY //
             + WHERE + "class_id = ?")
+
+    /** Select all starter pack boxes of a class */
+    const val SQL_GET_STARTER_PACK_BOXES = (SELECT + "id, name" //
+            + FROM + TABLE_CLASS_STARTER_PACK_BOX //
+            + WHERE + "class_id = ?")
+
+    /** Select all starter pack box options of a starter pack box */
+    const val SQL_GET_STARTER_PACK_BOX_OPTION_QUERIES =
+        (SELECT + "id, starter_pack_box_option_id, equipment_type_id, type_id, combat_id, item_id, quantity" //
+                + FROM + TABLE_CLASS_STARTER_PACK_BOX_OPTION_QUERY //
+                + WHERE + "starter_pack_box_id = ?")
+
 
     // AbilityDao
     /** Select all abilities in a specific language  */
@@ -695,5 +721,15 @@ object TableAndColumnNames {
     const val SQL_GET_CHARACTER_SPELL_SLOT_FEATS = (SELECT + "feat_id" //
             + FROM + TABLE_CHARAKTER_SPELL_SLOT_FEAT //
             + WHERE + "spell_slot_id = ?")
+
+    /** Select all equipment packs */
+    const val SQL_GET_ALL_EQUIPMENT_PACKS: String = (SELECT + "id, name " //
+            + FROM + TABLE_EQUIPMENT_PACK)
+
+    /** Select item groups of equipment pack */
+    const val SQL_GET_EQUIPMENT_PACK_ITEM_GROUPS = (SELECT + "id, good_id, quantity " //
+            + FROM + TABLE_EQUIPMENT_PACK_ITEM_GROUP //
+            + WHERE + "equipment_pack_id = ?")
+
 }
 

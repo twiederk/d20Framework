@@ -17,7 +17,7 @@ class ItemGroupRowMapper(private val allItems: List<Item>) : BaseRowMapper() {
      * Maps raw data to an item group.
      */
     @Throws(SQLException::class)
-    override fun mapRow(dataRow: DataRow): Any {
+    override fun mapRow(dataRow: DataRow): ItemGroup {
         // id, weapon_id, number
         val itemGroup = ItemGroup()
         itemGroup.id = dataRow.getInt(0)

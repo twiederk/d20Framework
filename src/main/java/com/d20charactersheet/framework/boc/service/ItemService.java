@@ -2,11 +2,18 @@ package com.d20charactersheet.framework.boc.service;
 
 import java.util.List;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.d20charactersheet.framework.boc.model.Armor;
+import com.d20charactersheet.framework.boc.model.ArmorType;
+import com.d20charactersheet.framework.boc.model.CombatType;
+import com.d20charactersheet.framework.boc.model.EquipmentPack;
 import com.d20charactersheet.framework.boc.model.Good;
+import com.d20charactersheet.framework.boc.model.GoodType;
 import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.Weapon;
 import com.d20charactersheet.framework.boc.model.WeaponFamily;
+import com.d20charactersheet.framework.boc.model.WeaponType;
 
 /**
  * Provides services to handle items.
@@ -18,6 +25,7 @@ public interface ItemService {
    *
    * @return All weapon families.
    */
+  @NotNull
   List<WeaponFamily> getAllWeaponFamilies();
 
   /**
@@ -28,13 +36,15 @@ public interface ItemService {
    *
    * @return List of all available weapons.
    */
-  List<Weapon> getAllWeapons(List<WeaponFamily> allWeaponFamilies);
+  @NotNull
+  List<Weapon> getAllWeapons(@NotNull List<WeaponFamily> allWeaponFamilies);
 
   /**
    * Returns list of all available armor.
    *
    * @return List of all available armor.
    */
+  @NotNull
   List<Armor> getAllArmor();
 
   /**
@@ -42,6 +52,7 @@ public interface ItemService {
    *
    * @return List of all available goods.
    */
+  @NotNull
   List<Good> getAllGoods();
 
   /**
@@ -52,7 +63,8 @@ public interface ItemService {
    *
    * @return New created weapon with valid id
    */
-  Weapon createWeapon(Weapon weapon);
+  @NotNull
+  Weapon createWeapon(@NotNull Weapon weapon);
 
   /**
    * Updates the given weapon in the persistent layer.
@@ -60,7 +72,7 @@ public interface ItemService {
    * @param weapon
    *     The weapon to update.
    */
-  void updateWeapon(Weapon weapon);
+  void updateWeapon(@NotNull Weapon weapon);
 
   /**
    * Creates a new armor with valid id.
@@ -70,7 +82,8 @@ public interface ItemService {
    *
    * @return The new armor with a valid id.
    */
-  Armor createArmor(Armor armor);
+  @NotNull
+  Armor createArmor(@NotNull Armor armor);
 
   /**
    * Updates the armor.
@@ -78,7 +91,7 @@ public interface ItemService {
    * @param armor
    *     The armor to update.
    */
-  void updateArmor(Armor armor);
+  void updateArmor(@NotNull Armor armor);
 
   /**
    * Create a new good with valid id.
@@ -88,7 +101,8 @@ public interface ItemService {
    *
    * @return The created good with valid id.
    */
-  Good createGood(Good good);
+  @NotNull
+  Good createGood(@NotNull Good good);
 
   /**
    * Update the given good.
@@ -96,7 +110,7 @@ public interface ItemService {
    * @param good
    *     The good to update.
    */
-  void updateGood(Good good);
+  void updateGood(@NotNull Good good);
 
   /**
    * Returns list of equipable weapons (weight and cost > 0).
@@ -106,7 +120,8 @@ public interface ItemService {
    *
    * @return List of equipable weapons (weight and cost > 0).
    */
-  List<Weapon> getEquipableWeapons(List<Weapon> allWeapons);
+  @NotNull
+  List<Weapon> getEquipableWeapons(@NotNull List<Weapon> allWeapons);
 
   /**
    * Returns item with the given id.
@@ -118,6 +133,83 @@ public interface ItemService {
    *
    * @return Item with the given id.
    */
-  Item getItemById(int itemId, List<? extends Item> items);
+  @NotNull
+  Item getItemById(int itemId, @NotNull List<? extends Item> items);
+
+  /**
+   * Returns weapons of the given weapon type.
+   *
+   * @param weaponType
+   *     The weapon type to filter the list with.
+   * @param allWeapons
+   *     The weapons to filter
+   *
+   * @return Weapons of given weapon type.
+   */
+  @NotNull
+  List<Weapon> filterWeaponsByType(@NotNull WeaponType weaponType, @NotNull List<Weapon> allWeapons);
+
+  /**
+   * Returns weapons of given combat type.
+   *
+   * @param combatType
+   *     The combat type to filter the list with
+   * @param allWeapons
+   *     The weapons to filter
+   *
+   * @return Weapons of given combat type.
+   */
+  @NotNull
+  List<Weapon> filterWeaponsByCombat(@NotNull CombatType combatType, @NotNull List<Weapon> allWeapons);
+
+  /**
+   * Returns armor of given armor type.
+   *
+   * @param armorType
+   *     The armor type to filter the list with.
+   * @param allArmor
+   *     The armor to filter
+   *
+   * @return Armor of given armor type.
+   */
+  @NotNull
+  List<Armor> filterArmorByType(@NotNull ArmorType armorType, @NotNull List<Armor> allArmor);
+
+  /**
+   * Returns goods of given good type.
+   *
+   * @param goodType
+   *     The good type to filter the list with.
+   * @param allGoods
+   *     The goods to filter.
+   *
+   * @return Goods of given good type.
+   */
+  @NotNull
+  List<Good> filterGoodsByType(@NotNull GoodType goodType, @NotNull List<Good> allGoods);
+
+  /**
+   * Returns requested equipment pack.
+   *
+   * @param id
+   *     The id of the requested equipment pack.
+   * @param allEquipmentPacks
+   *     List of all equipment packs.
+   *
+   * @return The requested equipment pack.
+   */
+  @NotNull
+  EquipmentPack getEquipmentPackById(int id, @NotNull List<EquipmentPack> allEquipmentPacks);
+
+  /**
+   * Returns all equipment packs.
+   *
+   * @param allItems
+   *     List of all items needed to fill equipment packs.
+   *
+   * @return All equipment packs.
+   */
+  @NotNull
+  List<EquipmentPack> getAllEquipmentPacks(@NotNull List<? extends Item> allItems);
 
 }

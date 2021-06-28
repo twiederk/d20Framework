@@ -4,9 +4,9 @@ import com.d20charactersheet.framework.boc.model.ItemGroup
 import java.util.*
 
 /**
- * Supports implementations of ItemDao. A character can carry a lot of items. Deleting all items an inserting them new
+ * Supports implementations of ItemDao. A character can carry a lot of items. Deleting all items and inserting them new
  * in the database, would take a lot of time. This Helper can detemine which items to delete, to insert or to update.
- * Thus only necessary changes are done, which is much faster. The method updateItems is the interface of the
+ * Only necessary changes are done, which is much faster. The method updateItems is the interface of the
  * ItemDaoHelper. While the methods insertItemGroups, updateItemGroups and deleteItemGroups must be imlemented specific
  * to the Dao.
  */

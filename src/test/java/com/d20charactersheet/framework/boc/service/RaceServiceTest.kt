@@ -8,7 +8,6 @@ import com.d20charactersheet.framework.boc.model.Size
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import java.util.*
 
 class RaceServiceTest {
 
@@ -58,15 +57,15 @@ class RaceServiceTest {
     fun testUpdateRace() {
         val originalRace = gameSystem.allRaces[0]
         val updateRace = createRace()
-        updateRace.id = originalRace!!.id
+        updateRace.id = originalRace.id
         raceService.updateRace(updateRace)
         gameSystem.clear()
         val updatedRace = gameSystem.allRaces[0]
-        Assert.assertEquals("testName", updatedRace?.name)
-        Assert.assertEquals(Size.MEDIUM, updatedRace?.size)
-        Assert.assertEquals(30, updatedRace?.baseLandSpeed)
-        Assert.assertEquals(AnyCharacterClass.ANY_CHARACTER_CLASS, updatedRace?.favoredCharacterClass)
-        Assert.assertEquals(10, updatedRace?.abilities?.size)
+        Assert.assertEquals("testName", updatedRace.name)
+        Assert.assertEquals(Size.MEDIUM, updatedRace.size)
+        Assert.assertEquals(30, updatedRace.baseLandSpeed)
+        Assert.assertEquals(AnyCharacterClass.ANY_CHARACTER_CLASS, updatedRace.favoredCharacterClass)
+        Assert.assertEquals(10, updatedRace.abilities?.size)
         raceService.updateRace(originalRace)
     }
 

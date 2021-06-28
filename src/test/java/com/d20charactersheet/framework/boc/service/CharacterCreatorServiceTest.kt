@@ -7,11 +7,12 @@ import java.util.*
 
 class CharacterCreatorServiceTest {
 
+    private val underTest = CharacterCreatorServiceImpl()
+
     @Test
     fun rollAttributeWithStandardMethod_roll4d6_sumOf3highestRolls() {
         // Arrange
         Die.setRandom(Random(1))
-        val underTest = CharacterCreatorServiceImpl()
 
         // Act
         val attributeScore = underTest.rollAttributeWithStandardMethod()

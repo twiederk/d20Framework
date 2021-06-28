@@ -2,10 +2,13 @@ package com.d20charactersheet.framework.boc.service;
 
 import java.util.List;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.d20charactersheet.framework.boc.model.Ability;
 import com.d20charactersheet.framework.boc.model.Armor;
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
+import com.d20charactersheet.framework.boc.model.EquipmentPack;
 import com.d20charactersheet.framework.boc.model.Feat;
 import com.d20charactersheet.framework.boc.model.Good;
 import com.d20charactersheet.framework.boc.model.KnownSpellsTable;
@@ -46,6 +49,7 @@ public class GameSystemCacheImpl implements GameSystem {
   private List<Weapon> allWeapons;
   private List<Armor> allArmor;
   private List<Good> allGoods;
+  private List<EquipmentPack> allEquipmentPacks;
   private List<Race> allRaces;
   private List<Ability> allAbilities;
   private List<Spell> allSpells;
@@ -71,68 +75,69 @@ public class GameSystemCacheImpl implements GameSystem {
     this.name = name;
   }
 
-  public void setCharacterService(final CharacterService characterService) {
+  public void setCharacterService(@NotNull final CharacterService characterService) {
     this.characterService = characterService;
   }
 
-  public void setSkillService(final SkillService skillService) {
+  public void setSkillService(@NotNull final SkillService skillService) {
     this.skillService = skillService;
   }
 
-  public void setFeatService(final FeatService featService) {
+  public void setFeatService(@NotNull final FeatService featService) {
     this.featService = featService;
   }
 
-  public void setCharacterClassService(final CharacterClassService characterClassService) {
+  public void setCharacterClassService(@NotNull final CharacterClassService characterClassService) {
     this.characterClassService = characterClassService;
   }
 
-  public void setItemService(final ItemService itemService) {
+  public void setItemService(@NotNull final ItemService itemService) {
     this.itemService = itemService;
   }
 
-  public void setRaceService(final RaceService raceService) {
+  public void setRaceService(@NotNull final RaceService raceService) {
     this.raceService = raceService;
   }
 
-  public void setAbilityService(final AbilityService abilityService) {
+  public void setAbilityService(@NotNull final AbilityService abilityService) {
     this.abilityService = abilityService;
   }
 
-  public void setImageService(final ImageService imageService) {
+  public void setImageService(@NotNull final ImageService imageService) {
     this.imageService = imageService;
   }
 
   @Override
-  public void setRuleService(final RuleService ruleService) {
+  public void setRuleService(@NotNull final RuleService ruleService) {
     this.ruleService = ruleService;
   }
 
   @Override
-  public void setDisplayService(final DisplayService displayService) {
+  public void setDisplayService(@NotNull final DisplayService displayService) {
     this.displayService = displayService;
   }
 
   @Override
-  public void setXpService(final XpService xpService) {
+  public void setXpService(@NotNull final XpService xpService) {
     this.xpService = xpService;
   }
 
   @Override
-  public void setExportImportService(final ExportImportService exportImportService) {
+  public void setExportImportService(@NotNull final ExportImportService exportImportService) {
     this.exportImportService = exportImportService;
   }
 
   @Override
-  public void setBodyService(BodyService bodyService) {
+  public void setBodyService(@NotNull BodyService bodyService) {
     this.bodyService = bodyService;
   }
 
   @Override
-  public void setCharacterCreatorService(CharacterCreatorService characterCreatorService) {
+  public void setCharacterCreatorService(@NotNull CharacterCreatorService characterCreatorService) {
     this.characterCreatorService = characterCreatorService;
   }
 
+  @NotNull
   public List<Skill> getAllSkills() {
     if (allSkills == null) {
       allSkills = skillService.getAllSkills();
@@ -140,6 +145,7 @@ public class GameSystemCacheImpl implements GameSystem {
     return allSkills;
   }
 
+  @NotNull
   public List<CharacterClass> getAllCharacterClasses() {
     if (allCharacterClasses == null) {
       allCharacterClasses = characterClassService.getAllCharacterClasses(getAllSkills(), getAllAbilities());
@@ -147,6 +153,7 @@ public class GameSystemCacheImpl implements GameSystem {
     return allCharacterClasses;
   }
 
+  @NotNull
   public List<Feat> getAllFeats() {
     if (allFeats == null) {
       allFeats = featService.getAllFeats();
@@ -154,6 +161,7 @@ public class GameSystemCacheImpl implements GameSystem {
     return allFeats;
   }
 
+  @NotNull
   public List<WeaponFamily> getAllWeaponFamilies() {
     if (allWeaponFamilies == null) {
       allWeaponFamilies = itemService.getAllWeaponFamilies();
@@ -161,6 +169,7 @@ public class GameSystemCacheImpl implements GameSystem {
     return allWeaponFamilies;
   }
 
+  @NotNull
   public List<Weapon> getAllWeapons() {
     if (allWeapons == null) {
       allWeapons = itemService.getAllWeapons(getAllWeaponFamilies());
@@ -168,6 +177,7 @@ public class GameSystemCacheImpl implements GameSystem {
     return allWeapons;
   }
 
+  @NotNull
   public List<Armor> getAllArmor() {
     if (allArmor == null) {
       allArmor = itemService.getAllArmor();
@@ -175,6 +185,7 @@ public class GameSystemCacheImpl implements GameSystem {
     return allArmor;
   }
 
+  @NotNull
   public List<Good> getAllGoods() {
     if (allGoods == null) {
       allGoods = itemService.getAllGoods();
@@ -182,6 +193,15 @@ public class GameSystemCacheImpl implements GameSystem {
     return allGoods;
   }
 
+  @NotNull
+  public List<EquipmentPack> getAllEquipmentPacks() {
+    if (allEquipmentPacks == null) {
+      allEquipmentPacks = itemService.getAllEquipmentPacks(getAllGoods());
+    }
+    return allEquipmentPacks;
+  }
+
+  @NotNull
   public List<Race> getAllRaces() {
     if (allRaces == null) {
       allRaces = raceService.getAllRaces(getAllCharacterClasses(), getAllAbilities());
@@ -189,6 +209,7 @@ public class GameSystemCacheImpl implements GameSystem {
     return allRaces;
   }
 
+  @NotNull
   public List<Ability> getAllAbilities() {
     if (allAbilities == null) {
       allAbilities = abilityService.getAllAbilities(getAllSpelllists(), getAllKnownSpellsTables(), getAllSpellsPerDayTables());
@@ -197,6 +218,7 @@ public class GameSystemCacheImpl implements GameSystem {
   }
 
   @Override
+  @NotNull
   public List<XpTable> getAllXpTables() {
     if (allXpTables == null) {
       allXpTables = xpService.getAllXpTables();
@@ -205,6 +227,7 @@ public class GameSystemCacheImpl implements GameSystem {
   }
 
   @Override
+  @NotNull
   public List<KnownSpellsTable> getAllKnownSpellsTables() {
     if (allKnownSpellsTables == null) {
       allKnownSpellsTables = spelllistService.getAllKnownSpellsTables();
@@ -213,6 +236,7 @@ public class GameSystemCacheImpl implements GameSystem {
   }
 
   @Override
+  @NotNull
   public List<SpellsPerDayTable> getAllSpellsPerDayTables() {
     if (allSpellsPerDayTables == null) {
       allSpellsPerDayTables = spelllistService.getAllSpellsPerDayTables();
@@ -239,93 +263,111 @@ public class GameSystemCacheImpl implements GameSystem {
   }
 
   @Override
+  @NotNull
   public List<Character> getAllCharacters() {
-    return characterService
-        .getAllCharacters(getAllCharacterClasses(), getAllRaces(), getAllAbilities(), getAllSkills(), getAllFeats(),
-                          getAllWeapons(), getAllArmor(), getAllGoods(), getAllSpells(), getAllXpTables());
+    return characterService.getAllCharacters(getAllCharacterClasses(), getAllRaces(), getAllAbilities(), getAllSkills(),
+                                             getAllFeats(), getAllWeapons(), getAllArmor(), getAllGoods(), getAllSpells(),
+                                             getAllXpTables());
   }
 
   @Override
+  @NotNull
   public Character getCharacter(final int id) {
-    return characterService
-        .getCharacter(id, getAllCharacterClasses(), getAllRaces(), getAllAbilities(), getAllSkills(), getAllFeats(),
-                      getAllWeapons(), getAllArmor(), getAllGoods(), getAllSpells(), getAllXpTables());
+    return characterService.getCharacter(id, getAllCharacterClasses(), getAllRaces(), getAllAbilities(), getAllSkills(),
+                                         getAllFeats(), getAllWeapons(), getAllArmor(), getAllGoods(), getAllSpells(),
+                                         getAllXpTables());
   }
 
+  @NotNull
   public SkillService getSkillService() {
     return skillService;
   }
 
+  @NotNull
   public FeatService getFeatService() {
     return featService;
   }
 
+  @NotNull
   public CharacterClassService getCharacterClassService() {
     return characterClassService;
   }
 
+  @NotNull
   public ItemService getItemService() {
     return itemService;
   }
 
+  @NotNull
   public AbilityService getAbilityService() {
     return abilityService;
   }
 
+  @NotNull
   public RaceService getRaceService() {
     return raceService;
   }
 
+  @NotNull
   public CharacterService getCharacterService() {
     return characterService;
   }
 
   @Override
+  @NotNull
   public ImageService getImageService() {
     return imageService;
   }
 
   @Override
+  @NotNull
   public RuleService getRuleService() {
     return ruleService;
   }
 
   @Override
+  @NotNull
   public DisplayService getDisplayService() {
     return displayService;
   }
 
   @Override
+  @NotNull
   public XpService getXpService() {
     return xpService;
   }
 
   @Override
+  @NotNull
   public BodyService getBodyService() {
     return bodyService;
   }
 
   @Override
+  @NotNull
   public CharacterCreatorService getCharacterCreatorService() {
     return characterCreatorService;
   }
 
   @Override
+  @NotNull
   public ExportImportService getExportImportService() {
     return exportImportService;
   }
 
   @Override
-  public void setSpelllistService(final SpelllistService spelllistService) {
+  public void setSpelllistService(@NotNull final SpelllistService spelllistService) {
     this.spelllistService = spelllistService;
   }
 
   @Override
+  @NotNull
   public SpelllistService getSpelllistService() {
     return spelllistService;
   }
 
   @Override
+  @NotNull
   public List<Spell> getAllSpells() {
     if (allSpells == null) {
       allSpells = spelllistService.getAllSpells();
@@ -334,6 +376,7 @@ public class GameSystemCacheImpl implements GameSystem {
   }
 
   @Override
+  @NotNull
   public List<Spelllist> getAllSpelllists() {
     if (allSpelllists == null) {
       allSpelllists = spelllistService.getAllSpelllists(getAllSpells());
@@ -341,14 +384,14 @@ public class GameSystemCacheImpl implements GameSystem {
     return allSpelllists;
   }
 
-  public void deleteCharacter(final Character character) {
+  public void deleteCharacter(@NotNull final Character character) {
     imageService.deleteImage(character.getImageId());
     imageService.deleteImage(character.getThumbImageId());
     characterService.deleteCharacter(character);
   }
 
   @Override
-  public void deleteSkill(final Skill skill) {
+  public void deleteSkill(@NotNull final Skill skill) {
     characterService.deleteSkill(skill);
     characterClassService.deleteSkill(skill);
     skillService.deleteSkill(skill);
@@ -356,7 +399,7 @@ public class GameSystemCacheImpl implements GameSystem {
   }
 
   @Override
-  public void deleteFeat(final Feat feat) {
+  public void deleteFeat(@NotNull final Feat feat) {
     characterService.deleteFeat(feat);
     featService.deleteFeat(feat);
     clear();
@@ -387,6 +430,7 @@ public class GameSystemCacheImpl implements GameSystem {
   }
 
   @Override
+  @NotNull
   public String getName() {
     return name;
   }
@@ -397,7 +441,7 @@ public class GameSystemCacheImpl implements GameSystem {
   }
 
   @Override
-  public void deleteSpellFromSpelllist(final Spelllist spelllist, final Spell spell) {
+  public void deleteSpellFromSpelllist(@NotNull final Spelllist spelllist, @NotNull final Spell spell) {
     spelllistService.deleteSpelllevel(spelllist, spell);
     characterService.deleteKnownSpells(spelllist, spell);
     characterService.deleteSpellSlots(spelllist, spell);

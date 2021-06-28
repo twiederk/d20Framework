@@ -1,9 +1,6 @@
 package com.d20charactersheet.framework.dac.dao
 
-import com.d20charactersheet.framework.boc.model.Armor
-import com.d20charactersheet.framework.boc.model.Good
-import com.d20charactersheet.framework.boc.model.Weapon
-import com.d20charactersheet.framework.boc.model.WeaponFamily
+import com.d20charactersheet.framework.boc.model.*
 
 /**
  * Interface to persistent layer of items.
@@ -118,4 +115,11 @@ interface ItemDao {
      * @return List of all weapon families.
      */
     fun getAllWeaponFamilies(): List<WeaponFamily>
+
+    /**
+     * Returns list of all equipment packs.
+     *
+     * @return List of all equipment packs.
+     */
+    fun getAllEquipmentPacks(allItems: List<Item>): List<EquipmentPack>
 }

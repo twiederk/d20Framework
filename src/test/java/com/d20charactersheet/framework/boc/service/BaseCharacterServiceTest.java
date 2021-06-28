@@ -118,7 +118,6 @@ public abstract class BaseCharacterServiceTest {
   @Test
   public void testCreateCharacter() {
     final CharacterService characterService = gameSystem.getCharacterService();
-    final ImageService imageService = gameSystem.getImageService();
 
     final String name = "testCreateCharacter";
     final String player = PLAYER_NAME;
@@ -148,9 +147,7 @@ public abstract class BaseCharacterServiceTest {
     assertEquals(alignment, character.getAlignment());
 
     // tear down
-    if (imageService != null) {
-      characterService.deleteCharacter(character);
-    }
+    characterService.deleteCharacter(character);
   }
 
   @Test

@@ -11,26 +11,26 @@ abstract class BaseItemDaoTest {
 
     @Test
     fun testGetAllWeapons() {
-        // Arrange
+        // arrange
         val allWeaponTypes = itemDao.getAllWeaponFamilies()
 
-        // Act
+        // act
         val weapons = itemDao.getAllWeapons(allWeaponTypes)
 
-        // Assert
+        // assert
         assertThat(weapons).hasSize(110)
     }
 
     @Test
     fun testWeapon() {
-        // Arrange
+        // arrange
         val allWeaponTypes = itemDao.getAllWeaponFamilies()
         val allWeapons = itemDao.getAllWeapons(allWeaponTypes)
 
-        // Act
+        // act
         val silverDagger = getWeaponByName(allWeapons)
 
-        // Assert
+        // assert
         assertThat(silverDagger.name).isEqualTo("Silver Dagger")
         assertThat(silverDagger.cost).isEqualTo(322.0f)
         assertThat(silverDagger.weight).isEqualTo(1.0f)
@@ -54,35 +54,47 @@ abstract class BaseItemDaoTest {
     @Test
     fun testGetAllArmor() {
 
-        // Act
+        // act
         val armor = itemDao.getAllArmor()
 
-        // Assert
+        // assert
         assertThat(armor).hasSize(38)
     }
 
     @Test
     fun testGetAllGoods() {
-        // Arrange
 
-        // Act
+        // act
         val goods = itemDao.getAllGoods()
 
-        // Assert
+        // assert
         assertThat(goods).hasSize(131)
     }
 
     @Test
+    fun testGetAllEquipmentPacks() {
+        // arrange
+        val allGoods = itemDao.getAllGoods()
+
+        // act
+        val equipmentPacks = itemDao.getAllEquipmentPacks(allGoods)
+
+        // assert
+        assertThat(equipmentPacks).hasSize(7)
+        assertThat(equipmentPacks[0].itemGroups).hasSize(14)
+    }
+
+    @Test
     fun testGetWeaponsOfBelvador() {
-        // Arrange
+        // arrange
         val character = Character()
         character.id = 0
         val allWeaponTypes = itemDao.getAllWeaponFamilies()
 
-        // Act
+        // act
         val weapons = characterDao.getWeapons(character, itemDao.getAllWeapons(allWeaponTypes))
 
-        // Assert
+        // assert
         assertThat(weapons).hasSize(3)
         assertItem(weapons[0], "Quarterstaff", "A quarterstaff is a double weapon.", 1)
         assertItem(weapons[1], "Crossbow, light", "You draw a light crossbow back by pulling a lever.", 1)
@@ -93,27 +105,27 @@ abstract class BaseItemDaoTest {
 
     @Test
     fun testGetArmorOfBelvador() {
-        // Arrange
+        // arrange
         val character = Character()
         character.id = 0
 
-        // Act
+        // act
         val armor = characterDao.getArmor(character, itemDao.getAllArmor())
 
-        // Assert
+        // assert
         assertThat(armor).isEmpty()
     }
 
     @Test
     fun testGetGoodsOfBelvador() {
-        // Arrange
+        // arrange
         val character = Character()
         character.id = 0
 
-        // Act
+        // act
         val goods = characterDao.getGoods(character, itemDao.getAllGoods())
 
-        // Assert
+        // assert
         assertThat(goods).hasSize(19)
         assertItem(goods[0], "Backpack", "A backpack is a leather pack carried on the back, typically with straps to secure it.",
                 1)
@@ -131,13 +143,13 @@ abstract class BaseItemDaoTest {
 
     @Test
     fun testCreateWeapon() {
-        // Arrange
+        // arrange
         var weapon = createWeapon()
 
-        // Act
+        // act
         weapon = itemDao.createWeapon(weapon)
 
-        // Assert
+        // assert
         assertThat(weapon).isNotNull
         assertThat(weapon.id).isGreaterThan(0)
 
@@ -167,7 +179,7 @@ abstract class BaseItemDaoTest {
 
     @Test
     fun testUpdateWeapon() {
-        // Arrange
+        // arrange
         val allWeaponTypes = itemDao.getAllWeaponFamilies()
         var weapon = itemDao.getAllWeapons(allWeaponTypes)[0]
         val backup = backupWeapon(weapon)
@@ -188,10 +200,10 @@ abstract class BaseItemDaoTest {
         weaponFamily.name = "testWeaponFamily"
         weapon.weaponFamily = weaponFamily
 
-        // Act
+        // act
         itemDao.updateWeapon(weapon)
 
-        // Assert
+        // assert
         weapon = getItemById(weaponId, itemDao.getAllWeapons(allWeaponTypes)) as Weapon
         assertWeaponUpdate(weapon)
 
@@ -243,13 +255,13 @@ abstract class BaseItemDaoTest {
 
     @Test
     fun testCreateArmor() {
-        // Arrange
+        // arrange
         var armor = createArmor()
 
-        // Act
+        // act
         armor = itemDao.createArmor(armor)
 
-        // Assert
+        // assert
         assertThat(armor).isNotNull
         assertThat(armor.id).isGreaterThan(0)
 
@@ -272,7 +284,7 @@ abstract class BaseItemDaoTest {
 
     @Test
     fun testUpdateArmor() {
-        // Arrange
+        // arrange
         var armor = itemDao.getAllArmor()[0]
         val backup = backupArmor(armor)
         val armorId = armor.id
@@ -285,10 +297,10 @@ abstract class BaseItemDaoTest {
         armor.armorCheckPenalty = -1
         armor.description = "testUpdateDescription"
 
-        // Act
+        // act
         itemDao.updateArmor(armor)
 
-        // Assert
+        // assert
         armor = getItemById(armorId, itemDao.getAllArmor()) as Armor
         assertArmorUpdate(armor)
 
@@ -324,13 +336,13 @@ abstract class BaseItemDaoTest {
 
     @Test
     fun testCreateGood() {
-        // Arrange
+        // arrange
         var good = createGood()
 
-        // Act
+        // act
         good = itemDao.createGood(good)
 
-        // Assert
+        // assert
         assertThat(good).isNotNull
         assertThat(good.id).isGreaterThan(0)
 
@@ -351,7 +363,7 @@ abstract class BaseItemDaoTest {
 
     @Test
     fun testUpdateGood() {
-        // Arrange
+        // arrange
         var good = itemDao.getAllGoods()[0]
         val backup = backupGood(good)
         val goodId = good.id
@@ -362,10 +374,10 @@ abstract class BaseItemDaoTest {
         good.qualityType = QualityType.NORMAL
         good.description = "testUpdateDescription"
 
-        // Act
+        // act
         itemDao.updateGood(good)
 
-        // Assert
+        // assert
         good = getItemById(goodId, itemDao.getAllGoods()) as Good
         assertGoodUpdate(good)
 

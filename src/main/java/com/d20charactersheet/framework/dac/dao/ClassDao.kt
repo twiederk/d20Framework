@@ -1,8 +1,6 @@
 package com.d20charactersheet.framework.dac.dao
 
-import com.d20charactersheet.framework.boc.model.Ability
-import com.d20charactersheet.framework.boc.model.CharacterClass
-import com.d20charactersheet.framework.boc.model.Skill
+import com.d20charactersheet.framework.boc.model.*
 
 /**
  * The data access object to the persistent layer for character class objects.
@@ -54,4 +52,13 @@ interface ClassDao {
      * The character classes to add the skill to.
      */
     fun addSkill(skill: Skill, characterClasses: List<CharacterClass>)
+
+    /**
+     * Returns starter boxes of requested class.
+     *
+     * @param classId
+     * The id of the class to get the starter boxes of.
+     * @return Map of starter boxes as key and list of starter pack queries as values. The starter pack queries are required to fill the starter box with options
+     */
+    fun getStarterPackBoxesWithQueries(classId: Int): Map<StarterPackBox, List<StarterPackQuery>>
 }
