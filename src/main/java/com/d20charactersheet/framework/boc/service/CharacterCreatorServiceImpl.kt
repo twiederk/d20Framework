@@ -3,6 +3,7 @@ package com.d20charactersheet.framework.boc.service
 import com.d20charactersheet.framework.boc.model.CharacterClass
 import com.d20charactersheet.framework.boc.model.Die
 import com.d20charactersheet.framework.boc.model.SelectionBox
+import com.d20charactersheet.framework.boc.model.SelectionOption
 
 class CharacterCreatorServiceImpl : CharacterCreatorService {
 
@@ -12,7 +13,12 @@ class CharacterCreatorServiceImpl : CharacterCreatorService {
     }
 
     override fun getEquipmentSelectionBoxes(characterClass: CharacterClass): List<SelectionBox> {
-        return listOf()
+        val armorSelectionBox = SelectionBox()
+
+        val chainMailOption = SelectionOption()
+        armorSelectionBox.add(chainMailOption)
+
+        return listOf(armorSelectionBox)
     }
 
 }

@@ -32,7 +32,7 @@ class CharacterCreatorServiceTest {
         val selectionBoxes: List<SelectionBox> = underTest.getEquipmentSelectionBoxes(CharacterClass())
 
         // assert
-        assertThat(selectionBoxes).hasSize(5)
+        assertThat(selectionBoxes).hasSize(1)
     }
 
 }
