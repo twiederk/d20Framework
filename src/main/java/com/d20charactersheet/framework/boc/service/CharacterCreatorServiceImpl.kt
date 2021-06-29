@@ -12,6 +12,7 @@ class CharacterCreatorServiceImpl : CharacterCreatorService {
     override fun getStarterPack(
         characterClass: CharacterClass,
         itemService: ItemService,
+        allWeapons: List<Weapon>,
         allArmor: List<Armor>
     ): StarterPack {
 
@@ -20,9 +21,13 @@ class CharacterCreatorServiceImpl : CharacterCreatorService {
         chainMailOption.add(ItemGroup().apply { item = chainMail; number = 1 })
 
         val leatherArmorOption = SelectionOption()
-        leatherArmorOption.add(ItemGroup().apply { item = Armor().apply { name = "Leather" }; number = 1 })
-        leatherArmorOption.add(ItemGroup().apply { item = Weapon().apply { name = "Longbow" }; number = 1 })
-        leatherArmorOption.add(ItemGroup().apply { item = Weapon().apply { name = "Arrow" }; number = 20 })
+        val leatherArmor = itemService.getItemById(2, allArmor)
+        val longBow = itemService.getItemById(1, allWeapons)
+        val arrow = itemService.getItemById(2, allWeapons)
+
+        leatherArmorOption.add(ItemGroup().apply { item = leatherArmor; number = 1 })
+        leatherArmorOption.add(ItemGroup().apply { item = longBow; number = 1 })
+        leatherArmorOption.add(ItemGroup().apply { item = arrow; number = 20 })
 
         val armorSelectionBox = SelectionBox()
         armorSelectionBox.add(chainMailOption)

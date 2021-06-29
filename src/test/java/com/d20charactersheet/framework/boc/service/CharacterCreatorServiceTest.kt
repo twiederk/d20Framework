@@ -27,9 +27,15 @@ class CharacterCreatorServiceTest {
     @Test
     fun getEquipmentSelection_fighter_getCompleteSelectionForFighter() {
         // arrange
+        val allWeaopns: List<Weapon> = mock()
         val allArmor: List<Armor> = mock()
         val itemService: ItemService = mock()
-        whenever(itemService.getItemById(1, allArmor)).thenReturn(Armor().apply { id = 1; name = "Chain mail" })
+        whenever(itemService.getItemById(1, allWeaopns)).thenReturn(Weapon().apply { name = "Longbow" })
+        whenever(itemService.getItemById(2, allWeaopns)).thenReturn(Weapon().apply { name = "Arrow" })
+
+        whenever(itemService.getItemById(1, allArmor)).thenReturn(Armor().apply { name = "Chain mail" })
+        whenever(itemService.getItemById(2, allArmor)).thenReturn(Armor().apply { name = "Leather" })
+
         whenever(itemService.filterWeaponsByType(WeaponType.MARTIAL)).thenReturn(
             listOf(
                 Weapon().apply { name = "Longsword" },
@@ -41,7 +47,7 @@ class CharacterCreatorServiceTest {
         )
 
         // act
-        val starterPack: StarterPack = underTest.getStarterPack(CharacterClass(), itemService, allArmor)
+        val starterPack: StarterPack = underTest.getStarterPack(CharacterClass(), itemService, allWeaopns, allArmor)
 
         // assert
         assertThat(starterPack.selectionBoxes).hasSize(2)
