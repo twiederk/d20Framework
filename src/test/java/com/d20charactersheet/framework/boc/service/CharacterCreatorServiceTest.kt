@@ -52,11 +52,18 @@ class CharacterCreatorServiceTest {
         // assert
         assertThat(starterPack.selectionBoxes).hasSize(2)
 
+        assertThat(starterPack.selectionBoxes[0].name).isEqualTo("Armor")
         assertThat(starterPack.selectionBoxes[0].options).hasSize(2)
         assertThat(starterPack.selectionBoxes[0].options[0].getTitle()).isEqualTo("Chain mail")
         assertThat(starterPack.selectionBoxes[0].options[1].getTitle()).isEqualTo("Leather, Longbow, Arrow (20)")
 
+        assertThat(starterPack.selectionBoxes[1].name).isEqualTo("Primary Hand")
         assertThat(starterPack.selectionBoxes[1].options).hasSize(5)
+        assertThat(starterPack.selectionBoxes[1].options[0].getTitle()).isEqualTo("Longsword")
+        assertThat(starterPack.selectionBoxes[1].options[1].getTitle()).isEqualTo("Battleaxe")
+        assertThat(starterPack.selectionBoxes[1].options[2].getTitle()).isEqualTo("Bastardsword")
+        assertThat(starterPack.selectionBoxes[1].options[3].getTitle()).isEqualTo("Two-Handed sword")
+        assertThat(starterPack.selectionBoxes[1].options[4].getTitle()).isEqualTo("Helberd")
     }
 
 }

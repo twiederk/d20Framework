@@ -1,6 +1,6 @@
 package com.d20charactersheet.framework.boc.model
 
-class SelectionBox {
+class SelectionBox(val name: String = "") {
 
     val options: MutableList<SelectionOption> = mutableListOf()
 

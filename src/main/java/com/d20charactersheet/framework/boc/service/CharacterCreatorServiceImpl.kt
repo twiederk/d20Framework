@@ -29,14 +29,14 @@ class CharacterCreatorServiceImpl : CharacterCreatorService {
         leatherArmorOption.add(ItemGroup().apply { item = longBow; number = 1 })
         leatherArmorOption.add(ItemGroup().apply { item = arrow; number = 20 })
 
-        val armorSelectionBox = SelectionBox()
+        val armorSelectionBox = SelectionBox("Armor")
         armorSelectionBox.add(chainMailOption)
         armorSelectionBox.add(leatherArmorOption)
 
 
         val martialWeapons: List<Weapon> = itemService.filterWeaponsByType(WeaponType.MARTIAL)
         val martialWeaponsSelectionOptions: List<SelectionOption> = createSelectionOptions(martialWeapons)
-        val primaryHandSelectionBox = SelectionBox()
+        val primaryHandSelectionBox = SelectionBox("Primary Hand")
         primaryHandSelectionBox.addAll(martialWeaponsSelectionOptions)
 
         val starterPack = StarterPack()
