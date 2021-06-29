@@ -25,7 +25,7 @@ class CharacterCreatorServiceTest {
     }
 
     @Test
-    fun getEquipmentSelection_fighter_getCompleteSelectionForFighter() {
+    fun getStarterPack_fighter_getCompleteSelectionForFighter() {
         // arrange
         val allWeaopns: List<Weapon> = mock()
         val allArmor: List<Armor> = mock()
@@ -35,6 +35,7 @@ class CharacterCreatorServiceTest {
 
         whenever(itemService.getItemById(1, allArmor)).thenReturn(Armor().apply { name = "Chain mail" })
         whenever(itemService.getItemById(2, allArmor)).thenReturn(Armor().apply { name = "Leather" })
+        whenever(itemService.getItemById(3, allArmor)).thenReturn(Armor().apply { name = "Shield" })
 
         whenever(itemService.filterWeaponsByType(WeaponType.MARTIAL)).thenReturn(
             listOf(
@@ -50,7 +51,7 @@ class CharacterCreatorServiceTest {
         val starterPack: StarterPack = underTest.getStarterPack(CharacterClass(), itemService, allWeaopns, allArmor)
 
         // assert
-        assertThat(starterPack.selectionBoxes).hasSize(2)
+        assertThat(starterPack.selectionBoxes).hasSize(3)
 
         assertThat(starterPack.selectionBoxes[0].name).isEqualTo("Armor")
         assertThat(starterPack.selectionBoxes[0].options).hasSize(2)
@@ -64,6 +65,15 @@ class CharacterCreatorServiceTest {
         assertThat(starterPack.selectionBoxes[1].options[2].getTitle()).isEqualTo("Bastardsword")
         assertThat(starterPack.selectionBoxes[1].options[3].getTitle()).isEqualTo("Two-Handed sword")
         assertThat(starterPack.selectionBoxes[1].options[4].getTitle()).isEqualTo("Helberd")
+
+        assertThat(starterPack.selectionBoxes[2].name).isEqualTo("Secondary Hand")
+        assertThat(starterPack.selectionBoxes[2].options).hasSize(6)
+        assertThat(starterPack.selectionBoxes[2].options[0].getTitle()).isEqualTo("Longsword")
+        assertThat(starterPack.selectionBoxes[2].options[1].getTitle()).isEqualTo("Battleaxe")
+        assertThat(starterPack.selectionBoxes[2].options[2].getTitle()).isEqualTo("Bastardsword")
+        assertThat(starterPack.selectionBoxes[2].options[3].getTitle()).isEqualTo("Two-Handed sword")
+        assertThat(starterPack.selectionBoxes[2].options[4].getTitle()).isEqualTo("Helberd")
+        assertThat(starterPack.selectionBoxes[2].options[5].getTitle()).isEqualTo("Shield")
     }
 
 }
