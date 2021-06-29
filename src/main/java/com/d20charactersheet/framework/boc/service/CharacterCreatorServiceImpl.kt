@@ -9,10 +9,15 @@ class CharacterCreatorServiceImpl : CharacterCreatorService {
         return rolls.sum() - (rolls.minOrNull() ?: 0)
     }
 
-    override fun getEquipmentSelectionBoxes(characterClass: CharacterClass, itemService: ItemService): List<SelectionBox> {
+    override fun getEquipmentSelectionBoxes(
+        characterClass: CharacterClass,
+        itemService: ItemService,
+        allArmor: List<Armor>
+    ): List<SelectionBox> {
 
         val chainMailOption = SelectionOption()
-        chainMailOption.add(ItemGroup().apply { item = Armor().apply { name = "Chain mail" }; number = 1 })
+        val chainMail = itemService.getItemById(1, allArmor)
+        chainMailOption.add(ItemGroup().apply { item = chainMail; number = 1 })
 
         val leatherArmorOption = SelectionOption()
         leatherArmorOption.add(ItemGroup().apply { item = Armor().apply { name = "Leather" }; number = 1 })
