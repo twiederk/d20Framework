@@ -32,6 +32,9 @@ class CharacterCreatorServiceTest {
         val itemService: ItemService = mock()
         whenever(itemService.getItemById(1, allWeaopns)).thenReturn(Weapon().apply { name = "Longbow" })
         whenever(itemService.getItemById(2, allWeaopns)).thenReturn(Weapon().apply { name = "Arrow" })
+        whenever(itemService.getItemById(3, allWeaopns)).thenReturn(Weapon().apply { name = "Crossbow, light" })
+        whenever(itemService.getItemById(4, allWeaopns)).thenReturn(Weapon().apply { name = "Bolt" })
+        whenever(itemService.getItemById(5, allWeaopns)).thenReturn(Weapon().apply { name = "Handaxe" })
 
         whenever(itemService.getItemById(1, allArmor)).thenReturn(Armor().apply { name = "Chain mail" })
         whenever(itemService.getItemById(2, allArmor)).thenReturn(Armor().apply { name = "Leather" })
@@ -51,7 +54,7 @@ class CharacterCreatorServiceTest {
         val starterPack: StarterPack = underTest.getStarterPack(CharacterClass(), itemService, allWeaopns, allArmor)
 
         // assert
-        assertThat(starterPack.selectionBoxes).hasSize(3)
+        assertThat(starterPack.selectionBoxes).hasSize(4)
 
         assertThat(starterPack.selectionBoxes[0].name).isEqualTo("Armor")
         assertThat(starterPack.selectionBoxes[0].options).hasSize(2)
@@ -74,6 +77,12 @@ class CharacterCreatorServiceTest {
         assertThat(starterPack.selectionBoxes[2].options[3].getTitle()).isEqualTo("Two-Handed sword")
         assertThat(starterPack.selectionBoxes[2].options[4].getTitle()).isEqualTo("Helberd")
         assertThat(starterPack.selectionBoxes[2].options[5].getTitle()).isEqualTo("Shield")
+
+        assertThat(starterPack.selectionBoxes[3].name).isEqualTo("Range Weapon")
+        assertThat(starterPack.selectionBoxes[3].options).hasSize(2)
+        assertThat(starterPack.selectionBoxes[3].options[0].getTitle()).isEqualTo("Crossbow, light, Bolt (20)")
+        assertThat(starterPack.selectionBoxes[3].options[1].getTitle()).isEqualTo("Handaxe (2)")
+
     }
 
 }
