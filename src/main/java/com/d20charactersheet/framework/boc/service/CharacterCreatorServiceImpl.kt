@@ -17,9 +17,7 @@ class CharacterCreatorServiceImpl : CharacterCreatorService {
     ): StarterPack {
 
         // Armor
-        val chainMailOption = SelectionOption()
         val chainMail = itemService.getItemById(1, allArmor)
-        chainMailOption.add(ItemGroup().apply { item = chainMail; number = 1 })
 
         val leatherArmorOption = SelectionOption()
         val leatherArmor = itemService.getItemById(2, allArmor)
@@ -31,7 +29,7 @@ class CharacterCreatorServiceImpl : CharacterCreatorService {
         leatherArmorOption.add(ItemGroup().apply { item = arrow; number = 20 })
 
         val armorSelectionBox = SelectionBox("Armor")
-        armorSelectionBox.add(chainMailOption)
+        armorSelectionBox.add(createSelectionOption(chainMail))
         armorSelectionBox.add(leatherArmorOption)
 
         // Primary Hand
@@ -44,9 +42,7 @@ class CharacterCreatorServiceImpl : CharacterCreatorService {
         val secondaryHandSelectionBox = SelectionBox("Secondary Hand")
         secondaryHandSelectionBox.addAll(martialWeaponsSelectionOptions)
         val shield = itemService.getItemById(3, allArmor)
-        val shieldSelectionOption = SelectionOption()
-        shieldSelectionOption.add(ItemGroup().apply { item = shield; number = 1 })
-        secondaryHandSelectionBox.add(shieldSelectionOption)
+        secondaryHandSelectionBox.add(createSelectionOption(shield))
 
         // Starter Pack
         val starterPack = StarterPack()
@@ -55,6 +51,12 @@ class CharacterCreatorServiceImpl : CharacterCreatorService {
         starterPack.add(secondaryHandSelectionBox)
 
         return starterPack
+    }
+
+    private fun createSelectionOption(item: Item): SelectionOption {
+        val selectionOption = SelectionOption()
+        selectionOption.add(ItemGroup().apply { this.item = item; number = 1 })
+        return selectionOption
     }
 
     private fun createSelectionOptions(weapons: List<Weapon>): List<SelectionOption> {
