@@ -41,16 +41,16 @@ class CharacterCreatorServiceTest {
         )
 
         // act
-        val selectionBoxes: List<SelectionBox> = underTest.getEquipmentSelectionBoxes(CharacterClass(), itemService, allArmor)
+        val starterPack: StarterPack = underTest.getStarterPack(CharacterClass(), itemService, allArmor)
 
         // assert
-        assertThat(selectionBoxes).hasSize(2)
+        assertThat(starterPack.selectionBoxes).hasSize(2)
 
-        assertThat(selectionBoxes[0].options).hasSize(2)
-        assertThat(selectionBoxes[0].options[0].getTitle()).isEqualTo("Chain mail")
-        assertThat(selectionBoxes[0].options[1].getTitle()).isEqualTo("Leather, Longbow, Arrow (20)")
+        assertThat(starterPack.selectionBoxes[0].options).hasSize(2)
+        assertThat(starterPack.selectionBoxes[0].options[0].getTitle()).isEqualTo("Chain mail")
+        assertThat(starterPack.selectionBoxes[0].options[1].getTitle()).isEqualTo("Leather, Longbow, Arrow (20)")
 
-        assertThat(selectionBoxes[1].options).hasSize(5)
+        assertThat(starterPack.selectionBoxes[1].options).hasSize(5)
     }
 
 }

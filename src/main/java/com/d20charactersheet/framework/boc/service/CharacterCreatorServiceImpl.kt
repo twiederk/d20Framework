@@ -9,11 +9,11 @@ class CharacterCreatorServiceImpl : CharacterCreatorService {
         return rolls.sum() - (rolls.minOrNull() ?: 0)
     }
 
-    override fun getEquipmentSelectionBoxes(
+    override fun getStarterPack(
         characterClass: CharacterClass,
         itemService: ItemService,
         allArmor: List<Armor>
-    ): List<SelectionBox> {
+    ): StarterPack {
 
         val chainMailOption = SelectionOption()
         val chainMail = itemService.getItemById(1, allArmor)
@@ -34,9 +34,11 @@ class CharacterCreatorServiceImpl : CharacterCreatorService {
         val primaryHandSelectionBox = SelectionBox()
         primaryHandSelectionBox.addAll(martialWeaponsSelectionOptions)
 
+        val starterPack = StarterPack()
+        starterPack.add(armorSelectionBox)
+        starterPack.add(primaryHandSelectionBox)
 
-
-        return listOf(armorSelectionBox, primaryHandSelectionBox)
+        return starterPack
     }
 
     private fun createSelectionOptions(weapons: List<Weapon>): List<SelectionOption> {
