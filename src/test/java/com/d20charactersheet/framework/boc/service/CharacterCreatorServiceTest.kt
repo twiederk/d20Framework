@@ -54,7 +54,7 @@ class CharacterCreatorServiceTest {
         val starterPack: StarterPack = underTest.getStarterPack(CharacterClass(), itemService, allWeaopns, allArmor)
 
         // assert
-        assertThat(starterPack.selectionBoxes).hasSize(4)
+        assertThat(starterPack.selectionBoxes).hasSize(5)
 
         assertThat(starterPack.selectionBoxes[0].name).isEqualTo("Armor")
         assertThat(starterPack.selectionBoxes[0].options).hasSize(2)
@@ -82,6 +82,11 @@ class CharacterCreatorServiceTest {
         assertThat(starterPack.selectionBoxes[3].options).hasSize(2)
         assertThat(starterPack.selectionBoxes[3].options[0].getTitle()).isEqualTo("Crossbow, light, Bolt (20)")
         assertThat(starterPack.selectionBoxes[3].options[1].getTitle()).isEqualTo("Handaxe (2)")
+
+        assertThat(starterPack.selectionBoxes[4].name).isEqualTo("Equipment Pack")
+        assertThat(starterPack.selectionBoxes[4].options).hasSize(2)
+        assertThat(starterPack.selectionBoxes[4].options[0].getTitle()).isEqualTo("Dungeoneer's Pack")
+        assertThat(starterPack.selectionBoxes[4].options[1].getTitle()).isEqualTo("Explorer's Pack")
 
     }
 

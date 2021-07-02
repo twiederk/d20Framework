@@ -45,10 +45,10 @@ class CharacterCreatorServiceImpl : CharacterCreatorService {
         secondaryHandSelectionBox.add(createSelectionOption(shield))
 
         // Range Weapon
-        val rangeWeaponSelectionBox = SelectionBox("Range Weapon")
         val crossbow = itemService.getItemById(3, allWeapons)
         val bolt = itemService.getItemById(4, allWeapons)
         val crossbowSelectionOption = SelectionOption()
+        val rangeWeaponSelectionBox = SelectionBox("Range Weapon")
         crossbowSelectionOption.add(ItemGroup().apply { item = crossbow; number = 1 })
         crossbowSelectionOption.add(ItemGroup().apply { item = bolt; number = 20 })
 
@@ -56,12 +56,24 @@ class CharacterCreatorServiceImpl : CharacterCreatorService {
         rangeWeaponSelectionBox.add(crossbowSelectionOption)
         rangeWeaponSelectionBox.add(createSelectionOption(handaxe, 2))
 
+        // Equipment pack
+
+        val dungeoneersPack = SelectionOption()
+        dungeoneersPack.add(ItemGroup().apply { item = Good().apply { name = "Dungeoneer's Pack" }; number = 1 })
+        val explorerersPack = SelectionOption()
+        explorerersPack.add(ItemGroup().apply { item = Good().apply { name = "Explorer's Pack" }; number = 1 })
+
+        val equipmentPackSelectionBox = SelectionBox("Equipment Pack")
+        equipmentPackSelectionBox.add(dungeoneersPack)
+        equipmentPackSelectionBox.add(explorerersPack)
+
         // Starter Pack
         val starterPack = StarterPack()
         starterPack.add(armorSelectionBox)
         starterPack.add(primaryHandSelectionBox)
         starterPack.add(secondaryHandSelectionBox)
         starterPack.add(rangeWeaponSelectionBox)
+        starterPack.add(equipmentPackSelectionBox)
 
         return starterPack
     }
