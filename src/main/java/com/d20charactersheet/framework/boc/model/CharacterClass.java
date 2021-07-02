@@ -30,6 +30,8 @@ public class CharacterClass implements Serializable {
 
   private List<ClassAbility> classAbilities = new LinkedList<>();
 
+  private StarterPack starterPack;
+
   /**
    * Returns the id of the class.
    *
@@ -199,6 +201,25 @@ public class CharacterClass implements Serializable {
    */
   public void setClassAbilities(final List<ClassAbility> classAbilities) {
     this.classAbilities = classAbilities;
+  }
+
+  /**
+   * Gets start pack of the class.
+   *
+   * @return The starter pack of the class.
+   */
+  public StarterPack getStarterPack() {
+    return starterPack;
+  }
+
+  /**
+   * Sets the starter pack of the class.
+   *
+   * @param starterPack
+   *     The starter pack to set
+   */
+  public void setStarterPack(StarterPack starterPack) {
+    this.starterPack = starterPack;
   }
 
   /**

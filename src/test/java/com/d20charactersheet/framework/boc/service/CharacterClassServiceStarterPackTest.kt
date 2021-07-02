@@ -35,11 +35,14 @@ class CharacterClassServiceStarterPackTest {
                 Weapon().apply { name = "Helberd" },
             )
         )
+        val clazz = CharacterClass()
 
         // act
-        val starterPack: StarterPack = underTest.getStarterPack(CharacterClass(), itemService, allWeaopns, allArmor)
+        val starterPack: StarterPack = underTest.getStarterPack(clazz, itemService, allWeaopns, allArmor)
 
         // assert
+        assertThat(clazz.starterPack).isEqualTo(starterPack)
+
         assertThat(starterPack.selectionBoxes).hasSize(5)
 
         assertThat(starterPack.selectionBoxes[0].name).isEqualTo("Armor")

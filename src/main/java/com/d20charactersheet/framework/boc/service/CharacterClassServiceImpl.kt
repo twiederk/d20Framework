@@ -127,6 +127,8 @@ class CharacterClassServiceImpl
         starterPack.add(rangeWeaponSelectionBox)
         starterPack.add(equipmentPackSelectionBox)
 
+        characterClass.starterPack = starterPack
+
         return starterPack
     }
 
