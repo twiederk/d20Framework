@@ -1,8 +1,6 @@
 package com.d20charactersheet.framework.boc.service
 
-import com.d20charactersheet.framework.boc.model.Ability
-import com.d20charactersheet.framework.boc.model.CharacterClass
-import com.d20charactersheet.framework.boc.model.Skill
+import com.d20charactersheet.framework.boc.model.*
 
 /**
  * Provides services about character classes.
@@ -67,4 +65,26 @@ interface CharacterClassService {
      * @return The class with the given name
      */
     fun findClassByName(name: String, allClasses: List<CharacterClass>): CharacterClass
+
+    /**
+     * Get start pack of class.
+     *
+     * @param characterClass
+     * The class to get the starter pack of.
+     * @param itemService
+     * The item service to retrieve items from.
+     * @param allWeapons
+     * List of all weapons.
+     * @param allArmor
+     * List of all armor.
+     * @return
+     * The start pack of the class.
+     */
+    fun getStarterPack(
+        characterClass: CharacterClass,
+        itemService: ItemService,
+        allWeapons: List<Weapon>,
+        allArmor: List<Armor>
+    ): StarterPack
+
 }

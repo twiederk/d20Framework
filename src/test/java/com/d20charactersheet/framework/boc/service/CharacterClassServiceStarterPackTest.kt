@@ -8,7 +8,7 @@ import org.mockito.kotlin.whenever
 
 class CharacterClassServiceStarterPackTest {
 
-    private val underTest = CharacterCreatorServiceImpl()
+    private val underTest = CharacterClassServiceImpl(mock())
 
     @Test
     fun getStarterPack_fighter_getCompleteSelectionForFighter() {
