@@ -4,15 +4,14 @@ import com.d20charactersheet.framework.boc.model.*
 import com.d20charactersheet.framework.dac.dao.ClassDao
 
 /**
- * Handles character class specific tasks.
- */
-class CharacterClassServiceImpl
-/**
  * Creates CharacterClassService with given data access object.
+ * Handles character class specific tasks.
  *
  * @param characterClassDao
  * The data access object to the persistent layer.
- */(private val characterClassDao: ClassDao) : CharacterClassService {
+ */
+class CharacterClassServiceImpl(private val characterClassDao: ClassDao) : CharacterClassService {
+
     /**
      * @see com.d20charactersheet.framework.boc.service.CharacterClassService.getAllCharacterClasses
      */
