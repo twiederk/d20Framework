@@ -257,8 +257,8 @@ class SqlClassDao(private val db: Database) : ClassDao {
         return starterPackBoxes
     }
 
-    private fun selectSelectionQueryTable(): List<SelectionQuery> {
-        val selectionQueries: MutableList<SelectionQuery> = mutableListOf()
+    private fun selectSelectionQueryTable(): List<StarterPackQuery> {
+        val starterPackQueries: MutableList<StarterPackQuery> = mutableListOf()
         var queryResult: QueryResult? = null
 //        try {
 //            queryResult = db.rawQuery(SQL_GET_SELECTION_QUERIES, arrayOf())
@@ -273,7 +273,7 @@ class SqlClassDao(private val db: Database) : ClassDao {
 //        } finally {
 //            queryResult?.close()
 //        }
-        return selectionQueries
+        return starterPackQueries
     }
 
 //    override fun getAllCharacterClasses(allSkills: List<Skill>, allAbilities: List<Ability>): List<CharacterClass> {

@@ -1,5 +1,5 @@
 package com.d20charactersheet.framework.boc.model
 
-class SelectionQuery {
+class StarterPackQuery {
 
 }
