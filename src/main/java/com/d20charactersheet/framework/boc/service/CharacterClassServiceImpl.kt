@@ -70,7 +70,7 @@ class CharacterClassServiceImpl(private val classDao: ClassDao) : CharacterClass
         // Armor
         val chainMail = itemService.getItemById(1, allArmor)
 
-        val leatherArmorOption = SelectionOption()
+        val leatherArmorOption = ItemSelectionOption()
         val leatherArmor = itemService.getItemById(2, allArmor)
         val longBow = itemService.getItemById(1, allWeapons)
         val arrow = itemService.getItemById(2, allWeapons)
@@ -98,7 +98,7 @@ class CharacterClassServiceImpl(private val classDao: ClassDao) : CharacterClass
         // Range Weapon
         val crossbow = itemService.getItemById(3, allWeapons)
         val bolt = itemService.getItemById(4, allWeapons)
-        val crossbowSelectionOption = SelectionOption()
+        val crossbowSelectionOption = ItemSelectionOption()
         val rangeWeaponSelectionBox = SelectionBox("Range Weapon")
         crossbowSelectionOption.add(ItemGroup().apply { item = crossbow; number = 1 })
         crossbowSelectionOption.add(ItemGroup().apply { item = bolt; number = 20 })
@@ -109,9 +109,9 @@ class CharacterClassServiceImpl(private val classDao: ClassDao) : CharacterClass
 
         // Equipment pack
 
-        val dungeoneersPack = SelectionOption()
+        val dungeoneersPack = ItemSelectionOption()
         dungeoneersPack.add(ItemGroup().apply { item = Good().apply { name = "Dungeoneer's Pack" }; number = 1 })
-        val explorerersPack = SelectionOption()
+        val explorerersPack = ItemSelectionOption()
         explorerersPack.add(ItemGroup().apply { item = Good().apply { name = "Explorer's Pack" }; number = 1 })
 
         val equipmentPackSelectionBox = SelectionBox("Equipment Pack")
@@ -132,7 +132,7 @@ class CharacterClassServiceImpl(private val classDao: ClassDao) : CharacterClass
     }
 
     private fun createSelectionOption(item: Item, number: Int = 1): SelectionOption {
-        val selectionOption = SelectionOption()
+        val selectionOption = ItemSelectionOption()
         selectionOption.add(ItemGroup().apply { this.item = item; this.number = number })
         return selectionOption
     }
@@ -141,7 +141,7 @@ class CharacterClassServiceImpl(private val classDao: ClassDao) : CharacterClass
         val itemGroups = weapons.map { ItemGroup().apply { item = it; number = 1 } }
         val selectionOptions = mutableListOf<SelectionOption>()
         for (itemGroup in itemGroups) {
-            val selectionOption = SelectionOption()
+            val selectionOption = ItemSelectionOption()
             selectionOption.add(itemGroup)
             selectionOptions.add(selectionOption)
         }
