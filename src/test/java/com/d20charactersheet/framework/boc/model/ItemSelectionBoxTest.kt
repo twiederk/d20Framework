@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test
 class ItemSelectionBoxTest {
 
     @Test
-    fun getName_notItem_emptyString() {
+    fun getName_noItem_emptyString() {
         // arrange
 
         // act

@@ -1,21 +1,7 @@
 package com.d20charactersheet.framework.boc.model
 
-class PackSelectionOption : SelectionOption {
+class PackSelectionOption(val equipmentPack: EquipmentPack) : SelectionOption {
 
+    override fun getTitle(): String = equipmentPack.name ?: ""
 
-    val itemGroups: MutableList<ItemGroup> = mutableListOf()
-
-    override fun getTitle(): String = itemGroups
-        .map { extractItemName(it) }
-        .joinToString { it }
-
-    fun add(itemGroup: ItemGroup) {
-        itemGroups.add(itemGroup)
-    }
-
-
-    private fun extractItemName(itemGroup: ItemGroup) = when (itemGroup.number) {
-        1 -> itemGroup.item.name
-        else -> "${itemGroup.item.name} (${itemGroup.number})"
-    }
 }
