@@ -18,11 +18,13 @@ import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.SELECT
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.SQL_GET_ALL_CLASSES
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.SQL_GET_CLASS_ABILITIES
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.SQL_GET_CLASS_SKILLS
+import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.SQL_GET_SELECTION_BOXES
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.TABLE_CLASS
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.TABLE_CLASS_ABILITY
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.TABLE_CLASS_SKILL
 import com.d20charactersheet.framework.dac.dao.sql.rowmapper.ClassAbilityRowMapper
 import com.d20charactersheet.framework.dac.dao.sql.rowmapper.ClassRowMapper
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.SelectionBoxRowMapper
 import java.sql.SQLException
 import java.util.*
 
@@ -32,6 +34,7 @@ import java.util.*
 class SqlClassDao(private val db: Database) : ClassDao {
 
     private val classRowMapper: RowMapper = ClassRowMapper()
+    private val selectionBoxRowMapper: RowMapper = SelectionBoxRowMapper()
 
     companion object {
         private const val SQL_GET_ID: String = SELECT + "id FROM " + TABLE_CLASS + " WHERE rowid = ?"
@@ -224,13 +227,34 @@ class SqlClassDao(private val db: Database) : ClassDao {
         }
     }
 
-    override fun getSelectionBoxes(selectionOptionId: Int): List<SelectionBox> {
+    override fun getSelectionBoxes(classId: Int): List<SelectionBox> {
         // select selection boxes
+        val selectionBoxes = selectSelectionBoxTable(classId)
         // selection selection options of each selection box
         // select selection quieries of each selecton option
-        // => return selection boxes filed with options and queries
         val selectionQueris = selectSelectionQueryTable()
-        return listOf()
+        // => return selection boxes filed with options and queries
+        return selectionBoxes
+    }
+
+    private fun selectSelectionBoxTable(classId: Int): List<SelectionBox> {
+        val selectionBoxes: MutableList<SelectionBox> = mutableListOf()
+        var queryResult: QueryResult? = null
+        try {
+            queryResult = db.rawQuery(SQL_GET_SELECTION_BOXES, arrayOf(classId.toString()))
+            queryResult.moveToFirst()
+            while (!queryResult.isAfterLast()) {
+                val selectionBox = selectionBoxRowMapper.mapRow(queryResult.getDataRow()) as SelectionBox
+                selectionBoxes.add(selectionBox)
+                queryResult.moveToNext()
+            }
+        } catch (sqlException: SQLException) {
+            println("Can't get selection queries $sqlException")
+            sqlException.printStackTrace()
+        } finally {
+            queryResult?.close()
+        }
+        return selectionBoxes
     }
 
     private fun selectSelectionQueryTable(): List<SelectionQuery> {

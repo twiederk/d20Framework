@@ -70,6 +70,9 @@ object TableAndColumnNames {
     /** Table of class abilities  */
     const val TABLE_CLASS_ABILITY = "class_ability"
 
+    /** Table of selection boxes */
+    const val TABLE_CLASS_SELECTION_BOX = "class_selection_box"
+
     /** Table of xp tables  */
     private const val TABLE_XP_TABLE = "xp_table"
 
@@ -589,6 +592,12 @@ object TableAndColumnNames {
     const val SQL_GET_CLASS_ABILITIES = (SELECT + "ability_id, level" //
             + FROM + TABLE_CLASS_ABILITY //
             + WHERE + "class_id = ?")
+
+    /** Select all selection boxes of a class */
+    const val SQL_GET_SELECTION_BOXES = (SELECT + "id, name" //
+            + FROM + TABLE_CLASS_SELECTION_BOX //
+            + WHERE + "class_id = ?")
+
 
     // AbilityDao
     /** Select all abilities in a specific language  */

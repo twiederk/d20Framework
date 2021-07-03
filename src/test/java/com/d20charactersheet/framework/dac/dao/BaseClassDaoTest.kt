@@ -14,7 +14,7 @@ abstract class BaseClassDaoTest {
     protected lateinit var allCharacterClasses: List<CharacterClass>
 
     @Test
-    fun testBaseClass() {
+    fun testAllCharacterClasses() {
 
         // Assert
         assertThat(allCharacterClasses).hasSize(27)
@@ -104,16 +104,15 @@ abstract class BaseClassDaoTest {
     }
 
     @Test
-    fun testGetSelectionQueryOfOneSelectionOption() {
-        // arrange
-        val selectionOptionId = 1
+    fun testSelectionBoxesOfFighter() {
 
         // act
-//        val selectionQueries : List<SelectionQuery> = classDao.getSelectionBoxes(selectionOptionId)
-        val selectionQueries: List<SelectionQuery>? = null
+        val selectionBoxes: List<SelectionBox> = classDao.getSelectionBoxes(4)
 
         // assert
-        assertThat(selectionQueries).isNotNull
+        assertThat(selectionBoxes).isNotNull
+        assertThat(selectionBoxes).hasSize(1)
+        assertThat(selectionBoxes[0].name).isEqualTo("Armor")
     }
 
 }

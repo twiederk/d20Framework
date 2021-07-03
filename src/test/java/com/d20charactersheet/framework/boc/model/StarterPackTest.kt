@@ -21,7 +21,7 @@ class StarterPackTest {
         val starterPack = StarterPack()
 
         // act
-        starterPack.add(SelectionBox(""))
+        starterPack.add(SelectionBox(name = ""))
 
         // assert
         assertThat(starterPack.selectionBoxes).hasSize(1)

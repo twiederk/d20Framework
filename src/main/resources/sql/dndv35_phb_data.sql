@@ -1607,6 +1607,9 @@ INSERT INTO class_ability VALUES ( 26, 222, 4 );
 INSERT INTO class_ability VALUES ( 26, 223, 5 );
 
 
+INSERT INTO class_selection_box VALUES (1, 4, "Armor");
+
+
 INSERT INTO feat_type VALUES (0,'General');
 INSERT INTO feat_type VALUES (1,'Item Creation');
 INSERT INTO feat_type VALUES (2,'Metamagic');

@@ -56,5 +56,5 @@ interface ClassDao {
      */
     fun addSkill(skill: Skill, characterClasses: List<CharacterClass>)
 
-    fun getSelectionBoxes(selectionOptionId: Int): List<SelectionBox>
+    fun getSelectionBoxes(classId: Int): List<SelectionBox>
 }
