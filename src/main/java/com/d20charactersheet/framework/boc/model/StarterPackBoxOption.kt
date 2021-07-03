@@ -1,6 +1,6 @@
 package com.d20charactersheet.framework.boc.model
 
-interface SelectionOption {
+interface StarterPackBoxOption {
 
     fun getTitle(): String
 

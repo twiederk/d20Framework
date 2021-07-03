@@ -1,6 +1,6 @@
 package com.d20charactersheet.framework.boc.model
 
-class PackSelectionOption(val equipmentPack: EquipmentPack) : SelectionOption {
+class PackStarterPackBoxOption(val equipmentPack: EquipmentPack) : StarterPackBoxOption {
 
     override fun getTitle(): String = equipmentPack.name ?: ""
 

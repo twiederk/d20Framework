@@ -3,12 +3,12 @@ package com.d20charactersheet.framework.boc.model
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class PackSelectionOptionTest {
+class PackStarterPackBoxOptionTest {
 
     @Test
     fun getTitle_noPack_nameOfPack() {
         // Arrange
-        val underTest = PackSelectionOption(EquipmentPack().apply { name = "myEquipmentPack" })
+        val underTest = PackStarterPackBoxOption(EquipmentPack().apply { name = "myEquipmentPack" })
 
         // Act
         val title = underTest.getTitle()

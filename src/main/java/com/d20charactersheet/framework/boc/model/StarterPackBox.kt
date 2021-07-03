@@ -4,14 +4,14 @@ class StarterPackBox(
     val id: Int = 0,
     val name: String = ""
 ) {
-    val options: MutableList<SelectionOption> = mutableListOf()
+    val options: MutableList<StarterPackBoxOption> = mutableListOf()
 
-    fun add(selectionOption: SelectionOption) {
-        options.add(selectionOption)
+    fun add(starterPackBoxOption: StarterPackBoxOption) {
+        options.add(starterPackBoxOption)
     }
 
-    fun addAll(selectionOptions: List<SelectionOption>) {
-        options.addAll(selectionOptions)
+    fun addAll(starterPackBoxOptions: List<StarterPackBoxOption>) {
+        options.addAll(starterPackBoxOptions)
     }
 
 }

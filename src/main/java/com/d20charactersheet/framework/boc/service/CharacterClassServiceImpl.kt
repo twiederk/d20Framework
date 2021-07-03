@@ -70,7 +70,7 @@ class CharacterClassServiceImpl(private val classDao: ClassDao) : CharacterClass
         // Armor
         val chainMail = itemService.getItemById(1, allArmor)
 
-        val leatherArmorOption = ItemSelectionOption()
+        val leatherArmorOption = ItemStarterPackBoxOption()
         val leatherArmor = itemService.getItemById(2, allArmor)
         val longBow = itemService.getItemById(1, allWeapons)
         val arrow = itemService.getItemById(2, allWeapons)
@@ -85,20 +85,20 @@ class CharacterClassServiceImpl(private val classDao: ClassDao) : CharacterClass
 
         // Primary Hand
         val martialWeapons: List<Weapon> = itemService.filterWeaponsByType(WeaponType.MARTIAL)
-        val martialWeaponsSelectionOptions: List<SelectionOption> = createSelectionOptions(martialWeapons)
+        val martialWeaponsStarterPackBoxOptions: List<StarterPackBoxOption> = createSelectionOptions(martialWeapons)
         val primaryHandSelectionBox = StarterPackBox(name = "Primary Hand")
-        primaryHandSelectionBox.addAll(martialWeaponsSelectionOptions)
+        primaryHandSelectionBox.addAll(martialWeaponsStarterPackBoxOptions)
 
         // Secondary Hand
         val secondaryHandSelectionBox = StarterPackBox(name = "Secondary Hand")
-        secondaryHandSelectionBox.addAll(martialWeaponsSelectionOptions)
+        secondaryHandSelectionBox.addAll(martialWeaponsStarterPackBoxOptions)
         val shield = itemService.getItemById(3, allArmor)
         secondaryHandSelectionBox.add(createSelectionOption(shield))
 
         // Range Weapon
         val crossbow = itemService.getItemById(3, allWeapons)
         val bolt = itemService.getItemById(4, allWeapons)
-        val crossbowSelectionOption = ItemSelectionOption()
+        val crossbowSelectionOption = ItemStarterPackBoxOption()
         val rangeWeaponSelectionBox = StarterPackBox(name = "Range Weapon")
         crossbowSelectionOption.add(ItemGroup().apply { item = crossbow; number = 1 })
         crossbowSelectionOption.add(ItemGroup().apply { item = bolt; number = 20 })
@@ -109,8 +109,8 @@ class CharacterClassServiceImpl(private val classDao: ClassDao) : CharacterClass
 
         // Equipment pack
 
-        val dungeoneersPack = PackSelectionOption(EquipmentPack().apply { name = "Dungeoneer's Pack" })
-        val explorerersPack = PackSelectionOption(EquipmentPack().apply { name = "Explorer's Pack" })
+        val dungeoneersPack = PackStarterPackBoxOption(EquipmentPack().apply { name = "Dungeoneer's Pack" })
+        val explorerersPack = PackStarterPackBoxOption(EquipmentPack().apply { name = "Explorer's Pack" })
 
         val equipmentPackSelectionBox = StarterPackBox(name = "Equipment Pack")
         equipmentPackSelectionBox.add(dungeoneersPack)
@@ -129,17 +129,17 @@ class CharacterClassServiceImpl(private val classDao: ClassDao) : CharacterClass
         return starterPack
     }
 
-    private fun createSelectionOption(item: Item, number: Int = 1): SelectionOption {
-        val selectionOption = ItemSelectionOption()
+    private fun createSelectionOption(item: Item, number: Int = 1): StarterPackBoxOption {
+        val selectionOption = ItemStarterPackBoxOption()
         selectionOption.add(ItemGroup().apply { this.item = item; this.number = number })
         return selectionOption
     }
 
-    private fun createSelectionOptions(weapons: List<Weapon>): List<SelectionOption> {
+    private fun createSelectionOptions(weapons: List<Weapon>): List<StarterPackBoxOption> {
         val itemGroups = weapons.map { ItemGroup().apply { item = it; number = 1 } }
-        val selectionOptions = mutableListOf<SelectionOption>()
+        val selectionOptions = mutableListOf<StarterPackBoxOption>()
         for (itemGroup in itemGroups) {
-            val selectionOption = ItemSelectionOption()
+            val selectionOption = ItemStarterPackBoxOption()
             selectionOption.add(itemGroup)
             selectionOptions.add(selectionOption)
         }

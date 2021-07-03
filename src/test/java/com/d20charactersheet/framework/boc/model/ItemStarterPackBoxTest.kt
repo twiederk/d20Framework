@@ -10,7 +10,7 @@ class ItemStarterPackBoxTest {
         // arrange
 
         // act
-        val title = ItemSelectionOption().getTitle()
+        val title = ItemStarterPackBoxOption().getTitle()
 
         // assert
         assertThat(title).isEmpty()
@@ -19,7 +19,7 @@ class ItemStarterPackBoxTest {
     @Test
     fun getName_singleItem_nameOfItem() {
         // arrange
-        val selectionOption = ItemSelectionOption()
+        val selectionOption = ItemStarterPackBoxOption()
         selectionOption.add(ItemGroup().apply {
             item = Armor().apply { name = "Chain mail"; number = 1 }
         })
@@ -34,7 +34,7 @@ class ItemStarterPackBoxTest {
     @Test
     fun getName_twoItems_namesSeparatedByComa() {
         // arrange
-        val selectionOption = ItemSelectionOption()
+        val selectionOption = ItemStarterPackBoxOption()
         selectionOption.add(ItemGroup().apply { item = Armor().apply { name = "Chain mail"; number = 1 } })
         selectionOption.add(ItemGroup().apply { item = Weapon().apply { name = "Longbow"; number = 1 } })
 
@@ -48,7 +48,7 @@ class ItemStarterPackBoxTest {
     @Test
     fun getName_twoItemsWithCount_namesSeparatedByComaAndCountInBraces() {
         // arrange
-        val selectionOption = ItemSelectionOption()
+        val selectionOption = ItemStarterPackBoxOption()
         selectionOption.add(ItemGroup().apply { item = Weapon().apply { name = "Longbow"; number = 1 } })
         selectionOption.add(ItemGroup().apply { item = Weapon().apply { name = "Arrow"; number = 20 } })
 

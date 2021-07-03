@@ -1,6 +1,6 @@
 package com.d20charactersheet.framework.boc.model
 
-class ItemSelectionOption : SelectionOption {
+class ItemStarterPackBoxOption : StarterPackBoxOption {
 
 
     val itemGroups: MutableList<ItemGroup> = mutableListOf()
