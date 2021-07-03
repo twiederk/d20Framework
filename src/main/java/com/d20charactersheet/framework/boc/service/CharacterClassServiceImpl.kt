@@ -109,10 +109,8 @@ class CharacterClassServiceImpl(private val classDao: ClassDao) : CharacterClass
 
         // Equipment pack
 
-        val dungeoneersPack = ItemSelectionOption()
-        dungeoneersPack.add(ItemGroup().apply { item = Good().apply { name = "Dungeoneer's Pack" }; number = 1 })
-        val explorerersPack = ItemSelectionOption()
-        explorerersPack.add(ItemGroup().apply { item = Good().apply { name = "Explorer's Pack" }; number = 1 })
+        val dungeoneersPack = PackSelectionOption(EquipmentPack().apply { name = "Dungeoneer's Pack" })
+        val explorerersPack = PackSelectionOption(EquipmentPack().apply { name = "Explorer's Pack" })
 
         val equipmentPackSelectionBox = SelectionBox("Equipment Pack")
         equipmentPackSelectionBox.add(dungeoneersPack)
