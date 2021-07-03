@@ -70,7 +70,7 @@ class CharacterClassServiceImpl(private val classDao: ClassDao) : CharacterClass
         // Armor
         val chainMail = itemService.getItemById(1, allArmor)
 
-        val leatherArmorOption = ItemStarterPackBoxOption()
+        val leatherArmorOption = StarterPackBoxItemOption()
         val leatherArmor = itemService.getItemById(2, allArmor)
         val longBow = itemService.getItemById(1, allWeapons)
         val arrow = itemService.getItemById(2, allWeapons)
@@ -98,7 +98,7 @@ class CharacterClassServiceImpl(private val classDao: ClassDao) : CharacterClass
         // Range Weapon
         val crossbow = itemService.getItemById(3, allWeapons)
         val bolt = itemService.getItemById(4, allWeapons)
-        val crossbowSelectionOption = ItemStarterPackBoxOption()
+        val crossbowSelectionOption = StarterPackBoxItemOption()
         val rangeWeaponSelectionBox = StarterPackBox(name = "Range Weapon")
         crossbowSelectionOption.add(ItemGroup().apply { item = crossbow; number = 1 })
         crossbowSelectionOption.add(ItemGroup().apply { item = bolt; number = 20 })
@@ -130,7 +130,7 @@ class CharacterClassServiceImpl(private val classDao: ClassDao) : CharacterClass
     }
 
     private fun createSelectionOption(item: Item, number: Int = 1): StarterPackBoxOption {
-        val selectionOption = ItemStarterPackBoxOption()
+        val selectionOption = StarterPackBoxItemOption()
         selectionOption.add(ItemGroup().apply { this.item = item; this.number = number })
         return selectionOption
     }
@@ -139,7 +139,7 @@ class CharacterClassServiceImpl(private val classDao: ClassDao) : CharacterClass
         val itemGroups = weapons.map { ItemGroup().apply { item = it; number = 1 } }
         val selectionOptions = mutableListOf<StarterPackBoxOption>()
         for (itemGroup in itemGroups) {
-            val selectionOption = ItemStarterPackBoxOption()
+            val selectionOption = StarterPackBoxItemOption()
             selectionOption.add(itemGroup)
             selectionOptions.add(selectionOption)
         }
