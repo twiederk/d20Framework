@@ -71,7 +71,7 @@ object TableAndColumnNames {
     const val TABLE_CLASS_ABILITY = "class_ability"
 
     /** Table of selection boxes */
-    const val TABLE_CLASS_SELECTION_BOX = "class_selection_box"
+    private const val TABLE_CLASS_STARTER_PACK_BOX = "class_starter_pack_box"
 
     /** Table of xp tables  */
     private const val TABLE_XP_TABLE = "xp_table"
@@ -595,7 +595,7 @@ object TableAndColumnNames {
 
     /** Select all selection boxes of a class */
     const val SQL_GET_SELECTION_BOXES = (SELECT + "id, name" //
-            + FROM + TABLE_CLASS_SELECTION_BOX //
+            + FROM + TABLE_CLASS_STARTER_PACK_BOX //
             + WHERE + "class_id = ?")
 
 
