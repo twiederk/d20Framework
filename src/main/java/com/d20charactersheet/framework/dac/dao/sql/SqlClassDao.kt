@@ -1,10 +1,7 @@
 package com.d20charactersheet.framework.dac.dao.sql
 
 
-import com.d20charactersheet.framework.boc.model.Ability
-import com.d20charactersheet.framework.boc.model.CharacterClass
-import com.d20charactersheet.framework.boc.model.ClassAbility
-import com.d20charactersheet.framework.boc.model.Skill
+import com.d20charactersheet.framework.boc.model.*
 import com.d20charactersheet.framework.dac.dao.ClassDao
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_ABILITY_ID
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_ALIGNMENTS
@@ -226,6 +223,47 @@ class SqlClassDao(private val db: Database) : ClassDao {
             }
         }
     }
+
+    override fun getSelectionBoxes(selectionOptionId: Int): List<SelectionBox> {
+        // select selection boxes
+        // selection selection options of each selection box
+        // select selection quieries of each selecton option
+        // => return selection boxes filed with options and queries
+        val selectionQueris = selectSelectionQueryTable()
+        return listOf()
+    }
+
+    private fun selectSelectionQueryTable(): List<SelectionQuery> {
+        val selectionQueries: MutableList<SelectionQuery> = mutableListOf()
+        var queryResult: QueryResult? = null
+//        try {
+//            queryResult = db.rawQuery(SQL_GET_SELECTION_QUERIES, arrayOf())
+//            queryResult.moveToFirst()
+//            while (!queryResult.isAfterLast()) {
+//                val selectionQuery = selectionQueryRowMapper.mapRow(queryResult.getDataRow()) as SelectionQuery
+//                selectionQueries.add(selectionQuery)
+//                queryResult.moveToNext()
+//            }
+//        } catch (sqlException: SQLException) {
+//            //            Logger.error("Can't get selection queries", sqlException);
+//        } finally {
+//            queryResult?.close()
+//        }
+        return selectionQueries
+    }
+
+//    override fun getAllCharacterClasses(allSkills: List<Skill>, allAbilities: List<Ability>): List<CharacterClass> {
+//        val characterClasses = selectCharacterClassTable()
+//        for (characterClass in characterClasses) {
+//            val characterClassId = characterClass.id
+//            val skills = selectCharacterClassSkillTable(characterClassId, allSkills)
+//            characterClass.skills = skills
+//            val classAbilities = selectClassAbilityTable(characterClassId, allAbilities)
+//            characterClass.classAbilities = classAbilities
+//        }
+//        return characterClasses
+//    }
+
 
     private fun setEnum(enumset: EnumSet<*>): Int {
         var result = 0

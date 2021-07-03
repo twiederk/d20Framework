@@ -7,37 +7,37 @@ import com.d20charactersheet.framework.dac.dao.ClassDao
  * Creates CharacterClassService with given data access object.
  * Handles character class specific tasks.
  *
- * @param characterClassDao
+ * @param classDao
  * The data access object to the persistent layer.
  */
-class CharacterClassServiceImpl(private val characterClassDao: ClassDao) : CharacterClassService {
+class CharacterClassServiceImpl(private val classDao: ClassDao) : CharacterClassService {
 
     /**
      * @see com.d20charactersheet.framework.boc.service.CharacterClassService.getAllCharacterClasses
      */
     override fun getAllCharacterClasses(allSkills: List<Skill>, allAbilities: List<Ability>): List<CharacterClass> {
-        return characterClassDao.getAllCharacterClasses(allSkills, allAbilities)
+        return classDao.getAllCharacterClasses(allSkills, allAbilities)
     }
 
     /**
      * @see com.d20charactersheet.framework.boc.service.CharacterClassService.deleteSkill
      */
     override fun deleteSkill(skill: Skill) {
-        characterClassDao.deleteSkill(skill)
+        classDao.deleteSkill(skill)
     }
 
     /**
      * @see com.d20charactersheet.framework.boc.service.CharacterClassService.updateCharacterClass
      */
     override fun updateCharacterClass(characterClass: CharacterClass) {
-        characterClassDao.updateCharacterClass(characterClass)
+        classDao.updateCharacterClass(characterClass)
     }
 
     /**
      * @see com.d20charactersheet.framework.boc.service.CharacterClassService.createCharacterClass
      */
     override fun createCharacterClass(characterClass: CharacterClass): CharacterClass {
-        characterClassDao.createCharacterClass(characterClass)
+        classDao.createCharacterClass(characterClass)
         return characterClass
     }
 
@@ -45,7 +45,7 @@ class CharacterClassServiceImpl(private val characterClassDao: ClassDao) : Chara
      * @see com.d20charactersheet.framework.boc.service.CharacterClassService.addSkill
      */
     override fun addSkill(skill: Skill, characterClasses: List<CharacterClass>) {
-        characterClassDao.addSkill(skill, characterClasses)
+        classDao.addSkill(skill, characterClasses)
     }
 
     /**

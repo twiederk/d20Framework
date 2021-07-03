@@ -2,6 +2,7 @@ package com.d20charactersheet.framework.dac.dao
 
 import com.d20charactersheet.framework.boc.model.Ability
 import com.d20charactersheet.framework.boc.model.CharacterClass
+import com.d20charactersheet.framework.boc.model.SelectionBox
 import com.d20charactersheet.framework.boc.model.Skill
 
 /**
@@ -54,4 +55,6 @@ interface ClassDao {
      * The character classes to add the skill to.
      */
     fun addSkill(skill: Skill, characterClasses: List<CharacterClass>)
+
+    fun getSelectionBoxes(selectionOptionId: Int): List<SelectionBox>
 }

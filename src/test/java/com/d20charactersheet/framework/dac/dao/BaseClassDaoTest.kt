@@ -1,16 +1,13 @@
 package com.d20charactersheet.framework.dac.dao
 
-import com.d20charactersheet.framework.boc.model.Alignment
-import com.d20charactersheet.framework.boc.model.BaseAttackBonus
-import com.d20charactersheet.framework.boc.model.CharacterClass
-import com.d20charactersheet.framework.boc.model.Save
+import com.d20charactersheet.framework.boc.model.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import java.util.*
 
 abstract class BaseClassDaoTest {
 
-    protected lateinit var characterClassDao: ClassDao
+    protected lateinit var classDao: ClassDao
     protected lateinit var skillDao: SkillDao
     protected lateinit var abilityDao: AbilityDao
     protected lateinit var spelllistDao: SpelllistDao
@@ -105,4 +102,18 @@ abstract class BaseClassDaoTest {
         assertThat(fastMovementBarbarian.ability.name).isEqualTo("Fast Movement - Barbarian")
         assertThat(fastMovementBarbarian.level).isEqualTo(1)
     }
+
+    @Test
+    fun testGetSelectionQueryOfOneSelectionOption() {
+        // arrange
+        val selectionOptionId = 1
+
+        // act
+//        val selectionQueries : List<SelectionQuery> = classDao.getSelectionBoxes(selectionOptionId)
+        val selectionQueries: List<SelectionQuery>? = null
+
+        // assert
+        assertThat(selectionQueries).isNotNull
+    }
+
 }

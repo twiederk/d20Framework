@@ -11,6 +11,17 @@ class CharacterClassServiceStarterPackTest {
     private val underTest = CharacterClassServiceImpl(mock())
 
     @Test
+    fun getStarterPack_singleItem_getOneSelectionBoxWithOneSelectionOptionWithOneItemGroup() {
+        // arrange
+
+        // act
+        val starterPack = underTest.getStarterPack(CharacterClass(), mock(), mock(), mock())
+
+        // assert
+        assertThat(starterPack.selectionBoxes).hasSize(1)
+    }
+
+    @Test
     fun getStarterPack_fighter_getCompleteSelectionForFighter() {
         // arrange
         val allWeaopns: List<Weapon> = mock()
