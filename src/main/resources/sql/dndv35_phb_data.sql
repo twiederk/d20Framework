@@ -1608,6 +1608,10 @@ INSERT INTO class_ability VALUES ( 26, 223, 5 );
 
 
 INSERT INTO class_starter_pack_box VALUES (1, 4, 'Armor' );
+INSERT INTO class_starter_pack_box VALUES (2, 4, 'Primary Hand' );
+INSERT INTO class_starter_pack_box VALUES (3, 4, 'Secondary Hand' );
+INSERT INTO class_starter_pack_box VALUES (4, 4, 'Ranged Weapon' );
+INSERT INTO class_starter_pack_box VALUES (5, 4, 'Equipment Pack' );
 
 
 INSERT INTO feat_type VALUES (0,'General');

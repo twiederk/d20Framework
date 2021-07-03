@@ -111,8 +111,12 @@ abstract class BaseClassDaoTest {
 
         // assert
         assertThat(starterPackBoxes).isNotNull
-        assertThat(starterPackBoxes).hasSize(1)
+        assertThat(starterPackBoxes).hasSize(5)
         assertThat(starterPackBoxes[0].name).isEqualTo("Armor")
+        assertThat(starterPackBoxes[1].name).isEqualTo("Primary Hand")
+        assertThat(starterPackBoxes[2].name).isEqualTo("Secondary Hand")
+        assertThat(starterPackBoxes[3].name).isEqualTo("Ranged Weapon")
+        assertThat(starterPackBoxes[4].name).isEqualTo("Equipment Pack")
     }
 
 }
