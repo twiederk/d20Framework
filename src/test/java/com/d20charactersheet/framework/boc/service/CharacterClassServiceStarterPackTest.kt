@@ -18,7 +18,7 @@ class CharacterClassServiceStarterPackTest {
         val starterPack = underTest.getStarterPack(CharacterClass(), mock(), mock(), mock())
 
         // assert
-        assertThat(starterPack.selectionBoxes).hasSize(1)
+        assertThat(starterPack.starterPackBoxes).hasSize(1)
     }
 
     @Test
@@ -54,39 +54,39 @@ class CharacterClassServiceStarterPackTest {
         // assert
         assertThat(clazz.starterPack).isEqualTo(starterPack)
 
-        assertThat(starterPack.selectionBoxes).hasSize(5)
+        assertThat(starterPack.starterPackBoxes).hasSize(5)
 
-        assertThat(starterPack.selectionBoxes[0].name).isEqualTo("Armor")
-        assertThat(starterPack.selectionBoxes[0].options).hasSize(2)
-        assertThat(starterPack.selectionBoxes[0].options[0].getTitle()).isEqualTo("Chain mail")
-        assertThat(starterPack.selectionBoxes[0].options[1].getTitle()).isEqualTo("Leather, Longbow, Arrow (20)")
+        assertThat(starterPack.starterPackBoxes[0].name).isEqualTo("Armor")
+        assertThat(starterPack.starterPackBoxes[0].options).hasSize(2)
+        assertThat(starterPack.starterPackBoxes[0].options[0].getTitle()).isEqualTo("Chain mail")
+        assertThat(starterPack.starterPackBoxes[0].options[1].getTitle()).isEqualTo("Leather, Longbow, Arrow (20)")
 
-        assertThat(starterPack.selectionBoxes[1].name).isEqualTo("Primary Hand")
-        assertThat(starterPack.selectionBoxes[1].options).hasSize(5)
-        assertThat(starterPack.selectionBoxes[1].options[0].getTitle()).isEqualTo("Longsword")
-        assertThat(starterPack.selectionBoxes[1].options[1].getTitle()).isEqualTo("Battleaxe")
-        assertThat(starterPack.selectionBoxes[1].options[2].getTitle()).isEqualTo("Bastardsword")
-        assertThat(starterPack.selectionBoxes[1].options[3].getTitle()).isEqualTo("Two-Handed sword")
-        assertThat(starterPack.selectionBoxes[1].options[4].getTitle()).isEqualTo("Helberd")
+        assertThat(starterPack.starterPackBoxes[1].name).isEqualTo("Primary Hand")
+        assertThat(starterPack.starterPackBoxes[1].options).hasSize(5)
+        assertThat(starterPack.starterPackBoxes[1].options[0].getTitle()).isEqualTo("Longsword")
+        assertThat(starterPack.starterPackBoxes[1].options[1].getTitle()).isEqualTo("Battleaxe")
+        assertThat(starterPack.starterPackBoxes[1].options[2].getTitle()).isEqualTo("Bastardsword")
+        assertThat(starterPack.starterPackBoxes[1].options[3].getTitle()).isEqualTo("Two-Handed sword")
+        assertThat(starterPack.starterPackBoxes[1].options[4].getTitle()).isEqualTo("Helberd")
 
-        assertThat(starterPack.selectionBoxes[2].name).isEqualTo("Secondary Hand")
-        assertThat(starterPack.selectionBoxes[2].options).hasSize(6)
-        assertThat(starterPack.selectionBoxes[2].options[0].getTitle()).isEqualTo("Longsword")
-        assertThat(starterPack.selectionBoxes[2].options[1].getTitle()).isEqualTo("Battleaxe")
-        assertThat(starterPack.selectionBoxes[2].options[2].getTitle()).isEqualTo("Bastardsword")
-        assertThat(starterPack.selectionBoxes[2].options[3].getTitle()).isEqualTo("Two-Handed sword")
-        assertThat(starterPack.selectionBoxes[2].options[4].getTitle()).isEqualTo("Helberd")
-        assertThat(starterPack.selectionBoxes[2].options[5].getTitle()).isEqualTo("Shield")
+        assertThat(starterPack.starterPackBoxes[2].name).isEqualTo("Secondary Hand")
+        assertThat(starterPack.starterPackBoxes[2].options).hasSize(6)
+        assertThat(starterPack.starterPackBoxes[2].options[0].getTitle()).isEqualTo("Longsword")
+        assertThat(starterPack.starterPackBoxes[2].options[1].getTitle()).isEqualTo("Battleaxe")
+        assertThat(starterPack.starterPackBoxes[2].options[2].getTitle()).isEqualTo("Bastardsword")
+        assertThat(starterPack.starterPackBoxes[2].options[3].getTitle()).isEqualTo("Two-Handed sword")
+        assertThat(starterPack.starterPackBoxes[2].options[4].getTitle()).isEqualTo("Helberd")
+        assertThat(starterPack.starterPackBoxes[2].options[5].getTitle()).isEqualTo("Shield")
 
-        assertThat(starterPack.selectionBoxes[3].name).isEqualTo("Range Weapon")
-        assertThat(starterPack.selectionBoxes[3].options).hasSize(2)
-        assertThat(starterPack.selectionBoxes[3].options[0].getTitle()).isEqualTo("Crossbow, light, Bolt (20)")
-        assertThat(starterPack.selectionBoxes[3].options[1].getTitle()).isEqualTo("Handaxe (2)")
+        assertThat(starterPack.starterPackBoxes[3].name).isEqualTo("Range Weapon")
+        assertThat(starterPack.starterPackBoxes[3].options).hasSize(2)
+        assertThat(starterPack.starterPackBoxes[3].options[0].getTitle()).isEqualTo("Crossbow, light, Bolt (20)")
+        assertThat(starterPack.starterPackBoxes[3].options[1].getTitle()).isEqualTo("Handaxe (2)")
 
-        assertThat(starterPack.selectionBoxes[4].name).isEqualTo("Equipment Pack")
-        assertThat(starterPack.selectionBoxes[4].options).hasSize(2)
-        assertThat(starterPack.selectionBoxes[4].options[0].getTitle()).isEqualTo("Dungeoneer's Pack")
-        assertThat(starterPack.selectionBoxes[4].options[1].getTitle()).isEqualTo("Explorer's Pack")
+        assertThat(starterPack.starterPackBoxes[4].name).isEqualTo("Equipment Pack")
+        assertThat(starterPack.starterPackBoxes[4].options).hasSize(2)
+        assertThat(starterPack.starterPackBoxes[4].options[0].getTitle()).isEqualTo("Dungeoneer's Pack")
+        assertThat(starterPack.starterPackBoxes[4].options[1].getTitle()).isEqualTo("Explorer's Pack")
 
     }
 

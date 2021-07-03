@@ -1,6 +1,6 @@
 package com.d20charactersheet.framework.boc.model
 
-class SelectionBox(
+class StarterPackBox(
     val id: Int = 0,
     val name: String = ""
 ) {

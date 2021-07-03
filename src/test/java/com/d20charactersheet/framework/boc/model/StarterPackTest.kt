@@ -12,7 +12,7 @@ class StarterPackTest {
         val starterPack = StarterPack()
 
         // Assert
-        assertThat(starterPack.selectionBoxes).isEmpty()
+        assertThat(starterPack.starterPackBoxes).isEmpty()
     }
 
     @Test
@@ -21,10 +21,10 @@ class StarterPackTest {
         val starterPack = StarterPack()
 
         // act
-        starterPack.add(SelectionBox(name = ""))
+        starterPack.add(StarterPackBox(name = ""))
 
         // assert
-        assertThat(starterPack.selectionBoxes).hasSize(1)
+        assertThat(starterPack.starterPackBoxes).hasSize(1)
 
     }
 }

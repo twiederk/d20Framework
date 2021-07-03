@@ -227,7 +227,7 @@ class SqlClassDao(private val db: Database) : ClassDao {
         }
     }
 
-    override fun getSelectionBoxes(classId: Int): List<SelectionBox> {
+    override fun getSelectionBoxes(classId: Int): List<StarterPackBox> {
         // select selection boxes
         val selectionBoxes = selectSelectionBoxTable(classId)
         // selection selection options of each selection box
@@ -237,15 +237,15 @@ class SqlClassDao(private val db: Database) : ClassDao {
         return selectionBoxes
     }
 
-    private fun selectSelectionBoxTable(classId: Int): List<SelectionBox> {
-        val selectionBoxes: MutableList<SelectionBox> = mutableListOf()
+    private fun selectSelectionBoxTable(classId: Int): List<StarterPackBox> {
+        val starterPackBoxes: MutableList<StarterPackBox> = mutableListOf()
         var queryResult: QueryResult? = null
         try {
             queryResult = db.rawQuery(SQL_GET_SELECTION_BOXES, arrayOf(classId.toString()))
             queryResult.moveToFirst()
             while (!queryResult.isAfterLast()) {
-                val selectionBox = selectionBoxRowMapper.mapRow(queryResult.getDataRow()) as SelectionBox
-                selectionBoxes.add(selectionBox)
+                val selectionBox = selectionBoxRowMapper.mapRow(queryResult.getDataRow()) as StarterPackBox
+                starterPackBoxes.add(selectionBox)
                 queryResult.moveToNext()
             }
         } catch (sqlException: SQLException) {
@@ -254,7 +254,7 @@ class SqlClassDao(private val db: Database) : ClassDao {
         } finally {
             queryResult?.close()
         }
-        return selectionBoxes
+        return starterPackBoxes
     }
 
     private fun selectSelectionQueryTable(): List<SelectionQuery> {

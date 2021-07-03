@@ -107,12 +107,12 @@ abstract class BaseClassDaoTest {
     fun testSelectionBoxesOfFighter() {
 
         // act
-        val selectionBoxes: List<SelectionBox> = classDao.getSelectionBoxes(4)
+        val starterPackBoxes: List<StarterPackBox> = classDao.getSelectionBoxes(4)
 
         // assert
-        assertThat(selectionBoxes).isNotNull
-        assertThat(selectionBoxes).hasSize(1)
-        assertThat(selectionBoxes[0].name).isEqualTo("Armor")
+        assertThat(starterPackBoxes).isNotNull
+        assertThat(starterPackBoxes).hasSize(1)
+        assertThat(starterPackBoxes[0].name).isEqualTo("Armor")
     }
 
 }

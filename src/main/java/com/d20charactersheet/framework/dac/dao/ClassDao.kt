@@ -2,8 +2,8 @@ package com.d20charactersheet.framework.dac.dao
 
 import com.d20charactersheet.framework.boc.model.Ability
 import com.d20charactersheet.framework.boc.model.CharacterClass
-import com.d20charactersheet.framework.boc.model.SelectionBox
 import com.d20charactersheet.framework.boc.model.Skill
+import com.d20charactersheet.framework.boc.model.StarterPackBox
 
 /**
  * The data access object to the persistent layer for character class objects.
@@ -56,5 +56,5 @@ interface ClassDao {
      */
     fun addSkill(skill: Skill, characterClasses: List<CharacterClass>)
 
-    fun getSelectionBoxes(classId: Int): List<SelectionBox>
+    fun getSelectionBoxes(classId: Int): List<StarterPackBox>
 }

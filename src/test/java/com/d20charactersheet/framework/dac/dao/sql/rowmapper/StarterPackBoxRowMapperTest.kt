@@ -7,7 +7,7 @@ import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
-class SelectionBoxRowMapperTest {
+class StarterPackBoxRowMapperTest {
 
     @Test
     fun mapRow() {

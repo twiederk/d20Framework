@@ -3,7 +3,7 @@ package com.d20charactersheet.framework.boc.model
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class ItemSelectionBoxTest {
+class ItemStarterPackBoxTest {
 
     @Test
     fun getName_noItem_emptyString() {

@@ -2,9 +2,9 @@ package com.d20charactersheet.framework.boc.model
 
 class StarterPack {
 
-    val selectionBoxes: MutableList<SelectionBox> = mutableListOf()
+    val starterPackBoxes: MutableList<StarterPackBox> = mutableListOf()
 
-    fun add(selectionBox: SelectionBox) {
-        selectionBoxes.add(selectionBox)
+    fun add(starterPackBox: StarterPackBox) {
+        starterPackBoxes.add(starterPackBox)
     }
 }
