@@ -24,8 +24,8 @@ class StarterPackHelper(
     private fun createStarterBoxOptions(groupedStarterPackQuieries: Map<Int, List<StarterPackQuery>>): List<StarterPackBoxOption> {
         val starterPackOptions = mutableListOf<StarterPackBoxOption>()
         for (starterPackQueries in groupedStarterPackQuieries.values) {
-            createStarterPackOption(starterPackQueries)
-            starterPackOptions.add(StarterPackBoxItemOption())
+            val starterPackBoxOption = createStarterPackOption(starterPackQueries)
+            starterPackOptions.add(starterPackBoxOption)
         }
         return starterPackOptions
     }

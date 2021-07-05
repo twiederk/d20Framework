@@ -33,13 +33,15 @@ class StarterPackHelperTest {
                 quantity = 4
             )
         )
+        val itemService: ItemService = mock()
+        whenever(itemService.getItemById(eq(3), any())) doReturn Armor().apply { name = "myArmor" }
 
         // act
-        val starterBoxOptions = StarterPackHelper(mock(), mock(), mock(), mock()).getStarterBoxOptions(starterPackQueries)
+        val starterBoxOptions = StarterPackHelper(itemService, mock(), mock(), mock()).getStarterBoxOptions(starterPackQueries)
 
         // assert
         assertThat(starterBoxOptions).hasSize(1)
-        assertThat(starterBoxOptions[0].getTitle()).isEqualTo("myArmor")
+        assertThat(starterBoxOptions[0].getTitle()).isEqualTo("myArmor (4)")
     }
 
     @Test
