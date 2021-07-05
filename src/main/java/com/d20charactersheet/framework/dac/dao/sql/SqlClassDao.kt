@@ -24,7 +24,7 @@ import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.TABLE_CLA
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.TABLE_CLASS_SKILL
 import com.d20charactersheet.framework.dac.dao.sql.rowmapper.ClassAbilityRowMapper
 import com.d20charactersheet.framework.dac.dao.sql.rowmapper.ClassRowMapper
-import com.d20charactersheet.framework.dac.dao.sql.rowmapper.SelectionBoxRowMapper
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.StarterBoxRowMapper
 import java.sql.SQLException
 import java.util.*
 
@@ -34,7 +34,7 @@ import java.util.*
 class SqlClassDao(private val db: Database) : ClassDao {
 
     private val classRowMapper: RowMapper = ClassRowMapper()
-    private val selectionBoxRowMapper: RowMapper = SelectionBoxRowMapper()
+    private val selectionBoxRowMapper: RowMapper = StarterBoxRowMapper()
 
     companion object {
         private const val SQL_GET_ID: String = SELECT + "id FROM " + TABLE_CLASS + " WHERE rowid = ?"

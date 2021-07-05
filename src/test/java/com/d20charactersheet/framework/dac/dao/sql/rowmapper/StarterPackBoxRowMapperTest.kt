@@ -17,7 +17,7 @@ class StarterPackBoxRowMapperTest {
         whenever(dataRow.getString(1)) doReturn "mySelectionBox"
 
         // Act
-        val selectionBox = SelectionBoxRowMapper().mapRow(dataRow)
+        val selectionBox = StarterBoxRowMapper().mapRow(dataRow)
 
         // Assert
         assertThat(selectionBox.id).isEqualTo(1)

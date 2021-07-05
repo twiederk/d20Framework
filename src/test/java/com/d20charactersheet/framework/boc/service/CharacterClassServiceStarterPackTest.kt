@@ -13,11 +13,13 @@ class CharacterClassServiceStarterPackTest {
     @Test
     fun getStarterPack_singleItem_getOneSelectionBoxWithOneSelectionOptionWithOneItemGroup() {
         // arrange
+        val clazz = CharacterClass()
 
         // act
-        val starterPack = underTest.getStarterPack(CharacterClass(), mock(), mock(), mock())
+        val starterPack = underTest.getStarterPack(clazz, mock(), mock(), mock())
 
         // assert
+        assertThat(clazz.starterPack).isEqualTo(starterPack)
         assertThat(starterPack.starterPackBoxes).hasSize(1)
     }
 

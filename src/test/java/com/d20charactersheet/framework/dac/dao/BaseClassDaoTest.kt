@@ -117,6 +117,10 @@ abstract class BaseClassDaoTest {
         assertThat(starterPackBoxes[2].name).isEqualTo("Secondary Hand")
         assertThat(starterPackBoxes[3].name).isEqualTo("Ranged Weapon")
         assertThat(starterPackBoxes[4].name).isEqualTo("Equipment Pack")
+
+        assertThat(starterPackBoxes[0].options[0].getTitle()).isEqualTo("Chain mail")
+        assertThat(starterPackBoxes[0].options[1].getTitle()).isEqualTo("Leather, Longbow, Arrow (20)")
+
     }
 
 }
