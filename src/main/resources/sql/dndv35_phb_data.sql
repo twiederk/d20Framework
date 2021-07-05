@@ -1614,6 +1614,12 @@ INSERT INTO class_starter_pack_box VALUES (4, 4, 'Ranged Weapon' );
 INSERT INTO class_starter_pack_box VALUES (5, 4, 'Equipment Pack' );
 
 
+INSERT INTO class_starter_pack_option_query VALUES (1, 1, 1, 1, -1, -1, 6, 1 );
+INSERT INTO class_starter_pack_option_query VALUES (2, 1, 2, 1, -1, -1, 1, 1 );
+INSERT INTO class_starter_pack_option_query VALUES (3, 1, 2, 0, -1, -1, 46, 1 );
+INSERT INTO class_starter_pack_option_query VALUES (4, 1, 2, 0, -1, -1, 68, 1 );
+
+
 INSERT INTO feat_type VALUES (0,'General');
 INSERT INTO feat_type VALUES (1,'Item Creation');
 INSERT INTO feat_type VALUES (2,'Metamagic');
