@@ -10,17 +10,16 @@ class StarterPackHelper {
         val groupedStarterPackQuieries: Map<Int, StarterPackQuery> =
             groupStarterPackBoxOptionQueries(starterPackQueries)
         // create option for each group of queries
-        val starterPackBoxOptions = createStarterBoxOptions(groupedStarterPackQuieries)
-        return starterPackBoxOptions
+        return createStarterBoxOptions(groupedStarterPackQuieries)
     }
 
 
     private fun createStarterBoxOptions(groupedStarterPackQuieries: Map<Int, StarterPackQuery>): List<StarterPackBoxOption> {
-        TODO("Not yet implemented function body")
+        return listOf()
     }
 
     private fun groupStarterPackBoxOptionQueries(starterPackQueries: List<StarterPackQuery>): Map<Int, StarterPackQuery> {
-        TODO("Not yet implemented function body")
+        return mapOf()
     }
 
 }
