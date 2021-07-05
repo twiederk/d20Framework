@@ -1,9 +1,7 @@
 package com.d20charactersheet.framework.dac.dao
 
-import com.d20charactersheet.framework.boc.model.Ability
-import com.d20charactersheet.framework.boc.model.CharacterClass
-import com.d20charactersheet.framework.boc.model.Skill
-import com.d20charactersheet.framework.boc.model.StarterPackBox
+import com.d20charactersheet.framework.boc.model.*
+import com.d20charactersheet.framework.boc.service.ItemService
 
 /**
  * The data access object to the persistent layer for character class objects.
@@ -56,5 +54,11 @@ interface ClassDao {
      */
     fun addSkill(skill: Skill, characterClasses: List<CharacterClass>)
 
-    fun getStarterPackBoxes(classId: Int): List<StarterPackBox>
+    fun getStarterPackBoxes(
+        classId: Int,
+        itemService: ItemService,
+        allWeapons: List<Weapon>,
+        allArmor: List<Armor>,
+        allGoods: List<Good>
+    ): List<StarterPackBox>
 }

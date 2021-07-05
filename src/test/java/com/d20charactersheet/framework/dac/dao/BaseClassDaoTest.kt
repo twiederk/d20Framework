@@ -3,6 +3,7 @@ package com.d20charactersheet.framework.dac.dao
 import com.d20charactersheet.framework.boc.model.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
+import org.mockito.kotlin.mock
 import java.util.*
 
 abstract class BaseClassDaoTest {
@@ -107,7 +108,7 @@ abstract class BaseClassDaoTest {
     fun testSelectionBoxesOfFighter() {
 
         // act
-        val starterPackBoxes: List<StarterPackBox> = classDao.getStarterPackBoxes(4)
+        val starterPackBoxes: List<StarterPackBox> = classDao.getStarterPackBoxes(4, mock(), mock(), mock(), mock())
 
         // assert
         assertThat(starterPackBoxes).isNotNull
