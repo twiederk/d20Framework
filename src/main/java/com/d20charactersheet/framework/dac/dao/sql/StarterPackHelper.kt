@@ -1,25 +1,25 @@
 package com.d20charactersheet.framework.dac.dao.sql
 
 import com.d20charactersheet.framework.boc.model.StarterPackBoxOption
-import com.d20charactersheet.framework.boc.model.StarterPackBoxOptionQuery
+import com.d20charactersheet.framework.boc.model.StarterPackQuery
 
 class StarterPackHelper {
 
-    fun getStarterBoxOptions(starterPackBoxOptionQueries: List<StarterPackBoxOptionQuery>): List<StarterPackBoxOption> {
+    fun getStarterBoxOptions(starterPackQueries: List<StarterPackQuery>): List<StarterPackBoxOption> {
         // group queries by option id
-        val groupedStarterPackBoxOptionQuieries: Map<Int, StarterPackBoxOptionQuery> =
-            groupStarterPackBoxOptionQueries(starterPackBoxOptionQueries)
+        val groupedStarterPackQuieries: Map<Int, StarterPackQuery> =
+            groupStarterPackBoxOptionQueries(starterPackQueries)
         // create option for each group of queries
-        val starterPackBoxOptions = createStarterBoxOptions(groupedStarterPackBoxOptionQuieries)
+        val starterPackBoxOptions = createStarterBoxOptions(groupedStarterPackQuieries)
         return starterPackBoxOptions
     }
 
 
-    private fun createStarterBoxOptions(groupedStarterPackBoxOptionQuieries: Map<Int, StarterPackBoxOptionQuery>): List<StarterPackBoxOption> {
+    private fun createStarterBoxOptions(groupedStarterPackQuieries: Map<Int, StarterPackQuery>): List<StarterPackBoxOption> {
         TODO("Not yet implemented function body")
     }
 
-    private fun groupStarterPackBoxOptionQueries(starterPackBoxOptionQueries: List<StarterPackBoxOptionQuery>): Map<Int, StarterPackBoxOptionQuery> {
+    private fun groupStarterPackBoxOptionQueries(starterPackQueries: List<StarterPackQuery>): Map<Int, StarterPackQuery> {
         TODO("Not yet implemented function body")
     }
 

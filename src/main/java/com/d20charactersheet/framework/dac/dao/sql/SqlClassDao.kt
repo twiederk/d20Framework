@@ -260,16 +260,16 @@ class SqlClassDao(private val db: Database) : ClassDao {
         return starterPackBoxes
     }
 
-    private fun selectStarterBoxOptionQueries(starterBoxId: Int): List<StarterPackBoxOptionQuery> {
-        val starterPackBoxOptionQueries: MutableList<StarterPackBoxOptionQuery> = mutableListOf()
+    private fun selectStarterBoxOptionQueries(starterBoxId: Int): List<StarterPackQuery> {
+        val starterPackQueries: MutableList<StarterPackQuery> = mutableListOf()
         var queryResult: QueryResult? = null
         try {
             queryResult = db.rawQuery(SQL_GET_STARTER_PACK_BOX_OPTION_QUERIES, arrayOf(starterBoxId.toString()))
             queryResult.moveToFirst()
             while (!queryResult.isAfterLast()) {
                 val starterPackBoxOptionQuery =
-                    starterPackBoxOptionQueryRowMapper.mapRow(queryResult.getDataRow()) as StarterPackBoxOptionQuery
-                starterPackBoxOptionQueries.add(starterPackBoxOptionQuery)
+                    starterPackBoxOptionQueryRowMapper.mapRow(queryResult.getDataRow()) as StarterPackQuery
+                starterPackQueries.add(starterPackBoxOptionQuery)
                 queryResult.moveToNext()
             }
         } catch (sqlException: SQLException) {
@@ -278,7 +278,7 @@ class SqlClassDao(private val db: Database) : ClassDao {
         } finally {
             queryResult?.close()
         }
-        return starterPackBoxOptionQueries
+        return starterPackQueries
     }
 
     private fun selectSelectionQueryTable(): List<StarterPackQuery> {
