@@ -18,13 +18,15 @@ import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.SELECT
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.SQL_GET_ALL_CLASSES
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.SQL_GET_CLASS_ABILITIES
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.SQL_GET_CLASS_SKILLS
-import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.SQL_GET_SELECTION_BOXES
+import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.SQL_GET_STARTER_PACK_BOXES
+import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.SQL_GET_STARTER_PACK_BOX_OPTION_QUERIES
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.TABLE_CLASS
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.TABLE_CLASS_ABILITY
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.TABLE_CLASS_SKILL
 import com.d20charactersheet.framework.dac.dao.sql.rowmapper.ClassAbilityRowMapper
 import com.d20charactersheet.framework.dac.dao.sql.rowmapper.ClassRowMapper
-import com.d20charactersheet.framework.dac.dao.sql.rowmapper.StarterBoxRowMapper
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.StarterBoxOptionQueryRowMapper
+import com.d20charactersheet.framework.dac.dao.sql.rowmapper.StarterPackBoxRowMapper
 import java.sql.SQLException
 import java.util.*
 
@@ -34,7 +36,8 @@ import java.util.*
 class SqlClassDao(private val db: Database) : ClassDao {
 
     private val classRowMapper: RowMapper = ClassRowMapper()
-    private val selectionBoxRowMapper: RowMapper = StarterBoxRowMapper()
+    private val starterPackBoxRowMapper: RowMapper = StarterPackBoxRowMapper()
+    private val starterPackBoxOptionQueryRowMapper: RowMapper = StarterBoxOptionQueryRowMapper()
 
     companion object {
         private const val SQL_GET_ID: String = SELECT + "id FROM " + TABLE_CLASS + " WHERE rowid = ?"
@@ -227,34 +230,55 @@ class SqlClassDao(private val db: Database) : ClassDao {
         }
     }
 
-    override fun getSelectionBoxes(classId: Int): List<StarterPackBox> {
-        // select selection boxes
-        val selectionBoxes = selectSelectionBoxTable(classId)
-        // selection selection options of each selection box
-        // select selection quieries of each selecton option
-        val selectionQueris = selectSelectionQueryTable()
-        // => return selection boxes filed with options and queries
-        return selectionBoxes
+    override fun getStarterPackBoxes(classId: Int): List<StarterPackBox> {
+        val starterPackBoxes = selectClassStarterPackBoxTable(classId)
+        for (starterPackBox in starterPackBoxes) {
+            val starterPackBoxOptionQueries = selectStarterBoxOptionQueries(starterPackBox.id)
+            val starterPackBoxOptions = StarterPackHelper().getStarterBoxOptions(starterPackBoxOptionQueries)
+            starterPackBox.addAll(starterPackBoxOptions)
+        }
+        return starterPackBoxes
     }
 
-    private fun selectSelectionBoxTable(classId: Int): List<StarterPackBox> {
+    private fun selectClassStarterPackBoxTable(classId: Int): List<StarterPackBox> {
         val starterPackBoxes: MutableList<StarterPackBox> = mutableListOf()
         var queryResult: QueryResult? = null
         try {
-            queryResult = db.rawQuery(SQL_GET_SELECTION_BOXES, arrayOf(classId.toString()))
+            queryResult = db.rawQuery(SQL_GET_STARTER_PACK_BOXES, arrayOf(classId.toString()))
             queryResult.moveToFirst()
             while (!queryResult.isAfterLast()) {
-                val selectionBox = selectionBoxRowMapper.mapRow(queryResult.getDataRow()) as StarterPackBox
+                val selectionBox = starterPackBoxRowMapper.mapRow(queryResult.getDataRow()) as StarterPackBox
                 starterPackBoxes.add(selectionBox)
                 queryResult.moveToNext()
             }
         } catch (sqlException: SQLException) {
-            println("Can't get selection queries $sqlException")
+            println("Can't get starter pack boxes $sqlException")
             sqlException.printStackTrace()
         } finally {
             queryResult?.close()
         }
         return starterPackBoxes
+    }
+
+    private fun selectStarterBoxOptionQueries(starterBoxId: Int): List<StarterPackBoxOptionQuery> {
+        val starterPackBoxOptionQueries: MutableList<StarterPackBoxOptionQuery> = mutableListOf()
+        var queryResult: QueryResult? = null
+        try {
+            queryResult = db.rawQuery(SQL_GET_STARTER_PACK_BOX_OPTION_QUERIES, arrayOf(starterBoxId.toString()))
+            queryResult.moveToFirst()
+            while (!queryResult.isAfterLast()) {
+                val starterPackBoxOptionQuery =
+                    starterPackBoxOptionQueryRowMapper.mapRow(queryResult.getDataRow()) as StarterPackBoxOptionQuery
+                starterPackBoxOptionQueries.add(starterPackBoxOptionQuery)
+                queryResult.moveToNext()
+            }
+        } catch (sqlException: SQLException) {
+            println("Can't get starter pack box option queries $sqlException")
+            sqlException.printStackTrace()
+        } finally {
+            queryResult?.close()
+        }
+        return starterPackBoxOptionQueries
     }
 
     private fun selectSelectionQueryTable(): List<StarterPackQuery> {

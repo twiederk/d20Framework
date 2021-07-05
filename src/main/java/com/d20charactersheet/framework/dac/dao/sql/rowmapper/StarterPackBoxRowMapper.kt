@@ -7,7 +7,7 @@ import com.d20charactersheet.framework.dac.dao.sql.RowMapper
 /**
  * Maps data to SelectionBox
  */
-class StarterBoxRowMapper : RowMapper {
+class StarterPackBoxRowMapper : RowMapper {
 
     override fun mapRow(dataRow: DataRow): StarterPackBox {
         return StarterPackBox(

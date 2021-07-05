@@ -70,8 +70,11 @@ object TableAndColumnNames {
     /** Table of class abilities  */
     const val TABLE_CLASS_ABILITY = "class_ability"
 
-    /** Table of selection boxes */
+    /** Table of starter pack boxes */
     private const val TABLE_CLASS_STARTER_PACK_BOX = "class_starter_pack_box"
+
+    /** Table of starter pack boxes */
+    private const val TABLE_CLASS_STARTER_PACK_BOX_OPTION_QUERY = "class_starter_pack_option_query"
 
     /** Table of xp tables  */
     private const val TABLE_XP_TABLE = "xp_table"
@@ -593,10 +596,16 @@ object TableAndColumnNames {
             + FROM + TABLE_CLASS_ABILITY //
             + WHERE + "class_id = ?")
 
-    /** Select all selection boxes of a class */
-    const val SQL_GET_SELECTION_BOXES = (SELECT + "id, name" //
+    /** Select all starter pack boxes of a class */
+    const val SQL_GET_STARTER_PACK_BOXES = (SELECT + "id, name" //
             + FROM + TABLE_CLASS_STARTER_PACK_BOX //
             + WHERE + "class_id = ?")
+
+    /** Select all starter pack box options of a starter pack box */
+    const val SQL_GET_STARTER_PACK_BOX_OPTION_QUERIES =
+        (SELECT + "id, starter_pack_box_option_id, equipment_tpye_id, type_id, combat_id, item_id, quantity" //
+                + FROM + TABLE_CLASS_STARTER_PACK_BOX_OPTION_QUERY //
+                + WHERE + "starter_pack_box_id = ?")
 
 
     // AbilityDao
