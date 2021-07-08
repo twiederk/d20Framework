@@ -12,8 +12,8 @@ class StarterBoxOptionQueryRowMapper : RowMapper {
             dataRow.getInt(0),
             dataRow.getInt(1),
             EquipmentType.values()[dataRow.getInt(2)],
-            dataRow.getInt(3),
-            dataRow.getInt(4),
+            dataRow.getInt(5),
+            dataRow.getInt(6),
 
             )
     }

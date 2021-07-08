@@ -17,14 +17,14 @@ class StarterBoxOptionQueryRowMapperTest {
         whenever(dataRow.getInt(0)) doReturn 1
         whenever(dataRow.getInt(1)) doReturn 2
         whenever(dataRow.getInt(2)) doReturn 1
-        whenever(dataRow.getInt(3)) doReturn 3
-        whenever(dataRow.getInt(4)) doReturn 4
+        whenever(dataRow.getInt(5)) doReturn 3
+        whenever(dataRow.getInt(6)) doReturn 4
 
         // Act
         val starterPackBoxOptionQuery = StarterBoxOptionQueryRowMapper().mapRow(dataRow)
 
         // Assert
-//        id, starter_pack_box_id, starter_pack_box_option_id, equipment_tpye_id, type_id, combat_id, item_id, quantity
+//        id, starter_pack_box_option_id, equipment_tpye_id, type_id, combat_id, item_id, quantity
         assertThat(starterPackBoxOptionQuery.id).isEqualTo(1)
         assertThat(starterPackBoxOptionQuery.optionId).isEqualTo(2)
         assertThat(starterPackBoxOptionQuery.equipmentType).isEqualTo(EquipmentType.ARMOR)
