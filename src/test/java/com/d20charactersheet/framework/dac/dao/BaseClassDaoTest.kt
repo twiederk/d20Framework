@@ -3,7 +3,6 @@ package com.d20charactersheet.framework.dac.dao
 import com.d20charactersheet.framework.boc.model.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
-import org.mockito.kotlin.mock
 import java.util.*
 
 abstract class BaseClassDaoTest {
@@ -108,19 +107,19 @@ abstract class BaseClassDaoTest {
     fun testSelectionBoxesOfFighter() {
 
         // act
-        val starterPackBoxes: List<StarterPackBox> = classDao.getStarterPackBoxes(4, mock(), mock(), mock(), mock())
+        val starterPackBoxsWithQueries: Map<StarterPackBox, List<StarterPackQuery>> = classDao.getStarterPackBoxQueries(4)
 
         // assert
-        assertThat(starterPackBoxes).isNotNull
-        assertThat(starterPackBoxes).hasSize(5)
-        assertThat(starterPackBoxes[0].name).isEqualTo("Armor")
-        assertThat(starterPackBoxes[1].name).isEqualTo("Primary Hand")
-        assertThat(starterPackBoxes[2].name).isEqualTo("Secondary Hand")
-        assertThat(starterPackBoxes[3].name).isEqualTo("Ranged Weapon")
-        assertThat(starterPackBoxes[4].name).isEqualTo("Equipment Pack")
-
-        assertThat(starterPackBoxes[0].options[0].getTitle()).isEqualTo("Chain mail")
-        assertThat(starterPackBoxes[0].options[1].getTitle()).isEqualTo("Leather, Longbow, Arrow (20)")
+        assertThat(starterPackBoxsWithQueries).isNotNull
+        assertThat(starterPackBoxsWithQueries).hasSize(5)
+        assertThat(starterPackBoxsWithQueries.keys).containsExactly(
+            StarterPackBox(1, "Armor"),
+            StarterPackBox(2, "Primary Hand"),
+            StarterPackBox(3, "Secondary Hand"),
+            StarterPackBox(4, "Ranged Weapon"),
+            StarterPackBox(5, "Equipment Pack")
+        )
+        assertThat(starterPackBoxsWithQueries[StarterPackBox(1, "Armor")]).hasSize(4)
 
     }
 

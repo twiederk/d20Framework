@@ -1,6 +1,6 @@
 package com.d20charactersheet.framework.boc.model
 
-class StarterPackBox(
+data class StarterPackBox(
     val id: Int = 0,
     val name: String = ""
 ) {

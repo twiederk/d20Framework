@@ -1,6 +1,6 @@
 package com.d20charactersheet.framework.boc.model
 
-class StarterPackQuery(
+data class StarterPackQuery(
     val id: Int,
     val optionId: Int,
     val equipmentType: EquipmentType,

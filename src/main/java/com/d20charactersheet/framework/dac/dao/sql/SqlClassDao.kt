@@ -2,7 +2,6 @@ package com.d20charactersheet.framework.dac.dao.sql
 
 
 import com.d20charactersheet.framework.boc.model.*
-import com.d20charactersheet.framework.boc.service.ItemService
 import com.d20charactersheet.framework.dac.dao.ClassDao
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_ABILITY_ID
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_ALIGNMENTS
@@ -231,21 +230,14 @@ class SqlClassDao(private val db: Database) : ClassDao {
         }
     }
 
-    override fun getStarterPackBoxes(
-        classId: Int,
-        itemService: ItemService,
-        allWeapons: List<Weapon>,
-        allArmor: List<Armor>,
-        allGoods: List<Good>
-    ): List<StarterPackBox> {
+    override fun getStarterPackBoxQueries(classId: Int): Map<StarterPackBox, List<StarterPackQuery>> {
+        val starterPackBoxQueries = mutableMapOf<StarterPackBox, List<StarterPackQuery>>()
         val starterPackBoxes = selectClassStarterPackBoxTable(classId)
         for (starterPackBox in starterPackBoxes) {
-            val starterPackBoxOptionQueries = selectStarterBoxOptionQueries(starterPackBox.id)
-            val starterPackBoxOptions =
-                StarterPackHelper(itemService, allWeapons, allArmor, allGoods).getStarterBoxOptions(starterPackBoxOptionQueries)
-            starterPackBox.addAll(starterPackBoxOptions)
+            val starterPackBoxOptionQueries = selectStarterBoxQueries(starterPackBox.id)
+            starterPackBoxQueries[starterPackBox] = starterPackBoxOptionQueries
         }
-        return starterPackBoxes
+        return starterPackBoxQueries
     }
 
     private fun selectClassStarterPackBoxTable(classId: Int): List<StarterPackBox> {
@@ -268,7 +260,7 @@ class SqlClassDao(private val db: Database) : ClassDao {
         return starterPackBoxes
     }
 
-    private fun selectStarterBoxOptionQueries(starterBoxId: Int): List<StarterPackQuery> {
+    private fun selectStarterBoxQueries(starterBoxId: Int): List<StarterPackQuery> {
         val starterPackQueries: MutableList<StarterPackQuery> = mutableListOf()
         var queryResult: QueryResult? = null
         try {
