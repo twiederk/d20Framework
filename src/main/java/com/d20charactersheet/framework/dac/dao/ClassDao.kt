@@ -53,5 +53,5 @@ interface ClassDao {
      */
     fun addSkill(skill: Skill, characterClasses: List<CharacterClass>)
 
-    fun getStarterPackBoxQueries(classId: Int): Map<StarterPackBox, List<StarterPackQuery>>
+    fun getStarterPackBoxesWithQueries(classId: Int): Map<StarterPackBox, List<StarterPackQuery>>
 }

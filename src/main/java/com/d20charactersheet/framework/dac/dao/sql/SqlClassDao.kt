@@ -230,7 +230,7 @@ class SqlClassDao(private val db: Database) : ClassDao {
         }
     }
 
-    override fun getStarterPackBoxQueries(classId: Int): Map<StarterPackBox, List<StarterPackQuery>> {
+    override fun getStarterPackBoxesWithQueries(classId: Int): Map<StarterPackBox, List<StarterPackQuery>> {
         val starterPackBoxQueries = mutableMapOf<StarterPackBox, List<StarterPackQuery>>()
         val starterPackBoxes = selectClassStarterPackBoxTable(classId)
         for (starterPackBox in starterPackBoxes) {

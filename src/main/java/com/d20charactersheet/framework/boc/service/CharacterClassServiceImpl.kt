@@ -2,6 +2,7 @@ package com.d20charactersheet.framework.boc.service
 
 import com.d20charactersheet.framework.boc.model.*
 import com.d20charactersheet.framework.dac.dao.ClassDao
+import com.d20charactersheet.framework.dac.dao.sql.StarterPackHelper
 
 /**
  * Creates CharacterClassService with given data access object.
@@ -64,9 +65,25 @@ class CharacterClassServiceImpl(private val classDao: ClassDao) : CharacterClass
         characterClass: CharacterClass,
         itemService: ItemService,
         allWeapons: List<Weapon>,
-        allArmor: List<Armor>
+        allArmor: List<Armor>,
+        allGoods: List<Good>
     ): StarterPack {
 
+        val starterPackBoxesWithQueries = classDao.getStarterPackBoxesWithQueries(characterClass.id)
+
+        val starterPack = StarterPack()
+        for (starterPackBox in starterPackBoxesWithQueries.keys) {
+            val starterBoxOptions = StarterPackHelper(itemService, allWeapons, allArmor, allGoods)
+                .getStarterBoxOptions(starterPackBoxesWithQueries.getOrDefault(starterPackBox, listOf()))
+            starterPackBox.addAll(starterBoxOptions)
+            starterPack.add(starterPackBox)
+        }
+
+        characterClass.starterPack = starterPack
+
+        return starterPack
+
+        /*
         // Armor
         val chainMail = itemService.getItemById(1, allArmor)
 
@@ -115,18 +132,9 @@ class CharacterClassServiceImpl(private val classDao: ClassDao) : CharacterClass
         val equipmentPackSelectionBox = StarterPackBox(name = "Equipment Pack")
         equipmentPackSelectionBox.add(dungeoneersPack)
         equipmentPackSelectionBox.add(explorerersPack)
+        */
 
-        // Starter Pack
-        val starterPack = StarterPack()
-        starterPack.add(armorSelectionBox)
-        starterPack.add(primaryHandSelectionBox)
-        starterPack.add(secondaryHandSelectionBox)
-        starterPack.add(rangeWeaponSelectionBox)
-        starterPack.add(equipmentPackSelectionBox)
 
-        characterClass.starterPack = starterPack
-
-        return starterPack
     }
 
     private fun createSelectionOption(item: Item, number: Int = 1): StarterPackBoxOption {

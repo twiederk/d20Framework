@@ -107,7 +107,7 @@ abstract class BaseClassDaoTest {
     fun testSelectionBoxesOfFighter() {
 
         // act
-        val starterPackBoxsWithQueries: Map<StarterPackBox, List<StarterPackQuery>> = classDao.getStarterPackBoxQueries(4)
+        val starterPackBoxsWithQueries: Map<StarterPackBox, List<StarterPackQuery>> = classDao.getStarterPackBoxesWithQueries(4)
 
         // assert
         assertThat(starterPackBoxsWithQueries).isNotNull

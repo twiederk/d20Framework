@@ -1,33 +1,48 @@
 package com.d20charactersheet.framework.boc.service
 
 import com.d20charactersheet.framework.boc.model.*
+import com.d20charactersheet.framework.dac.dao.ClassDao
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
+import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
 class CharacterClassServiceStarterPackTest {
 
-    private val underTest = CharacterClassServiceImpl(mock())
+    private val classDao: ClassDao = mock()
+
+    private val underTest = CharacterClassServiceImpl(classDao)
 
     @Test
     fun getStarterPack_singleItem_getOneSelectionBoxWithOneSelectionOptionWithOneItemGroup() {
         // arrange
-        val clazz = CharacterClass()
+        whenever(classDao.getStarterPackBoxesWithQueries(1)) doReturn mapOf(
+            StarterPackBox(1, "Weapon") to listOf(StarterPackQuery(1, 2, EquipmentType.WEAPON, 3, 4))
+        )
+        val clazz = CharacterClass().apply { id = 1 }
+
+        val allWeaopns: List<Weapon> = mock()
+        val allArmor: List<Armor> = mock()
+        val allGoods: List<Good> = mock()
+        val itemService: ItemService = mock()
 
         // act
-        val starterPack = underTest.getStarterPack(clazz, mock(), mock(), mock())
+        val starterPack = underTest.getStarterPack(clazz, itemService, allWeaopns, allArmor, allGoods)
 
         // assert
         assertThat(clazz.starterPack).isEqualTo(starterPack)
-        assertThat(starterPack.starterPackBoxes).hasSize(1)
+        assertThat(starterPack.starterPackBoxes).containsExactly(StarterPackBox(1, "Weapon"))
     }
 
     @Test
+    @Disabled("Implement simple boxes first")
     fun getStarterPack_fighter_getCompleteSelectionForFighter() {
         // arrange
         val allWeaopns: List<Weapon> = mock()
         val allArmor: List<Armor> = mock()
+        val allGoods: List<Good> = mock()
         val itemService: ItemService = mock()
         whenever(itemService.getItemById(1, allWeaopns)).thenReturn(Weapon().apply { name = "Longbow" })
         whenever(itemService.getItemById(2, allWeaopns)).thenReturn(Weapon().apply { name = "Arrow" })
@@ -51,7 +66,7 @@ class CharacterClassServiceStarterPackTest {
         val clazz = CharacterClass()
 
         // act
-        val starterPack: StarterPack = underTest.getStarterPack(clazz, itemService, allWeaopns, allArmor)
+        val starterPack: StarterPack = underTest.getStarterPack(clazz, itemService, allWeaopns, allArmor, allGoods)
 
         // assert
         assertThat(clazz.starterPack).isEqualTo(starterPack)
