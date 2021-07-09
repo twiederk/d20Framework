@@ -33,7 +33,7 @@ class StarterPackHelper(
     fun createStarterPackOption(starterPackQueries: List<StarterPackQuery>): StarterPackBoxOption {
         val starterPackBoxOption = StarterPackBoxItemOption()
         for (starterPackQuery in starterPackQueries) {
-            val item = itemService.getItemById(starterPackQuery.itemId, allArmor)
+            val item = itemService.getItemById(starterPackQuery.itemId, allWeapons)
             starterPackBoxOption.add(ItemGroup().apply { this.item = item; number = starterPackQuery.quantity })
         }
         return starterPackBoxOption

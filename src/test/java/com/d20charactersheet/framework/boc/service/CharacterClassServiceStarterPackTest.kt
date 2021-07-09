@@ -27,6 +27,7 @@ class CharacterClassServiceStarterPackTest {
         val allArmor: List<Armor> = mock()
         val allGoods: List<Good> = mock()
         val itemService: ItemService = mock()
+        whenever(itemService.getItemById(3, allWeaopns)) doReturn Weapon().apply { name = "myWeapon" }
 
         // act
         val starterPack = underTest.getStarterPack(clazz, itemService, allWeaopns, allArmor, allGoods)
@@ -34,6 +35,8 @@ class CharacterClassServiceStarterPackTest {
         // assert
         assertThat(clazz.starterPack).isEqualTo(starterPack)
         assertThat(starterPack.starterPackBoxes).containsExactly(StarterPackBox(1, "Weapon"))
+        assertThat(starterPack.starterPackBoxes[0].options).hasSize(1)
+        assertThat(starterPack.starterPackBoxes[0].options[0].getTitle()).isEqualTo("myWeapon (4)")
     }
 
     @Test
