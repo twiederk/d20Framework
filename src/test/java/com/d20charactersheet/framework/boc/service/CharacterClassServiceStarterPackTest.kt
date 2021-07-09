@@ -16,7 +16,7 @@ class CharacterClassServiceStarterPackTest {
     private val underTest = CharacterClassServiceImpl(classDao)
 
     @Test
-    fun getStarterPack_singleItem_getOneSelectionBoxWithOneSelectionOptionWithOneItemGroup() {
+    fun getStarterPack_oneItem_getOneSelectionBoxWithOneSelectionOptionWithOneItemGroup() {
         // arrange
         whenever(classDao.getStarterPackBoxesWithQueries(1)) doReturn mapOf(
             StarterPackBox(1, "Weapon") to listOf(StarterPackQuery(1, 2, EquipmentType.WEAPON, 3, 4))
@@ -37,6 +37,34 @@ class CharacterClassServiceStarterPackTest {
         assertThat(starterPack.starterPackBoxes).containsExactly(StarterPackBox(1, "Weapon"))
         assertThat(starterPack.starterPackBoxes[0].options).hasSize(1)
         assertThat(starterPack.starterPackBoxes[0].options[0].getTitle()).isEqualTo("myWeapon (4)")
+    }
+
+    @Test
+    fun getStarterPack_twoItemsForOneOption_getOneSelectionBoxWithOneSelectionOptionWithTwoItemGroups() {
+        // arrange
+        whenever(classDao.getStarterPackBoxesWithQueries(1)) doReturn mapOf(
+            StarterPackBox(1, "Weapon with Armor") to listOf(
+                StarterPackQuery(1, 2, EquipmentType.WEAPON, 3, 4),
+                StarterPackQuery(1, 2, EquipmentType.ARMOR, 5, 6)
+            )
+        )
+        val clazz = CharacterClass().apply { id = 1 }
+
+        val allWeaopns: List<Weapon> = mock()
+        val allArmor: List<Armor> = mock()
+        val allGoods: List<Good> = mock()
+        val itemService: ItemService = mock()
+        whenever(itemService.getItemById(3, allWeaopns)) doReturn Weapon().apply { name = "myWeapon" }
+        whenever(itemService.getItemById(5, allArmor)) doReturn Weapon().apply { name = "myArmor" }
+
+        // act
+        val starterPack = underTest.getStarterPack(clazz, itemService, allWeaopns, allArmor, allGoods)
+
+        // assert
+        assertThat(clazz.starterPack).isEqualTo(starterPack)
+        assertThat(starterPack.starterPackBoxes).containsExactly(StarterPackBox(1, "Weapon with Armor"))
+        assertThat(starterPack.starterPackBoxes[0].options).hasSize(1)
+        assertThat(starterPack.starterPackBoxes[0].options[0].getTitle()).isEqualTo("myWeapon (4), myArmor (6)")
     }
 
     @Test

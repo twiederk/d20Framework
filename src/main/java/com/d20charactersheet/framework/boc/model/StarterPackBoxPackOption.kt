@@ -4,4 +4,8 @@ class StarterPackBoxPackOption(val equipmentPack: EquipmentPack) : StarterPackBo
 
     override fun getTitle(): String = equipmentPack.name ?: ""
 
+    override fun addAll(itemGroups: List<ItemGroup>) {
+        TODO("Not yet implemented function body")
+    }
+
 }

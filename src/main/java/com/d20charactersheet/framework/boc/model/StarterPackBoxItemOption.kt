@@ -2,12 +2,15 @@ package com.d20charactersheet.framework.boc.model
 
 class StarterPackBoxItemOption : StarterPackBoxOption {
 
-
     val itemGroups: MutableList<ItemGroup> = mutableListOf()
 
     override fun getTitle(): String = itemGroups
         .map { extractItemName(it) }
         .joinToString { it }
+
+    override fun addAll(itemGroups: List<ItemGroup>) {
+        this.itemGroups.addAll(itemGroups)
+    }
 
     fun add(itemGroup: ItemGroup) {
         itemGroups.add(itemGroup)

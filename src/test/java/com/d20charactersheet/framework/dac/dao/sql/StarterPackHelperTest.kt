@@ -1,8 +1,6 @@
 package com.d20charactersheet.framework.dac.dao.sql
 
-import com.d20charactersheet.framework.boc.model.Armor
-import com.d20charactersheet.framework.boc.model.EquipmentType
-import com.d20charactersheet.framework.boc.model.StarterPackQuery
+import com.d20charactersheet.framework.boc.model.*
 import com.d20charactersheet.framework.boc.service.ItemService
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -64,6 +62,54 @@ class StarterPackHelperTest {
 
         // assert
         assertThat(starterPackOption.getTitle()).isEqualTo("myArmor (4)")
+    }
+
+    @Test
+    fun executeStarterPackQuery_oneWeapon_oneItemGroupWithWeapon() {
+        // arrange
+        val itemService: ItemService = mock()
+        val allWeapons: List<Weapon> = mock()
+        val starterPackQuery = StarterPackQuery(
+            id = 1,
+            optionId = 2,
+            equipmentType = EquipmentType.WEAPON,
+            itemId = 4,
+            quantity = 5
+        )
+        whenever(itemService.getItemById(4, allWeapons)) doReturn Weapon().apply { id = 4 }
+
+        // act
+        val itemGroups: List<ItemGroup> =
+            StarterPackHelper(itemService, allWeapons, mock(), mock()).executeStarterPackQuery(starterPackQuery)
+
+        // assert
+        assertThat(itemGroups).hasSize(1)
+        assertThat(itemGroups[0].item).isEqualTo(Weapon().apply { id = 4 })
+        assertThat(itemGroups[0].number).isEqualTo(5)
+    }
+
+    @Test
+    fun executeStarterPackQuery_oneArmor_oneItemGroupWithOneArmor() {
+        // arrange
+        val itemService: ItemService = mock()
+        val allArmor: List<Armor> = mock()
+        val starterPackQuery = StarterPackQuery(
+            id = 1,
+            optionId = 2,
+            equipmentType = EquipmentType.ARMOR,
+            itemId = 4,
+            quantity = 5
+        )
+        whenever(itemService.getItemById(4, allArmor)) doReturn Armor().apply { id = 4 }
+
+        // act
+        val itemGroups: List<ItemGroup> =
+            StarterPackHelper(itemService, mock(), allArmor, mock()).executeStarterPackQuery(starterPackQuery)
+
+        // assert
+        assertThat(itemGroups).hasSize(1)
+        assertThat(itemGroups[0].item).isEqualTo(Armor().apply { id = 4 })
+        assertThat(itemGroups[0].number).isEqualTo(5)
     }
 
 }
