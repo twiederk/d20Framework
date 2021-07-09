@@ -136,4 +136,28 @@ class StarterPackHelperTest {
         assertThat(itemGroups[0].number).isEqualTo(5)
     }
 
+    @Test
+    fun executeStarterPackQuery_onePack_oneItemGroupWithOneGood() {
+        // arrange
+        val itemService: ItemService = mock()
+        val allEquipmentPacks: List<EquipmentPack> = mock()
+        val starterPackQuery = StarterPackQuery(
+            id = 1,
+            optionId = 2,
+            equipmentType = EquipmentType.PACK,
+            itemId = 4,
+            quantity = 1
+        )
+        whenever(itemService.getEquipmentPackById(4, allEquipmentPacks)) doReturn EquipmentPack(4, "myPack")
+
+        // act
+        val itemGroups: List<ItemGroup> =
+            StarterPackHelper(itemService, mock(), mock(), mock()).executeStarterPackQuery(starterPackQuery)
+
+        // assert
+        assertThat(itemGroups).hasSize(1)
+        assertThat(itemGroups[0].item).isEqualTo(EquipmentPack(4, "myPack"))
+        assertThat(itemGroups[0].number).isEqualTo(1)
+    }
+
 }

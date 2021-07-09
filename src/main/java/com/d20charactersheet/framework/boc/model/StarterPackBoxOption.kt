@@ -4,6 +4,4 @@ interface StarterPackBoxOption {
 
     fun getTitle(): String
 
-    fun addAll(itemGroups: List<ItemGroup>)
-
 }

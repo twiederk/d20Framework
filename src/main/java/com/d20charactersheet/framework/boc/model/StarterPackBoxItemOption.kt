@@ -8,7 +8,7 @@ class StarterPackBoxItemOption : StarterPackBoxOption {
         .map { extractItemName(it) }
         .joinToString { it }
 
-    override fun addAll(itemGroups: List<ItemGroup>) {
+    fun addAll(itemGroups: List<ItemGroup>) {
         this.itemGroups.addAll(itemGroups)
     }
 

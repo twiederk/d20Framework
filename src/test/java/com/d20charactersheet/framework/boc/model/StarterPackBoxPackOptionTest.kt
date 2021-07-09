@@ -8,7 +8,7 @@ class StarterPackBoxPackOptionTest {
     @Test
     fun getTitle_noPack_nameOfPack() {
         // Arrange
-        val underTest = StarterPackBoxPackOption(EquipmentPack().apply { name = "myEquipmentPack" })
+        val underTest = StarterPackBoxPackOption(EquipmentPack(1, "myEquipmentPack"))
 
         // Act
         val title = underTest.getTitle()

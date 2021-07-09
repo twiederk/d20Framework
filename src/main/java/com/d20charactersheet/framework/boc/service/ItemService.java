@@ -5,6 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.NotNull;
 
 import com.d20charactersheet.framework.boc.model.Armor;
+import com.d20charactersheet.framework.boc.model.EquipmentPack;
 import com.d20charactersheet.framework.boc.model.Good;
 import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.Weapon;
@@ -125,4 +126,6 @@ public interface ItemService {
 
   @NotNull
   List<Weapon> filterWeaponsByType(@NotNull WeaponType weaponType);
+
+  EquipmentPack getEquipmentPackById(int id, @NotNull List<EquipmentPack> allEquipmentPacks);
 }
