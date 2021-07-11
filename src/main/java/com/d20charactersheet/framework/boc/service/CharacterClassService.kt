@@ -85,7 +85,8 @@ interface CharacterClassService {
         itemService: ItemService,
         allWeapons: List<Weapon>,
         allArmor: List<Armor>,
-        allGoods: List<Good>
+        allGoods: List<Good>,
+        allPacks: List<EquipmentPack>
     ): StarterPack
 
 }

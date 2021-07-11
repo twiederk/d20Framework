@@ -2,7 +2,6 @@ package com.d20charactersheet.framework.boc.service
 
 import com.d20charactersheet.framework.boc.model.*
 import com.d20charactersheet.framework.dac.dao.ClassDao
-import com.d20charactersheet.framework.dac.dao.sql.StarterPackHelper
 
 /**
  * Creates CharacterClassService with given data access object.
@@ -66,14 +65,15 @@ class CharacterClassServiceImpl(private val classDao: ClassDao) : CharacterClass
         itemService: ItemService,
         allWeapons: List<Weapon>,
         allArmor: List<Armor>,
-        allGoods: List<Good>
+        allGoods: List<Good>,
+        allPacks: List<EquipmentPack>
     ): StarterPack {
 
         val starterPackBoxesWithQueries = classDao.getStarterPackBoxesWithQueries(characterClass.id)
 
         val starterPack = StarterPack()
         for (starterPackBox in starterPackBoxesWithQueries.keys) {
-            val starterBoxOptions = StarterPackHelper(itemService, allWeapons, allArmor, allGoods)
+            val starterBoxOptions = StarterPackHelper(itemService, allWeapons, allArmor, allGoods, allPacks)
                 .getStarterBoxOptions(starterPackBoxesWithQueries.getOrDefault(starterPackBox, listOf()))
             starterPackBox.addAll(starterBoxOptions)
             starterPack.add(starterPackBox)
