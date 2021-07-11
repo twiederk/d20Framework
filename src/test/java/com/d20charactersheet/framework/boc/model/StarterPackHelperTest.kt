@@ -11,10 +11,11 @@ import org.mockito.kotlin.whenever
 
 class StarterPackHelperTest {
 
-    val itemService: ItemService = mock()
-    val allWeapons: List<Weapon> = mock()
-    val allArmor: List<Armor> = mock()
-    val allGoods: List<Good> = mock()
+    private val itemService: ItemService = mock()
+    private val allWeapons: List<Weapon> = mock()
+    private val allArmor: List<Armor> = mock()
+    private val allGoods: List<Good> = mock()
+    private val allPacks: List<EquipmentPack> = mock()
 
     @Test
     fun createStarterBoxOptions_oneWeapon_oneItemGroupWithWeapon() {
@@ -35,9 +36,9 @@ class StarterPackHelperTest {
             StarterPackHelper(
                 itemService,
                 allWeapons,
-                mock(),
-                mock(),
-                mock()
+                allArmor,
+                allGoods,
+                allPacks
             ).createStarterBoxOptions(mapOf(1 to starterPackQueries))
 
         // assert
@@ -64,9 +65,9 @@ class StarterPackHelperTest {
             StarterPackHelper(
                 itemService,
                 allWeapons,
-                mock(),
-                mock(),
-                mock()
+                allArmor,
+                allGoods,
+                allPacks
             ).createStarterBoxOptions(mapOf(1 to starterPackQueries))
 
         // assert
@@ -78,7 +79,6 @@ class StarterPackHelperTest {
     @Test
     fun createStarterBoxOptions_oneGood_oneItemGroupWithOneGood() {
         // arrange
-        val itemService: ItemService = mock()
         val starterPackQueries = listOf(
             StarterPackQuery(
                 id = 1,
@@ -95,9 +95,9 @@ class StarterPackHelperTest {
             StarterPackHelper(
                 itemService,
                 allWeapons,
-                mock(),
-                mock(),
-                mock()
+                allArmor,
+                allGoods,
+                allPacks
             ).createStarterBoxOptions(mapOf(1 to starterPackQueries))
 
         // assert
@@ -108,8 +108,6 @@ class StarterPackHelperTest {
     @Test
     fun createStarterBoxOptions_onePack_oneItemGroupWithOneGood() {
         // arrange
-        val itemService: ItemService = mock()
-        val allEquipmentPacks: List<EquipmentPack> = mock()
         val starterPackQueries = listOf(
             StarterPackQuery(
                 id = 1,
@@ -119,16 +117,16 @@ class StarterPackHelperTest {
                 quantity = 1
             )
         )
-        whenever(itemService.getEquipmentPackById(4, allEquipmentPacks)) doReturn EquipmentPack(4, "myPack")
+        whenever(itemService.getEquipmentPackById(4, allPacks)) doReturn EquipmentPack(4, "myPack")
 
         // act
         val starterPackOptions: List<StarterPackBoxOption> =
             StarterPackHelper(
                 itemService,
                 allWeapons,
-                mock(),
-                mock(),
-                mock()
+                allArmor,
+                allGoods,
+                allPacks
             ).createStarterBoxOptions(mapOf(1 to starterPackQueries))
 
         // assert
