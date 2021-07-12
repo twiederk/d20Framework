@@ -10,7 +10,13 @@ class StarterPackHelper(
     private val allPacks: List<EquipmentPack>
 ) {
 
-
+    /**
+     * Get all options of one starter box.
+     *
+     * @param starterPackQueries List of all queries for this starter box.
+     *
+     * @return List of all options for this box
+     */
     fun getStarterBoxOptions(starterPackQueries: List<StarterPackQuery>): List<StarterPackBoxOption> {
         val groupedStarterPackQuieries: Map<Int, List<StarterPackQuery>> = starterPackQueries.groupBy { it.optionId }
 
