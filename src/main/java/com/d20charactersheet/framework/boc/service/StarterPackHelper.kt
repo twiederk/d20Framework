@@ -7,28 +7,20 @@ class StarterPackHelper(
     private val allWeapons: List<Weapon>,
     private val allArmor: List<Armor>,
     private val allGoods: List<Good>,
-    val allPacks: List<EquipmentPack>
+    private val allPacks: List<EquipmentPack>
 ) {
 
 
     fun getStarterBoxOptions(starterPackQueries: List<StarterPackQuery>): List<StarterPackBoxOption> {
-        val groupedStarterPackQuieries: Map<Int, List<StarterPackQuery>> = groupStarterPackQueries(starterPackQueries)
-        return createStarterBoxOptions(groupedStarterPackQuieries)
-    }
+        val groupedStarterPackQuieries: Map<Int, List<StarterPackQuery>> = starterPackQueries.groupBy { it.optionId }
 
-    private fun groupStarterPackQueries(starterPackQueries: List<StarterPackQuery>): Map<Int, List<StarterPackQuery>> {
-        return starterPackQueries.groupBy { it.optionId }
-    }
-
-
-    internal fun createStarterBoxOptions(groupedStarterPackQuieries: Map<Int, List<StarterPackQuery>>): List<StarterPackBoxOption> {
         // queries are now mapped to options
         val starterPackOptions = mutableListOf<StarterPackBoxOption>()
-        for (starterPackQueries in groupedStarterPackQuieries.values) {
+        for (queriesOfOneOption in groupedStarterPackQuieries.values) {
             // list of queries for one option
             starterPackOptions.addAll(
                 StarterPackFactory().createStarterPackOptions(
-                    starterPackQueries,
+                    queriesOfOneOption,
                     itemService,
                     allWeapons,
                     allArmor,

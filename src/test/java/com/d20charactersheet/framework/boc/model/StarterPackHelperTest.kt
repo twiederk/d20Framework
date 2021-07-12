@@ -17,8 +17,19 @@ class StarterPackHelperTest {
     private val allGoods: List<Good> = mock()
     private val allPacks: List<EquipmentPack> = mock()
 
+
     @Test
-    fun createStarterBoxOptions_oneWeapon_oneItemGroupWithWeapon() {
+    fun getStarterBoxOptions_emptyListOfStarterBoxQueries_emptyListOfStarterPackOptions() {
+
+        // act
+        val starterBoxOptions = StarterPackHelper(mock(), mock(), mock(), mock(), mock()).getStarterBoxOptions(listOf())
+
+        // assert
+        assertThat(starterBoxOptions).isEmpty()
+    }
+
+    @Test
+    fun getStarterBoxOptions_oneWeapon_oneItemGroupWithWeapon() {
         // arrange
         val starterPackQueries = listOf(
             StarterPackQuery(
@@ -39,7 +50,7 @@ class StarterPackHelperTest {
                 allArmor,
                 allGoods,
                 allPacks
-            ).createStarterBoxOptions(mapOf(1 to starterPackQueries))
+            ).getStarterBoxOptions(starterPackQueries)
 
         // assert
         assertThat(starterPackOptions).hasSize(1)
@@ -47,7 +58,7 @@ class StarterPackHelperTest {
     }
 
     @Test
-    fun createStarterBoxOptions_oneArmor_oneItemGroupWithOneArmor() {
+    fun getStarterBoxOptions_oneArmor_oneItemGroupWithOneArmor() {
         // arrange
         val starterPackQueries = listOf(
             StarterPackQuery(
@@ -68,7 +79,7 @@ class StarterPackHelperTest {
                 allArmor,
                 allGoods,
                 allPacks
-            ).createStarterBoxOptions(mapOf(1 to starterPackQueries))
+            ).getStarterBoxOptions(starterPackQueries)
 
         // assert
         assertThat(starterPackOptions).hasSize(1)
@@ -77,7 +88,7 @@ class StarterPackHelperTest {
     }
 
     @Test
-    fun createStarterBoxOptions_oneGood_oneItemGroupWithOneGood() {
+    fun getStarterBoxOptions_oneGood_oneItemGroupWithOneGood() {
         // arrange
         val starterPackQueries = listOf(
             StarterPackQuery(
@@ -98,7 +109,7 @@ class StarterPackHelperTest {
                 allArmor,
                 allGoods,
                 allPacks
-            ).createStarterBoxOptions(mapOf(1 to starterPackQueries))
+            ).getStarterBoxOptions(starterPackQueries)
 
         // assert
         assertThat(starterPackOptions).hasSize(1)
@@ -106,7 +117,7 @@ class StarterPackHelperTest {
     }
 
     @Test
-    fun createStarterBoxOptions_onePack_oneItemGroupWithOneGood() {
+    fun getStarterBoxOptions_onePack_oneItemGroupWithOneGood() {
         // arrange
         val starterPackQueries = listOf(
             StarterPackQuery(
@@ -127,7 +138,7 @@ class StarterPackHelperTest {
                 allArmor,
                 allGoods,
                 allPacks
-            ).createStarterBoxOptions(mapOf(1 to starterPackQueries))
+            ).getStarterBoxOptions(starterPackQueries)
 
         // assert
         assertThat(starterPackOptions).hasSize(1)
@@ -135,13 +146,78 @@ class StarterPackHelperTest {
     }
 
     @Test
-    fun getStarterBoxOptions_emptyListOfStarterBoxQueries_emptyListOfStarterPackOptions() {
+    fun getStarterBoxOptions_twoItemsForOneOptions_oneOptionWithOneItemEach() {
+        // arrange
+        val starterPackQueries = listOf(
+            StarterPackQuery(
+                id = 1,
+                optionId = 2,
+                equipmentType = EquipmentType.WEAPON,
+                itemId = 3,
+                quantity = 1
+            ),
+            StarterPackQuery(
+                id = 1,
+                optionId = 2,
+                equipmentType = EquipmentType.WEAPON,
+                itemId = 4,
+                quantity = 1
+            )
+        )
+        whenever(itemService.getItemById(3, allWeapons)) doReturn Weapon().apply { id = 3; name = "myFirstWeapon" }
+        whenever(itemService.getItemById(4, allWeapons)) doReturn Weapon().apply { id = 4; name = "mySecondWeapon" }
 
         // act
-        val starterBoxOptions = StarterPackHelper(mock(), mock(), mock(), mock(), mock()).getStarterBoxOptions(listOf())
+        val starterPackOptions: List<StarterPackBoxOption> =
+            StarterPackHelper(
+                itemService,
+                allWeapons,
+                allArmor,
+                allGoods,
+                allPacks
+            ).getStarterBoxOptions(starterPackQueries)
 
         // assert
-        assertThat(starterBoxOptions).isEmpty()
+        assertThat(starterPackOptions).hasSize(1)
+        assertThat(starterPackOptions[0].getTitle()).isEqualTo("myFirstWeapon, mySecondWeapon")
+    }
+
+    @Test
+    fun getStarterBoxOptions_twoItemsForTwoOptions_twoOptionsWithOneItemEach() {
+        // arrange
+        val starterPackQueries = listOf(
+            StarterPackQuery(
+                id = 1,
+                optionId = 2,
+                equipmentType = EquipmentType.WEAPON,
+                itemId = 3,
+                quantity = 1
+            ),
+            StarterPackQuery(
+                id = 1,
+                optionId = 3,
+                equipmentType = EquipmentType.WEAPON,
+                itemId = 4,
+                quantity = 1
+            )
+        )
+        whenever(itemService.getItemById(3, allWeapons)) doReturn Weapon().apply { id = 3; name = "myFirstWeapon" }
+        whenever(itemService.getItemById(4, allWeapons)) doReturn Weapon().apply { id = 4; name = "mySecondWeapon" }
+
+        // act
+        val starterPackOptions: List<StarterPackBoxOption> =
+            StarterPackHelper(
+                itemService,
+                allWeapons,
+                allArmor,
+                allGoods,
+                allPacks
+            ).getStarterBoxOptions(starterPackQueries)
+
+        // assert
+        assertThat(starterPackOptions).hasSize(2)
+        assertThat(starterPackOptions[0].getTitle()).isEqualTo("myFirstWeapon")
+        assertThat(starterPackOptions[1].getTitle()).isEqualTo("mySecondWeapon")
     }
 
 }
