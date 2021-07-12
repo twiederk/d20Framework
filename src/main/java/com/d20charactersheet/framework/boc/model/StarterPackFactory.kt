@@ -7,11 +7,24 @@ class StarterPackFactory {
     fun createStarterPackOptions(
         starterPackQueries: List<StarterPackQuery>,
         itemService: ItemService,
+        allWeapons: List<Weapon>,
         allPacks: List<EquipmentPack>
     ): List<StarterPackBoxOption> {
-        if (starterPackQueries.size == 1 && starterPackQueries[0].equipmentType == EquipmentType.PACK) {
-            val equipmentPack = itemService.getEquipmentPackById(starterPackQueries[0].itemId, allPacks)
-            return listOf(StarterPackBoxPackOption(equipmentPack))
+        if (starterPackQueries.size == 1) {
+            val starterPackQuery = starterPackQueries[0]
+            when (starterPackQuery.equipmentType) {
+                EquipmentType.PACK -> {
+                    val equipmentPack = itemService.getEquipmentPackById(starterPackQuery.itemId, allPacks)
+                    return listOf(StarterPackBoxPackOption(equipmentPack))
+                }
+                EquipmentType.WEAPON -> {
+                    val weapon = itemService.getItemById(starterPackQuery.itemId, allWeapons)
+                    val starterPackOption = StarterPackBoxItemOption().also {
+                        it.add(ItemGroup().apply { item = weapon; number = starterPackQuery.quantity })
+                    }
+                    return listOf(starterPackOption)
+                }
+            }
         }
         return emptyList()
     }

@@ -22,11 +22,18 @@ class StarterPackHelper(
 
 
     internal fun createStarterBoxOptions(groupedStarterPackQuieries: Map<Int, List<StarterPackQuery>>): List<StarterPackBoxOption> {
-        /** queries are now mapped to options */
+        // queries are now mapped to options
         val starterPackOptions = mutableListOf<StarterPackBoxOption>()
         for (starterPackQueries in groupedStarterPackQuieries.values) {
-            /* list of queries for one option */
-            starterPackOptions.addAll(StarterPackFactory().createStarterPackOptions(starterPackQueries, itemService, allPacks))
+            // list of queries for one option
+            starterPackOptions.addAll(
+                StarterPackFactory().createStarterPackOptions(
+                    starterPackQueries,
+                    itemService,
+                    allWeapons,
+                    allPacks
+                )
+            )
         }
         return starterPackOptions
     }
