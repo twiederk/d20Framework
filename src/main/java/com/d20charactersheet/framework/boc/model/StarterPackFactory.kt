@@ -13,38 +13,37 @@ class StarterPackFactory {
         allGood: List<Good>,
         allPacks: List<EquipmentPack>
     ): List<StarterPackBoxOption> {
-        if (starterPackQueries.size == 1) {
-            val starterPackQuery = starterPackQueries[0]
-            when (starterPackQuery.equipmentType) {
-                WEAPON -> {
-                    val weapon = itemService.getItemById(starterPackQuery.itemId, allWeapons)
-                    return createStarterPackItemOption(weapon, starterPackQuery)
-                }
-                ARMOR -> {
-                    val armor = itemService.getItemById(starterPackQuery.itemId, allArmor)
-                    return createStarterPackItemOption(armor, starterPackQuery)
-                }
-                GOOD -> {
-                    val good = itemService.getItemById(starterPackQuery.itemId, allGood)
-                    return createStarterPackItemOption(good, starterPackQuery)
-                }
-                PACK -> {
-                    val equipmentPack = itemService.getEquipmentPackById(starterPackQuery.itemId, allPacks)
-                    return listOf(StarterPackBoxPackOption(equipmentPack))
-                }
-            }
+        if (starterPackQueries.size == 1 && starterPackQueries[0].equipmentType == PACK) {
+            val equipmentPack = itemService.getEquipmentPackById(starterPackQueries[0].itemId, allPacks)
+            return listOf(StarterPackBoxPackOption(equipmentPack))
         }
-        return emptyList()
+        val itemGroups = mutableListOf<ItemGroup>()
+        for (starterPackQuery in starterPackQueries) {
+            itemGroups.add(getSingleItem(starterPackQuery, itemService, allWeapons, allArmor, allGood))
+        }
+        return listOf(StarterPackBoxItemOption().also { it.addAll(itemGroups) })
+
     }
 
-    private fun createStarterPackItemOption(
-        item: Item,
-        starterPackQuery: StarterPackQuery
-    ): List<StarterPackBoxItemOption> {
-        val starterPackOption = StarterPackBoxItemOption().also {
-            it.add(ItemGroup().apply { this.item = item; number = starterPackQuery.quantity })
+    private fun getSingleItem(
+        starterPackQuery: StarterPackQuery,
+        itemService: ItemService,
+        allWeapons: List<Weapon>,
+        allArmor: List<Armor>,
+        allGood: List<Good>
+    ): ItemGroup = when (starterPackQuery.equipmentType) {
+        WEAPON -> {
+            val weapon = itemService.getItemById(starterPackQuery.itemId, allWeapons)
+            ItemGroup().apply { this.item = weapon; number = starterPackQuery.quantity }
         }
-        return listOf(starterPackOption)
+        ARMOR -> {
+            val armor = itemService.getItemById(starterPackQuery.itemId, allArmor)
+            ItemGroup().apply { this.item = armor; number = starterPackQuery.quantity }
+        }
+        else -> {
+            val good = itemService.getItemById(starterPackQuery.itemId, allGood)
+            ItemGroup().apply { this.item = good; number = starterPackQuery.quantity }
+        }
     }
 
 }

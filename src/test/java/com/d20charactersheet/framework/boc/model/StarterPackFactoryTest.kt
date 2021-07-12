@@ -108,4 +108,35 @@ class StarterPackFactoryTest {
         assertThat((starterPackOptions[0]).getTitle()).isEqualTo("myPack")
     }
 
+    @Test
+    fun createStarterPackOptions_twoQuerieForOneOption_oneOptionWithTwoItemGroups() {
+        // arrange
+        val starterPackQueries = listOf(
+            StarterPackQuery(
+                id = 1,
+                optionId = 2,
+                equipmentType = EquipmentType.WEAPON,
+                itemId = 3,
+                quantity = 1
+            ),
+            StarterPackQuery(
+                id = 2,
+                optionId = 2,
+                equipmentType = EquipmentType.WEAPON,
+                itemId = 4,
+                quantity = 1
+            )
+        )
+        whenever(itemService.getItemById(3, allWeapons)) doReturn Weapon().apply { id = 3; name = "myFirstWeapon" }
+        whenever(itemService.getItemById(4, allWeapons)) doReturn Weapon().apply { id = 4; name = "mySecondWeapon" }
+
+        // act
+        val starterPackOptions =
+            StarterPackFactory().createStarterPackOptions(starterPackQueries, itemService, allWeapons, allArmor, allGoods, allPacks)
+
+        // assert
+        assertThat(starterPackOptions).hasSize(1)
+        assertThat((starterPackOptions[0]).getTitle()).isEqualTo("myFirstWeapon, mySecondWeapon")
+    }
+
 }
