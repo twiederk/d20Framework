@@ -11,7 +11,9 @@ class StarterPackFactoryTest {
 
     private val itemService: ItemService = mock()
 
+    private val allArmor: List<Armor> = mock()
     private val allWeapons: List<Weapon> = mock()
+    private val allGoods: List<Good> = mock()
     private val allPacks: List<EquipmentPack> = mock()
 
     @Test
@@ -23,18 +25,64 @@ class StarterPackFactoryTest {
                 optionId = 2,
                 equipmentType = EquipmentType.WEAPON,
                 itemId = 3,
-                quantity = 1
+                quantity = 4
             )
         )
         whenever(itemService.getItemById(3, allWeapons)) doReturn Weapon().apply { id = 3; name = "myWeapon" }
 
         // act
         val starterPackOptions =
-            StarterPackFactory().createStarterPackOptions(starterPackQueries, itemService, allWeapons, allPacks)
+            StarterPackFactory().createStarterPackOptions(starterPackQueries, itemService, allWeapons, allArmor, allGoods, allPacks)
 
         // assert
         assertThat(starterPackOptions).hasSize(1)
-        assertThat((starterPackOptions[0]).getTitle()).isEqualTo("myWeapon")
+        assertThat((starterPackOptions[0]).getTitle()).isEqualTo("myWeapon (4)")
+    }
+
+    @Test
+    fun createStarterPackOptions_oneQueryForArmor_oneOptionWithOneArmor() {
+        // arrange
+        val starterPackQueries = listOf(
+            StarterPackQuery(
+                id = 1,
+                optionId = 2,
+                equipmentType = EquipmentType.ARMOR,
+                itemId = 3,
+                quantity = 4
+            )
+        )
+        whenever(itemService.getItemById(3, allArmor)) doReturn Weapon().apply { id = 3; name = "myArmor" }
+
+        // act
+        val starterPackOptions =
+            StarterPackFactory().createStarterPackOptions(starterPackQueries, itemService, allWeapons, allArmor, allGoods, allPacks)
+
+        // assert
+        assertThat(starterPackOptions).hasSize(1)
+        assertThat((starterPackOptions[0]).getTitle()).isEqualTo("myArmor (4)")
+    }
+
+    @Test
+    fun createStarterPackOptions_oneQueryForGood_oneOptionWithOneGood() {
+        // arrange
+        val starterPackQueries = listOf(
+            StarterPackQuery(
+                id = 1,
+                optionId = 2,
+                equipmentType = EquipmentType.GOOD,
+                itemId = 3,
+                quantity = 4
+            )
+        )
+        whenever(itemService.getItemById(3, allGoods)) doReturn Weapon().apply { id = 3; name = "myGood" }
+
+        // act
+        val starterPackOptions =
+            StarterPackFactory().createStarterPackOptions(starterPackQueries, itemService, allWeapons, allArmor, allGoods, allPacks)
+
+        // assert
+        assertThat(starterPackOptions).hasSize(1)
+        assertThat((starterPackOptions[0]).getTitle()).isEqualTo("myGood (4)")
     }
 
     @Test
@@ -53,7 +101,7 @@ class StarterPackFactoryTest {
 
         // act
         val starterPackOptions =
-            StarterPackFactory().createStarterPackOptions(starterPackQueries, itemService, allWeapons, allPacks)
+            StarterPackFactory().createStarterPackOptions(starterPackQueries, itemService, allWeapons, allArmor, allGoods, allPacks)
 
         // assert
         assertThat(starterPackOptions).hasSize(1)

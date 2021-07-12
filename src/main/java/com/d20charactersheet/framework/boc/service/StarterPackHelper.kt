@@ -31,6 +31,8 @@ class StarterPackHelper(
                     starterPackQueries,
                     itemService,
                     allWeapons,
+                    allArmor,
+                    allGoods,
                     allPacks
                 )
             )
