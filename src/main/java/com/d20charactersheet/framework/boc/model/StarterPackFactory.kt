@@ -16,10 +16,6 @@ class StarterPackFactory {
         if (starterPackQueries.size == 1) {
             val starterPackQuery = starterPackQueries[0]
             when (starterPackQuery.equipmentType) {
-                PACK -> {
-                    val equipmentPack = itemService.getEquipmentPackById(starterPackQuery.itemId, allPacks)
-                    return listOf(StarterPackBoxPackOption(equipmentPack))
-                }
                 WEAPON -> {
                     val weapon = itemService.getItemById(starterPackQuery.itemId, allWeapons)
                     return createStarterPackItemOption(weapon, starterPackQuery)
@@ -31,6 +27,10 @@ class StarterPackFactory {
                 GOOD -> {
                     val good = itemService.getItemById(starterPackQuery.itemId, allGood)
                     return createStarterPackItemOption(good, starterPackQuery)
+                }
+                PACK -> {
+                    val equipmentPack = itemService.getEquipmentPackById(starterPackQuery.itemId, allPacks)
+                    return listOf(StarterPackBoxPackOption(equipmentPack))
                 }
             }
         }
