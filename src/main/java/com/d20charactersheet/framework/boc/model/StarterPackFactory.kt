@@ -22,28 +22,29 @@ class StarterPackFactory {
                 }
                 WEAPON -> {
                     val weapon = itemService.getItemById(starterPackQuery.itemId, allWeapons)
-                    val starterPackOption = StarterPackBoxItemOption().also {
-                        it.add(ItemGroup().apply { item = weapon; number = starterPackQuery.quantity })
-                    }
-                    return listOf(starterPackOption)
+                    return createStarterPackItemOption(weapon, starterPackQuery)
                 }
                 ARMOR -> {
-                    val weapon = itemService.getItemById(starterPackQuery.itemId, allArmor)
-                    val starterPackOption = StarterPackBoxItemOption().also {
-                        it.add(ItemGroup().apply { item = weapon; number = starterPackQuery.quantity })
-                    }
-                    return listOf(starterPackOption)
+                    val armor = itemService.getItemById(starterPackQuery.itemId, allArmor)
+                    return createStarterPackItemOption(armor, starterPackQuery)
                 }
                 GOOD -> {
-                    val weapon = itemService.getItemById(starterPackQuery.itemId, allGood)
-                    val starterPackOption = StarterPackBoxItemOption().also {
-                        it.add(ItemGroup().apply { item = weapon; number = starterPackQuery.quantity })
-                    }
-                    return listOf(starterPackOption)
+                    val good = itemService.getItemById(starterPackQuery.itemId, allGood)
+                    return createStarterPackItemOption(good, starterPackQuery)
                 }
             }
         }
         return emptyList()
+    }
+
+    private fun createStarterPackItemOption(
+        item: Item,
+        starterPackQuery: StarterPackQuery
+    ): List<StarterPackBoxItemOption> {
+        val starterPackOption = StarterPackBoxItemOption().also {
+            it.add(ItemGroup().apply { this.item = item; number = starterPackQuery.quantity })
+        }
+        return listOf(starterPackOption)
     }
 
 }
