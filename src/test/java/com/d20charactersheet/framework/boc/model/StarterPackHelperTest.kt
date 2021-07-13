@@ -36,6 +36,8 @@ class StarterPackHelperTest {
                 id = 1,
                 optionId = 2,
                 equipmentType = EquipmentType.WEAPON,
+                typeId = -1,
+                combatId = -1,
                 itemId = 4,
                 quantity = 5
             )
@@ -65,6 +67,8 @@ class StarterPackHelperTest {
                 id = 1,
                 optionId = 2,
                 equipmentType = EquipmentType.ARMOR,
+                typeId = -1,
+                combatId = -1,
                 itemId = 4,
                 quantity = 5
             )
@@ -95,6 +99,8 @@ class StarterPackHelperTest {
                 id = 1,
                 optionId = 2,
                 equipmentType = EquipmentType.GOOD,
+                typeId = -1,
+                combatId = -1,
                 itemId = 4,
                 quantity = 5
             )
@@ -124,6 +130,8 @@ class StarterPackHelperTest {
                 id = 1,
                 optionId = 2,
                 equipmentType = EquipmentType.PACK,
+                typeId = -1,
+                combatId = -1,
                 itemId = 4,
                 quantity = 1
             )
@@ -153,6 +161,8 @@ class StarterPackHelperTest {
                 id = 1,
                 optionId = 2,
                 equipmentType = EquipmentType.WEAPON,
+                typeId = -1,
+                combatId = -1,
                 itemId = 3,
                 quantity = 1
             ),
@@ -160,6 +170,8 @@ class StarterPackHelperTest {
                 id = 1,
                 optionId = 2,
                 equipmentType = EquipmentType.WEAPON,
+                typeId = -1,
+                combatId = -1,
                 itemId = 4,
                 quantity = 1
             )
@@ -190,6 +202,8 @@ class StarterPackHelperTest {
                 id = 1,
                 optionId = 2,
                 equipmentType = EquipmentType.WEAPON,
+                typeId = -1,
+                combatId = -1,
                 itemId = 3,
                 quantity = 1
             ),
@@ -197,6 +211,8 @@ class StarterPackHelperTest {
                 id = 1,
                 optionId = 3,
                 equipmentType = EquipmentType.WEAPON,
+                typeId = -1,
+                combatId = -1,
                 itemId = 4,
                 quantity = 1
             )

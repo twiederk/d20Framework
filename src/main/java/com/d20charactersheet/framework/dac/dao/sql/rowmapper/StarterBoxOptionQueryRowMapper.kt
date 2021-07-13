@@ -9,13 +9,14 @@ class StarterBoxOptionQueryRowMapper : RowMapper {
 
     override fun mapRow(dataRow: DataRow): StarterPackQuery {
         return StarterPackQuery(
-            dataRow.getInt(0),
-            dataRow.getInt(1),
-            EquipmentType.values()[dataRow.getInt(2)],
-            dataRow.getInt(5),
-            dataRow.getInt(6),
-
-            )
+            id = dataRow.getInt(0),
+            optionId = dataRow.getInt(1),
+            equipmentType = EquipmentType.values()[dataRow.getInt(2)],
+            typeId = dataRow.getInt(3),
+            combatId = dataRow.getInt(4),
+            itemId = dataRow.getInt(5),
+            quantity = dataRow.getInt(6),
+        )
     }
 
 }

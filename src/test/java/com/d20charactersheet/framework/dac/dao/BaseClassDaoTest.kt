@@ -120,7 +120,24 @@ abstract class BaseClassDaoTest {
             StarterPackBox(5, "Equipment Pack")
         )
         assertThat(starterPackBoxsWithQueries[StarterPackBox(1, "Armor")]).hasSize(4)
+        val chainMailQuery = starterPackBoxsWithQueries[StarterPackBox(1, "Armor")]!![0]
+        assertThat(chainMailQuery.id).isEqualTo(1)
+        assertThat(chainMailQuery.optionId).isEqualTo(1)
+        assertThat(chainMailQuery.equipmentType).isEqualTo(EquipmentType.ARMOR)
+        assertThat(chainMailQuery.typeId).isEqualTo(-1)
+        assertThat(chainMailQuery.combatId).isEqualTo(-1)
+        assertThat(chainMailQuery.itemId).isEqualTo(6)
+        assertThat(chainMailQuery.quantity).isEqualTo(1)
+
         assertThat(starterPackBoxsWithQueries[StarterPackBox(2, "Primary Hand")]).hasSize(1)
+        val martialWeaponQuery = starterPackBoxsWithQueries[StarterPackBox(2, "Primary Hand")]!![0]
+        assertThat(martialWeaponQuery.id).isEqualTo(5)
+        assertThat(martialWeaponQuery.optionId).isEqualTo(1)
+        assertThat(martialWeaponQuery.equipmentType).isEqualTo(EquipmentType.WEAPON)
+        assertThat(martialWeaponQuery.typeId).isEqualTo(1)
+        assertThat(martialWeaponQuery.combatId).isEqualTo(-1)
+        assertThat(martialWeaponQuery.itemId).isEqualTo(-1)
+        assertThat(martialWeaponQuery.quantity).isEqualTo(1)
 
     }
 

@@ -18,7 +18,7 @@ class CharacterClassServiceStarterPackTest {
     fun getStarterPack_oneItem_getOneStaterPackBoxWithOneStarterPackOptionWithOneItemGroup() {
         // arrange
         whenever(classDao.getStarterPackBoxesWithQueries(1)) doReturn mapOf(
-            StarterPackBox(1, "Weapon") to listOf(StarterPackQuery(1, 2, EquipmentType.WEAPON, 3, 4))
+            StarterPackBox(1, "Weapon") to listOf(StarterPackQuery(1, 2, EquipmentType.WEAPON, -1, -1, 3, 4))
         )
         val clazz = CharacterClass().apply { id = 1 }
 
@@ -44,8 +44,8 @@ class CharacterClassServiceStarterPackTest {
         // arrange
         whenever(classDao.getStarterPackBoxesWithQueries(1)) doReturn mapOf(
             StarterPackBox(1, "Weapon with Armor") to listOf(
-                StarterPackQuery(1, 2, EquipmentType.WEAPON, 3, 4),
-                StarterPackQuery(1, 2, EquipmentType.ARMOR, 5, 6)
+                StarterPackQuery(1, 2, EquipmentType.WEAPON, -1, -1, 3, 4),
+                StarterPackQuery(1, 2, EquipmentType.ARMOR, -1, -1, 5, 6)
             )
         )
         val clazz = CharacterClass().apply { id = 1 }
@@ -78,10 +78,10 @@ class CharacterClassServiceStarterPackTest {
 
         whenever(classDao.getStarterPackBoxesWithQueries(1)) doReturn mapOf(
             StarterPackBox(1, "Armor") to listOf(
-                StarterPackQuery(1, 1, EquipmentType.ARMOR, 1, 1), // Chain mail
-                StarterPackQuery(2, 2, EquipmentType.ARMOR, 2, 1), // Leather
-                StarterPackQuery(3, 2, EquipmentType.WEAPON, 1, 1), // Longbow
-                StarterPackQuery(4, 2, EquipmentType.WEAPON, 2, 1), // Arrows (20)
+                StarterPackQuery(1, 1, EquipmentType.ARMOR, -1, -1, 1, 1), // Chain mail
+                StarterPackQuery(2, 2, EquipmentType.ARMOR, -1, -1, 2, 1), // Leather
+                StarterPackQuery(3, 2, EquipmentType.WEAPON, -1, -1, 1, 1), // Longbow
+                StarterPackQuery(4, 2, EquipmentType.WEAPON, -1, -1, 2, 1), // Arrows (20)
             )
         )
 

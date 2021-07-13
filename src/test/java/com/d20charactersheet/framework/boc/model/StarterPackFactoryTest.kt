@@ -24,6 +24,8 @@ class StarterPackFactoryTest {
                 id = 1,
                 optionId = 2,
                 equipmentType = EquipmentType.WEAPON,
+                typeId = -1,
+                combatId = -1,
                 itemId = 3,
                 quantity = 4
             )
@@ -47,6 +49,8 @@ class StarterPackFactoryTest {
                 id = 1,
                 optionId = 2,
                 equipmentType = EquipmentType.ARMOR,
+                typeId = -1,
+                combatId = -1,
                 itemId = 3,
                 quantity = 4
             )
@@ -70,6 +74,8 @@ class StarterPackFactoryTest {
                 id = 1,
                 optionId = 2,
                 equipmentType = EquipmentType.GOOD,
+                typeId = -1,
+                combatId = -1,
                 itemId = 3,
                 quantity = 4
             )
@@ -93,6 +99,8 @@ class StarterPackFactoryTest {
                 id = 1,
                 optionId = 2,
                 equipmentType = EquipmentType.PACK,
+                typeId = -1,
+                combatId = -1,
                 itemId = 3,
                 quantity = 1
             )
@@ -116,6 +124,8 @@ class StarterPackFactoryTest {
                 id = 1,
                 optionId = 2,
                 equipmentType = EquipmentType.WEAPON,
+                typeId = -1,
+                combatId = -1,
                 itemId = 3,
                 quantity = 1
             ),
@@ -123,6 +133,8 @@ class StarterPackFactoryTest {
                 id = 2,
                 optionId = 2,
                 equipmentType = EquipmentType.WEAPON,
+                typeId = -1,
+                combatId = -1,
                 itemId = 4,
                 quantity = 1
             )
@@ -147,7 +159,9 @@ class StarterPackFactoryTest {
                 id = 1,
                 optionId = 2,
                 equipmentType = EquipmentType.WEAPON,
-                itemId = 3,
+                typeId = 1,
+                combatId = -1,
+                itemId = -1,
                 quantity = 1
             )
         )
