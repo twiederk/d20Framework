@@ -82,6 +82,9 @@ class CharacterClassServiceStarterPackTest {
                 StarterPackQuery(2, 2, EquipmentType.ARMOR, -1, -1, 2, 1), // Leather
                 StarterPackQuery(3, 2, EquipmentType.WEAPON, -1, -1, 1, 1), // Longbow
                 StarterPackQuery(4, 2, EquipmentType.WEAPON, -1, -1, 2, 1), // Arrows (20)
+            ),
+            StarterPackBox(2, "Primary Hand") to listOf(
+                StarterPackQuery(5, 1, EquipmentType.WEAPON, 1, -1, -1, 1), // Martial weapons
             )
         )
 
@@ -91,6 +94,14 @@ class CharacterClassServiceStarterPackTest {
         whenever(itemService.getItemById(1, allWeaopns)).thenReturn(Weapon().apply { name = "Longbow" })
         whenever(itemService.getItemById(2, allWeaopns)).thenReturn(Weapon().apply { name = "Arrow (20)" })
 
+        whenever(itemService.filterWeaponsByType(WeaponType.MARTIAL)) doReturn listOf(
+            Weapon().apply { name = "Longsword" },
+            Weapon().apply { name = "Battleaxe" },
+            Weapon().apply { name = "Bastardsword" },
+            Weapon().apply { name = "Two-Handed sword" },
+            Weapon().apply { name = "Helberd" }
+        )
+
         val clazz = CharacterClass().apply { id = 1 }
 
         // act
@@ -99,20 +110,20 @@ class CharacterClassServiceStarterPackTest {
         // assert
         assertThat(clazz.starterPack).isEqualTo(starterPack)
 
-        assertThat(starterPack.starterPackBoxes).hasSize(1)
+        assertThat(starterPack.starterPackBoxes).hasSize(2)
 
         assertThat(starterPack.starterPackBoxes[0].name).isEqualTo("Armor")
         assertThat(starterPack.starterPackBoxes[0].options).hasSize(2)
         assertThat(starterPack.starterPackBoxes[0].options[0].getTitle()).isEqualTo("Chain mail")
         assertThat(starterPack.starterPackBoxes[0].options[1].getTitle()).isEqualTo("Leather, Longbow, Arrow (20)")
 
-//        assertThat(starterPack.starterPackBoxes[1].name).isEqualTo("Primary Hand")
-//        assertThat(starterPack.starterPackBoxes[1].options).hasSize(5)
-//        assertThat(starterPack.starterPackBoxes[1].options[0].getTitle()).isEqualTo("Longsword")
-//        assertThat(starterPack.starterPackBoxes[1].options[1].getTitle()).isEqualTo("Battleaxe")
-//        assertThat(starterPack.starterPackBoxes[1].options[2].getTitle()).isEqualTo("Bastardsword")
-//        assertThat(starterPack.starterPackBoxes[1].options[3].getTitle()).isEqualTo("Two-Handed sword")
-//        assertThat(starterPack.starterPackBoxes[1].options[4].getTitle()).isEqualTo("Helberd")
+        assertThat(starterPack.starterPackBoxes[1].name).isEqualTo("Primary Hand")
+        assertThat(starterPack.starterPackBoxes[1].options).hasSize(5)
+        assertThat(starterPack.starterPackBoxes[1].options[0].getTitle()).isEqualTo("Longsword")
+        assertThat(starterPack.starterPackBoxes[1].options[1].getTitle()).isEqualTo("Battleaxe")
+        assertThat(starterPack.starterPackBoxes[1].options[2].getTitle()).isEqualTo("Bastardsword")
+        assertThat(starterPack.starterPackBoxes[1].options[3].getTitle()).isEqualTo("Two-Handed sword")
+        assertThat(starterPack.starterPackBoxes[1].options[4].getTitle()).isEqualTo("Helberd")
 //
 //        assertThat(starterPack.starterPackBoxes[2].name).isEqualTo("Secondary Hand")
 //        assertThat(starterPack.starterPackBoxes[2].options).hasSize(6)
