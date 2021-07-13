@@ -120,6 +120,7 @@ abstract class BaseClassDaoTest {
             StarterPackBox(5, "Equipment Pack")
         )
         assertThat(starterPackBoxsWithQueries[StarterPackBox(1, "Armor")]).hasSize(4)
+        assertThat(starterPackBoxsWithQueries[StarterPackBox(2, "Primary Hand")]).hasSize(1)
 
     }
 
