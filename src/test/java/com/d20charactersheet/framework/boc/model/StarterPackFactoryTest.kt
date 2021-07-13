@@ -165,14 +165,21 @@ class StarterPackFactoryTest {
                 quantity = 1
             )
         )
+        whenever(itemService.filterWeaponsByType(WeaponType.MARTIAL)) doReturn listOf(
+            Weapon().apply { name = "firstWeapon" },
+            Weapon().apply { name = "secondWeapon" },
+            Weapon().apply { name = "thirdWeapon" }
+        )
 
         // act
         val starterPackOptions =
             StarterPackFactory().createStarterPackOptions(starterPackQueries, itemService, allWeapons, allArmor, allGoods, allPacks)
 
         // assert
-        assertThat(starterPackOptions).hasSize(1)
-        assertThat((starterPackOptions[0]).getTitle()).isEqualTo("myFirstWeapon, mySecondWeapon")
+        assertThat(starterPackOptions).hasSize(3)
+        assertThat((starterPackOptions[0]).getTitle()).isEqualTo("firstWeapon")
+        assertThat((starterPackOptions[1]).getTitle()).isEqualTo("secondWeapon")
+        assertThat((starterPackOptions[2]).getTitle()).isEqualTo("thirdWeapon")
     }
 
 }
