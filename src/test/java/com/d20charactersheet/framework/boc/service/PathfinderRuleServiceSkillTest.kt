@@ -1,6 +1,7 @@
 package com.d20charactersheet.framework.boc.service
 
 import com.d20charactersheet.framework.boc.model.Character
+import com.d20charactersheet.framework.boc.model.CharacterClass
 import com.d20charactersheet.framework.boc.model.CharacterSkill
 import org.junit.Assert
 import org.junit.jupiter.api.Test
@@ -51,7 +52,7 @@ class PathfinderRuleServiceSkillTest : PathfinderRuleServiceTestCase() {
 
     @Test
     fun testGetSkillPoints() {
-        val skillPoints = ruleService.getSkillPoints(valeros, null)
+        val skillPoints = ruleService.getSkillPoints(valeros, CharacterClass())
         Assert.assertEquals(4, skillPoints.toLong())
     }
 }

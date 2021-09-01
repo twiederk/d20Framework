@@ -59,6 +59,17 @@ class DnD5eCharacterTest {
     }
 
     @Test
+    fun belvador_weaponAttacks() {
+
+        // assert
+        assertThat(belvador.weaponAttacks).extracting("weapon.name").containsExactlyInAnyOrder(
+            "Quarterstaff (Versatile)",
+            "Crossbow, Light",
+            "Dagger"
+        )
+    }
+
+    @Test
     fun belvador_characterGoods() {
 
         // assert
@@ -93,6 +104,17 @@ class DnD5eCharacterTest {
             "Longsword",
             "Longbow",
             "Crossbow bolts (20)"
+        )
+    }
+
+
+    @Test
+    fun serio_weaponAttacks() {
+
+        // assert
+        assertThat(serio.weaponAttacks).extracting("weapon.name").containsExactlyInAnyOrder(
+            "Longsword",
+            "Crossbow, Light"
         )
     }
 

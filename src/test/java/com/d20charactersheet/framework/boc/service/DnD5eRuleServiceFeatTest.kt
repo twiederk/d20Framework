@@ -1,8 +1,6 @@
 package com.d20charactersheet.framework.boc.service
 
-import com.d20charactersheet.framework.boc.model.Character
-import com.d20charactersheet.framework.boc.model.CharacterClass
-import com.d20charactersheet.framework.boc.model.ClassLevel
+import com.d20charactersheet.framework.dsl.createCharacter
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -11,9 +9,7 @@ class DnD5eRuleServiceFeatTest {
     @Test
     fun getNumberOfFeats_singleClass1stLevel_numberofFeatsIs0() {
         // Arrange
-        val character = Character().apply {
-            classLevels = listOf(ClassLevel(CharacterClass(), 1))
-        }
+        val character = createCharacter { classLevels { classLevel { level = 1 } } }
 
         // Act
         val proficiencyBonus = DnD5eRuleServiceImpl().getNumberOfFeats(character)
@@ -25,9 +21,7 @@ class DnD5eRuleServiceFeatTest {
     @Test
     fun getNumberOfFeats_singleClass4thLevel_numberofFeatsIs1() {
         // Arrange
-        val character = Character().apply {
-            classLevels = listOf(ClassLevel(CharacterClass(), 4))
-        }
+        val character = createCharacter { classLevels { classLevel { level = 4 } } }
 
         // Act
         val proficiencyBonus = DnD5eRuleServiceImpl().getNumberOfFeats(character)
@@ -39,12 +33,12 @@ class DnD5eRuleServiceFeatTest {
     @Test
     fun getNumberOfFeats_multiClass3rdAnd3rdAnd3rdLevel_numberofFeatsIs0() {
         // Arrange
-        val character = Character().apply {
-            classLevels = listOf(
-                ClassLevel(CharacterClass(), 3), //
-                ClassLevel(CharacterClass(), 3), //
-                ClassLevel(CharacterClass(), 3)
-            )
+        val character = createCharacter {
+            classLevels {
+                classLevel { level = 3 }
+                classLevel { level = 3 }
+                classLevel { level = 3 }
+            }
         }
 
         // Act
@@ -57,12 +51,12 @@ class DnD5eRuleServiceFeatTest {
     @Test
     fun getNumberOfFeats_multiClass4thAnd4thAnd1stLevel_numberofFeatsIs2() {
         // Arrange
-        val character = Character().apply {
-            classLevels = listOf(
-                ClassLevel(CharacterClass(), 4), //
-                ClassLevel(CharacterClass(), 4), //
-                ClassLevel(CharacterClass(), 1)
-            )
+        val character = createCharacter {
+            classLevels {
+                classLevel { level = 4 }
+                classLevel { level = 4 }
+                classLevel { level = 1 }
+            }
         }
 
         // Act

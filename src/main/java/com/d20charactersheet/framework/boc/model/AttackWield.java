@@ -8,17 +8,25 @@ public enum AttackWield {
   /**
    * Wield weapon in off-hand while two-weapon fighting.
    */
-  OFF_HAND, /**
+  OFF_HAND,
+
+  /**
    * Wield weapon in primary-hand while two-weapon fighting.
    */
-  PRIMARY_HAND, /**
+  PRIMARY_HAND,
+
+  /**
    * Wield weapon in primary-hand while two-weapon fighting, with a light weapon in the off-hand
    */
-  PRIMARY_HAND_LIGHT_OFF_HAND, /**
+  PRIMARY_HAND_LIGHT_OFF_HAND,
+
+  /**
    * Wield the weapon with one hand.
    */
-  ONE_HAND, /**
-   * Wield the weapon with tww hands.
+  ONE_HAND,
+
+  /**
+   * Wield the weapon with two hands.
    */
   TWO_HANDED
 }

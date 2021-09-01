@@ -36,6 +36,7 @@ class DnD5eUniverse : Universe {
         gameSystem.itemService = ItemServiceImpl(SqlItemDao(jdbcDatabase))
         gameSystem.xpService = XpServiceImpl(SqlXpDao(jdbcDatabase))
         gameSystem.characterService = CharacterServiceImpl(SqlCharacterDao(jdbcDatabase))
+        gameSystem.ruleService = DnD5eRuleServiceImpl()
     }
 
 

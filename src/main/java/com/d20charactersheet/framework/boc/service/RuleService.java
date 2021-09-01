@@ -3,6 +3,8 @@ package com.d20charactersheet.framework.boc.service;
 import java.util.EnumSet;
 import java.util.List;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.d20charactersheet.framework.boc.model.AttackWield;
 import com.d20charactersheet.framework.boc.model.Attribute;
 import com.d20charactersheet.framework.boc.model.Body;
@@ -46,7 +48,7 @@ public interface RuleService {
    *
    * @return The base attack bonus of the character.
    */
-  int getBaseAttackBonus(Character character);
+  int getBaseAttackBonus(@NotNull Character character);
 
   /**
    * Returns the initiative of the character. The initiative is the dexterity bonus of the character.
@@ -56,7 +58,7 @@ public interface RuleService {
    *
    * @return The initiative of the character.
    */
-  int getInitative(Character character);
+  int getInitative(@NotNull Character character);
 
   /**
    * Returns the speed of the character. The speed depends on the race of the character.
@@ -66,7 +68,7 @@ public interface RuleService {
    *
    * @return The speed of the character.
    */
-  int getSpeed(Character character);
+  int getSpeed(@NotNull Character character);
 
   /**
    * Returns the armor class of the character. The armor class is calculated by the formular 10 + Dexteritymod. +
@@ -77,7 +79,7 @@ public interface RuleService {
    *
    * @return The armor class of the character.
    */
-  int getArmorClass(Character character);
+  int getArmorClass(@NotNull Character character);
 
   /**
    * Returns the flat footed armor class of the character. The armor class is calculated by the formular 10 + armor (without dexterity).
@@ -87,7 +89,7 @@ public interface RuleService {
    *
    * @return The flat footed armor class of the character
    */
-  int calculateFlatFootedArmorClass(Character character);
+  int calculateFlatFootedArmorClass(@NotNull Character character);
 
   /**
    * Returns the touch armor class of the character. The armor class is calculated by the formular 10 + dexterity (without armor).
@@ -97,7 +99,7 @@ public interface RuleService {
    *
    * @return The touch armor class of the character
    */
-  int calculateTouchArmorClass(Character character);
+  int calculateTouchArmorClass(@NotNull Character character);
 
   /**
    * Returns all classes the character has no level in.
@@ -109,7 +111,8 @@ public interface RuleService {
    *
    * @return All classes the character has no level in.
    */
-  List<CharacterClass> getOppositeOfCharacterClasses(Character character, List<CharacterClass> allClasses);
+  @NotNull
+  List<CharacterClass> getOppositeOfCharacterClasses(@NotNull Character character, @NotNull List<CharacterClass> allClasses);
 
   /**
    * Returns the max class skill rank of the character.
@@ -119,7 +122,7 @@ public interface RuleService {
    *
    * @return The max class skill rank of the character.
    */
-  int getMaxClassSkillRank(Character character);
+  int getMaxClassSkillRank(@NotNull Character character);
 
   /**
    * Returns the max cross class skill rank of the character.
@@ -129,7 +132,7 @@ public interface RuleService {
    *
    * @return The max cross class skill rank of the character.
    */
-  float getMaxCrossClassSkillRank(Character character);
+  float getMaxCrossClassSkillRank(@NotNull Character character);
 
   /**
    * Returns, true if the character is trained in the skill.
@@ -139,7 +142,7 @@ public interface RuleService {
    *
    * @return True, if the character is trained in the skill.
    */
-  boolean isTrained(CharacterSkill characterSkill);
+  boolean isTrained(@NotNull CharacterSkill characterSkill);
 
   /**
    * Returns the number of skill points of the character, with the given start class.
@@ -151,7 +154,7 @@ public interface RuleService {
    *
    * @return The number of skill points of the character.
    */
-  int getSkillPoints(Character character, CharacterClass startClass);
+  int getSkillPoints(@NotNull Character character, @NotNull CharacterClass startClass);
 
   /**
    * The skill modifier of this skill for this character. Calculating together the attribute modifier, rank and
@@ -164,7 +167,7 @@ public interface RuleService {
    *
    * @return The skill modifier.
    */
-  int getSkillModifier(Character character, CharacterSkill characterSkill);
+  int getSkillModifier(@NotNull Character character, @NotNull CharacterSkill characterSkill);
 
   /**
    * Returns the attribute modifier of the character of the given attribute.
@@ -176,7 +179,7 @@ public interface RuleService {
    *
    * @return The attribute modifier.
    */
-  int getAttributeModifier(Character character, Attribute attribute);
+  int getAttributeModifier(@NotNull Character character, @NotNull Attribute attribute);
 
   /**
    * Performs a skill check. Returning the result of the die roll.
@@ -188,7 +191,8 @@ public interface RuleService {
    *
    * @return The result of the skill check.
    */
-  DieRoll rollSkill(Character character, CharacterSkill characterSkill);
+  @NotNull
+  DieRoll rollSkill(@NotNull Character character, @NotNull CharacterSkill characterSkill);
 
   /**
    * Returns the save of character. Save is calculated of base save, plus attribute modifier, plus modifier.
@@ -200,7 +204,7 @@ public interface RuleService {
    *
    * @return The save of the character.
    */
-  int getSave(Character character, Save save);
+  int getSave(@NotNull Character character, @NotNull Save save);
 
   /**
    * Returns the base save of the character. The base save is calculated of all base saves of the classes with levels
@@ -213,7 +217,7 @@ public interface RuleService {
    *
    * @return The base save of the character.
    */
-  int getBaseSave(Character character, Save save);
+  int getBaseSave(@NotNull Character character, @NotNull Save save);
 
   /**
    * Returns the modifier of the character for the save.
@@ -225,7 +229,7 @@ public interface RuleService {
    *
    * @return The modifier of the character for the save.
    */
-  int getSaveModifier(Character character, Save save);
+  int getSaveModifier(@NotNull Character character, @NotNull Save save);
 
   /**
    * Returns the attribute modifier of the character for the save.
@@ -237,7 +241,7 @@ public interface RuleService {
    *
    * @return The attribute modifier of the character for the save.
    */
-  int getSaveAttributeModifier(Character character, Save save);
+  int getSaveAttributeModifier(@NotNull Character character, @NotNull Save save);
 
   /**
    * Returns true if the skill is a class skill of the character.
@@ -249,7 +253,7 @@ public interface RuleService {
    *
    * @return True if the skill is a class skill of the character.
    */
-  boolean isClassSkill(Character character, Skill skill);
+  boolean isClassSkill(@NotNull Character character, @NotNull Skill skill);
 
   /**
    * Calcultes the number of feats of the character.
@@ -259,7 +263,7 @@ public interface RuleService {
    *
    * @return The number of feats of the character.
    */
-  int getNumberOfFeats(Character character);
+  int getNumberOfFeats(@NotNull Character character);
 
   /**
    * Calculates the number of skill points spent by the character.
@@ -269,7 +273,7 @@ public interface RuleService {
    *
    * @return The number of skill points spent by the character.
    */
-  int getSpentSkillPoints(Character character);
+  int getSpentSkillPoints(@NotNull Character character);
 
   /**
    * Sums up the gold of the character.
@@ -279,7 +283,7 @@ public interface RuleService {
    *
    * @return The gold of the character.
    */
-  float getGold(Character character);
+  float getGold(@NotNull Character character);
 
   /**
    * Calculates the load of the character. Goods of type MOUNT and MOUNT_GEAR are not added.
@@ -289,7 +293,7 @@ public interface RuleService {
    *
    * @return The load of the character.
    */
-  float getLoad(Character character);
+  float getLoad(@NotNull Character character);
 
   /**
    * Calculates the Combat Maneuver Bonus (CMB) of the character.
@@ -299,7 +303,7 @@ public interface RuleService {
    *
    * @return The calculated cmb.
    */
-  int getCombatManeuverBonus(Character character);
+  int getCombatManeuverBonus(@NotNull Character character);
 
   /**
    * Calculates the Combat Maneuver Defence Bonus (CMD) of the character.
@@ -309,7 +313,7 @@ public interface RuleService {
    *
    * @return The calculated cmd.
    */
-  int getCombatManeuverDefence(Character character);
+  int getCombatManeuverDefence(@NotNull Character character);
 
   /**
    * Returns the special size modificator for cmb/grapple.
@@ -319,7 +323,7 @@ public interface RuleService {
    *
    * @return The special size modificator for cmb/grapple.
    */
-  int getSpecialSizeModifier(Size size);
+  int getSpecialSizeModifier(@NotNull Size size);
 
   /**
    * Returns how many ranks are gained by investing one skill point.
@@ -331,7 +335,7 @@ public interface RuleService {
    *
    * @return The number of ranks the character get for investing one skill point in the given skill.
    */
-  float getRankPerSkillPoint(Character character, Skill skill);
+  float getRankPerSkillPoint(@NotNull Character character, @NotNull Skill skill);
 
   /**
    * Calculates the attack bonuses and damage of the given WeaponAttack.
@@ -343,7 +347,8 @@ public interface RuleService {
    *
    * @return The calculated WeaponAttack.
    */
-  WeaponAttack calculateWeaponAttack(Character character, WeaponAttack weaponAttack);
+  @NotNull
+  WeaponAttack calculateWeaponAttack(@NotNull Character character, @NotNull WeaponAttack weaponAttack);
 
   /**
    * Rolls an attack with the given attack bonus.
@@ -353,6 +358,7 @@ public interface RuleService {
    *
    * @return The result of the attack roll.
    */
+  @NotNull
   DieRoll rollAttack(int attackBonus);
 
   /**
@@ -365,7 +371,8 @@ public interface RuleService {
    *
    * @return The result of the damage roll.
    */
-  DieRoll rollDamage(Damage damage, int damageBonus);
+  @NotNull
+  DieRoll rollDamage(@NotNull Damage damage, int damageBonus);
 
   /**
    * Rolls a critical with the given damage, bonus and critical.
@@ -379,7 +386,8 @@ public interface RuleService {
    *
    * @return The reslt of the critical roll.
    */
-  DieRoll rollCritical(Damage damage, int damageBonus, Critical critical);
+  @NotNull
+  DieRoll rollCritical(@NotNull Damage damage, int damageBonus, @NotNull Critical critical);
 
   /**
    * Returns true, if the attack roll is critical.
@@ -391,7 +399,7 @@ public interface RuleService {
    *
    * @return True, if the attack roll is critical.
    */
-  boolean isCritical(DieRoll attackRoll, Critical critical);
+  boolean isCritical(@NotNull DieRoll attackRoll, @NotNull Critical critical);
 
   /**
    * Returns true, if the attack roll fumbled.
@@ -401,7 +409,7 @@ public interface RuleService {
    *
    * @return True, if the attack roll fumbled.
    */
-  boolean isFumble(DieRoll dieRoll);
+  boolean isFumble(@NotNull DieRoll dieRoll);
 
   /**
    * Returns the allows attack wields for the weapon.
@@ -411,7 +419,8 @@ public interface RuleService {
    *
    * @return The allows attack wields for the weapon.
    */
-  EnumSet<AttackWield> getAttackWields(Weapon weapon);
+  @NotNull
+  EnumSet<AttackWield> getAttackWields(@NotNull Weapon weapon);
 
   /**
    * Returns the result of an attribute roll.
@@ -423,7 +432,8 @@ public interface RuleService {
    *
    * @return the result of an attribute roll.
    */
-  DieRoll rollAttribute(Character character, Attribute attribute);
+  @NotNull
+  DieRoll rollAttribute(@NotNull Character character, @NotNull Attribute attribute);
 
   /**
    * Returns the result of a save roll.
@@ -435,7 +445,8 @@ public interface RuleService {
    *
    * @return The result of a save roll.
    */
-  DieRoll rollSave(Character character, Save save);
+  @NotNull
+  DieRoll rollSave(@NotNull Character character, @NotNull Save save);
 
   /**
    * Returns the result of the initative roll.
@@ -445,7 +456,8 @@ public interface RuleService {
    *
    * @return The result of the initative roll.
    */
-  DieRoll rollInitative(Character character);
+  @NotNull
+  DieRoll rollInitative(@NotNull Character character);
 
   /**
    * Returns the result of a base attack bonus roll.
@@ -455,7 +467,8 @@ public interface RuleService {
    *
    * @return The result of a base attack bonus roll.
    */
-  DieRoll rollBaseAttackBonus(Character character);
+  @NotNull
+  DieRoll rollBaseAttackBonus(@NotNull Character character);
 
   /**
    * Returns the result of a combat maneuver bonus roll.
@@ -465,7 +478,8 @@ public interface RuleService {
    *
    * @return The result of a combat maneuver bonus roll.
    */
-  DieRoll rollCombatManeuverBonus(Character character);
+  @NotNull
+  DieRoll rollCombatManeuverBonus(@NotNull Character character);
 
   /**
    * Returns the result of the combat maneuver defence roll.
@@ -475,7 +489,8 @@ public interface RuleService {
    *
    * @return The result of the combat maneuver defence roll.
    */
-  DieRoll rollCombatManeuverDefence(Character character);
+  @NotNull
+  DieRoll rollCombatManeuverDefence(@NotNull Character character);
 
   /**
    * Returns the number of known spells of the character for the given spell list ability and spell level.
@@ -489,7 +504,7 @@ public interface RuleService {
    *
    * @return The number of known spells of the character for the given spell list ability and spell level.
    */
-  int getNumberOfKnownSpells(Character character, SpelllistAbility spelllistAbility, int spellLevel);
+  int getNumberOfKnownSpells(@NotNull Character character, @NotNull SpelllistAbility spelllistAbility, int spellLevel);
 
   /**
    * Returns the maximum spell level of the character for the given spell list ability.
@@ -501,7 +516,7 @@ public interface RuleService {
    *
    * @return The maximum spell level of the character for the given spell list ability.
    */
-  int getMaxSpelllevel(Character character, SpelllistAbility spelllistAbility);
+  int getMaxSpelllevel(@NotNull Character character, @NotNull SpelllistAbility spelllistAbility);
 
   /**
    * Returns the spell slots of the character and fills them with spells.
@@ -511,7 +526,8 @@ public interface RuleService {
    *
    * @return The spell slots of the character and fills them with spells.
    */
-  List<SpellSlot> calculateSpellSlots(Character character);
+  @NotNull
+  List<SpellSlot> calculateSpellSlots(@NotNull Character character);
 
   /**
    * Returns the current spell caster level of the character for the given spell list ability.
@@ -523,7 +539,7 @@ public interface RuleService {
    *
    * @return The current spell caster level of the character for the given spell list ability.
    */
-  int getSpellcasterLevel(Character character, SpelllistAbility spelllistAbility);
+  int getSpellcasterLevel(@NotNull Character character, @NotNull SpelllistAbility spelllistAbility);
 
   /**
    * Returns the spells available for spell slot of the character.
@@ -535,7 +551,8 @@ public interface RuleService {
    *
    * @return Returns the spells available for spell slot of the character.
    */
-  List<Spell> getSpellSelection(Character character, SpellSlot spellSlot);
+  @NotNull
+  List<Spell> getSpellSelection(@NotNull Character character, @NotNull SpellSlot spellSlot);
 
   /**
    * Returns spell save difficulty class for spell of spell slot.
@@ -547,7 +564,7 @@ public interface RuleService {
    *
    * @return Spell save difficulty class for spell of spell slot.
    */
-  int getSpellSaveDifficultyClass(Character character, SpellSlot spellSlot);
+  int getSpellSaveDifficultyClass(@NotNull Character character, @NotNull SpellSlot spellSlot);
 
   /**
    * Refreshes all spell slots of the character. Spell slots of prepared spells are set to uncast. Spell slots of
@@ -558,7 +575,8 @@ public interface RuleService {
    *
    * @return The refreshed spell slots.
    */
-  List<SpellSlot> rest(Character character);
+  @NotNull
+  List<SpellSlot> rest(@NotNull Character character);
 
   /**
    * Equip the item to the body part of the body.
@@ -572,7 +590,8 @@ public interface RuleService {
    *
    * @return The body with the equipped item.
    */
-  Body equipItem(Body body, BodyPart bodyPart, Item item);
+  @NotNull
+  Body equipItem(@NotNull Body body, @NotNull BodyPart bodyPart, @NotNull Item item);
 
   /**
    * Calculates the proficiency bonus.
@@ -583,6 +602,6 @@ public interface RuleService {
    * @return The profiency bonus.
    */
   @SuppressWarnings({"SameReturnValue", "unused"})
-  int calculateProficiencyBonus(Character character);
+  int calculateProficiencyBonus(@NotNull Character character);
 
 }

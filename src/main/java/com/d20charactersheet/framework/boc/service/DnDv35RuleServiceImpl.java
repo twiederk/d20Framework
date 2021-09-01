@@ -1,5 +1,7 @@
 package com.d20charactersheet.framework.boc.service;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.d20charactersheet.framework.boc.model.Character;
 import com.d20charactersheet.framework.boc.model.CharacterClass;
 import com.d20charactersheet.framework.boc.model.CharacterSkill;
@@ -13,7 +15,7 @@ import com.d20charactersheet.framework.boc.model.Skill;
 public class DnDv35RuleServiceImpl extends AbstractRuleServiceImpl {
 
   @Override
-  protected int getNumberOfClassFeats(final Character character) {
+  protected int getNumberOfClassFeats(final @NotNull Character character) {
     return 1 + character.getCharacterLevel() / 3;
   }
 
@@ -21,7 +23,7 @@ public class DnDv35RuleServiceImpl extends AbstractRuleServiceImpl {
    * @see com.d20charactersheet.framework.boc.service.RuleService#getMaxClassSkillRank(com.d20charactersheet.framework.boc.model.Character)
    */
   @Override
-  public int getMaxClassSkillRank(final Character character) {
+  public int getMaxClassSkillRank(final @NotNull Character character) {
     return character.getCharacterLevel() + 3;
   }
 
@@ -29,7 +31,7 @@ public class DnDv35RuleServiceImpl extends AbstractRuleServiceImpl {
    * @see com.d20charactersheet.framework.boc.service.RuleService#getMaxCrossClassSkillRank(com.d20charactersheet.framework.boc.model.Character)
    */
   @Override
-  public float getMaxCrossClassSkillRank(final Character character) {
+  public float getMaxCrossClassSkillRank(final @NotNull Character character) {
     return getMaxClassSkillRank(character) / 2.0f;
   }
 
@@ -37,7 +39,7 @@ public class DnDv35RuleServiceImpl extends AbstractRuleServiceImpl {
    * @see com.d20charactersheet.framework.boc.service.RuleService#getSkillModifier(com.d20charactersheet.framework.boc.model.Character, com.d20charactersheet.framework.boc.model.CharacterSkill)
    */
   @Override
-  public int getSkillModifier(final Character character, final CharacterSkill characterSkill) {
+  public int getSkillModifier(final @NotNull Character character, final @NotNull CharacterSkill characterSkill) {
     final int attributeModifier = getAttributeModifier(character, characterSkill.getSkill().getAttribute());
     return attributeModifier + (int) Math.floor(characterSkill.getRank()) + characterSkill.getModifier();
   }
@@ -49,10 +51,10 @@ public class DnDv35RuleServiceImpl extends AbstractRuleServiceImpl {
    * @see com.d20charactersheet.framework.boc.service.RuleService#getSpentSkillPoints(com.d20charactersheet.framework.boc.model.Character)
    */
   @Override
-  public int getSpentSkillPoints(final Character character) {
+  public int getSpentSkillPoints(final @NotNull Character character) {
     int spentSkillPoints = 0;
 
-    for (final CharacterSkill characterSkill : character.getCharacterSkills()) {
+    for (final @NotNull CharacterSkill characterSkill : character.getCharacterSkills()) {
       if (isClassSkill(character, characterSkill.getSkill())) {
         spentSkillPoints += characterSkill.getRank();
       } else {
@@ -66,12 +68,13 @@ public class DnDv35RuleServiceImpl extends AbstractRuleServiceImpl {
    * @see com.d20charactersheet.framework.boc.service.RuleService#getSkillPoints(com.d20charactersheet.framework.boc.model.Character, com.d20charactersheet.framework.boc.model.CharacterClass)
    */
   @Override
-  public int getSkillPoints(final Character character, final CharacterClass startClass) {
+  public int getSkillPoints(final @NotNull Character character, final @NotNull CharacterClass startClass) {
     final int intelligenceBonus = getModifier(character.getIntelligence());
     final int abilityBonus = getAbilityBonus(character);
     int skillPoints = 0;
     for (final ClassLevel classLevel : character.getClassLevels()) {
-      final CharacterClass characterClass = classLevel.getCharacterClass();
+      final @NotNull
+      CharacterClass characterClass = classLevel.getCharacterClass();
       final int level = classLevel.getLevel();
       final int classSkillPoints = characterClass.getSkillPointsPerLevel();
       final int skillPointsPerLevel = Math.max(1, classSkillPoints + intelligenceBonus) + abilityBonus;
@@ -85,7 +88,7 @@ public class DnDv35RuleServiceImpl extends AbstractRuleServiceImpl {
   }
 
   @Override
-  public float getRankPerSkillPoint(final Character character, final Skill skill) {
+  public float getRankPerSkillPoint(final @NotNull Character character, final @NotNull Skill skill) {
     if (isClassSkill(character, skill)) {
       return 1.0f;
     }
@@ -93,12 +96,12 @@ public class DnDv35RuleServiceImpl extends AbstractRuleServiceImpl {
   }
 
   @Override
-  public int calculateProficiencyBonus(Character character) {
+  public int calculateProficiencyBonus(final @NotNull Character character) {
     return 0;
   }
 
   @Override
-  public int getSpecialSizeModifier(final Size size) {
+  public int getSpecialSizeModifier(final @NotNull Size size) {
     switch (size) {
       case FINE:
         return -16;

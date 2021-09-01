@@ -25,7 +25,13 @@ INSERT INTO charakter_ability VALUES ( 13, 2, 5, 101, 0 );
 
 --INSERT INTO charakter_feat VALUES ( 1, 9, 0, '' );
 
---INSERT INTO charakter_weapon_attack VALUES ( 1, 0, 'Quarterstaff', 'My good old quarterstaff', 4, 11, 0, 0, 0 );
+
+INSERT INTO charakter_weapon_attack VALUES ( 1, 1, 'Quarterstaff', 'My good old quarterstaff', 4, 9, 0, 0, 0 );
+INSERT INTO charakter_weapon_attack VALUES ( 2, 1, 'Crossbow, light', '', 3, 13, 20, 0, 0 );
+INSERT INTO charakter_weapon_attack VALUES ( 3, 1, 'Silver Dagger', 'Use against lycanthropes', 3, 2, 0, 0, 0 );
+INSERT INTO charakter_weapon_attack VALUES ( 4, 2, 'Longsword', '', 3, 25, 0, 0, 0 );
+INSERT INTO charakter_weapon_attack VALUES ( 5, 2, 'Crossbow, light', '', 3, 13, 20, 0, 0 );
+
 
 INSERT INTO charakter_weapon VALUES ( 1, 1, 8, 1 );
 INSERT INTO charakter_weapon VALUES ( 2, 1, 13, 1 );
