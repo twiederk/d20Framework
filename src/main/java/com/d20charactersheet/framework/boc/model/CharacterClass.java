@@ -32,6 +32,8 @@ public class CharacterClass implements Serializable {
 
   private StarterPack starterPack;
 
+  private int imageId;
+
   /**
    * Returns the id of the class.
    *
@@ -220,6 +222,25 @@ public class CharacterClass implements Serializable {
    */
   public void setStarterPack(StarterPack starterPack) {
     this.starterPack = starterPack;
+  }
+
+  /**
+   * Gets image id of the class.
+   *
+   * @return The image id of the class.
+   */
+  public int getImageId() {
+    return imageId;
+  }
+
+  /**
+   * Sets the image id of the class.
+   *
+   * @param imageId
+   *     The image id to set
+   */
+  public void setImageId(int imageId) {
+    this.imageId = imageId;
   }
 
   /**

@@ -4,7 +4,7 @@ import com.d20charactersheet.framework.boc.service.*
 import com.d20charactersheet.framework.dac.dao.sql.*
 import com.d20charactersheet.framework.dac.dao.sql.jdbc.JdbcDatabase
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import java.sql.Connection
 import java.sql.DriverManager
 
@@ -14,7 +14,7 @@ class DnDv35DatabaseTest {
     fun getAllCharacters_loadDataFromRealDatabase_dataLoaded() {
 
         // Arrange
-        val connection: Connection = DriverManager.getConnection("jdbc:sqlite:./src/test/resources/db/dndv35_db_4_4_0")
+        val connection: Connection = DriverManager.getConnection("jdbc:sqlite:./src/test/resources/db/dndv35_db_4_8_0")
         val jdbcDatabase = JdbcDatabase(connection)
 
         val skillService: SkillService = SkillServiceImpl(SqlSkillDao(jdbcDatabase))
@@ -46,7 +46,7 @@ class DnDv35DatabaseTest {
         val allCharacters = gameSystem.allCharacters
 
         // Assert
-        assertThat(allCharacters).hasSize(14)
+        assertThat(allCharacters).hasSize(1)
     }
 
 }

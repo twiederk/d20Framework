@@ -9,6 +9,7 @@ import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_BA
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_CLASS_ID
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_HIT_DIE_ID
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_ID
+import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_IMAGE_ID
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_LEVEL
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_NAME
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_SAVES
@@ -168,6 +169,7 @@ class SqlClassDao(private val db: Database) : ClassDao {
         contentValues.put(COLUMN_BASE_ATTACK_BONUS, characterClass.baseAttackBonus.ordinal)
         contentValues.put(COLUMN_SKILL_POINTS_PER_LEVEL, characterClass.skillPointsPerLevel)
         contentValues.put(COLUMN_HIT_DIE_ID, characterClass.hitDie.ordinal)
+        contentValues.put(COLUMN_IMAGE_ID, characterClass.imageId)
         return contentValues
     }
 

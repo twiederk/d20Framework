@@ -596,7 +596,7 @@ object TableAndColumnNames {
     // ClassDao
     /** Select all character classes  */
     const val SQL_GET_ALL_CLASSES = (SELECT
-            + "id, name, saves, alignments, base_attack_bonus, skill_points_per_level, hit_die_id" //
+            + "id, name, saves, alignments, base_attack_bonus, skill_points_per_level, hit_die_id, image_id" //
             + FROM + TABLE_CLASS)
 
     /** Select all class abilities of a class  */

@@ -11,7 +11,7 @@ class ClassRowMapper : BaseRowMapper() {
      */
     @Throws(SQLException::class)
     override fun mapRow(dataRow: DataRow): Any {
-        // id, name, base_attack_bonus, saves, alignments, skill_points_per_level, hit_die_id
+        // id, name, base_attack_bonus, saves, alignments, skill_points_per_level, hit_die_id, image_id
         val characterClass = CharacterClass()
         characterClass.id = dataRow.getInt(0)
         characterClass.name = dataRow.getString(1)
@@ -22,6 +22,7 @@ class ClassRowMapper : BaseRowMapper() {
         characterClass.baseAttackBonus = BaseAttackBonus.values()[dataRow.getInt(4)]
         characterClass.skillPointsPerLevel = dataRow.getInt(5)
         characterClass.hitDie = Die.values()[dataRow.getInt(6)]
+        characterClass.imageId = dataRow.getInt(7)
         return characterClass
     }
 }

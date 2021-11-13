@@ -5,7 +5,7 @@ import com.d20charactersheet.framework.dac.dao.sql.*
 import com.d20charactersheet.framework.dac.dao.sql.jdbc.JdbcDatabase
 import com.d20charactersheet.framework.dac.dao.sql.jdbc.JdbcHelper
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import java.nio.file.Files
 import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
@@ -18,11 +18,11 @@ class DnD5eDatabaseTest {
     fun getImageId_updateDatabaseWithCustomImage_customImagesHasUpdatedId() {
 
         // arrange
-        val src = Paths.get("./src/test/resources/db/dnd5e_db_4_3_0")
-        val dest = Paths.get("./src/test/resources/db/dnd5e_db_4_3_0_to_update")
+        val src = Paths.get("./src/test/resources/db/dnd5e_db_4_7_1")
+        val dest = Paths.get("./src/test/resources/db/dnd5e_db_4_7_1_to_update")
         Files.copy(src, dest, StandardCopyOption.REPLACE_EXISTING)
 
-        val connection: Connection = DriverManager.getConnection("jdbc:sqlite:./src/test/resources/db/dnd5e_db_4_3_0_to_update")
+        val connection: Connection = DriverManager.getConnection("jdbc:sqlite:./src/test/resources/db/dnd5e_db_4_7_1_to_update")
         val jdbcDatabase = JdbcDatabase(connection)
 
         val skillService: SkillService = SkillServiceImpl(SqlSkillDao(jdbcDatabase))
@@ -50,16 +50,16 @@ class DnD5eDatabaseTest {
         gameSystem.bodyService = BodyService()
         gameSystem.ruleService = DnD5eRuleServiceImpl()
 
-        val jdbcHelper = JdbcHelper("jdbc:sqlite:./src/test/resources/db/dnd5e_db_4_3_0_to_update")
+        val jdbcHelper = JdbcHelper("jdbc:sqlite:./src/test/resources/db/dnd5e_db_4_7_1_to_update")
 
         // act
-        jdbcHelper.executeSqlScript("/db/dnd5e_upgrade_72_to_73.sql")
+        jdbcHelper.executeSqlScript("/db/dnd5e_upgrade_77_to_78.sql")
 
         // assert
         val testCharacter = gameSystem.allCharacters[1]
-        assertThat(testCharacter.name).isEqualTo("test")
-        assertThat(testCharacter.imageId).isEqualTo(40)
-        assertThat(testCharacter.thumbImageId).isEqualTo(41)
+        assertThat(testCharacter.name).isEqualTo("Thornton")
+        assertThat(testCharacter.imageId).isEqualTo(76)
+        assertThat(testCharacter.thumbImageId).isEqualTo(77)
 
         // tear down
         jdbcHelper.connection.close()

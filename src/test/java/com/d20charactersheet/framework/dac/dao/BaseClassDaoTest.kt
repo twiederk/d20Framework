@@ -27,7 +27,7 @@ abstract class BaseClassDaoTest {
         val barbarian = allCharacterClasses[0]
 
         // Assert
-        assertClass(barbarian, 0, "Barbarian", BaseAttackBonus.GOOD, Save.FORTITUDE, getAlignmentsOfBarbarian(), 4)
+        assertClass(barbarian, 0, "Barbarian", BaseAttackBonus.GOOD, Save.FORTITUDE, getAlignmentsOfBarbarian(), 4, 68)
     }
 
     @Test
@@ -37,11 +37,19 @@ abstract class BaseClassDaoTest {
         val wizard = allCharacterClasses[10]
 
         // Assert
-        assertClass(wizard, 10, "Wizard", BaseAttackBonus.POOR, Save.WILL, EnumSet.allOf(Alignment::class.java), 2)
+        assertClass(wizard, 10, "Wizard", BaseAttackBonus.POOR, Save.WILL, EnumSet.allOf(Alignment::class.java), 2, 54)
     }
 
-    private fun assertClass(characterClass: CharacterClass, id: Int, name: String,
-                            baseAttackBonus: BaseAttackBonus, save: Save, alignments: EnumSet<Alignment>, skillPointsPerLevel: Int) {
+    private fun assertClass(
+        characterClass: CharacterClass,
+        id: Int,
+        name: String,
+        baseAttackBonus: BaseAttackBonus,
+        save: Save,
+        alignments: EnumSet<Alignment>,
+        skillPointsPerLevel: Int,
+        imageId: Int
+    ) {
         assertThat(characterClass.id).isEqualTo(id)
         assertThat(characterClass.name).isEqualTo(name)
         assertThat(characterClass.baseAttackBonus).isEqualTo(baseAttackBonus)
@@ -49,6 +57,7 @@ abstract class BaseClassDaoTest {
         assertThat(characterClass.alignments).isEqualTo(alignments)
         assertThat(characterClass.skillPointsPerLevel).isEqualTo(skillPointsPerLevel)
         assertThat(characterClass.skills).isNotNull
+        assertThat(characterClass.imageId).isEqualTo(imageId)
     }
 
     private fun assertSaves(characterClass: CharacterClass, save: Save) {
