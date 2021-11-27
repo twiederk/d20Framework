@@ -1,17 +1,18 @@
-INSERT INTO charakter VALUES(0, 'Torsten', 'Belvador the Summoner', 2, 0, 2, 1, 13129, 11, 18, 17, 18, 11, 15, 26, 26, 0, 0, 0, 0, 0, 0, 0, 2, 3, 1, 2, 3, 4 );
-INSERT INTO charakter VALUES(1, 'Torsten', 'Nascan Schwarzhaut', 7, 0, 4, 1, 24500, 12, 16, 13, 10, 12, 10, 39, 39, 5, 0, 0, 0, 0, 0, 0, 4, 5, 10, 20, 30, 40 );
-INSERT INTO charakter VALUES(2, 'Diana', 'Nyatar', 2, 1, 5, 1, 14056, 13, 18, 13, 14, 13, 12, 27, 27, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 732, 69, 14);
-INSERT INTO charakter VALUES(3, 'Beate', 'Jadzia', 7, 1, 3, 1, 5700, 13, 15, 11, 11, 16, 9, 22, 22, 3, 0, 0, 0, 0, 0, 0, 0, 1, 0, 4, 8, 0);
-INSERT INTO charakter VALUES(4, 'Christian', 'Worf', 5, 0, 2, 1, 9600, 20, 15, 17, 9, 11, 9, 48, 48, 3, 4, 0, 0, 0, 0, 0, 0, 1, 0, 221, 3, 0);
-INSERT INTO charakter VALUES(5, 'Mischa', 'Rodrekr Vaeringjar', 1, 0, 3, 1, 11200, 19, 15, 16, 12, 12, 8, 58, 58, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 238, 3, 4 );
-INSERT INTO charakter VALUES(6, 'Torsten', 'Thore Stavanger', 7, 0, 2, 1, 24500, 12, 16, 10, 13, 10, 9, 29, 29, 8, 0, 0, 0, 0, 0, 0, 0, 1, 0, 129, 35, 50 );
-INSERT INTO charakter VALUES(7, 'Pathfinder', 'Kyra', 7, 1, 1, 1, 0, 13, 8, 14, 10, 17, 12, 10, 10, 5, 4, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0);
-INSERT INTO charakter VALUES(8, 'Pathfinder', 'Merisiel', 1, 1, 5, 1, 0, 12, 17, 12, 10, 13, 10, 9, 9, 3, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0);
-INSERT INTO charakter VALUES(9, 'Pathfinder', 'Ezren', 7, 0, 3, 1, 0, 12, 10, 13, 17, 14, 8, 7, 7, 0, 4, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0);
-INSERT INTO charakter VALUES(10, 'Pathfinder', 'Valeros', 7, 0, 3, 1, 0, 16, 15, 12, 13, 8, 10, 11, 11, 5, 4, 0, 0, 0, 0, 0, 0, 1, 0, 49, 0, 0);
-INSERT INTO charakter VALUES(11, 'Benny', 'Dorn Evenwood', 7, 0, 5, 1, 8000, 8, 14, 14, 14, 9, 18, 22, 22, 0, 4, 0, 0, 2, 0, 0, 0, 1, 0, 0, 48, 150);
-INSERT INTO charakter VALUES(12, 'Fabian', 'Hakim Al Dschech Ibn Sauri Harfed Ben Uluman', 7, 0, 1, 1, 8000, 9, 14, 16, 17, 12, 13, 28, 28, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 );
-INSERT INTO charakter VALUES(13, 'Frank', 'Toc der Juengere', 7, 1, 4, 1, 9401, 10, 16, 12, 16, 13, 17, 25, 25, 3, 0, 0, 0, 0, 2, 0, 0, 1, 0, 400, 4, 4);
+INSERT INTO charakter VALUES( 0, 'Torsten', 'Belvador the Summoner', 2, 0, 2, 3, 13129, 11, 18, 17, 18, 11, 15, 26, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 1, 2, 3, 4 );
+INSERT INTO charakter VALUES( 1, 'Torsten', 'Nascan Schwarzhaut', 7, 0, 4, 1, 24500, 12, 16, 13, 10, 12, 10, 39, 39, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 5, 10, 20, 30, 40 );
+INSERT INTO charakter VALUES( 2, 'Diana', 'Nyatar', 2, 1, 5, 1, 14056, 13, 18, 13, 14, 13, 12, 27, 27, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 732, 69, 14 );
+INSERT INTO charakter VALUES( 3, 'Beate', 'Jadzia', 7, 1, 3, 1, 5700, 13, 15, 11, 11, 16, 9, 22, 22, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 4, 8, 0 );
+INSERT INTO charakter VALUES( 4, 'Christian', 'Worf', 5, 0, 2, 1, 9600, 20, 15, 17, 9, 11, 9, 48, 48, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 221, 3, 0 );
+INSERT INTO charakter VALUES( 5, 'Mischa', 'Rodrekr Vaeringjar', 1, 0, 3, 1, 11200, 19, 15, 16, 12, 12, 8, 58, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 238, 3, 4 );
+INSERT INTO charakter VALUES( 6, 'Torsten', 'Thore Stavanger', 7, 0, 2, 1, 24500, 12, 16, 10, 13, 10, 9, 29, 29, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 129, 35, 50 );
+INSERT INTO charakter VALUES( 7, 'Pathfinder', 'Kyra', 7, 1, 1, 1, 0, 13, 8, 14, 10, 17, 12, 10, 10, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 );
+INSERT INTO charakter VALUES( 8, 'Pathfinder', 'Merisiel', 1, 1, 5, 1, 0, 12, 17, 12, 10, 13, 10, 9, 9, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 );
+INSERT INTO charakter VALUES( 9, 'Pathfinder', 'Ezren', 7, 0, 3, 1, 0, 12, 10, 13, 17, 14, 8, 7, 7, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 );
+INSERT INTO charakter VALUES( 10, 'Pathfinder', 'Valeros', 7, 0, 3, 1, 0, 16, 15, 12, 13, 8, 10, 11, 11, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 49, 0, 0 );
+INSERT INTO charakter VALUES( 11, 'Benny', 'Dorn Evenwood', 7, 0, 5, 1, 8000, 8, 14, 14, 14, 9, 18, 22, 22, 0, 4, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0, 0, 48, 150 );
+INSERT INTO charakter VALUES( 12, 'Fabian', 'Hakim Al Dschech Ibn Sauri Harfed Ben Uluman', 7, 0, 1, 1, 8000, 9, 14, 16, 17, 12, 13, 28, 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 );
+INSERT INTO charakter VALUES( 13, 'Frank', 'Toc der Juengere', 7, 1, 4, 1, 9401, 10, 16, 12, 16, 13, 17, 25, 25, 3, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 0, 400, 4, 4 );
+
 
 INSERT INTO charakter_class_level VALUES ( 1, 0, 11, 5 );
 INSERT INTO charakter_class_level VALUES ( 2, 1, 9, 4 );
@@ -28,6 +29,7 @@ INSERT INTO charakter_class_level VALUES ( 12, 10, 5, 1 );
 INSERT INTO charakter_class_level VALUES ( 13, 11, 10, 4 );
 INSERT INTO charakter_class_level VALUES ( 14, 12, 11, 4 );
 INSERT INTO charakter_class_level VALUES ( 15, 13, 2, 4 );
+
 
 INSERT INTO charakter_ability VALUES ( 1, 0, 11, 334, 1 );
 INSERT INTO charakter_ability VALUES ( 2, 0, 11, 335, 1 );
@@ -256,6 +258,7 @@ INSERT INTO charakter_ability VALUES ( 224, 13, 2, 99, 1 );
 INSERT INTO charakter_ability VALUES ( 225, 13, 2, 100, 0 );
 INSERT INTO charakter_ability VALUES ( 226, 13, 2, 101, 0 );
 
+
 INSERT INTO charakter_skill VALUES ( 14, 0, 7, 0, 0 );
 INSERT INTO charakter_skill VALUES ( 18, 0, 7, 0, 0 );
 INSERT INTO charakter_skill VALUES ( 23, 0, 2, 2, 0 );
@@ -273,6 +276,7 @@ INSERT INTO charakter_skill VALUES ( 29, 10, 0, 0, 1 );
 INSERT INTO charakter_skill VALUES ( 32, 10, 0, 0, 1 );
 INSERT INTO charakter_skill VALUES ( 34, 10, 1, 0, 1 );
 
+
 INSERT INTO charakter_feat VALUES ( 1, 13, 0, '' );
 INSERT INTO charakter_feat VALUES ( 2, 170, 0, '' );
 INSERT INTO charakter_feat VALUES ( 3, 130, 0, 'Conjuration' );
@@ -280,11 +284,13 @@ INSERT INTO charakter_feat VALUES ( 4, 68, 10, '' );
 INSERT INTO charakter_feat VALUES ( 5, 151, 10, 'Longsword' );
 INSERT INTO charakter_feat VALUES ( 6, 107, 10, '' );
 
+
 INSERT INTO charakter_weapon_attack VALUES ( 1, 0, 'Quarterstaff', 'My good old quarterstaff', 4, 13, 0, 0, 0 );
 INSERT INTO charakter_weapon_attack VALUES ( 2, 0, 'Crossbow, light', '', 3, 19, 20, 0, 0 );
 INSERT INTO charakter_weapon_attack VALUES ( 3, 0, 'Silver Dagger', 'Use against lycanthropes', 3, 107, 0, 0, 0 );
 INSERT INTO charakter_weapon_attack VALUES ( 4, 10, 'Longsword', '', 3, 35, 0, 0, 0 );
 INSERT INTO charakter_weapon_attack VALUES ( 5, 10, 'Shortbow', '', 4, 56, 20, 0, 0 );
+
 
 INSERT INTO charakter_weapon VALUES ( 1, 0, 13, 1 );
 INSERT INTO charakter_weapon VALUES ( 2, 0, 19, 1 );
@@ -293,8 +299,10 @@ INSERT INTO charakter_weapon VALUES ( 4, 10, 35, 1 );
 INSERT INTO charakter_weapon VALUES ( 5, 10, 56, 1 );
 INSERT INTO charakter_weapon VALUES ( 6, 10, 57, 1 );
 
+
 INSERT INTO charakter_armor VALUES ( 1, 10, 6, 1 );
 INSERT INTO charakter_armor VALUES ( 2, 10, 17, 1 );
+
 
 INSERT INTO charakter_good VALUES ( 1, 0, 1, 1 );
 INSERT INTO charakter_good VALUES ( 2, 0, 67, 1 );
@@ -327,6 +335,7 @@ INSERT INTO charakter_good VALUES ( 28, 10, 40, 1 );
 INSERT INTO charakter_good VALUES ( 29, 10, 64, 10 );
 INSERT INTO charakter_good VALUES ( 30, 10, 51, 5 );
 INSERT INTO charakter_good VALUES ( 31, 10, 67, 1 );
+
 
 INSERT INTO charakter_known_spell VALUES ( 1, 0, 2, 24 );
 INSERT INTO charakter_known_spell VALUES ( 2, 0, 2, 138 );
@@ -425,6 +434,7 @@ INSERT INTO charakter_known_spell VALUES ( 94, 13, 6, 281 );
 INSERT INTO charakter_known_spell VALUES ( 95, 13, 6, 112 );
 INSERT INTO charakter_known_spell VALUES ( 96, 13, 6, 298 );
 
+
 INSERT INTO charakter_spell_slot VALUES ( 1, 0, 138, 0, 0 );
 INSERT INTO charakter_spell_slot VALUES ( 2, 0, 370, 0, 0 );
 INSERT INTO charakter_spell_slot VALUES ( 3, 0, 426, 0, 0 );
@@ -477,6 +487,7 @@ INSERT INTO charakter_spell_slot VALUES ( 49, 13, 68, 1, 1 );
 INSERT INTO charakter_spell_slot VALUES ( 50, 13, -1, 1, 0 );
 INSERT INTO charakter_spell_slot VALUES ( 51, 13, 298, 2, 1 );
 INSERT INTO charakter_spell_slot VALUES ( 52, 13, -1, 2, 0 );
+
 
 INSERT INTO charakter_spell_slot_ability VALUES ( 1, 1, 334 );
 INSERT INTO charakter_spell_slot_ability VALUES ( 2, 2, 334 );
@@ -531,5 +542,6 @@ INSERT INTO charakter_spell_slot_ability VALUES ( 50, 49, 81 );
 INSERT INTO charakter_spell_slot_ability VALUES ( 51, 50, 81 );
 INSERT INTO charakter_spell_slot_ability VALUES ( 52, 51, 81 );
 INSERT INTO charakter_spell_slot_ability VALUES ( 53, 52, 81 );
+
 
 INSERT INTO charakter_spell_slot_feat VALUES ( 1, 16, 170 );

@@ -1,5 +1,6 @@
 package com.d20charactersheet.framework
 
+import com.d20charactersheet.framework.boc.model.Save
 import com.d20charactersheet.framework.boc.service.*
 import com.d20charactersheet.framework.dac.dao.sql.*
 import com.d20charactersheet.framework.dac.dao.sql.jdbc.JdbcDatabase
@@ -11,18 +12,19 @@ import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
 import java.sql.Connection
 import java.sql.DriverManager
+import java.util.*
 
 class DnD5eDatabaseTest {
 
     @Test
-    fun getImageId_updateDatabaseWithCustomImage_customImagesHasUpdatedId() {
+    fun updateDatabase() {
 
         // arrange
-        val src = Paths.get("./src/test/resources/db/dnd5e_db_4_7_1")
-        val dest = Paths.get("./src/test/resources/db/dnd5e_db_4_7_1_to_update")
+        val src = Paths.get("./src/test/resources/db/dnd5e_db_4_8_0")
+        val dest = Paths.get("./src/test/resources/db/dnd5e_db_4_8_0_to_update")
         Files.copy(src, dest, StandardCopyOption.REPLACE_EXISTING)
 
-        val connection: Connection = DriverManager.getConnection("jdbc:sqlite:./src/test/resources/db/dnd5e_db_4_7_1_to_update")
+        val connection: Connection = DriverManager.getConnection("jdbc:sqlite:./src/test/resources/db/dnd5e_db_4_8_0_to_update")
         val jdbcDatabase = JdbcDatabase(connection)
 
         val skillService: SkillService = SkillServiceImpl(SqlSkillDao(jdbcDatabase))
@@ -50,16 +52,15 @@ class DnD5eDatabaseTest {
         gameSystem.bodyService = BodyService()
         gameSystem.ruleService = DnD5eRuleServiceImpl()
 
-        val jdbcHelper = JdbcHelper("jdbc:sqlite:./src/test/resources/db/dnd5e_db_4_7_1_to_update")
+        val jdbcHelper = JdbcHelper("jdbc:sqlite:./src/test/resources/db/dnd5e_db_4_8_0_to_update")
 
         // act
-        jdbcHelper.executeSqlScript("/db/dnd5e_upgrade_77_to_78.sql")
+        jdbcHelper.executeSqlScript("/db/dnd5e_upgrade_78_to_79.sql")
 
         // assert
-        val testCharacter = gameSystem.allCharacters[1]
-        assertThat(testCharacter.name).isEqualTo("Thornton")
-        assertThat(testCharacter.imageId).isEqualTo(76)
-        assertThat(testCharacter.thumbImageId).isEqualTo(77)
+        val testCharacter = gameSystem.allCharacters[0]
+        assertThat(testCharacter.name).isEqualTo("Belvador the Summoner")
+        assertThat(testCharacter.classLevels[0].characterClass.saves).isEqualTo(EnumSet.of(Save.INTELLIGENCE, Save.WISDOM))
 
         // tear down
         jdbcHelper.connection.close()

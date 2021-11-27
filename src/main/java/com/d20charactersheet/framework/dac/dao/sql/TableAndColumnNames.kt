@@ -227,14 +227,23 @@ object TableAndColumnNames {
     /** Modifier of combat maneuver defence modifier column  */
     const val COLUMN_CMD_MOD = "cmd_mod"
 
-    /** Fortitude saving throw misc modifier column  */
-    const val COLUMN_FORTITUDE_MISC_MOD = "fort_misc_mod"
+    /** Strength save misc modifier column  */
+    const val COLUMN_STRENGTH_MISC_MOD = "save_str_misc_mod"
 
-    /** Reflex saving throw misc modifier column  */
-    const val COLUMN_REFLEX_MISC_MOD = "ref_misc_mod"
+    /** Dexterity save misc modifier column  */
+    const val COLUMN_DEXTERITY_MISC_MOD = "save_dex_misc_mod"
 
-    /** Will saving throw misc modifier column  */
-    const val COLUMN_WILL_MISC_MOD = "will_misc_mod"
+    /** Constitution save misc modifier column  */
+    const val COLUMN_CONSTITUTION_MISC_MOD = "save_con_misc_mod"
+
+    /** Intelligence save misc modifier column  */
+    const val COLUMN_INTELLIGENCE_MISC_MOD = "save_int_misc_mod"
+
+    /** Wisdom save misc modifier column  */
+    const val COLUMN_WISDOM_MISC_MOD = "save_wis_misc_mod"
+
+    /** Charisma save misc modifier column  */
+    const val COLUMN_CHARISMA_MISC_MOD = "save_cha_misc_mod"
 
     /** Image id column  */
     const val COLUMN_IMAGE_ID = "image_id"
@@ -540,8 +549,10 @@ object TableAndColumnNames {
     // CharacterDao
     /** Selects all characters from the database  */
     const val SQL_GET_ALL_CHARACTERS = (SELECT
-            + "id, player, name, race_id, sex_id, alignment_id, xp_table_id, experience, strength, dexterity, constitution, intelligence, wisdom, charisma, hitpoints, "
-            + "max_hitpoints, armor, ini_misc_mod, cmb_mod, cmd_mod, fort_misc_mod, ref_misc_mod, will_misc_mod, image_id, thumb_image_id, platinum, gold, silver, copper" //
+            + "id, player, name, race_id, sex_id, alignment_id, xp_table_id, experience, strength, dexterity, constitution, intelligence, wisdom, charisma, hitpoints, " //
+            + "max_hitpoints, armor, ini_misc_mod, cmb_mod, cmd_mod, " //
+            + "$COLUMN_STRENGTH_MISC_MOD, $COLUMN_DEXTERITY_MISC_MOD, $COLUMN_CONSTITUTION_MISC_MOD, $COLUMN_INTELLIGENCE_MISC_MOD, $COLUMN_WISDOM_MISC_MOD, $COLUMN_CHARISMA_MISC_MOD, " //
+            + "image_id, thumb_image_id, platinum, gold, silver, copper" //
             + FROM + TABLE_CHARAKTER) //
 
 
@@ -552,8 +563,10 @@ object TableAndColumnNames {
 
     /** Selects one character from the database  */
     const val SQL_GET_CHARACTER = (SELECT
-            + "id, player, name, race_id, sex_id, alignment_id, xp_table_id, experience, strength, dexterity, constitution, intelligence, wisdom, charisma, hitpoints, "
-            + "max_hitpoints, armor, ini_misc_mod, cmb_mod, cmd_mod, fort_misc_mod, ref_misc_mod, will_misc_mod, image_id, thumb_image_id, platinum, gold, silver, copper" //
+            + "id, player, name, race_id, sex_id, alignment_id, xp_table_id, experience, strength, dexterity, constitution, intelligence, wisdom, charisma, hitpoints, " //
+            + "max_hitpoints, armor, ini_misc_mod, cmb_mod, cmd_mod, " //
+            + "$COLUMN_STRENGTH_MISC_MOD, $COLUMN_DEXTERITY_MISC_MOD, $COLUMN_CONSTITUTION_MISC_MOD, $COLUMN_INTELLIGENCE_MISC_MOD, $COLUMN_WISDOM_MISC_MOD, $COLUMN_CHARISMA_MISC_MOD, " //
+            + "image_id, thumb_image_id, platinum, gold, silver, copper" //
             + FROM + TABLE_CHARAKTER //
             + WHERE + "id = ?")
 

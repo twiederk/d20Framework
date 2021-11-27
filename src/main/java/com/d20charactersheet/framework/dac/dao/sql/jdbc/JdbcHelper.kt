@@ -32,7 +32,7 @@ class JdbcHelper(connection: String = "jdbc:sqlite::memory:") {
     }
 
     private fun getSqlScriptsFromRawResource(sqlScriptName: String): Array<String?> {
-        val sql = this::class.java.getResource(sqlScriptName).readText()
+        val sql = checkNotNull(this::class.java.getResource(sqlScriptName)).readText()
         return sql.split(";".toRegex()).toTypedArray()
     }
 

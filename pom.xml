@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.d20charactersheet</groupId>
   <artifactId>framework</artifactId>
-  <version>4.7.0</version>
+  <version>4.8.0-SNAPSHOT</version>
 
   <name>d20 Framework</name>
   <description>Base framework for d20 game systems.</description>
@@ -15,9 +15,9 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
-    <kotlin.version>1.5.31</kotlin.version>
+    <kotlin.version>1.6.10</kotlin.version>
     <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
-    <junit.jupiter.version>5.8.1</junit.jupiter.version>
+    <junit.jupiter.version>5.8.2</junit.jupiter.version>
   </properties>
 
   <dependencies>
@@ -68,7 +68,7 @@
     <dependency>
       <groupId>org.junit.platform</groupId>
       <artifactId>junit-platform-launcher</artifactId>
-      <version>1.8.1</version>
+      <version>1.8.2</version>
       <scope>test</scope>
     </dependency>
 
@@ -84,7 +84,7 @@
     <dependency>
       <groupId>org.mockito.kotlin</groupId>
       <artifactId>mockito-kotlin</artifactId>
-      <version>3.2.0</version>
+      <version>4.0.0</version>
       <scope>test</scope>
     </dependency>
 

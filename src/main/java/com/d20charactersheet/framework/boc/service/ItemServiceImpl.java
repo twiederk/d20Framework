@@ -136,6 +136,7 @@ public class ItemServiceImpl implements ItemService {
   public List<Weapon> filterWeaponsByType(@NotNull WeaponType weaponType, @NotNull List<Weapon> allWeapons) {
     return allWeapons.stream().filter(weapon -> weapon.getWeaponType().equals(weaponType)) //
         .filter(weapon -> weapon.getQualityType().equals(QualityType.NORMAL)) //
+        .filter(weapon -> weapon.getWeight() > 0) //
         .collect(Collectors.toList());
   }
 
@@ -144,6 +145,7 @@ public class ItemServiceImpl implements ItemService {
   public List<Weapon> filterWeaponsByCombat(@NotNull CombatType combatType, @NotNull List<Weapon> allWeapons) {
     return allWeapons.stream().filter(weapon -> weapon.getCombatType().equals(combatType)) //
         .filter(weapon -> weapon.getQualityType().equals(QualityType.NORMAL)) //
+        .filter(weapon -> weapon.getWeight() > 0) //
         .collect(Collectors.toList());
   }
 

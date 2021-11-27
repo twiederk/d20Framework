@@ -29,10 +29,10 @@ class PathfinderStarterPackTest {
         assertThat(starterPack.starterPackBoxes).hasSize(4)
 
         assertThat(starterPack.starterPackBoxes[0].name).isEqualTo("Primary Hand")
-        assertThat(starterPack.starterPackBoxes[0].options).hasSize(28)
+        assertThat(starterPack.starterPackBoxes[0].options).hasSize(27)
 
         assertThat(starterPack.starterPackBoxes[1].name).isEqualTo("Secondary Hand")
-        assertThat(starterPack.starterPackBoxes[1].options).hasSize(28)
+        assertThat(starterPack.starterPackBoxes[1].options).hasSize(27)
 
         assertThat(starterPack.starterPackBoxes[2].name).isEqualTo("Range Weapon")
         assertThat(starterPack.starterPackBoxes[2].options).hasSize(1)
@@ -55,7 +55,7 @@ class PathfinderStarterPackTest {
         assertThat(starterPack.starterPackBoxes).hasSize(4)
 
         assertThat(starterPack.starterPackBoxes[0].name).isEqualTo("Primary Hand")
-        assertThat(starterPack.starterPackBoxes[0].options).hasSize(29)
+        assertThat(starterPack.starterPackBoxes[0].options).hasSize(28)
 
         assertThat(starterPack.starterPackBoxes[1].name).isEqualTo("Equipment")
         assertThat(starterPack.starterPackBoxes[1].options).hasSize(2)
@@ -94,7 +94,7 @@ class PathfinderStarterPackTest {
         assertThat(starterPack.starterPackBoxes[1].options[2].getTitle()).isEqualTo("Chainmail, Shield, light steel")
 
         assertThat(starterPack.starterPackBoxes[2].name).isEqualTo("Secondary Hand")
-        assertThat(starterPack.starterPackBoxes[2].options).hasSize(28)
+        assertThat(starterPack.starterPackBoxes[2].options).hasSize(27)
 
         assertThat(starterPack.starterPackBoxes[3].name).isEqualTo("Equipment")
         assertThat(starterPack.starterPackBoxes[3].options).hasSize(2)
@@ -119,10 +119,10 @@ class PathfinderStarterPackTest {
         assertThat(starterPack.starterPackBoxes).hasSize(5)
 
         assertThat(starterPack.starterPackBoxes[0].name).isEqualTo("Primary Hand")
-        assertThat(starterPack.starterPackBoxes[0].options).hasSize(28)
+        assertThat(starterPack.starterPackBoxes[0].options).hasSize(27)
 
         assertThat(starterPack.starterPackBoxes[1].name).isEqualTo("Secondary Hand")
-        assertThat(starterPack.starterPackBoxes[1].options).hasSize(22)
+        assertThat(starterPack.starterPackBoxes[1].options).hasSize(21)
 
         assertThat(starterPack.starterPackBoxes[2].name).isEqualTo("Armor")
         assertThat(starterPack.starterPackBoxes[2].options).hasSize(1)
@@ -155,10 +155,10 @@ class PathfinderStarterPackTest {
         assertThat(starterPack.starterPackBoxes[0].options[1].getTitle()).isEqualTo("Leather, Longbow, Arrows, Longbow (20)")
 
         assertThat(starterPack.starterPackBoxes[1].name).isEqualTo("Primary Hand")
-        assertThat(starterPack.starterPackBoxes[1].options).hasSize(45)
+        assertThat(starterPack.starterPackBoxes[1].options).hasSize(40)
 
         assertThat(starterPack.starterPackBoxes[2].name).isEqualTo("Secondary Hand")
-        assertThat(starterPack.starterPackBoxes[2].options).hasSize(46)
+        assertThat(starterPack.starterPackBoxes[2].options).hasSize(41)
 
         assertThat(starterPack.starterPackBoxes[3].name).isEqualTo("Range Weapon")
         assertThat(starterPack.starterPackBoxes[3].options).hasSize(2)
@@ -183,7 +183,7 @@ class PathfinderStarterPackTest {
         assertThat(starterPack.starterPackBoxes).hasSize(3)
 
         assertThat(starterPack.starterPackBoxes[0].name).isEqualTo("Primary Hand")
-        assertThat(starterPack.starterPackBoxes[0].options).hasSize(28)
+        assertThat(starterPack.starterPackBoxes[0].options).hasSize(27)
 
         assertThat(starterPack.starterPackBoxes[1].name).isEqualTo("Equipment")
         assertThat(starterPack.starterPackBoxes[1].options).hasSize(2)
@@ -207,13 +207,13 @@ class PathfinderStarterPackTest {
         assertThat(starterPack.starterPackBoxes).hasSize(6)
 
         assertThat(starterPack.starterPackBoxes[0].name).isEqualTo("Primary Hand")
-        assertThat(starterPack.starterPackBoxes[0].options).hasSize(45)
+        assertThat(starterPack.starterPackBoxes[0].options).hasSize(40)
 
         assertThat(starterPack.starterPackBoxes[1].name).isEqualTo("Secondary Hand")
-        assertThat(starterPack.starterPackBoxes[1].options).hasSize(46)
+        assertThat(starterPack.starterPackBoxes[1].options).hasSize(41)
 
         assertThat(starterPack.starterPackBoxes[2].name).isEqualTo("Range Weapon")
-        assertThat(starterPack.starterPackBoxes[2].options).hasSize(22)
+        assertThat(starterPack.starterPackBoxes[2].options).hasSize(21)
 
         assertThat(starterPack.starterPackBoxes[3].name).isEqualTo("Equipment")
         assertThat(starterPack.starterPackBoxes[3].options).hasSize(2)
@@ -247,10 +247,10 @@ class PathfinderStarterPackTest {
         assertThat(starterPack.starterPackBoxes[0].options[1].getTitle()).isEqualTo("Leather")
 
         assertThat(starterPack.starterPackBoxes[1].name).isEqualTo("Primary Hand")
-        assertThat(starterPack.starterPackBoxes[1].options).hasSize(22)
+        assertThat(starterPack.starterPackBoxes[1].options).hasSize(21)
 
         assertThat(starterPack.starterPackBoxes[2].name).isEqualTo("Secondary Hand")
-        assertThat(starterPack.starterPackBoxes[2].options).hasSize(22)
+        assertThat(starterPack.starterPackBoxes[2].options).hasSize(21)
 
         assertThat(starterPack.starterPackBoxes[3].name).isEqualTo("Equipment")
         assertThat(starterPack.starterPackBoxes[3].options).hasSize(2)
@@ -306,7 +306,7 @@ class PathfinderStarterPackTest {
         assertThat(starterPack.starterPackBoxes).hasSize(3)
 
         assertThat(starterPack.starterPackBoxes[0].name).isEqualTo("Primary Hand")
-        assertThat(starterPack.starterPackBoxes[0].options).hasSize(28)
+        assertThat(starterPack.starterPackBoxes[0].options).hasSize(27)
 
         assertThat(starterPack.starterPackBoxes[1].name).isEqualTo("Equipment")
         assertThat(starterPack.starterPackBoxes[1].options).hasSize(2)

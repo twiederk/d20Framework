@@ -217,7 +217,7 @@ public interface RuleService {
    *
    * @return The base save of the character.
    */
-  int getBaseSave(@NotNull Character character, @NotNull Save save);
+  int getProficiencySave(@NotNull Character character, @NotNull Save save);
 
   /**
    * Returns the modifier of the character for the save.

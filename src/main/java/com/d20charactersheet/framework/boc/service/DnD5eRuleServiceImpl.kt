@@ -62,6 +62,35 @@ class DnD5eRuleServiceImpl : AbstractRuleServiceImpl() {
         return dieRoll
     }
 
+    /**
+     * @see com.d20charactersheet.framework.boc.service.RuleService.getSaveAttributeModifier
+     */
+    override fun getSaveAttributeModifier(character: Character, save: Save): Int {
+        return when (save) {
+            Save.STRENGTH -> getModifier(character.strength)
+            Save.DEXTERITY -> getModifier(character.dexterity)
+            Save.CONSTITUTION -> getModifier(character.constitution)
+            Save.INTELLIGENCE -> getModifier(character.intelligence)
+            Save.WISDOM -> getModifier(character.wisdom)
+            Save.CHARISMA -> getModifier(character.charisma)
+        }
+    }
+
+    override fun getSave(character: Character, save: Save): Int {
+        val proficiencyBonus = getProficiencySave(character, save)
+        val attributeModifier = getSaveAttributeModifier(character, save)
+        val modifier = getSaveModifier(character, save)
+        return proficiencyBonus + attributeModifier + modifier
+    }
+
+    override fun getProficiencySave(character: Character, save: Save): Int {
+        val classWithHighestLevel = character.classLevels.maxByOrNull { it.level } ?: character.classLevels[0]
+        if (classWithHighestLevel.characterClass.saves.contains(save)) {
+            return calculateProficiencyBonus(character)
+        }
+        return 0
+    }
+
     override fun getMaxClassSkillRank(character: Character): Int {
         return 0
     }

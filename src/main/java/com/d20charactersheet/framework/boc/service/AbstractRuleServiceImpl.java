@@ -268,17 +268,17 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
    */
   @Override
   public int getSave(final @NotNull Character character, final @NotNull Save save) {
-    final int baseSave = getBaseSave(character, save);
+    final int baseSave = getProficiencySave(character, save);
     final int attributeModifier = getSaveAttributeModifier(character, save);
     final int modifier = getSaveModifier(character, save);
     return baseSave + attributeModifier + modifier;
   }
 
   /**
-   * @see com.d20charactersheet.framework.boc.service.RuleService#getBaseSave(com.d20charactersheet.framework.boc.model.Character, com.d20charactersheet.framework.boc.model.Save)
+   * @see com.d20charactersheet.framework.boc.service.RuleService#getProficiencySave(com.d20charactersheet.framework.boc.model.Character, com.d20charactersheet.framework.boc.model.Save)
    */
   @Override
-  public int getBaseSave(final @NotNull Character character, final @NotNull Save save) {
+  public int getProficiencySave(final @NotNull Character character, final @NotNull Save save) {
     int baseSave = 0;
     for (final ClassLevel classLevel : character.getClassLevels()) {
       baseSave += getBaseSave(classLevel, save);
@@ -308,13 +308,13 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
   @Override
   public int getSaveAttributeModifier(final @NotNull Character character, final @NotNull Save save) {
     switch (save) {
-      case FORTITUDE:
+      case STRENGTH:
         return getModifier(character.getConstitution());
 
-      case REFLEX:
+      case DEXTERITY:
         return getModifier(character.getDexterity());
 
-      case WILL:
+      case CONSTITUTION:
         return getModifier(character.getWisdom());
 
       default:
@@ -327,19 +327,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
    */
   @Override
   public int getSaveModifier(final @NotNull Character character, final @NotNull Save save) {
-    switch (save) {
-      case FORTITUDE:
-        return character.getFortitudeModifier();
-
-      case REFLEX:
-        return character.getReflexModifier();
-
-      case WILL:
-        return character.getWillModifier();
-
-      default:
-        throw new IllegalStateException("Can't determine modifier of save: " + save);
-    }
+    return character.getSaveModifier(save);
   }
 
   /**

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-
 /**
  * Stores the data of character, which is normally stored on a paper called character sheet.
  */
@@ -522,60 +521,27 @@ public class Character implements Serializable {
   }
 
   /**
-   * Returns modifier of fortitude saving throw.
+   * Returns modifier of given save.
    *
-   * @return Modifier of fortitude saving throw.
+   * @param save
+   *     The save to return the modifier of.
+   *
+   * @return The save modifier.
    */
-  public int getFortitudeModifier() {
-    return saves.getFortitudeModifier();
+  public int getSaveModifier(Save save) {
+    return saves.getSaveModifier(save);
   }
 
   /**
-   * Sets modifier of fortitude saving throw.
+   * Sets the modifier for the given save.
    *
-   * @param fortitudeModifier
-   *     Modifier of fortitude saving throw.
+   * @param save
+   *     The save to set the modifier of.
+   * @param modifier
+   *     The modifier to set.
    */
-  public void setFortitudeModifier(final int fortitudeModifier) {
-    saves.setFortitudeModifier(fortitudeModifier);
-  }
-
-  /**
-   * Returns modifier of reflex saving throw.
-   *
-   * @return Modifier of reflex saving throw.
-   */
-  public int getReflexModifier() {
-    return saves.getReflexModifier();
-  }
-
-  /**
-   * Sets modifier of reflex saving throw.
-   *
-   * @param reflexModifier
-   *     Modifier of reflex saving throw.
-   */
-  public void setReflexModifier(final int reflexModifier) {
-    saves.setReflexModifier(reflexModifier);
-  }
-
-  /**
-   * Returns modifier of will saving throw.
-   *
-   * @return Modifier of will saving throw.
-   */
-  public int getWillModifier() {
-    return saves.getWillModifier();
-  }
-
-  /**
-   * Sets modifier of will saving throw.
-   *
-   * @param willModifier
-   *     Modifier of will saving throw.
-   */
-  public void setWillModifier(final int willModifier) {
-    saves.setWillModifier(willModifier);
+  public void setSaveModifier(Save save, int modifier) {
+    saves.setSaveModifier(save, modifier);
   }
 
   /**
@@ -916,7 +882,9 @@ public class Character implements Serializable {
 
   /**
    * Sets the body of the character.
-   * @param body The body of the character to set.
+   *
+   * @param body
+   *     The body of the character to set.
    */
   public void setBody(Body body) {
     this.body = body;
@@ -924,6 +892,7 @@ public class Character implements Serializable {
 
   /**
    * Returns the equipped items of the character.
+   *
    * @return The equipped items of the character.
    */
   public List<Item> getEquippedItems() {

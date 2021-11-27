@@ -156,9 +156,9 @@ class ExportImportServiceTest {
     }
 
     private fun assertSaves(belvador: Character) {
-        Assert.assertEquals(0, belvador.fortitudeModifier.toLong())
-        Assert.assertEquals(0, belvador.reflexModifier.toLong())
-        Assert.assertEquals(0, belvador.willModifier.toLong())
+        Assert.assertEquals(0, belvador.getSaveModifier(Save.STRENGTH).toLong())
+        Assert.assertEquals(0, belvador.getSaveModifier(Save.DEXTERITY).toLong())
+        Assert.assertEquals(0, belvador.getSaveModifier(Save.CONSTITUTION).toLong())
     }
 
     private fun assertMoney(belvador: Character) {

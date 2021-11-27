@@ -1,23 +1,38 @@
 package com.d20charactersheet.framework.boc.model;
 
 /**
- * Enumeration of saving throws of D&D 3.5.
+ * Enumeration of saves.
  */
 public enum Save {
 
   /**
-   * Fortitude saving throw
+   * Strength save
    */
-  FORTITUDE,
+  STRENGTH,
 
   /**
-   * Reflex saving throw
+   * Dexterity save
    */
-  REFLEX,
+  DEXTERITY,
 
   /**
-   * Will saving throw
+   * Consitution save
    */
-  WILL
+  CONSTITUTION,
+
+  /**
+   * Intelligence save
+   */
+  INTELLIGENCE,
+
+  /**
+   * Wisdom save
+   */
+  WISDOM,
+
+  /**
+   * Charisma save
+   */
+  CHARISMA
 
 }

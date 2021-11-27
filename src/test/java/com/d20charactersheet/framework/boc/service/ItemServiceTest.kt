@@ -361,12 +361,13 @@ class ItemServiceTest {
     fun filterWeaponsByType_simple_returnAllSimpleAndNormalWeapons() {
         // arrange
         val allWeapons: List<Weapon> = listOf(
-            Weapon().apply { weaponType = WeaponType.SIMPLE; qualityType = QualityType.NORMAL },
-            Weapon().apply { weaponType = WeaponType.SIMPLE; qualityType = QualityType.MASTERWORK },
-            Weapon().apply { weaponType = WeaponType.SIMPLE; qualityType = QualityType.MAGIC },
-            Weapon().apply { weaponType = WeaponType.MARTIAL },
-            Weapon().apply { weaponType = WeaponType.EXOTIC },
-            Weapon().apply { weaponType = WeaponType.AMMO }
+            Weapon().apply { weaponType = WeaponType.SIMPLE; qualityType = QualityType.NORMAL; weight = 1F },
+            Weapon().apply { weaponType = WeaponType.SIMPLE; qualityType = QualityType.MASTERWORK; weight = 1F },
+            Weapon().apply { weaponType = WeaponType.SIMPLE; qualityType = QualityType.MAGIC; weight = 1F },
+            Weapon().apply { weaponType = WeaponType.SIMPLE; qualityType = QualityType.NORMAL; weight = 0F },
+            Weapon().apply { weaponType = WeaponType.MARTIAL; weight = 1F },
+            Weapon().apply { weaponType = WeaponType.EXOTIC; weight = 1F },
+            Weapon().apply { weaponType = WeaponType.AMMO; weight = 1F }
         )
 
         // act
@@ -375,17 +376,19 @@ class ItemServiceTest {
         // assert
         assertThat(weapons.map { it.weaponType }).containsOnly(WeaponType.SIMPLE)
         assertThat(weapons.map { it.qualityType }).containsOnly(QualityType.NORMAL)
+        assertThat(weapons).allMatch { weapon -> weapon.weight > 0 }
     }
 
     @Test
     fun filterWeaponsByCombat_melee_returnMeleeWeapons() {
         val allWeapons: List<Weapon> = listOf(
-            Weapon().apply { combatType = CombatType.MELEE_WEAPON; qualityType = QualityType.NORMAL },
-            Weapon().apply { combatType = CombatType.MELEE_WEAPON; qualityType = QualityType.MASTERWORK },
-            Weapon().apply { combatType = CombatType.MELEE_WEAPON; qualityType = QualityType.MAGIC },
-            Weapon().apply { combatType = CombatType.RANGED_WEAPON; qualityType = QualityType.NORMAL },
-            Weapon().apply { combatType = CombatType.RANGED_WEAPON; qualityType = QualityType.MASTERWORK },
-            Weapon().apply { combatType = CombatType.RANGED_WEAPON; qualityType = QualityType.MAGIC }
+            Weapon().apply { combatType = CombatType.MELEE_WEAPON; qualityType = QualityType.NORMAL; weight = 1F },
+            Weapon().apply { combatType = CombatType.MELEE_WEAPON; qualityType = QualityType.NORMAL; weight = 0F },
+            Weapon().apply { combatType = CombatType.MELEE_WEAPON; qualityType = QualityType.MASTERWORK; weight = 1F },
+            Weapon().apply { combatType = CombatType.MELEE_WEAPON; qualityType = QualityType.MAGIC; weight = 1F },
+            Weapon().apply { combatType = CombatType.RANGED_WEAPON; qualityType = QualityType.NORMAL; weight = 1F },
+            Weapon().apply { combatType = CombatType.RANGED_WEAPON; qualityType = QualityType.MASTERWORK; weight = 1F },
+            Weapon().apply { combatType = CombatType.RANGED_WEAPON; qualityType = QualityType.MAGIC; weight = 1F }
         )
 
         // act
@@ -394,17 +397,19 @@ class ItemServiceTest {
         // assert
         assertThat(weapons.map { it.combatType }).containsOnly(CombatType.MELEE_WEAPON)
         assertThat(weapons.map { it.qualityType }).containsOnly(QualityType.NORMAL)
+        assertThat(weapons).allMatch { weapon -> weapon.weight > 0 }
     }
 
     @Test
     fun filterWeaponsByCombat_ranged_returnRangedWeapons() {
         val allWeapons: List<Weapon> = listOf(
-            Weapon().apply { combatType = CombatType.MELEE_WEAPON; qualityType = QualityType.NORMAL },
-            Weapon().apply { combatType = CombatType.MELEE_WEAPON; qualityType = QualityType.MASTERWORK },
-            Weapon().apply { combatType = CombatType.MELEE_WEAPON; qualityType = QualityType.MAGIC },
-            Weapon().apply { combatType = CombatType.RANGED_WEAPON; qualityType = QualityType.NORMAL },
-            Weapon().apply { combatType = CombatType.RANGED_WEAPON; qualityType = QualityType.MASTERWORK },
-            Weapon().apply { combatType = CombatType.RANGED_WEAPON; qualityType = QualityType.MAGIC }
+            Weapon().apply { combatType = CombatType.MELEE_WEAPON; qualityType = QualityType.NORMAL; weight = 1F },
+            Weapon().apply { combatType = CombatType.MELEE_WEAPON; qualityType = QualityType.NORMAL; weight = 0F },
+            Weapon().apply { combatType = CombatType.MELEE_WEAPON; qualityType = QualityType.MASTERWORK; weight = 1F },
+            Weapon().apply { combatType = CombatType.MELEE_WEAPON; qualityType = QualityType.MAGIC; weight = 1F },
+            Weapon().apply { combatType = CombatType.RANGED_WEAPON; qualityType = QualityType.NORMAL; weight = 1F },
+            Weapon().apply { combatType = CombatType.RANGED_WEAPON; qualityType = QualityType.MASTERWORK; weight = 1F },
+            Weapon().apply { combatType = CombatType.RANGED_WEAPON; qualityType = QualityType.MAGIC; weight = 1F }
         )
 
         // act
@@ -413,6 +418,7 @@ class ItemServiceTest {
         // assert
         assertThat(weapons.map { it.combatType }).containsOnly(CombatType.RANGED_WEAPON)
         assertThat(weapons.map { it.qualityType }).containsOnly(QualityType.NORMAL)
+        assertThat(weapons).allMatch { weapon -> weapon.weight > 0 }
     }
 
     @Test

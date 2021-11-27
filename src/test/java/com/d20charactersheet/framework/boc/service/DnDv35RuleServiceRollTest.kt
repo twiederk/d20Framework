@@ -77,7 +77,7 @@ class DnDv35RuleServiceRollTest : DnDv35RuleServiceTestCase() {
 
     @Test
     fun testRollSave() {
-        val dieRoll = ruleService.rollSave(belvador, Save.FORTITUDE)
+        val dieRoll = ruleService.rollSave(belvador, Save.STRENGTH)
         assertDieRoll(dieRoll, 1, Die.D20, 4)
     }
 

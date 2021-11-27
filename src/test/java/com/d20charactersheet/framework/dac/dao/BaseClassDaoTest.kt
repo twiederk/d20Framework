@@ -27,7 +27,7 @@ abstract class BaseClassDaoTest {
         val barbarian = allCharacterClasses[0]
 
         // Assert
-        assertClass(barbarian, 0, "Barbarian", BaseAttackBonus.GOOD, Save.FORTITUDE, getAlignmentsOfBarbarian(), 4, 68)
+        assertClass(barbarian, 0, "Barbarian", BaseAttackBonus.GOOD, Save.STRENGTH, getAlignmentsOfBarbarian(), 4, 68)
     }
 
     @Test
@@ -37,7 +37,7 @@ abstract class BaseClassDaoTest {
         val wizard = allCharacterClasses[10]
 
         // Assert
-        assertClass(wizard, 10, "Wizard", BaseAttackBonus.POOR, Save.WILL, EnumSet.allOf(Alignment::class.java), 2, 54)
+        assertClass(wizard, 10, "Wizard", BaseAttackBonus.POOR, Save.CONSTITUTION, EnumSet.allOf(Alignment::class.java), 2, 54)
     }
 
     private fun assertClass(

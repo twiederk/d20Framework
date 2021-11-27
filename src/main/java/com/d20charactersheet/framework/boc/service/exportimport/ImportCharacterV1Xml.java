@@ -29,6 +29,7 @@ import com.d20charactersheet.framework.boc.model.ItemGroup;
 import com.d20charactersheet.framework.boc.model.KnownSpell;
 import com.d20charactersheet.framework.boc.model.Note;
 import com.d20charactersheet.framework.boc.model.Race;
+import com.d20charactersheet.framework.boc.model.Save;
 import com.d20charactersheet.framework.boc.model.Sex;
 import com.d20charactersheet.framework.boc.model.Skill;
 import com.d20charactersheet.framework.boc.model.Spell;
@@ -375,9 +376,9 @@ public class ImportCharacterV1Xml extends XmlImport implements ImportCharacter {
       final NodeList childNodes = savesElement.getChildNodes();
       final Character character = importReport.getImportObject();
 
-      character.setFortitudeModifier(getInt(childNodes.item(INDEX_FORTIFY)));
-      character.setReflexModifier(getInt(childNodes.item(INDEX_REFLEX)));
-      character.setWillModifier(getInt(childNodes.item(INDEX_WILL)));
+      character.setSaveModifier(Save.STRENGTH, getInt(childNodes.item(INDEX_FORTIFY)));
+      character.setSaveModifier(Save.DEXTERITY, getInt(childNodes.item(INDEX_REFLEX)));
+      character.setSaveModifier(Save.CONSTITUTION, getInt(childNodes.item(INDEX_WILL)));
     }
   }
 

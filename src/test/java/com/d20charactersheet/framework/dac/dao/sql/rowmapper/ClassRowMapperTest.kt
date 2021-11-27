@@ -30,7 +30,7 @@ internal class ClassRowMapperTest {
         // Assert
         assertThat(characterClass.id).isEqualTo(1)
         assertThat(characterClass.name).isEqualTo("myCharacterName")
-        assertThat(characterClass.saves).isEqualTo(EnumSet.of(Save.REFLEX))
+        assertThat(characterClass.saves).isEqualTo(EnumSet.of(Save.DEXTERITY))
         assertThat(characterClass.alignments).isEqualTo(EnumSet.of(Alignment.LAWFUL_GOOD, Alignment.NEUTRAL_GOOD))
         assertThat(characterClass.baseAttackBonus).isEqualTo(BaseAttackBonus.POOR)
         assertThat(characterClass.skillPointsPerLevel).isEqualTo(5)

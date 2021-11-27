@@ -4,6 +4,7 @@ import com.d20charactersheet.framework.boc.model.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import java.util.*
 
 class DisplayServiceTest {
 
@@ -37,7 +38,8 @@ class DisplayServiceTest {
             override fun getDisplayCombatType(combatType: CombatType): String? = null
             override fun getDisplayWeaponCategory(weaponCategory: WeaponCategory): String? = null
             override fun getDisplayWeaponEncumbrance(weaponEncumbrance: WeaponEncumbrance): String? = null
-            override fun getDisplaySave(save: Save): String? = null
+            override fun getDisplaySave(save: Save): String = save.toString()
+            override fun getDisplaySaves(saves: EnumSet<Save>): String = saves.toString()
             override fun getDisplayAttributeShort(attribute: Attribute): String? = null
             override fun getDisplaySchool(school: School): String? = null
             override fun getDisplaySubSchool(subSchool: SubSchool): String? = null
@@ -46,7 +48,12 @@ class DisplayServiceTest {
             override fun getDisplayRange(range: Range): String? = null
             override fun getDisplaySpellResistance(spellResistance: SpellResistance): String? = null
             override fun getDisplayAbilityClass(ability: Ability): String? = null
-            override fun getDisplayNumberOfKnownSpells(numberOfKnownSpells: Int, maxNumberOfKnownSpells: Int, numberOfSpells: Int): String? = null
+            override fun getDisplayNumberOfKnownSpells(
+                numberOfKnownSpells: Int,
+                maxNumberOfKnownSpells: Int,
+                numberOfSpells: Int
+            ): String? = null
+
             override fun getDisplaySpellSlotLevel(level: Int): String? = null
             override fun getDisplaySchoolShort(school: School): String? = null
             override fun getDisplayCastingType(castingType: CastingType): String? = null
@@ -235,6 +242,18 @@ class DisplayServiceTest {
 
         // Assert
         assertThat(displayAmmunition).isEqualTo("-")
+    }
+
+    @Test
+    fun getDisplaySaves_strengthAndDexteritySave_displaySaves() {
+        // Arrange
+        val saves = EnumSet.of(Save.STRENGTH, Save.DEXTERITY)
+
+        // Act
+        val displayAmmunition = displayService.getDisplaySaves(saves)
+
+        // Assert
+        assertThat(displayAmmunition).isEqualTo("[STRENGTH, DEXTERITY]")
     }
 
 }

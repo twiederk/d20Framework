@@ -20,6 +20,7 @@ import com.d20charactersheet.framework.boc.model.Feat;
 import com.d20charactersheet.framework.boc.model.ItemGroup;
 import com.d20charactersheet.framework.boc.model.KnownSpell;
 import com.d20charactersheet.framework.boc.model.Note;
+import com.d20charactersheet.framework.boc.model.Save;
 import com.d20charactersheet.framework.boc.model.SpellSlot;
 import com.d20charactersheet.framework.boc.model.SpelllistAbility;
 import com.d20charactersheet.framework.boc.model.WeaponAttack;
@@ -164,9 +165,9 @@ public class ExportCharacterXml extends XmlExport implements ExportCharacter {
 
   private Node createSaves() {
     final Element savesElement = document.createElement(TAG_SAVES);
-    savesElement.appendChild(createElementWithText(TAG_FORTIFYMOD, character.getFortitudeModifier()));
-    savesElement.appendChild(createElementWithText(TAG_REFLEXMOD, character.getReflexModifier()));
-    savesElement.appendChild(createElementWithText(TAG_WILLMOD, character.getWillModifier()));
+    savesElement.appendChild(createElementWithText(TAG_FORTIFYMOD, character.getSaveModifier(Save.STRENGTH)));
+    savesElement.appendChild(createElementWithText(TAG_REFLEXMOD, character.getSaveModifier(Save.DEXTERITY)));
+    savesElement.appendChild(createElementWithText(TAG_WILLMOD, character.getSaveModifier(Save.CONSTITUTION)));
     return savesElement;
   }
 

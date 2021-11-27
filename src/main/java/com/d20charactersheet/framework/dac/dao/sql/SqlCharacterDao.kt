@@ -13,25 +13,28 @@ import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_CA
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_CATEGORY
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_CHARAKTER_ID
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_CHARISMA
+import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_CHARISMA_MISC_MOD
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_CLASS_ID
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_CMB_MOD
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_CMD_MOD
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_CONSTITUTION
+import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_CONSTITUTION_MISC_MOD
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_COPPER
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_DAMAGE_BONUS_MODIFIER
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_DATE
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_DESCRIPTION
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_DEXTERITY
+import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_DEXTERITY_MISC_MOD
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_EXPERIENCE
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_FAVORITE
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_FEAT_ID
-import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_FORTITUDE_MISC_MOD
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_GOLD
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_HITPOINTS
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_ID
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_IMAGE_ID
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_INI_MISC_MOD
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_INTELLIGENCE
+import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_INTELLIGENCE_MISC_MOD
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_ITEMCLASS
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_ITEM_ID
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_LEVEL
@@ -43,7 +46,6 @@ import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_PL
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_PLAYER
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_RACE_ID
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_RANK
-import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_REFLEX_MISC_MOD
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_SEX_ID
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_SILVER
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_SKILL_ID
@@ -51,11 +53,12 @@ import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_SP
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_SPELL_ID
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_SPELL_SLOT_ID
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_STRENGTH
+import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_STRENGTH_MISC_MOD
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_TEXT
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_THUMB_IMAGE_ID
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_WEAPON_ID
-import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_WILL_MISC_MOD
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_WISDOM
+import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_WISDOM_MISC_MOD
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.COLUMN_XP_TABLE_ID
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.FROM
 import com.d20charactersheet.framework.dac.dao.sql.TableAndColumnNames.SELECT
@@ -97,7 +100,7 @@ import java.util.*
  * Data access object to access data of a SQLite 3 database.
  */
 class SqlCharacterDao(private val db: Database) : CharacterDao {
-    
+
     private val weaponHelper: WeaponHelper
     private val armorHelper: ArmorHelper
     private val goodHelper: GoodHelper
@@ -112,8 +115,10 @@ class SqlCharacterDao(private val db: Database) : CharacterDao {
     }
 
 
-    override fun getAllCharacters(allCharacterClasses: List<CharacterClass>, allRaces: List<Race>,
-                                  allXpTables: List<XpTable>): List<Character> {
+    override fun getAllCharacters(
+        allCharacterClasses: List<CharacterClass>, allRaces: List<Race>,
+        allXpTables: List<XpTable>
+    ): List<Character> {
         val characters: MutableList<Character> = ArrayList()
         var queryResult: QueryResult? = null
         try {
@@ -156,8 +161,10 @@ class SqlCharacterDao(private val db: Database) : CharacterDao {
         return classLevels
     }
 
-    override fun getCharacter(id: Int, allCharacterClasses: List<CharacterClass>, allRaces: List<Race>,
-                              allXpTables: List<XpTable>): Character {
+    override fun getCharacter(
+        id: Int, allCharacterClasses: List<CharacterClass>, allRaces: List<Race>,
+        allXpTables: List<XpTable>
+    ): Character {
         var queryResult: QueryResult? = null
         try {
             val bindVariables = arrayOf(id.toString())
@@ -227,9 +234,12 @@ class SqlCharacterDao(private val db: Database) : CharacterDao {
         values.put(COLUMN_CMD_MOD, character.cmdModifier)
 
         // saving throws
-        values.put(COLUMN_FORTITUDE_MISC_MOD, character.fortitudeModifier)
-        values.put(COLUMN_REFLEX_MISC_MOD, character.reflexModifier)
-        values.put(COLUMN_WILL_MISC_MOD, character.willModifier)
+        values.put(COLUMN_STRENGTH_MISC_MOD, character.getSaveModifier(Save.STRENGTH))
+        values.put(COLUMN_DEXTERITY_MISC_MOD, character.getSaveModifier(Save.DEXTERITY))
+        values.put(COLUMN_CONSTITUTION_MISC_MOD, character.getSaveModifier(Save.CONSTITUTION))
+        values.put(COLUMN_INTELLIGENCE_MISC_MOD, character.getSaveModifier(Save.INTELLIGENCE))
+        values.put(COLUMN_WISDOM_MISC_MOD, character.getSaveModifier(Save.WISDOM))
+        values.put(COLUMN_CHARISMA_MISC_MOD, character.getSaveModifier(Save.CHARISMA))
 
         // images
         values.put(COLUMN_IMAGE_ID, character.imageId)
@@ -511,8 +521,10 @@ class SqlCharacterDao(private val db: Database) : CharacterDao {
         return characterAbilities
     }
 
-    override fun createCharacterAbility(character: Character, characterClass: CharacterClass,
-                                        characterAbility: CharacterAbility) {
+    override fun createCharacterAbility(
+        character: Character, characterClass: CharacterClass,
+        characterAbility: CharacterAbility
+    ) {
         val characterAbilityValues = getCharacterAbilityValues(character, characterClass, characterAbility)
         characterAbilityValues.putNull(COLUMN_ID)
         synchronized(Database.DB_LOCK) {
@@ -532,8 +544,10 @@ class SqlCharacterDao(private val db: Database) : CharacterDao {
         }
     }
 
-    private fun getCharacterAbilityValues(character: Character, characterClass: CharacterClass,
-                                          characterAbility: CharacterAbility): ContentValues {
+    private fun getCharacterAbilityValues(
+        character: Character, characterClass: CharacterClass,
+        characterAbility: CharacterAbility
+    ): ContentValues {
         val values = ContentValues()
         values.put(COLUMN_CHARAKTER_ID, character.id)
         values.put(COLUMN_CLASS_ID, characterClass.id)
@@ -732,8 +746,10 @@ class SqlCharacterDao(private val db: Database) : CharacterDao {
         return knownSpells
     }
 
-    override fun getSpellSlots(character: Character, allSpells: List<Spell>, allAbilities: List<Ability>,
-                               allFeats: List<Feat>): List<SpellSlot> {
+    override fun getSpellSlots(
+        character: Character, allSpells: List<Spell>, allAbilities: List<Ability>,
+        allFeats: List<Feat>
+    ): List<SpellSlot> {
         val spelllistAbilities = getSpelllistAbilities(allAbilities)
         val metaMagicFeats = getMetamagicFeats(allFeats)
         val spellSlots: MutableList<SpellSlot> = ArrayList()
@@ -778,8 +794,10 @@ class SqlCharacterDao(private val db: Database) : CharacterDao {
         return metamagicFeats
     }
 
-    private fun getSpelllistAbilities(spellSlot: SpellSlot,
-                                      allSpelllistAbilities: List<SpelllistAbility>): List<SpelllistAbility> {
+    private fun getSpelllistAbilities(
+        spellSlot: SpellSlot,
+        allSpelllistAbilities: List<SpelllistAbility>
+    ): List<SpelllistAbility> {
         val spelllistAbilities: MutableList<SpelllistAbility> = LinkedList()
         var queryResult: QueryResult? = null
         try {
@@ -787,8 +805,10 @@ class SqlCharacterDao(private val db: Database) : CharacterDao {
             queryResult = db.rawQuery(SQL_GET_CHARACTER_SPELL_SLOT_ABILITIES, spellSlotId)
             queryResult.moveToFirst()
             while (!queryResult.isAfterLast()) {
-                val spelllistAbility = getSpelllistAbility(queryResult.getDataRow().getInt(0),
-                        allSpelllistAbilities)
+                val spelllistAbility = getSpelllistAbility(
+                    queryResult.getDataRow().getInt(0),
+                    allSpelllistAbilities
+                )
                 spelllistAbilities.add(spelllistAbility)
                 queryResult.moveToNext()
             }
@@ -950,12 +970,13 @@ class SqlCharacterDao(private val db: Database) : CharacterDao {
 
     override fun updateCharacterSkill(character: Character, characterSkill: CharacterSkill) {
         val contentValues = getCharacterSkillContentValues(characterSkill)
-        val bindVariables = arrayOf(character.id.toString(),
-                characterSkill.skill.id.toString()
+        val bindVariables = arrayOf(
+            character.id.toString(),
+            characterSkill.skill.id.toString()
         )
         synchronized(Database.DB_LOCK) {
             val numberOfAffectedRows = db
-                    .update(TABLE_CHARAKTER_SKILL, contentValues, WHERE_CHARAKTER_ID_AND_SKILL_ID, bindVariables)
+                .update(TABLE_CHARAKTER_SKILL, contentValues, WHERE_CHARAKTER_ID_AND_SKILL_ID, bindVariables)
             if (numberOfAffectedRows == 0) {
                 contentValues.put(COLUMN_SKILL_ID, characterSkill.skill.id)
                 contentValues.put(COLUMN_CHARAKTER_ID, character.id)
@@ -987,8 +1008,14 @@ class SqlCharacterDao(private val db: Database) : CharacterDao {
         return body
     }
 
-    private fun getItem(itemId: Int, itemclass: String, allWeapons: List<Weapon>, allArmor: List<Armor>, allGoods: List<Good>): Item {
-        return when(itemclass) {
+    private fun getItem(
+        itemId: Int,
+        itemclass: String,
+        allWeapons: List<Weapon>,
+        allArmor: List<Armor>,
+        allGoods: List<Good>
+    ): Item {
+        return when (itemclass) {
             Weapon::class.java.simpleName -> findItem(itemId, allWeapons)
             Armor::class.java.simpleName -> findItem(itemId, allArmor)
             Good::class.java.simpleName -> findItem(itemId, allGoods)
@@ -1066,7 +1093,8 @@ class SqlCharacterDao(private val db: Database) : CharacterDao {
         private const val WHERE_CHARACTER_ID: String = "$COLUMN_CHARAKTER_ID = ?"
         private const val WHERE_ID: String = "$COLUMN_ID = ?"
         private const val WHERE_SPELLLIST_ID_AND_SPELL_ID: String = "$COLUMN_SPELLLIST_ID = ? AND $COLUMN_SPELL_ID = ?"
-        private const val WHERE_SPELL_SLOT_ID_NOT_IN_TABLE_CHARAKTER_SPELL_SLOT = "$COLUMN_SPELL_SLOT_ID NOT IN ($SELECT $COLUMN_ID $FROM $TABLE_CHARAKTER_SPELL_SLOT)"
+        private const val WHERE_SPELL_SLOT_ID_NOT_IN_TABLE_CHARAKTER_SPELL_SLOT =
+            "$COLUMN_SPELL_SLOT_ID NOT IN ($SELECT $COLUMN_ID $FROM $TABLE_CHARAKTER_SPELL_SLOT)"
         private const val WHERE_CHARAKTER_ID_AND_SKILL_ID: String = "$COLUMN_CHARAKTER_ID = ? AND $COLUMN_SKILL_ID = ?"
     }
 

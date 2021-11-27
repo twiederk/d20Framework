@@ -1,6 +1,9 @@
 package com.d20charactersheet.framework.boc.service;
 
+import java.util.EnumSet;
 import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
 
 import com.d20charactersheet.framework.boc.model.Ability;
 import com.d20charactersheet.framework.boc.model.AbilityType;
@@ -413,7 +416,19 @@ public interface DisplayService {
    *
    * @return The name of the save.
    */
-  String getDisplaySave(Save save);
+  @NotNull
+  String getDisplaySave(@NotNull Save save);
+
+  /**
+   * Returns comma separated list of saves
+   *
+   * @param saves
+   *     The saves to display.
+   *
+   * @return The saves separated by comma.
+   */
+  @NotNull
+  String getDisplaySaves(@NotNull EnumSet<Save> saves);
 
   /**
    * Returns the abbreviation of an attribute name.

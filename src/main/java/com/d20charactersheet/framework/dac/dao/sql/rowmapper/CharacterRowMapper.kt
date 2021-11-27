@@ -5,7 +5,7 @@ import com.d20charactersheet.framework.dac.dao.sql.DataRow
 import java.sql.SQLException
 
 /**
- * Maps a datarow to an Character instance.
+ * Maps a datarow to a Character instance.
  *
  * @param allRaces
  * All races of the game system.
@@ -40,11 +40,14 @@ class CharacterRowMapper(private val allRaces: List<Race>, private val allXpTabl
         character.initiativeModifier = dataRow.getInt(17)
         character.cmbModifier = dataRow.getInt(18)
         character.cmdModifier = dataRow.getInt(19)
-        character.fortitudeModifier = dataRow.getInt(20)
-        character.reflexModifier = dataRow.getInt(21)
-        character.willModifier = dataRow.getInt(22)
-        character.imageId = dataRow.getInt(23)
-        character.thumbImageId = dataRow.getInt(24)
+        character.setSaveModifier(Save.STRENGTH, dataRow.getInt(20))
+        character.setSaveModifier(Save.DEXTERITY, dataRow.getInt(21))
+        character.setSaveModifier(Save.CONSTITUTION, dataRow.getInt(22))
+        character.setSaveModifier(Save.INTELLIGENCE, dataRow.getInt(23))
+        character.setSaveModifier(Save.WISDOM, dataRow.getInt(24))
+        character.setSaveModifier(Save.CHARISMA, dataRow.getInt(25))
+        character.imageId = dataRow.getInt(26)
+        character.thumbImageId = dataRow.getInt(27)
         character.money = getMoney(dataRow)
         return character
     }
@@ -52,10 +55,10 @@ class CharacterRowMapper(private val allRaces: List<Race>, private val allXpTabl
     @Throws(SQLException::class)
     private fun getMoney(dataRow: DataRow): Money {
         val money = Money()
-        money.platinum = dataRow.getInt(25)
-        money.gold = dataRow.getInt(26)
-        money.silver = dataRow.getInt(27)
-        money.copper = dataRow.getInt(28)
+        money.platinum = dataRow.getInt(28)
+        money.gold = dataRow.getInt(29)
+        money.silver = dataRow.getInt(30)
+        money.copper = dataRow.getInt(31)
         return money
     }
 }
