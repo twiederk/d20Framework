@@ -19,7 +19,19 @@ class DnD5eRuleServiceProficiencyBonusTest {
     }
 
     @Test
-    fun calculateProficiencyBonus_singleClass5thLevel_bonusIs2() {
+    fun calculateProficiencyBonus_singleClass4thLevel_bonusIs2() {
+        // Arrange
+        val character = createCharacter { classLevels { classLevel { level = 4 } } }
+
+        // Act
+        val proficiencyBonus = DnD5eRuleServiceImpl().calculateProficiencyBonus(character)
+
+        // Assert
+        assertThat(proficiencyBonus).isEqualTo(2)
+    }
+
+    @Test
+    fun calculateProficiencyBonus_singleClass5thLevel_bonusIs3() {
         // Arrange
         val character = createCharacter { classLevels { classLevel { level = 5 } } }
 
@@ -31,7 +43,24 @@ class DnD5eRuleServiceProficiencyBonusTest {
     }
 
     @Test
-    fun calculateProficiencyBonus_multiClass4thAnd5thLevel_bonusIs2() {
+    fun calculateProficiencyBonus_multiClass4thAnd4thLevel_bonusIs3() {
+        // Arrange
+        val character = createCharacter {
+            classLevels {
+                classLevel { level = 4 }
+                classLevel { level = 4 }
+            }
+        }
+
+        // Act
+        val proficiencyBonus = DnD5eRuleServiceImpl().calculateProficiencyBonus(character)
+
+        // Assert
+        assertThat(proficiencyBonus).isEqualTo(3)
+    }
+
+    @Test
+    fun calculateProficiencyBonus_multiClass4thAnd5thLevel_bonusIs4() {
         // Arrange
         val character = createCharacter {
             classLevels {

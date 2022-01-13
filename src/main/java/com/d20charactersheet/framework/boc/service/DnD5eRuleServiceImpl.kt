@@ -1,6 +1,7 @@
 package com.d20charactersheet.framework.boc.service
 
 import com.d20charactersheet.framework.boc.model.*
+import kotlin.math.max
 
 class DnD5eRuleServiceImpl : AbstractRuleServiceImpl() {
 
@@ -30,7 +31,7 @@ class DnD5eRuleServiceImpl : AbstractRuleServiceImpl() {
 
     override fun calculateProficiencyBonus(character: Character): Int {
         val levelTotal = character.classLevels.sumOf { classLevel -> classLevel.level }
-        return levelTotal / 4 + 2
+        return (levelTotal - 1) / 4 + 2
     }
 
     override fun calculateAttributeModifier(character: Character, weapon: Weapon): Int {
@@ -121,6 +122,97 @@ class DnD5eRuleServiceImpl : AbstractRuleServiceImpl() {
 
     override fun getNumberOfClassFeats(character: Character): Int {
         return 0
+    }
+
+    override fun getMaxSpelllevel(character: Character, spelllistAbility: SpelllistAbility): Int {
+        return spelllistAbility.spelllist.maxLevel
+    }
+
+    override fun getNumberOfKnownSpells(character: Character, spelllistAbility: SpelllistAbility, spellLevel: Int): Int {
+        val knownSpellsTable = spelllistAbility.knownSpellsTable
+        val spellcasterLevel = getSpellcasterLevel(character, spelllistAbility)
+        val numberOfKnownSpells = knownSpellsTable.getKnownSpells(spellcasterLevel, spellLevel)
+        if (isNoAccess(numberOfKnownSpells)) {
+            return 0
+        }
+        if (isCantrip(spellLevel)) {
+            return numberOfKnownSpells
+        }
+        if (spelllistAbility.castingType == CastingType.SPONTANEOUS) {
+            return numberOfKnownSpells
+        }
+        return numberOfKnownSpells + max(getAttributeModifier(character, spelllistAbility.spellAttribute), 1)
+    }
+
+    private fun isCantrip(spellLevel: Int) = spellLevel == 0
+
+    private fun isNoAccess(numberOfKnownSpells: Int) = numberOfKnownSpells == KnownSpellsTable.NO_ACCESS
+
+    override fun calculateSpellSlots(character: Character): List<SpellSlot> {
+        val spellSlots: List<SpellSlot> = ArrayList()
+        for (spelllistAbility in character.spelllistAbilities) {
+            calculateSpellSlots(character, spelllistAbility, spellSlots)
+        }
+
+        fillSpellSlots(character, spellSlots)
+
+        return spellSlots
+    }
+
+    private fun calculateSpellSlots(character: Character, spelllistAbility: SpelllistAbility, spellSlots: List<SpellSlot>) {
+        val spellCasterLevel = getSpellcasterLevel(character, spelllistAbility)
+
+        // get slots of spells per day table
+        createSpellsPerDaySlots(spelllistAbility, spellCasterLevel, spellSlots)
+    }
+
+    override fun getSpellSaveDifficultyClass(character: Character, spellSlot: SpellSlot): Int {
+        val proficiencyBonus = calculateProficiencyBonus(character)
+        val attributeBonus = calculateSpellSaveDiffucultyClassAttributeBonus(character, spellSlot.spelllistAbilities)
+        return 8 + proficiencyBonus + attributeBonus
+    }
+
+    private fun calculateSpellSaveDiffucultyClassAttributeBonus(
+        character: Character,
+        spelllistAbilities: List<SpelllistAbility>?
+    ): Int {
+        if (spelllistAbilities != null && spelllistAbilities.isNotEmpty()) {
+            return getAttributeModifier(character, spelllistAbilities[0].spellAttribute)
+        }
+        return 0
+    }
+
+    override fun getSpellSelection(character: Character, spellSlot: SpellSlot): List<Spell> {
+        val spellSelection = mutableListOf<Spell>()
+        val spelllists = spellSlot.spelllists
+        for (spelllist in spelllists) {
+            val knownSpells = character.getKnownSpells(spelllist)
+            val spellSlotLevel = spellSlot.level
+            if (spellSlotLevel == 0) {
+                val spellsOfLevel = getSpellsOfLevel(spelllist.getSpellsOfLevel(spellSlotLevel), knownSpells)
+                spellSelection.addAll(spellsOfLevel)
+            }
+            if (spellSlotLevel > 0) {
+                for (spellLevel in (1..spellSlotLevel)) {
+                    val spellsOfLevel = getSpellsOfLevel(spelllist.getSpellsOfLevel(spellLevel), knownSpells)
+                    spellSelection.addAll(spellsOfLevel)
+                }
+            }
+        }
+        return spellSelection
+    }
+
+    override fun rest(character: Character): MutableList<SpellSlot> {
+        val spellSlots = mutableListOf<SpellSlot>()
+        for (spellSlot in character.spellSlots) {
+            if (spellSlot.level == 0) {
+                spellSlot.isCast = false
+            } else {
+                spellSlot.spell = SpellSlot.EMPTY_SPELL
+            }
+            spellSlots.add(spellSlot)
+        }
+        return spellSlots
     }
 
 }

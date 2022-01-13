@@ -46,7 +46,7 @@ abstract class BaseSpelllistDaoTest {
         assertThat(spell.isDivineFocus).isFalse
         assertThat(spell.isXpCost).isFalse
         assertThat(spell.castingTime).isEqualTo(CastingTime.ONE_STANDARD_ACTION)
-        assertThat(spell.range).isEqualTo(Range.LONG)
+        assertThat(spell.range).isEqualTo("Long (400 ft. + 40 ft./level)")
         assertThat(spell.effect).isEqualTo("One arrow of acid")
         assertThat(spell.duration).isEqualTo("1 round + 1 round per three levels")
         assertThat(spell.spellResistance).isEqualTo(SpellResistance.NO)
@@ -113,7 +113,7 @@ abstract class BaseSpelllistDaoTest {
         spell.isMaterial = true
         spell.isFocus = true
         spell.castingTime = CastingTime.ONE_STANDARD_ACTION
-        spell.range = Range.LONG
+        spell.range = "Long (400 ft. + 40 ft./level)"
         spell.effect = "one arrow of acid"
         spell.duration = "1 round + 1 round per three levels"
         spell.savingThrow = "none"
@@ -145,7 +145,7 @@ abstract class BaseSpelllistDaoTest {
         assertThat(newSpell.isMaterial).isTrue
         assertThat(newSpell.isFocus).isTrue
         assertThat(newSpell.castingTime).isEqualTo(CastingTime.ONE_STANDARD_ACTION)
-        assertThat(newSpell.range).isEqualTo(Range.LONG)
+        assertThat(newSpell.range).isEqualTo("Long (400 ft. + 40 ft./level)")
         assertThat(newSpell.effect).isEqualTo("one arrow of acid")
         assertThat(newSpell.duration).isEqualTo("1 round + 1 round per three levels")
         assertThat(newSpell.savingThrow).isEqualTo("none")

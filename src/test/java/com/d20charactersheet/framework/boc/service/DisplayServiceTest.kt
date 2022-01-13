@@ -45,7 +45,6 @@ class DisplayServiceTest {
             override fun getDisplaySubSchool(subSchool: SubSchool): String? = null
             override fun getDisplayCastingTime(castingTime: CastingTime): String? = null
             override fun getDisplayDescriptor(descriptor: Descriptor): String? = null
-            override fun getDisplayRange(range: Range): String? = null
             override fun getDisplaySpellResistance(spellResistance: SpellResistance): String? = null
             override fun getDisplayAbilityClass(ability: Ability): String? = null
             override fun getDisplayNumberOfKnownSpells(

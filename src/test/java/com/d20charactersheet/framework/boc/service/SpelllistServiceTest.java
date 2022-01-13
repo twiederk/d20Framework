@@ -16,7 +16,6 @@ import org.junit.Test;
 import com.d20charactersheet.framework.boc.model.CastingTime;
 import com.d20charactersheet.framework.boc.model.Descriptor;
 import com.d20charactersheet.framework.boc.model.KnownSpellsTable;
-import com.d20charactersheet.framework.boc.model.Range;
 import com.d20charactersheet.framework.boc.model.School;
 import com.d20charactersheet.framework.boc.model.Spell;
 import com.d20charactersheet.framework.boc.model.SpellResistance;
@@ -94,7 +93,7 @@ public class SpelllistServiceTest {
     assertTrue(newSpell.isMaterial());
     assertTrue(newSpell.isFocus());
     assertEquals(CastingTime.ONE_STANDARD_ACTION, newSpell.getCastingTime());
-    assertEquals(Range.LONG, newSpell.getRange());
+    assertEquals("Long (400 ft. + 40 ft./level)", newSpell.getRange());
     assertEquals("one arrow of acid", newSpell.getEffect());
     assertEquals("1 round + 1 round per three levels", newSpell.getDuration());
     assertEquals("none", newSpell.getSavingThrow());
@@ -121,7 +120,7 @@ public class SpelllistServiceTest {
     spell.setMaterial(true);
     spell.setFocus(true);
     spell.setCastingTime(CastingTime.ONE_STANDARD_ACTION);
-    spell.setRange(Range.LONG);
+    spell.setRange("Long (400 ft. + 40 ft./level)");
     spell.setEffect("one arrow of acid");
     spell.setDuration("1 round + 1 round per three levels");
     spell.setSavingThrow("none");

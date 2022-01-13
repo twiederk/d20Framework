@@ -8,10 +8,11 @@ class ItemTest {
     @Test
     fun equals_sameWeapon_isEqual() {
         // Arrange
-        val weapon = Weapon().apply { id = 1 }
+        val weapon1 = Weapon().apply { id = 1 }
+        val weapon2 = Weapon().apply { id = 1 }
 
         // Act
-        val result = weapon == weapon
+        val result = weapon1 == weapon2
 
         // Assert
         assertThat(result).isTrue
@@ -59,10 +60,11 @@ class ItemTest {
     @Test
     fun equals_sameArmor_isEqual() {
         // Arrange
-        val armor = Armor().apply { id = 1 }
+        val armor1 = Armor().apply { id = 1 }
+        val armor2 = Armor().apply { id = 1 }
 
         // Act
-        val result = armor == armor
+        val result = armor1 == armor2
 
         // Assert
         assertThat(result).isTrue
@@ -111,10 +113,11 @@ class ItemTest {
     @Test
     fun equals_sameGood_isEqual() {
         // Arrange
-        val good = Good().apply { id = 1 }
+        val good1 = Good().apply { id = 1 }
+        val good2 = Good().apply { id = 1 }
 
         // Act
-        val result = good == good
+        val result = good1 == good2
 
         // Assert
         assertThat(result).isTrue

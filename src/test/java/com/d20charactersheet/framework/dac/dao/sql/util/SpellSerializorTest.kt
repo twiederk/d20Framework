@@ -135,34 +135,6 @@ class SpellSerializorTest {
     }
 
     @Test
-    fun testDeserializeRange() {
-        var range = spellSerializor.deserializeRange("Personal")
-        Assert.assertNotNull(range)
-        Assert.assertEquals(Range.PERSONAL, range)
-        range = spellSerializor.deserializeRange("Touch")
-        Assert.assertNotNull(range)
-        Assert.assertEquals(Range.TOUCH, range)
-        range = spellSerializor.deserializeRange("Close (25 ft. + 5 ft./2 levels)")
-        Assert.assertNotNull(range)
-        Assert.assertEquals(Range.CLOSE, range)
-        range = spellSerializor.deserializeRange("Medium (100 ft. + 10 ft./level)")
-        Assert.assertNotNull(range)
-        Assert.assertEquals(Range.MEDIUM, range)
-        range = spellSerializor.deserializeRange("Long (400 ft. + 40 ft./level)")
-        Assert.assertNotNull(range)
-        Assert.assertEquals(Range.LONG, range)
-        range = spellSerializor.deserializeRange("See text")
-        Assert.assertNotNull(range)
-        Assert.assertEquals(Range.SPECIFIC, range)
-        range = spellSerializor.deserializeRange("Close (25 ft. + 5 ft./2 levels) or see text")
-        Assert.assertNotNull(range)
-        Assert.assertEquals(Range.SPECIFIC, range)
-        range = spellSerializor.deserializeRange("Anywhere within the area to be warded")
-        Assert.assertNotNull(range)
-        Assert.assertEquals(Range.SPECIFIC, range)
-    }
-
-    @Test
     fun testDeserializeSpellResistance() {
         var spellResistance = spellSerializor.deserializeSpellResistance("Yes")
         Assert.assertNotNull(spellResistance)

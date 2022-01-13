@@ -1057,7 +1057,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
     return attributeBonusSlots;
   }
 
-  private void fillSpellSlots(final @NotNull Character character, final List<SpellSlot> spellSlots) {
+  protected void fillSpellSlots(final @NotNull Character character, final List<SpellSlot> spellSlots) {
     final List<SpellSlot> characterSpellSlots = new ArrayList<>(character.getSpellSlots());
     for (final SpellSlot spellSlot : spellSlots) {
       fillSpellSlot(spellSlot, characterSpellSlots);
@@ -1140,7 +1140,7 @@ public abstract class AbstractRuleServiceImpl implements RuleService {
     return spellSelection;
   }
 
-  private List<Spell> getSpellsOfLevel(final List<Spell> spelllistSpells, final List<KnownSpell> knownSpells) {
+  protected List<Spell> getSpellsOfLevel(final List<Spell> spelllistSpells, final List<KnownSpell> knownSpells) {
     final List<Spell> spellsOfLevel = new LinkedList<>();
     for (final KnownSpell knownSpell : knownSpells) {
       final Spell spell = knownSpell.getSpell();

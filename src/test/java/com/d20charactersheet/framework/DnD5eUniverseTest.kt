@@ -11,7 +11,7 @@ class DnD5eUniverseTest {
     @Test
     fun getGameSystem_initDnD5eUniverse_gameSystemIsInitialized() {
 
-        // Assert
+        // assert
         assertThat(gameSystem.name).isEqualTo("Dungeons & Dragons 5e")
         assertThat(gameSystem.id).isEqualTo(3)
         assertThat(gameSystem.characterCreatorService).isNotNull
@@ -20,21 +20,42 @@ class DnD5eUniverseTest {
     @Test
     fun getAllRaces_allRaces_returnsAllRaces() {
 
-        // Act
+        // act
         val allRaces = gameSystem.raceService.getAllRaces(gameSystem.allCharacterClasses, gameSystem.allAbilities)
 
-        // Assert
+        // assert
         assertThat(allRaces).hasSize(9)
     }
 
     @Test
     fun getAllRaces_allClasses_returnsAllClasses() {
 
-        // Act
+        // act
         val allClasses = gameSystem.characterClassService.getAllCharacterClasses(gameSystem.allSkills, gameSystem.allAbilities)
 
-        // Assert
+        // assert
         assertThat(allClasses).hasSize(12)
+    }
+
+    @Test
+    fun getAllSpelllists_allSpelllists_returnsAllSpelllists() {
+
+        // act
+        val allSpelllists = gameSystem.allSpelllists
+
+        // assert
+        assertThat(allSpelllists).hasSize(8)
+
+    }
+
+    @Test
+    fun getAllSpells_allSpells_returnsAllSpells() {
+
+        // act
+        val allSpells = gameSystem.allSpells
+
+        // assert
+        assertThat(allSpells).hasSize(361)
     }
 
 }

@@ -7,7 +7,9 @@ public enum CastingType {
   /**
    * Spells can be cast immediately
    */
-  SPONTANEOUS, /**
+  SPONTANEOUS,
+
+  /**
    * Spells must be memorized before casting
    */
   PREPARED

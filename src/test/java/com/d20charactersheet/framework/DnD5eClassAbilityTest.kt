@@ -1,6 +1,11 @@
 package com.d20charactersheet.framework
 
+import com.d20charactersheet.framework.boc.model.Attribute
+import com.d20charactersheet.framework.boc.model.CastingType
+import com.d20charactersheet.framework.boc.model.SpellSource
+import com.d20charactersheet.framework.boc.model.SpelllistAbility
 import com.d20charactersheet.framework.boc.service.GameSystem
+import com.d20charactersheet.framework.dac.abilitybuilder.SpelllistAbilityBuilder
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
@@ -402,6 +407,19 @@ class DnD5eClassAbilityTest {
             "Evocation - Empowered Evocation",
             "Evocation - Overchannel"
         )
+
+        val ability = wizard.classAbilities.find { it.ability.name == "Spellcasting - Wizard" }?.ability
+        assertThat(ability).isInstanceOf(SpelllistAbility::class.java)
+
+        val spelllistAbility = ability as SpelllistAbility
+        assertThat(spelllistAbility.spelllist.name).isEqualTo("Wizard")
+        assertThat(spelllistAbility.spellAttribute).isEqualTo(Attribute.INTELLIGENCE)
+        assertThat(spelllistAbility.castingType).isEqualTo(CastingType.PREPARED)
+        assertThat(spelllistAbility.spellSource).isEqualTo(SpellSource.ARCANE)
+        assertThat(spelllistAbility.knownSpellsTable.name).isEqualTo("Wizard")
+        assertThat(spelllistAbility.spellsPerDayTable.name).isEqualTo("Wizard")
+        assertThat(spelllistAbility.isAttributeBonusSpellSlots).isFalse
+        assertThat(spelllistAbility.schools).isEqualTo(SpelllistAbilityBuilder.ANY_SCHOOL)
     }
 
 }

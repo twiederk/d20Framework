@@ -7,31 +7,49 @@ public enum CastingTime {
   /**
    * None casting time set
    */
-  NONE, /**
+  NONE,
+
+  /**
    * 1 standard action
    */
-  ONE_STANDARD_ACTION, /**
+  ONE_STANDARD_ACTION,
+
+  /**
    * 1 free action
    */
-  ONE_FREE_ACTION, /**
+  ONE_FREE_ACTION,
+
+  /**
    * 1 round
    */
-  ONE_ROUND, /**
+  ONE_ROUND,
+
+  /**
    * 1 minute
    */
-  ONE_MINUTE, /**
+  ONE_MINUTE,
+
+  /**
    * 10 minutes
    */
-  TEN_MINUTES, /**
+  TEN_MINUTES,
+
+  /**
    * 1 hour
    */
-  ONE_HOUR, /**
+  ONE_HOUR,
+
+  /**
    * 1 immediate action
    */
-  ONE_IMMEDIATE_ACTION, /**
+  ONE_IMMEDIATE_ACTION,
+
+  /**
    * 1 swift action
    */
-  ONE_SWIFT_ACTION, /**
+  ONE_SWIFT_ACTION,
+
+  /**
    * Specific casting time
    */
   SPECIFIC

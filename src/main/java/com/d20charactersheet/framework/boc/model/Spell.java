@@ -18,7 +18,7 @@ public class Spell implements Serializable {
   private Descriptor[] descriptors;
   private final BitSet components;
   private CastingTime castingTime;
-  private Range range;
+  private String range;
   private String effect;
   private String duration;
   private String savingThrow;
@@ -116,7 +116,7 @@ public class Spell implements Serializable {
    *
    * @return The range of the spell.
    */
-  public Range getRange() {
+  public String getRange() {
     return range;
   }
 
@@ -126,7 +126,7 @@ public class Spell implements Serializable {
    * @param range
    *     The range of the spell.
    */
-  public void setRange(final Range range) {
+  public void setRange(final String range) {
     this.range = range;
   }
 

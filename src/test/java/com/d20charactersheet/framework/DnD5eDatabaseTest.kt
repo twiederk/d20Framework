@@ -1,6 +1,6 @@
 package com.d20charactersheet.framework
 
-import com.d20charactersheet.framework.boc.model.Save
+import com.d20charactersheet.framework.boc.model.SpelllistAbility
 import com.d20charactersheet.framework.boc.service.*
 import com.d20charactersheet.framework.dac.dao.sql.*
 import com.d20charactersheet.framework.dac.dao.sql.jdbc.JdbcDatabase
@@ -12,7 +12,6 @@ import java.nio.file.Paths
 import java.nio.file.StandardCopyOption
 import java.sql.Connection
 import java.sql.DriverManager
-import java.util.*
 
 class DnD5eDatabaseTest {
 
@@ -20,11 +19,11 @@ class DnD5eDatabaseTest {
     fun updateDatabase() {
 
         // arrange
-        val src = Paths.get("./src/test/resources/db/dnd5e_db_4_8_0")
-        val dest = Paths.get("./src/test/resources/db/dnd5e_db_4_8_0_to_update")
+        val src = Paths.get("./src/test/resources/db/dnd5e_db_4_9_1")
+        val dest = Paths.get("./src/test/resources/db/dnd5e_db_4_9_1_to_update")
         Files.copy(src, dest, StandardCopyOption.REPLACE_EXISTING)
 
-        val connection: Connection = DriverManager.getConnection("jdbc:sqlite:./src/test/resources/db/dnd5e_db_4_8_0_to_update")
+        val connection: Connection = DriverManager.getConnection("jdbc:sqlite:./src/test/resources/db/dnd5e_db_4_9_1_to_update")
         val jdbcDatabase = JdbcDatabase(connection)
 
         val skillService: SkillService = SkillServiceImpl(SqlSkillDao(jdbcDatabase))
@@ -52,15 +51,49 @@ class DnD5eDatabaseTest {
         gameSystem.bodyService = BodyService()
         gameSystem.ruleService = DnD5eRuleServiceImpl()
 
-        val jdbcHelper = JdbcHelper("jdbc:sqlite:./src/test/resources/db/dnd5e_db_4_8_0_to_update")
+        val jdbcHelper = JdbcHelper("jdbc:sqlite:./src/test/resources/db/dnd5e_db_4_9_1_to_update")
 
         // act
-        jdbcHelper.executeSqlScript("/db/dnd5e_upgrade_78_to_79.sql")
+        jdbcHelper.executeSqlScript("/db/dnd5e_upgrade_80_to_81.sql")
 
         // assert
-        val testCharacter = gameSystem.allCharacters[0]
-        assertThat(testCharacter.name).isEqualTo("Belvador the Summoner")
-        assertThat(testCharacter.classLevels[0].characterClass.saves).isEqualTo(EnumSet.of(Save.INTELLIGENCE, Save.WISDOM))
+        assertThat(gameSystem.allSpells).hasSize(361)
+        assertThat(gameSystem.allSpelllists).hasSize(8)
+        assertThat(gameSystem.allKnownSpellsTables).hasSize(7)
+        assertThat(gameSystem.allSpellsPerDayTables).hasSize(7)
+        assertThat(gameSystem.abilityService.getAbilityById(48, gameSystem.allAbilities)).isInstanceOf(SpelllistAbility::class.java)
+        assertThat(gameSystem.abilityService.getAbilityById(63, gameSystem.allAbilities)).isInstanceOf(SpelllistAbility::class.java)
+        assertThat(gameSystem.abilityService.getAbilityById(77, gameSystem.allAbilities)).isInstanceOf(SpelllistAbility::class.java)
+        assertThat(
+            gameSystem.abilityService.getAbilityById(
+                141,
+                gameSystem.allAbilities
+            )
+        ).isInstanceOf(SpelllistAbility::class.java)
+        assertThat(
+            gameSystem.abilityService.getAbilityById(
+                157,
+                gameSystem.allAbilities
+            )
+        ).isInstanceOf(SpelllistAbility::class.java)
+        assertThat(
+            gameSystem.abilityService.getAbilityById(
+                195,
+                gameSystem.allAbilities
+            )
+        ).isInstanceOf(SpelllistAbility::class.java)
+        assertThat(
+            gameSystem.abilityService.getAbilityById(
+                215,
+                gameSystem.allAbilities
+            )
+        ).isInstanceOf(SpelllistAbility::class.java)
+        assertThat(
+            gameSystem.abilityService.getAbilityById(
+                260,
+                gameSystem.allAbilities
+            )
+        ).isInstanceOf(SpelllistAbility::class.java)
 
         // tear down
         jdbcHelper.connection.close()

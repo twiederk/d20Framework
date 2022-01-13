@@ -26,7 +26,6 @@ import com.d20charactersheet.framework.boc.model.GoodType;
 import com.d20charactersheet.framework.boc.model.Item;
 import com.d20charactersheet.framework.boc.model.Note;
 import com.d20charactersheet.framework.boc.model.QualityType;
-import com.d20charactersheet.framework.boc.model.Range;
 import com.d20charactersheet.framework.boc.model.RuleError;
 import com.d20charactersheet.framework.boc.model.Save;
 import com.d20charactersheet.framework.boc.model.School;
@@ -45,6 +44,7 @@ import com.d20charactersheet.framework.boc.model.WeaponType;
 /**
  * Service to turn internal data into displayable strings.
  */
+@SuppressWarnings("SameReturnValue")
 public interface DisplayService {
 
   /**
@@ -490,16 +490,6 @@ public interface DisplayService {
    * @return Descriptor for display.
    */
   String getDisplayDescriptor(Descriptor descriptor);
-
-  /**
-   * Returns the range for display.
-   *
-   * @param range
-   *     The range to display.
-   *
-   * @return The range for display.
-   */
-  String getDisplayRange(Range range);
 
   /**
    * Returns spell resistance for display.

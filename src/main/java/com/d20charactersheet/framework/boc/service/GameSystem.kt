@@ -6,6 +6,7 @@ import com.d20charactersheet.framework.boc.model.*
  * Represents consistent game system. Provides services and data of game system. Executes task including more than one
  * service. Provides convenience methods.
  */
+@SuppressWarnings("SameReturnValue")
 interface GameSystem {
 
     /**

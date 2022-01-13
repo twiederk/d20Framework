@@ -47,10 +47,9 @@ import com.d20charactersheet.framework.dac.dao.sql.rowmapper.SpelllistRowMapper
 import com.d20charactersheet.framework.dac.dao.sql.rowmapper.SpellsPerDayTableRowMapper
 import com.d20charactersheet.framework.dac.dao.sql.util.SpellSerializor
 import java.sql.SQLException
-import java.util.*
 
 /**
- * Data access object for SpelllistService. Retrieves spells and spell lists from SQLite3 database.
+ * Data access object for SpelllistService. Retrieve spells and spell lists from SQLite3 database.
  * Instantiates SQLiteSpelllistDao
  *
  * @param db
@@ -180,7 +179,7 @@ class SqlSpelllistDao(private val db: Database) : SpelllistDao {
         contentValues.put(COLUMN_SCHOOL, spellSerializor.serializeSchool(spell))
         contentValues.put(COLUMN_COMPONENTS, spellSerializor.serializeComponents(spell))
         contentValues.put(COLUMN_CASTING_TIME, spellSerializor.serializeCastingTime(spell.castingTime))
-        contentValues.put(COLUMN_RANGE, spellSerializor.serializeRange(spell.range))
+        contentValues.put(COLUMN_RANGE, spell.range)
         contentValues.put(COLUMN_EFFECT, spell.effect)
         contentValues.put(COLUMN_DURATION, spell.duration)
         contentValues.put(COLUMN_SAVING_THROW, spell.savingThrow)

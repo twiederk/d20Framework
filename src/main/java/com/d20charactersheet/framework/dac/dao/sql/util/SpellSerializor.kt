@@ -111,25 +111,6 @@ class SpellSerializor {
     }
 
     /**
-     * Deserialize range from data.
-     *
-     * @param range
-     * The data to deserialize from.
-     *
-     * @return The range.
-     */
-    fun deserializeRange(range: String): Range {
-        return when (range) {
-            "Personal" -> Range.PERSONAL
-            "Touch" -> Range.TOUCH
-            "Close (25 ft. + 5 ft./2 levels)" -> Range.CLOSE
-            "Medium (100 ft. + 10 ft./level)" -> Range.MEDIUM
-            "Long (400 ft. + 40 ft./level)" -> Range.LONG
-            else -> Range.SPECIFIC
-        }
-    }
-
-    /**
      * Deserialize the spell resistance from.
      *
      * @param data
@@ -309,25 +290,6 @@ class SpellSerializor {
             CastingTime.ONE_SWIFT_ACTION -> "1 swift action"
             CastingTime.SPECIFIC -> "specific"
             CastingTime.NONE -> ""
-        }
-    }
-
-    /**
-     * Serialize rang to string.
-     *
-     * @param range
-     * The range to serialize.
-     *
-     * @return The string containing the serialized range.
-     */
-    fun serializeRange(range: Range): String {
-        return when (range) {
-            Range.PERSONAL -> "Personal"
-            Range.TOUCH -> "Touch"
-            Range.CLOSE -> "Close (25 ft. + 5 ft./2 levels)"
-            Range.MEDIUM -> "Medium (100 ft. + 10 ft./level)"
-            Range.LONG -> "Long (400 ft. + 40 ft./level)"
-            Range.SPECIFIC -> "specific"
         }
     }
 

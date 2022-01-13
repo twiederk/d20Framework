@@ -19,7 +19,7 @@ class DnD5eCharacterTest {
         val allCharacters = gameSystem.allCharacters
 
         // Assert
-        assertThat(allCharacters).hasSize(2)
+        assertThat(allCharacters).hasSize(10)
     }
 
     @Test

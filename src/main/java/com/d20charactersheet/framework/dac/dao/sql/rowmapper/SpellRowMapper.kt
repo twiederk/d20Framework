@@ -21,7 +21,7 @@ class SpellRowMapper : BaseRowMapper() {
         setSchools(spell, dataRow.getString(2))
         setComponents(spell, dataRow.getInt(3))
         spell.castingTime = spellSerializor.deserializeCastingTime(dataRow.getString(4))
-        spell.range = spellSerializor.deserializeRange(dataRow.getString(5))
+        spell.range = dataRow.getString(5)
         spell.effect = dataRow.getString(6)
         spell.duration = dataRow.getString(7)
         spell.savingThrow = dataRow.getString(8)
