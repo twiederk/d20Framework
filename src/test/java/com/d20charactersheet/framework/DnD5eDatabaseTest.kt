@@ -1,6 +1,5 @@
 package com.d20charactersheet.framework
 
-import com.d20charactersheet.framework.boc.model.SpelllistAbility
 import com.d20charactersheet.framework.boc.service.*
 import com.d20charactersheet.framework.dac.dao.sql.*
 import com.d20charactersheet.framework.dac.dao.sql.jdbc.JdbcDatabase
@@ -19,11 +18,11 @@ class DnD5eDatabaseTest {
     fun updateDatabase() {
 
         // arrange
-        val src = Paths.get("./src/test/resources/db/dnd5e_db_4_9_1")
-        val dest = Paths.get("./src/test/resources/db/dnd5e_db_4_9_1_to_update")
+        val src = Paths.get("./src/test/resources/db/dnd5e_db_4_11_0")
+        val dest = Paths.get("./src/test/resources/db/dnd5e_db_4_11_0_to_update")
         Files.copy(src, dest, StandardCopyOption.REPLACE_EXISTING)
 
-        val connection: Connection = DriverManager.getConnection("jdbc:sqlite:./src/test/resources/db/dnd5e_db_4_9_1_to_update")
+        val connection: Connection = DriverManager.getConnection("jdbc:sqlite:./src/test/resources/db/dnd5e_db_4_11_0_to_update")
         val jdbcDatabase = JdbcDatabase(connection)
 
         val skillService: SkillService = SkillServiceImpl(SqlSkillDao(jdbcDatabase))
@@ -51,49 +50,25 @@ class DnD5eDatabaseTest {
         gameSystem.bodyService = BodyService()
         gameSystem.ruleService = DnD5eRuleServiceImpl()
 
-        val jdbcHelper = JdbcHelper("jdbc:sqlite:./src/test/resources/db/dnd5e_db_4_9_1_to_update")
+        val jdbcHelper = JdbcHelper("jdbc:sqlite:./src/test/resources/db/dnd5e_db_4_11_0_to_update")
 
         // act
-        jdbcHelper.executeSqlScript("/db/dnd5e_upgrade_80_to_81.sql")
+        jdbcHelper.executeSqlScript("/db/dnd5e_upgrade_82_to_83.sql")
 
         // assert
-        assertThat(gameSystem.allSpells).hasSize(361)
-        assertThat(gameSystem.allSpelllists).hasSize(8)
-        assertThat(gameSystem.allKnownSpellsTables).hasSize(7)
-        assertThat(gameSystem.allSpellsPerDayTables).hasSize(7)
-        assertThat(gameSystem.abilityService.getAbilityById(48, gameSystem.allAbilities)).isInstanceOf(SpelllistAbility::class.java)
-        assertThat(gameSystem.abilityService.getAbilityById(63, gameSystem.allAbilities)).isInstanceOf(SpelllistAbility::class.java)
-        assertThat(gameSystem.abilityService.getAbilityById(77, gameSystem.allAbilities)).isInstanceOf(SpelllistAbility::class.java)
-        assertThat(
-            gameSystem.abilityService.getAbilityById(
-                141,
-                gameSystem.allAbilities
-            )
-        ).isInstanceOf(SpelllistAbility::class.java)
-        assertThat(
-            gameSystem.abilityService.getAbilityById(
-                157,
-                gameSystem.allAbilities
-            )
-        ).isInstanceOf(SpelllistAbility::class.java)
-        assertThat(
-            gameSystem.abilityService.getAbilityById(
-                195,
-                gameSystem.allAbilities
-            )
-        ).isInstanceOf(SpelllistAbility::class.java)
-        assertThat(
-            gameSystem.abilityService.getAbilityById(
-                215,
-                gameSystem.allAbilities
-            )
-        ).isInstanceOf(SpelllistAbility::class.java)
-        assertThat(
-            gameSystem.abilityService.getAbilityById(
-                260,
-                gameSystem.allAbilities
-            )
-        ).isInstanceOf(SpelllistAbility::class.java)
+        assertThat(gameSystem.allSkills).hasSize(18)
+        assertThat(gameSystem.allCharacterClasses[0].skills).hasSize(6)
+        assertThat(gameSystem.allCharacterClasses[1].skills).hasSize(18)
+        assertThat(gameSystem.allCharacterClasses[2].skills).hasSize(5)
+        assertThat(gameSystem.allCharacterClasses[3].skills).hasSize(8)
+        assertThat(gameSystem.allCharacterClasses[4].skills).hasSize(8)
+        assertThat(gameSystem.allCharacterClasses[5].skills).hasSize(6)
+        assertThat(gameSystem.allCharacterClasses[6].skills).hasSize(6)
+        assertThat(gameSystem.allCharacterClasses[7].skills).hasSize(8)
+        assertThat(gameSystem.allCharacterClasses[8].skills).hasSize(11)
+        assertThat(gameSystem.allCharacterClasses[9].skills).hasSize(6)
+        assertThat(gameSystem.allCharacterClasses[10].skills).hasSize(7)
+        assertThat(gameSystem.allCharacterClasses[11].skills).hasSize(6)
 
         // tear down
         jdbcHelper.connection.close()

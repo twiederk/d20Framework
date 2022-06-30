@@ -259,7 +259,13 @@ INSERT INTO charakter_ability VALUES ( 232, 10, 11, 258, 0 );
 INSERT INTO charakter_ability VALUES ( 233, 10, 11, 259, 0 );
 
 
---INSERT INTO charakter_skill VALUES ( 5, 0, 8, 0, 0 );
+INSERT INTO charakter_skill VALUES ( 5, 1, 1, 0, 1 );
+INSERT INTO charakter_skill VALUES ( 6, 1, 0, 2, 1 );
+INSERT INTO charakter_skill VALUES ( 11, 1, 1, 0, 1 );
+INSERT INTO charakter_skill VALUES ( 7, 1, 0, 0, 0 );
+INSERT INTO charakter_skill VALUES ( 12, 1, 0, 2, 1 );
+INSERT INTO charakter_skill VALUES ( 9, 1, 0, 0, 0 );
+
 
 --INSERT INTO charakter_feat VALUES ( 1, 9, 0, '' );
 

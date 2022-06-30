@@ -58,4 +58,15 @@ class DnD5eUniverseTest {
         assertThat(allSpells).hasSize(361)
     }
 
+    @Test
+    fun getAllSkills_allSkills_returnsAllSkills() {
+
+        // act
+        val allSkills = gameSystem.allSkills
+
+        // assert
+        assertThat(allSkills).hasSize(18)
+
+
+    }
 }

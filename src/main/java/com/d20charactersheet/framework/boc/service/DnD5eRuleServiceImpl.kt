@@ -105,7 +105,10 @@ class DnD5eRuleServiceImpl : AbstractRuleServiceImpl() {
     }
 
     override fun getSkillModifier(character: Character, characterSkill: CharacterSkill): Int {
-        return 0
+        val attributeModifier = getAttributeModifier(character, characterSkill.skill.attribute)
+        val miscModifier = characterSkill.modifier
+        val proficiencyBonus = if (characterSkill.rank > 0) calculateProficiencyBonus(character) else 0
+        return attributeModifier + miscModifier + proficiencyBonus
     }
 
     override fun getSpentSkillPoints(character: Character): Int {
@@ -214,5 +217,10 @@ class DnD5eRuleServiceImpl : AbstractRuleServiceImpl() {
         }
         return spellSlots
     }
+
+    override fun isTrained(characterSkill: CharacterSkill): Boolean {
+        return characterSkill.rank == 1.0F
+    }
+
 
 }
