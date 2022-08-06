@@ -1,7 +1,10 @@
 package com.d20charactersheet.framework.boc.service;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
 
 import com.d20charactersheet.framework.boc.model.Armor;
 import com.d20charactersheet.framework.boc.model.Character;
@@ -36,6 +39,23 @@ public class ExportImportServiceImpl implements ExportImportService {
 
   @Override
   public List<ImportReport<Character>> importCharacters(final GameSystem gameSystem, final File importFile) throws Exception {
+    final ImportContext importContext = createImportCharactersContext(gameSystem);
+
+    final ImportCharacter importCharacter = importFactory.getImportCharacter(importContext, importFile);
+    return importCharacter.importCharacters();
+  }
+
+  @Override
+  public List<ImportReport<Character>> importCharacters(final GameSystem gameSystem, final InputStream importStream)
+      throws Exception {
+    final ImportContext importContext = createImportCharactersContext(gameSystem);
+
+    final ImportCharacter importCharacter = importFactory.getImportCharacter(importContext, importStream);
+    return importCharacter.importCharacters();
+  }
+
+  @NotNull
+  private ImportContext createImportCharactersContext(GameSystem gameSystem) {
     final ImportContext importContext = new ImportContext();
     importContext.setGameSystemName(gameSystem.getName());
     importContext.setAllRaces(gameSystem.getAllRaces());
@@ -49,9 +69,7 @@ public class ExportImportServiceImpl implements ExportImportService {
     importContext.setAllSpells(gameSystem.getAllSpells());
     importContext.setAllSpelllists(gameSystem.getAllSpelllists());
     importContext.setAllAbilities(gameSystem.getAllAbilities());
-
-    final ImportCharacter importCharacter = importFactory.getImportCharacter(importContext, importFile);
-    return importCharacter.importCharacters();
+    return importContext;
   }
 
   @Override
@@ -64,15 +82,30 @@ public class ExportImportServiceImpl implements ExportImportService {
 
   @Override
   public List<ImportReport<? extends Item>> importEquipment(final GameSystem gameSystem, final File importFile) throws Exception {
+    final ImportContext importContext = createImportEquipmentContext(gameSystem);
+
+    final ImportEquipment importEquipment = importFactory.getImportEquipment(importContext, importFile);
+    return importEquipment.importEquipment();
+  }
+
+  @Override
+  public List<ImportReport<? extends Item>> importEquipment(final GameSystem gameSystem, final InputStream importStream)
+      throws Exception {
+    final ImportContext importContext = createImportEquipmentContext(gameSystem);
+
+    final ImportEquipment importEquipment = importFactory.getImportEquipment(importContext, importStream);
+    return importEquipment.importEquipment();
+  }
+
+  @NotNull
+  private ImportContext createImportEquipmentContext(GameSystem gameSystem) {
     final ImportContext importContext = new ImportContext();
     importContext.setGameSystemName(gameSystem.getName());
     importContext.setAllWeapons(gameSystem.getAllWeapons());
     importContext.setAllWeaponFamilies(gameSystem.getAllWeaponFamilies());
     importContext.setAllArmor(gameSystem.getAllArmor());
     importContext.setAllGoods(gameSystem.getAllGoods());
-
-    final ImportEquipment importEquipment = importFactory.getImportEquipment(importContext, importFile);
-    return importEquipment.importEquipment();
+    return importContext;
   }
 
 }

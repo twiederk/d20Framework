@@ -1,6 +1,7 @@
 package com.d20charactersheet.framework.boc.service;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 import com.d20charactersheet.framework.boc.model.Armor;
@@ -11,7 +12,7 @@ import com.d20charactersheet.framework.boc.model.Weapon;
 import com.d20charactersheet.framework.boc.service.exportimport.ImportReport;
 
 /**
- * Exports characters to a xml file and imports characters from an xml file.
+ * Exports characters to a xml file and imports characters from a xml file.
  */
 public interface ExportImportService {
 
@@ -21,7 +22,7 @@ public interface ExportImportService {
   String EXPORT_CHARACTER_FILE_PREFIX = "d20cs_characters";
 
   /**
-   * The file name prefix of a equipment xml file
+   * The file name prefix of an equipment xml file
    */
   String EXPORT_EQUIPMENT_FILE_PREFIX = "d20cs_equipment";
 
@@ -63,6 +64,21 @@ public interface ExportImportService {
   List<ImportReport<Character>> importCharacters(GameSystem gameSystem, File importFile) throws Exception;
 
   /**
+   * Imports characters from a xml file into the given game system and returning an import report for each character.
+   *
+   * @param gameSystem
+   *     The game system to import the characters to.
+   * @param importStream
+   *     The stream to import the characters from.
+   *
+   * @return The import reports of each character.
+   *
+   * @throws Exception
+   *     Thrown if the import failed.
+   */
+  List<ImportReport<Character>> importCharacters(GameSystem gameSystem, InputStream importStream) throws Exception;
+
+  /**
    * Exports equipment to a xml file.
    *
    * @param gameSystem
@@ -98,4 +114,19 @@ public interface ExportImportService {
    *     Thrown if the import failed.
    */
   List<ImportReport<? extends Item>> importEquipment(GameSystem gameSystem, File importFile) throws Exception;
+
+  /**
+   * Imports equipment from a xml file int the given game system. Returns a list of import reports.
+   *
+   * @param gameSystem
+   *     The game system to import the equipment to.
+   * @param importStream
+   *     The file to import from.
+   *
+   * @return The list of import reports.
+   *
+   * @throws Exception
+   *     Thrown if the import failed.
+   */
+  List<ImportReport<? extends Item>> importEquipment(GameSystem gameSystem, InputStream importStream) throws Exception;
 }

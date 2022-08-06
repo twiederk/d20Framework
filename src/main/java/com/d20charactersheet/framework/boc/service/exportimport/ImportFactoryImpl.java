@@ -1,6 +1,7 @@
 package com.d20charactersheet.framework.boc.service.exportimport;
 
 import java.io.File;
+import java.io.InputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -16,6 +17,13 @@ public class ImportFactoryImpl implements ImportFactory, XmlConstants {
   @Override
   public ImportCharacter getImportCharacter(final ImportContext importContext, final File importFile) throws Exception {
     final Document document = parseDocument(importFile);
+    checkGameSystem(importContext.getGameSystemName(), document.getDocumentElement());
+    return getImportCharacter(importContext, document);
+  }
+
+  @Override
+  public ImportCharacter getImportCharacter(ImportContext importContext, InputStream importStream) throws Exception {
+    final Document document = parseDocument(importStream);
     checkGameSystem(importContext.getGameSystemName(), document.getDocumentElement());
     return getImportCharacter(importContext, document);
   }
@@ -41,6 +49,13 @@ public class ImportFactoryImpl implements ImportFactory, XmlConstants {
     return getImportEquipment(importContext, document);
   }
 
+  @Override
+  public ImportEquipment getImportEquipment(ImportContext importContext, InputStream importStream) throws Exception {
+    final Document document = parseDocument(importStream);
+    checkGameSystem(importContext.getGameSystemName(), document.getDocumentElement());
+    return getImportEquipment(importContext, document);
+  }
+
   private ImportEquipment getImportEquipment(final ImportContext importContext, final Document document) {
     final int version = getVersion(document);
 
@@ -56,11 +71,16 @@ public class ImportFactoryImpl implements ImportFactory, XmlConstants {
     return builder.parse(importFile);
   }
 
+  private Document parseDocument(final InputStream importStream) throws Exception {
+    final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    final DocumentBuilder builder = factory.newDocumentBuilder();
+    return builder.parse(importStream);
+  }
+
   void checkGameSystem(final String gameSystemName, final Element documentElement) {
     final String name = documentElement.getAttribute(ATTRIBUTE_GAMESYSTEM);
     if (!gameSystemName.equalsIgnoreCase(name)) {
-      throw new IllegalStateException("Import file belongs to " + name //
-                                          + ", but current game system is " + gameSystemName);
+      throw new IllegalStateException("Import file belongs to " + name + ", but current game system is " + gameSystemName);
     }
   }
 
